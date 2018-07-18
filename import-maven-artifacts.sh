@@ -182,6 +182,10 @@ function exportArtifact() {
   announceCopy $stageRepo/android/arch $destAndroidRepo/android/arch
   rm -rf $stageRepo/android/arch
 
+  # Copy databinding to third-party repo as it's part of the tools prior to the rest of AndroidX
+  announceCopy $stageRepo/androidx/databinding/ $destThirdPartyRepo/androidx/databinding
+  rm -rf $stageRepo/androidx/databinding
+
   announceCopy $stageRepo/androidx $destAndroidRepo/androidx
   rm -rf $stageRepo/androidx
 
