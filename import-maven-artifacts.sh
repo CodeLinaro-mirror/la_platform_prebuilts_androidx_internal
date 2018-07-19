@@ -175,6 +175,9 @@ function announceCopy() {
 }
 
 function exportArtifact() {
+  # Remove maven-metadata.xml files
+  find $stageRepo -name maven-metadata.xml | xargs rm
+
   echo exporting
   announceCopy $stageRepo/com/android/support $destAndroidRepo/com/android/support
   rm -rf $stageRepo/com/android/support
