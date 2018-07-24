@@ -34,6 +34,18 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>2.19.0</version>
+      <scope>compile</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>*</artifactId>
+          <groupId>net.bytebuddy</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
       <groupId>androidx.arch.core</groupId>
       <artifactId>core-runtime</artifactId>
       <version>2.0.0-rc01</version>
@@ -45,18 +57,6 @@
       <artifactId>annotation</artifactId>
       <version>1.0.0-rc01</version>
       <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-      <version>2.19.0</version>
-      <scope>compile</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>*</artifactId>
-          <groupId>net.bytebuddy</groupId>
-        </exclusion>
-      </exclusions>
     </dependency>
   </dependencies>
 </project>
