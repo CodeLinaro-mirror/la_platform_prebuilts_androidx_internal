@@ -1,0 +1,313 @@
+#!/usr/bin/python3
+
+import os, sys, zipfile
+import argparse
+import subprocess
+from shutil import rmtree
+from distutils.dir_util import copy_tree
+
+# cd into directory of script
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+# See go/fetch_artifact for details on this script.
+FETCH_ARTIFACT = '/google/data/ro/projects/android/fetch_artifact'
+PUBLISHDOCSRULES_REL = './buildSrc/src/main/kotlin/androidx/build/PublishDocsRules.kt'
+FRAMEWORKS_SUPPORT_FP = os.path.abspath(os.path.join(os.getcwd(), '..', '..', '..', 'frameworks', 'support'))
+PUBLISHDOCSRULES_FP = os.path.join(FRAMEWORKS_SUPPORT_FP, PUBLISHDOCSRULES_REL)
+GIT_TREE_ARGS = '--git-dir=./../../../frameworks/support/.git/ --work-tree=./../../../frameworks/support/'
+summary_log = []
+publish_docs_log = []
+prebuilts_log = []
+
+
+def print_e(*args, **kwargs):
+	print(*args, file=sys.stderr, **kwargs)
+
+def cp(src_path, dst_path):
+	if not os.path.exists(dst_path):
+		os.makedirs(dst_path)
+	if not os.path.exists(src_path):
+		print_e('cp error: Source path %s does not exist.' % src_path)
+		return None
+	try:
+		copy_tree(src_path, dst_path)
+	except DistutilsFileError as err:
+		print_e('FAIL: Unable to copy %s to destination %s')
+		return None
+	return dst_path
+
+def rm(path):
+	if os.path.isdir(path):
+		rmtree(path)
+	elif os.path.exists(path):
+		os.remove(path)
+
+def fetch_artifact(target, build_id, artifact_path):
+	download_to = os.path.join('.', os.path.dirname(artifact_path))
+	print('Fetching %s from %s with build ID %s ...' % (artifact_path, target, build_id))
+	print("download_to: ", download_to)
+	if not os.path.exists(download_to):
+		os.makedirs(download_to)
+	print("If this script hangs, try running glogin or gcert.")
+	fetch_cmd = [FETCH_ARTIFACT, '--bid', str(build_id), '--target', target, artifact_path,
+				 download_to]
+	try:
+		subprocess.check_output(fetch_cmd, stderr=subprocess.STDOUT)
+	except subprocess.CalledProcessError:
+		print_e('FAIL: Unable to retrieve %s artifact for build ID %s' % (artifact_path, build_id))
+		print_e('Please make sure you are authenticated for build server access!')
+		return None
+	return artifact_path
+
+def extract_artifact(artifact_path):
+	# Unzip the repo archive into a separate directory.
+	repo_dir = os.path.basename(artifact_path)[:-4]
+	with zipfile.ZipFile(artifact_path) as zipFile:
+		zipFile.extractall(repo_dir)
+	return repo_dir
+
+def get_repo_androidx_path(repo_dir):
+	# Check that ${repo_path}/m2repository/androidx exists
+	repo_androidx_path = os.path.join(os.getcwd(), "./%s/m2repository/androidx" % repo_dir)
+	if not os.path.exists(repo_androidx_path):
+		print_e("FAIL: Downloaded artifact zip %s.zip does not contain m2repository/androidx" % repo_dir)
+		return None
+	return repo_androidx_path
+
+def copy_and_merge_artifacts(repo_dir, dest_dir, components):
+	repo_androidx_path = get_repo_androidx_path(repo_dir)
+	if not repo_androidx_path: return None
+	if not components:
+		return cp(repo_androidx_path, dest_dir)
+	else:
+		# Only copy over components that were specified on the command line
+		for comp in components:
+			repo_comp_path = os.path.join(repo_androidx_path, comp)
+			if not os.path.exists(repo_comp_path):
+				print_e("Failed to find component %s in the artifact zip file" % comp)
+				return None
+			dest_comp_path = os.path.join(dest_dir, comp)
+			if not cp(repo_comp_path, dest_comp_path):
+				print_e("Failed to find copy %s to %s" % (repo_comp_path, dest_comp_path))
+				return None
+		return dest_dir
+
+def fetch_and_extract(target, build_id, file, artifact_path=None):
+	if not artifact_path:
+		artifact_path = fetch_artifact(target, build_id, file)
+	if not artifact_path:
+		return None
+	return extract_artifact(artifact_path)
+
+def get_new_library_version(file_path):
+	try:
+		ls_output = subprocess.check_output('ls %s' % file_path, shell=True)
+	except subprocess.CalledProcessError:
+		print_e('Failed to get version for library: %s' % file_path)
+		return None
+	version = ls_output.decode().strip('\n').split(',')[0]
+	if not version[0].isnumeric():
+		print_e('Failed to get version for library: %s' % file_path)
+		return None
+	return version
+
+def get_updated_components_map():
+	try:
+		# Run git status --porcelain to get the names of the libraries that have changed
+		# (cut -c4- removes the change-type-character from git status output)
+		gitdiff_ouput = subprocess.check_output('git status --porcelain | cut -c4-', shell=True)
+	except subprocess.CalledProcessError:
+		print_e('FAIL: No artifacts to import from build ID %s' %  build_id)
+		return None
+	# Iterate through the git diff output to map libraries to their new versions
+	component_ver_map = {}
+	diff = iter(gitdiff_ouput.splitlines())
+	for line in diff:
+		file_path_list = line.decode().split('/')
+		if len(file_path_list) <= 3:
+			continue
+		component = file_path_list[1]
+		subcomponent = file_path_list[2]
+		# For new libraries/components, git status doesn't return the directory with the version
+		# So, we need to go get it if it's not there
+		version = file_path_list[3] if file_path_list[3] else get_new_library_version(line.decode())
+		if not version: continue
+		# If the component was not specified in the component list on the command line, skip
+		if (args.libraries) and (component not in args.libraries):
+			continue
+		if component.upper() not in component_ver_map:
+			component_ver_map[component.upper()] = version
+			summary_log.append("Prebuilts: %s --> %s" % (component, version))
+			prebuilts_log.append(component)
+		if subcomponent not in component_ver_map:
+			component_ver_map[subcomponent] = version
+			summary_log.append("Prebuilts: %s --> %s" % (subcomponent, version))
+			prebuilts_log.append(subcomponent)
+	return component_ver_map
+
+def update_publish_doc_rules():
+	component_ver_map = get_updated_components_map()
+	# Get build the file path of PublicDocRules.kt - this isn't great, open to a better solution
+	if not os.path.exists(PUBLISHDOCSRULES_FP):
+		print_e("PublishDocsRules.kt not in expected location.")
+		return None
+	# Open file for reading and get all lines
+	with open(PUBLISHDOCSRULES_FP, 'r') as f:
+		pdr_lines = f.readlines()
+	num_lines = len(pdr_lines)
+	for i in range(num_lines):
+		cur_line = pdr_lines[i]
+		# Skip any line that doesn't declare a version
+		if 'LibraryGroups' not in cur_line: continue
+		component = cur_line.split('LibraryGroups.')[1].split(',')[0]
+		# Get the subcomponent (if it exists)
+		cur_line_split = cur_line.split('\"')
+		# Skip any line that does contain a version
+		if len(cur_line_split) < 2: continue
+		subcomponent = ""
+		if len(cur_line_split) >= 4:
+			subcomponent = cur_line_split[-4]
+		# Split lines based on quotes and get second to last string - this will be the version
+		outdated_ver = cur_line.split('\"')[-2]
+		ver_index = cur_line.find(outdated_ver)
+		# Skip any line that does contain a version
+		if not outdated_ver[0].isnumeric():	continue
+		### Update component or subcomponent ###
+		if subcomponent in component_ver_map:
+			# Update version of subcomponent
+			if component_ver_map[subcomponent] != outdated_ver:
+				pdr_lines[i] = cur_line[:ver_index] \
+					+ component_ver_map[subcomponent] \
+					+ cur_line[ver_index+len(outdated_ver):]
+				summary_log.append("PublishDocsRule.kt: Updated %s from %s to %s" %(subcomponent, outdated_ver, component_ver_map[subcomponent]))
+				publish_docs_log.append(subcomponent)
+		if not subcomponent and component in component_ver_map:
+			# Update version of component
+			if component_ver_map[component] != outdated_ver:
+				pdr_lines[i] = cur_line[:ver_index] \
+					+ component_ver_map[component] \
+					+ cur_line[ver_index+len(outdated_ver):]
+				summary_log.append("PublishDocsRule.kt: Updated %s from %s to %s" %(component.lower(), outdated_ver, component_ver_map[component]))
+				publish_docs_log.append(component.lower())
+	# Open file for writing and update all lines
+	with open(PUBLISHDOCSRULES_FP, 'w') as f:
+		f.writelines(pdr_lines)
+	return True
+
+def update_androidx(target, build_id, local_file, update_all_prebuilts):
+	try:
+		if build_id:
+			if update_all_prebuilts:
+				artifact_zip_file = 'top-of-tree-m2repository-all-%s.zip' % build_id
+			else:
+				artifact_zip_file = 'gmaven-diff-all-%s.zip' % build_id
+			repo_dir = fetch_and_extract("androidx", build_id, artifact_zip_file, None)
+		else:
+			repo_dir = fetch_and_extract("androidx", None, None, local_file)
+		if not repo_dir:
+			print_e('Failed to extract AndroidX repository')
+			return False
+		print("Download and extract artifacts... Successful")
+		if not copy_and_merge_artifacts(repo_dir, './androidx', args.libraries):
+			print_e('Failed to copy and merge AndroidX repository')
+			return False
+		print("Copy and merge artifacts... Successful")
+		if not args.skip_publishdocrules:
+			if not update_publish_doc_rules():
+				print_e('Failed to update PublicDocRules.kt')
+				return False
+			print("Update PublishDocsRules.kt... Successful")
+		return True
+	finally:
+		# Remove temp directories and temp files we've created 
+		rm(repo_dir)
+		rm('%s.zip' % repo_dir)
+		rm('.fetch_artifact2.dat')
+
+def print_change_summary():
+	print("\n ---  SUMMARY --- ")
+	for change in summary_log:
+		print(change)
+
+# Check if build ID exists and is a number
+def getBuildId(args):
+	source = args.source
+	number_text = source[:]
+	if not number_text.isnumeric():
+		return None
+	args.file = False
+	return source
+
+# Check if file exists and is not a number
+def getFile(args):
+	source = args.source
+	if not source.isnumeric():
+		return args.source
+	return None
+
+def commit_prebuilts():
+	subprocess.check_call(['git', 'add', './androidx'])
+	# ensure that we've actually made a change:
+	staged_changes = subprocess.check_output('git diff --cached', stderr=subprocess.STDOUT, shell=True)
+	if not staged_changes:
+		print_e("There are no prebuilts changes to commit!  Check build id.")
+		return False
+	if not args.source.isnumeric():
+		src_msg = "local Maven ZIP %s" % getFile(args)
+	else:
+		src_msg = "build %s" % (getBuildId(args))
+	msg = "Import %s from %s\n\n%s" % (", ".join(prebuilts_log), src_msg, 'Test: N/A')
+	subprocess.check_call(['git', 'commit', '-m', msg])
+	summary_log.append("1 Commit was made in prebuilts/androidx/internal to commit prebuilts")
+	print("Create commit for prebuilts... Successful")
+	return True
+
+def commit_publish_docs_rules():
+	git_add_cmd =  "git %s add %s"  % (GIT_TREE_ARGS, PUBLISHDOCSRULES_REL)
+	subprocess.check_output(git_add_cmd, stderr=subprocess.STDOUT, shell=True)
+	git_cached_cmd = "git %s diff --cached" % GIT_TREE_ARGS
+	staged_changes = subprocess.check_output(git_cached_cmd, stderr=subprocess.STDOUT, shell=True)
+	if not staged_changes:
+		summary_log.append("NO CHANGES were made to PublishDocsRules.kt")
+		return False
+	pdr_msg = "Updated PublishDocsRules.kt for %s \n\n%s" % (", ".join(publish_docs_log), 'Test: ./gradlew buildOnServer')
+	git_commit_cmd = "git %s commit -m \"%s\"" % (GIT_TREE_ARGS, pdr_msg)
+	subprocess.check_output(git_commit_cmd, stderr=subprocess.STDOUT, shell=True)
+	summary_log.append("1 Commit was made in frameworks/support to commmit changes to PublishDocsRules.kt")
+	print("Create commit for PublishDocsRules.kt... Successful")
+
+
+# Set up input arguments
+parser = argparse.ArgumentParser(
+	description=('Import AndroidX prebuilts from the Android Build Server and if necessary, update PublishDocsRules.kt.  By default, uses gmaven-diff-all-<BUILDID>.zip to get artifacts.'))
+parser.add_argument(
+	'source',
+	help='Build server build ID or local Maven ZIP file')
+parser.add_argument(
+	'--all_prebuilts', action="store_true",
+	help='If specified, updates all AndroidX prebuilts with artifacts from the build ID')
+parser.add_argument(
+	'--skip_publishdocrules', action="store_true",
+	help='If specified, PublishDocsRules.kt will NOT be updated')
+parser.add_argument(
+	'--libraries', metavar='library', nargs='+',
+	help="""If specified, only update libraries whose groupId contains the listed text.
+	For example,if you specify \"--libraries paging slice lifecycle\", then this
+	script will import each library with groupId beginning with \"androidx.paging\", \"androidx.slice\",
+	or \"androidx.lifecycle\"""")
+
+# Parse arguments and check for existence of build ID or file
+args = parser.parse_args()
+args.file = True
+if not args.source:
+	parser.error("You must specify a build ID or local Maven ZIP file")
+	sys.exit(1)
+
+if not update_androidx('androidx', getBuildId(args), getFile(args), args.all_prebuilts):
+	print_e('Failed to update AndroidX, aborting...')
+	sys.exit(1)
+
+if not commit_prebuilts(): sys.exit(1)
+commit_publish_docs_rules()
+print_change_summary()
+print("Test and check these changes before uploading to Gerrit")
