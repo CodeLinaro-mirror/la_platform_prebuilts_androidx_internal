@@ -74,21 +74,39 @@ def get_repo_androidx_path(repo_dir):
 		return None
 	return repo_androidx_path
 
-def copy_and_merge_artifacts(repo_dir, dest_dir, components):
+def get_groupId_from_artifactId(artifactId):
+	# By convention, androidx namespace is declared as:
+	# androidx.${groupId}:${groupId}-${optionalArtifactIdSuffix}:${version}
+	# Here, artifactId == "${groupId}-${optionalArtifactIdSuffix}"
+	return artifactId.split('-')[0]
+
+def copy_and_merge_artifacts(repo_dir, dest_dir, groupIds, artifactIds):
 	repo_androidx_path = get_repo_androidx_path(repo_dir)
 	if not repo_androidx_path: return None
-	if not components:
+	if not groupIds and not artifactIds:
 		return cp(repo_androidx_path, dest_dir)
 	else:
-		# Only copy over components that were specified on the command line
-		for comp in components:
-			repo_comp_path = os.path.join(repo_androidx_path, comp)
-			if not os.path.exists(repo_comp_path):
-				print_e("Failed to find component %s in the artifact zip file" % comp)
+		# Only copy over groupIds that were specified on the command line
+		for group in groupIds:
+			repo_group_path = os.path.join(repo_androidx_path, group)
+			if not os.path.exists(repo_group_path):
+				print_e("Failed to find groupId %s in the artifact zip file" % group)
 				return None
-			dest_comp_path = os.path.join(dest_dir, comp)
-			if not cp(repo_comp_path, dest_comp_path):
-				print_e("Failed to find copy %s to %s" % (repo_comp_path, dest_comp_path))
+			dest_group_path = os.path.join(dest_dir, group)
+			if not cp(repo_group_path, dest_group_path):
+				print_e("Failed to find copy %s to %s" % (repo_group_path, dest_group_path))
+				return None
+		# Only copy over artifactIds that were specified on the command line
+		for artifact in artifactIds:
+			# Get the groupId from the artifactId (in AndroidX, the groupId must be based on the artifactId)
+			artifact_groupId = get_groupId_from_artifactId(artifact)
+			repo_artifact_path = os.path.join(repo_androidx_path, artifact_groupId, artifact)
+			if not os.path.exists(repo_artifact_path):
+				print_e("Failed to find artifactId %s in the artifact zip file" % artifact)
+				return None
+			dest_artifact_path = os.path.join(dest_dir, artifact_groupId, artifact)
+			if not cp(repo_artifact_path, dest_artifact_path):
+				print_e("Failed to find copy %s to %s" % (repo_artifact_path, dest_artifact_path))
 				return None
 		return dest_dir
 
@@ -133,8 +151,13 @@ def get_updated_components_map():
 		version = file_path_list[3] if file_path_list[3] else get_new_library_version(line.decode())
 		if not version: continue
 		# If the component was not specified in the component list on the command line, skip
-		if (args.libraries) and (component not in args.libraries):
-			continue
+		if (args.groups) or (args.artifacts):
+			skip = True
+			if (args.groups) and (component in args.groups):
+				skip = False
+			if (args.artifacts) and (component in args.artifacts):
+				skip = False
+			if skip: continue
 		if component.upper() not in component_ver_map:
 			component_ver_map[component.upper()] = version
 		if subcomponent not in component_ver_map:
@@ -206,7 +229,7 @@ def update_androidx(target, build_id, local_file, update_all_prebuilts):
 			print_e('Failed to extract AndroidX repository')
 			return False
 		print("Download and extract artifacts... Successful")
-		if not copy_and_merge_artifacts(repo_dir, './androidx', args.libraries):
+		if not copy_and_merge_artifacts(repo_dir, './androidx', args.groups, args.artifacts):
 			print_e('Failed to copy and merge AndroidX repository')
 			return False
 		print("Copy and merge artifacts... Successful")
@@ -288,11 +311,17 @@ parser.add_argument(
 	'--skip_publishdocrules', action="store_true",
 	help='If specified, PublishDocsRules.kt will NOT be updated')
 parser.add_argument(
-	'--libraries', metavar='library', nargs='+',
+	'--groups', metavar='groupId', nargs='+',
 	help="""If specified, only update libraries whose groupId contains the listed text.
-	For example,if you specify \"--libraries paging slice lifecycle\", then this
+	For example, if you specify \"--groups paging slice lifecycle\", then this
 	script will import each library with groupId beginning with \"androidx.paging\", \"androidx.slice\",
 	or \"androidx.lifecycle\"""")
+parser.add_argument(
+	'--artifacts', metavar='artifactId', nargs='+',
+	help="""If specified, only update libraries whose artifactId contains the listed text.
+	For example, if you specify \"--artifacts core slice-view lifecycle-common\", then this
+	script will import specific artifacts \"androidx.core:core\", \"androidx.slice:slice-view\",
+	and \"androidx.lifecycle:lifecycle-common\"""")
 
 # Parse arguments and check for existence of build ID or file
 args = parser.parse_args()
