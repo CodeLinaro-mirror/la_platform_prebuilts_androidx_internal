@@ -137,12 +137,10 @@ def get_updated_components_map():
 			continue
 		if component.upper() not in component_ver_map:
 			component_ver_map[component.upper()] = version
-			summary_log.append("Prebuilts: %s --> %s" % (component, version))
-			prebuilts_log.append(component)
 		if subcomponent not in component_ver_map:
 			component_ver_map[subcomponent] = version
 			summary_log.append("Prebuilts: %s --> %s" % (subcomponent, version))
-			prebuilts_log.append(subcomponent)
+			prebuilts_log.append(subcomponent+'-'+version)
 	return component_ver_map
 
 def update_publish_doc_rules():
@@ -256,7 +254,7 @@ def commit_prebuilts():
 		src_msg = "local Maven ZIP %s" % getFile(args)
 	else:
 		src_msg = "build %s" % (getBuildId(args))
-	msg = "Import %s from %s\n\n%s" % (", ".join(prebuilts_log), src_msg, 'Test: N/A')
+	msg = "Import prebuilts %s from %s\n\n%s" % (", ".join(prebuilts_log), src_msg, 'Test: N/A')
 	subprocess.check_call(['git', 'commit', '-m', msg])
 	summary_log.append("1 Commit was made in prebuilts/androidx/internal to commit prebuilts")
 	print("Create commit for prebuilts... Successful")
