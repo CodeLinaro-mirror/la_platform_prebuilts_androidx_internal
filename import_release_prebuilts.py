@@ -180,7 +180,7 @@ def update_publish_doc_rules():
 					+ component_ver_map[subcomponent] \
 					+ cur_line[ver_index+len(outdated_ver):]
 				summary_log.append("PublishDocsRule.kt: Updated %s from %s to %s" %(subcomponent, outdated_ver, component_ver_map[subcomponent]))
-				publish_docs_log.append(subcomponent)
+				publish_docs_log.append(subcomponent+'-'+component_ver_map[subcomponent])
 		if not subcomponent and component in component_ver_map:
 			# Update version of component
 			if component_ver_map[component] != outdated_ver:
@@ -188,7 +188,7 @@ def update_publish_doc_rules():
 					+ component_ver_map[component] \
 					+ cur_line[ver_index+len(outdated_ver):]
 				summary_log.append("PublishDocsRule.kt: Updated %s from %s to %s" %(component.lower(), outdated_ver, component_ver_map[component]))
-				publish_docs_log.append(component.lower())
+				publish_docs_log.append(component.lower()+'-'+component_ver_map[component])
 	# Open file for writing and update all lines
 	with open(PUBLISHDOCSRULES_FP, 'w') as f:
 		f.writelines(pdr_lines)
