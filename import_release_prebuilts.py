@@ -85,8 +85,8 @@ def copy_and_merge_artifacts(repo_dir, dest_dir, groupIds, artifactIds):
 	if not repo_androidx_path: return None
 	if not groupIds and not artifactIds:
 		return cp(repo_androidx_path, dest_dir)
-	else:
-		# Only copy over groupIds that were specified on the command line
+	if groupIds:
+		# Copy over groupIds that were specified on the command line
 		for group in groupIds:
 			repo_group_path = os.path.join(repo_androidx_path, group)
 			if not os.path.exists(repo_group_path):
@@ -96,7 +96,8 @@ def copy_and_merge_artifacts(repo_dir, dest_dir, groupIds, artifactIds):
 			if not cp(repo_group_path, dest_group_path):
 				print_e("Failed to find copy %s to %s" % (repo_group_path, dest_group_path))
 				return None
-		# Only copy over artifactIds that were specified on the command line
+	if artifactIds:
+		# Copy over artifactIds that were specified on the command line
 		for artifact in artifactIds:
 			# Get the groupId from the artifactId (in AndroidX, the groupId must be based on the artifactId)
 			artifact_groupId = get_groupId_from_artifactId(artifact)
@@ -108,7 +109,7 @@ def copy_and_merge_artifacts(repo_dir, dest_dir, groupIds, artifactIds):
 			if not cp(repo_artifact_path, dest_artifact_path):
 				print_e("Failed to find copy %s to %s" % (repo_artifact_path, dest_artifact_path))
 				return None
-		return dest_dir
+	return dest_dir
 
 def fetch_and_extract(target, build_id, file, artifact_path=None):
 	if not artifact_path:
