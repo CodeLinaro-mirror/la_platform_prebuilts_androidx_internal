@@ -118,17 +118,47 @@ def fetch_and_extract(target, build_id, file, artifact_path=None):
 		return None
 	return extract_artifact(artifact_path)
 
-def get_new_library_version(file_path):
-	try:
-		ls_output = subprocess.check_output('ls %s' % file_path, shell=True)
-	except subprocess.CalledProcessError:
-		print_e('Failed to get version for library: %s' % file_path)
-		return None
-	version = ls_output.decode().strip('\n').split(',')[0]
-	if not version[0].isnumeric():
-		print_e('Failed to get version for library: %s' % file_path)
-		return None
-	return version
+def update_new_artifacts(group_id_file_path, component_ver_map, groupId):
+	# Finds each new library having groupId <groupId> under <group_id_file_path> and
+	# updates <component_ver_map> with this new library
+	success = False
+	# Walk filepath to get versions for each artifactId
+	for parent_file_path, dirs, _ in os.walk(group_id_file_path):
+		for dir_name in dirs:
+			if dir_name[0].isnumeric():
+				# Version directories have format version as dir_name, for example: 1.1.0-alpha06
+				version = dir_name
+				# Get artifactId from filepath
+				artifactId = parent_file_path.strip('/').split('/')[-1]
+				update_components_map(component_ver_map, groupId, artifactId, version)
+				success = True
+	if not success:
+		print_e("Failed to find any artifactIds in filepath: %s" % group_id_file_path)
+	return success
+
+def should_update_artifact(component, subcomponent):
+	# If a component list was specified and if the component was NOT specified in the
+	# component list on the command line, return false
+	should_update = False
+	if (args.groups) or (args.artifacts):
+		if (args.groups) and (component in args.groups):
+			should_update = True
+		if (args.artifacts) and (component in args.artifacts):
+			should_update = True
+		if (args.artifacts) and (subcomponent in args.artifacts):
+			should_update = True
+	else:
+		should_update = True
+	return should_update
+
+def update_components_map(component_ver_map, component, subcomponent, version):
+	if should_update_artifact(component, subcomponent):
+		if component.upper() not in component_ver_map:
+			component_ver_map[component.upper()] = version
+		if subcomponent not in component_ver_map:
+			component_ver_map[subcomponent] = version
+			summary_log.append("Prebuilts: %s --> %s" % (subcomponent, version))
+			prebuilts_log.append(subcomponent+'-'+version)
 
 def get_updated_components_map():
 	try:
@@ -143,28 +173,19 @@ def get_updated_components_map():
 	diff = iter(gitdiff_ouput.splitlines())
 	for line in diff:
 		file_path_list = line.decode().split('/')
-		if len(file_path_list) <= 3:
+		if len(file_path_list) < 3:
 			continue
 		component = file_path_list[1]
 		subcomponent = file_path_list[2]
 		# For new libraries/components, git status doesn't return the directory with the version
 		# So, we need to go get it if it's not there
-		version = file_path_list[3] if file_path_list[3] else get_new_library_version(line.decode())
-		if not version: continue
-		# If the component was not specified in the component list on the command line, skip
-		if (args.groups) or (args.artifacts):
-			skip = True
-			if (args.groups) and (component in args.groups):
-				skip = False
-			if (args.artifacts) and (component in args.artifacts):
-				skip = False
-			if skip: continue
-		if component.upper() not in component_ver_map:
-			component_ver_map[component.upper()] = version
-		if subcomponent not in component_ver_map:
-			component_ver_map[subcomponent] = version
-			summary_log.append("Prebuilts: %s --> %s" % (subcomponent, version))
-			prebuilts_log.append(subcomponent+'-'+version)
+		if len(file_path_list) <= 3 or file_path_list[3] == "":
+			# New library, so we need to check full directory tree to get version(s)
+			if not update_new_artifacts(line.decode(), component_ver_map, component):
+				continue
+		else:
+			version = file_path_list[3]
+			update_components_map(component_ver_map, component, subcomponent, version)
 	return component_ver_map
 
 def update_publish_doc_rules():
@@ -278,7 +299,7 @@ def commit_prebuilts():
 		src_msg = "local Maven ZIP %s" % getFile(args)
 	else:
 		src_msg = "build %s" % (getBuildId(args))
-	msg = "Import prebuilts %s from %s\n\n%s" % (", ".join(prebuilts_log), src_msg, 'Test: N/A')
+	msg = "Import prebuilts %s from %s\n\n%s" % (", ".join(prebuilts_log), src_msg, 'Test: ./gradlew buildOnServer')
 	subprocess.check_call(['git', 'commit', '-m', msg])
 	summary_log.append("1 Commit was made in prebuilts/androidx/internal to commit prebuilts")
 	print("Create commit for prebuilts... Successful")
