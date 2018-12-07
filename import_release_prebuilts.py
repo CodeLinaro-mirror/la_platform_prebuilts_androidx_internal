@@ -118,9 +118,9 @@ def fetch_and_extract(target, build_id, file, artifact_path=None):
 		return None
 	return extract_artifact(artifact_path)
 
-def update_new_artifacts(group_id_file_path, component_ver_map, groupId):
+def update_new_artifacts(group_id_file_path, artifact_ver_map, groupId):
 	# Finds each new library having groupId <groupId> under <group_id_file_path> and
-	# updates <component_ver_map> with this new library
+	# updates <artifact_ver_map> with this new library
 	success = False
 	# Walk filepath to get versions for each artifactId
 	for parent_file_path, dirs, _ in os.walk(group_id_file_path):
@@ -130,7 +130,7 @@ def update_new_artifacts(group_id_file_path, component_ver_map, groupId):
 				version = dir_name
 				# Get artifactId from filepath
 				artifactId = parent_file_path.strip('/').split('/')[-1]
-				update_components_map(component_ver_map, groupId, artifactId, version)
+				update_artifact_ver_map(artifact_ver_map, groupId, artifactId, version)
 				success = True
 	if not success:
 		print_e("Failed to find any artifactIds in filepath: %s" % group_id_file_path)
@@ -149,16 +149,16 @@ def should_update_artifact(groupId, artifactId):
 		should_update = True
 	return should_update
 
-def update_components_map(component_ver_map, component, subcomponent, version):
-	if should_update_artifact(component, subcomponent):
-		if component.upper() not in component_ver_map:
-			component_ver_map[component.upper()] = version
-		if subcomponent not in component_ver_map:
-			component_ver_map[subcomponent] = version
-			summary_log.append("Prebuilts: %s --> %s" % (subcomponent, version))
-			prebuilts_log.append(subcomponent+'-'+version)
+def update_artifact_ver_map(artifact_ver_map, groupId, artifactId, version):
+	if should_update_artifact(groupId, artifactId):
+		if groupId.upper() not in artifact_ver_map:
+			artifact_ver_map[groupId.upper()] = version
+		if artifactId not in artifact_ver_map:
+			artifact_ver_map[artifactId] = version
+			summary_log.append("Prebuilts: %s --> %s" % (artifactId, version))
+			prebuilts_log.append(artifactId+'-'+version)
 
-def get_updated_components_map():
+def get_updated_artifact_ver_map():
 	try:
 		# Run git status --porcelain to get the names of the libraries that have changed
 		# (cut -c4- removes the change-type-character from git status output)
@@ -167,27 +167,27 @@ def get_updated_components_map():
 		print_e('FAIL: No artifacts to import from build ID %s' %  build_id)
 		return None
 	# Iterate through the git diff output to map libraries to their new versions
-	component_ver_map = {}
+	artifact_ver_map = {}
 	diff = iter(gitdiff_ouput.splitlines())
 	for line in diff:
 		file_path_list = line.decode().split('/')
 		if len(file_path_list) < 3:
 			continue
-		component = file_path_list[1]
-		subcomponent = file_path_list[2]
-		# For new libraries/components, git status doesn't return the directory with the version
+		groupId = file_path_list[1]
+		artifactId = file_path_list[2]
+		# For new libraries/groupIds, git status doesn't return the directory with the version
 		# So, we need to go get it if it's not there
 		if len(file_path_list) <= 3 or file_path_list[3] == "":
 			# New library, so we need to check full directory tree to get version(s)
-			if not update_new_artifacts(line.decode(), component_ver_map, component):
+			if not update_new_artifacts(line.decode(), artifact_ver_map, groupId):
 				continue
 		else:
 			version = file_path_list[3]
-			update_components_map(component_ver_map, component, subcomponent, version)
-	return component_ver_map
+			update_artifact_ver_map(artifact_ver_map, groupId, artifactId, version)
+	return artifact_ver_map
 
 def update_publish_doc_rules():
-	component_ver_map = get_updated_components_map()
+	artifact_ver_map = get_updated_artifact_ver_map()
 	# Get build the file path of PublicDocRules.kt - this isn't great, open to a better solution
 	if not os.path.exists(PUBLISHDOCSRULES_FP):
 		print_e("PublishDocsRules.kt not in expected location.")
@@ -200,36 +200,36 @@ def update_publish_doc_rules():
 		cur_line = pdr_lines[i]
 		# Skip any line that doesn't declare a version
 		if 'LibraryGroups' not in cur_line: continue
-		component = cur_line.split('LibraryGroups.')[1].split(',')[0]
-		# Get the subcomponent (if it exists)
+		groupId = cur_line.split('LibraryGroups.')[1].split(',')[0]
+		# Get the artifactId (if it exists)
 		cur_line_split = cur_line.split('\"')
 		# Skip any line that does contain a version
 		if len(cur_line_split) < 2: continue
-		subcomponent = ""
+		artifactId = ""
 		if len(cur_line_split) >= 4:
-			subcomponent = cur_line_split[-4]
+			artifactId = cur_line_split[-4]
 		# Split lines based on quotes and get second to last string - this will be the version
 		outdated_ver = cur_line.split('\"')[-2]
 		ver_index = cur_line.find(outdated_ver)
 		# Skip any line that does contain a version
 		if not outdated_ver[0].isnumeric():	continue
-		### Update component or subcomponent ###
-		if subcomponent in component_ver_map:
-			# Update version of subcomponent
-			if component_ver_map[subcomponent] != outdated_ver:
+		### Update groupId or artifactId ###
+		if artifactId in artifact_ver_map:
+			# Update version of artifactId
+			if artifact_ver_map[artifactId] != outdated_ver:
 				pdr_lines[i] = cur_line[:ver_index] \
-					+ component_ver_map[subcomponent] \
+					+ artifact_ver_map[artifactId] \
 					+ cur_line[ver_index+len(outdated_ver):]
-				summary_log.append("PublishDocsRule.kt: Updated %s from %s to %s" %(subcomponent, outdated_ver, component_ver_map[subcomponent]))
-				publish_docs_log.append(subcomponent+'-'+component_ver_map[subcomponent])
-		if not subcomponent and component in component_ver_map:
-			# Update version of component
-			if component_ver_map[component] != outdated_ver:
+				summary_log.append("PublishDocsRule.kt: Updated %s from %s to %s" %(artifactId, outdated_ver, artifact_ver_map[artifactId]))
+				publish_docs_log.append(artifactId+'-'+artifact_ver_map[artifactId])
+		if not artifactId and groupId in artifact_ver_map:
+			# Update version of groupId
+			if artifact_ver_map[groupId] != outdated_ver:
 				pdr_lines[i] = cur_line[:ver_index] \
-					+ component_ver_map[component] \
+					+ artifact_ver_map[groupId] \
 					+ cur_line[ver_index+len(outdated_ver):]
-				summary_log.append("PublishDocsRule.kt: Updated %s from %s to %s" %(component.lower(), outdated_ver, component_ver_map[component]))
-				publish_docs_log.append(component.lower()+'-'+component_ver_map[component])
+				summary_log.append("PublishDocsRule.kt: Updated %s from %s to %s" %(groupId.lower(), outdated_ver, artifact_ver_map[groupId]))
+				publish_docs_log.append(groupId.lower()+'-'+artifact_ver_map[groupId])
 	# Open file for writing and update all lines
 	with open(PUBLISHDOCSRULES_FP, 'w') as f:
 		f.writelines(pdr_lines)
