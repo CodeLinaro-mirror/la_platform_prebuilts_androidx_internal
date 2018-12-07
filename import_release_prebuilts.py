@@ -323,6 +323,9 @@ parser.add_argument(
 	For example, if you specify \"--artifacts core slice-view lifecycle-common\", then this
 	script will import specific artifacts \"androidx.core:core\", \"androidx.slice:slice-view\",
 	and \"androidx.lifecycle:lifecycle-common\"""")
+parser.add_argument(
+	'--no_commit', action="store_true",
+	help='If specified, this script will not commit the changes')
 
 # Parse arguments and check for existence of build ID or file
 args = parser.parse_args()
@@ -335,7 +338,10 @@ if not update_androidx('androidx', getBuildId(args), getFile(args), args.all_pre
 	print_e('Failed to update AndroidX, aborting...')
 	sys.exit(1)
 
-if not commit_prebuilts(): sys.exit(1)
-commit_publish_docs_rules()
+if args.no_commit:
+	summary_log.append("These changes were NOT committed.")
+else:
+	if not commit_prebuilts(): sys.exit(1)
+	commit_publish_docs_rules()
 print_change_summary()
 print("Test and check these changes before uploading to Gerrit")
