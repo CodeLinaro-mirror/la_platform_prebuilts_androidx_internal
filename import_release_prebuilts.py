@@ -136,16 +136,14 @@ def update_new_artifacts(group_id_file_path, component_ver_map, groupId):
 		print_e("Failed to find any artifactIds in filepath: %s" % group_id_file_path)
 	return success
 
-def should_update_artifact(component, subcomponent):
-	# If a component list was specified and if the component was NOT specified in the
-	# component list on the command line, return false
+def should_update_artifact(groupId, artifactId):
+	# If a artifact or group list was specified and if the artifactId or groupId were NOT specified 
+	# in either list on the command line, return false
 	should_update = False
 	if (args.groups) or (args.artifacts):
-		if (args.groups) and (component in args.groups):
+		if (args.groups) and (groupId in args.groups):
 			should_update = True
-		if (args.artifacts) and (component in args.artifacts):
-			should_update = True
-		if (args.artifacts) and (subcomponent in args.artifacts):
+		if (args.artifacts) and (artifactId in args.artifacts):
 			should_update = True
 	else:
 		should_update = True
