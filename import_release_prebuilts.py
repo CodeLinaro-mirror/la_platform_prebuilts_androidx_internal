@@ -118,9 +118,9 @@ def fetch_and_extract(target, build_id, file, artifact_path=None):
 		return None
 	return extract_artifact(artifact_path)
 
-def update_new_artifacts(group_id_file_path, artifact_ver_map, groupId):
+def update_new_artifacts(group_id_file_path, groupId_ver_map, artifactId_ver_map, groupId):
 	# Finds each new library having groupId <groupId> under <group_id_file_path> and
-	# updates <artifact_ver_map> with this new library
+	# updates <groupId_ver_map> and <artifactId_ver_map> with this new library
 	success = False
 	# Walk filepath to get versions for each artifactId
 	for parent_file_path, dirs, _ in os.walk(group_id_file_path):
@@ -130,7 +130,7 @@ def update_new_artifacts(group_id_file_path, artifact_ver_map, groupId):
 				version = dir_name
 				# Get artifactId from filepath
 				artifactId = parent_file_path.strip('/').split('/')[-1]
-				update_artifact_ver_map(artifact_ver_map, groupId, artifactId, version)
+				update_version_maps(groupId_ver_map, artifactId_ver_map, groupId, artifactId, version)
 				success = True
 	if not success:
 		print_e("Failed to find any artifactIds in filepath: %s" % group_id_file_path)
@@ -149,16 +149,16 @@ def should_update_artifact(groupId, artifactId):
 		should_update = True
 	return should_update
 
-def update_artifact_ver_map(artifact_ver_map, groupId, artifactId, version):
+def update_version_maps(groupId_ver_map, artifactId_ver_map, groupId, artifactId, version):
 	if should_update_artifact(groupId, artifactId):
-		if groupId.upper() not in artifact_ver_map:
-			artifact_ver_map[groupId.upper()] = version
-		if artifactId not in artifact_ver_map:
-			artifact_ver_map[artifactId] = version
+		if groupId.upper() not in groupId_ver_map:
+			groupId_ver_map[groupId.upper()] = version
+		if artifactId not in artifactId_ver_map:
+			artifactId_ver_map[artifactId] = version
 			summary_log.append("Prebuilts: %s --> %s" % (artifactId, version))
 			prebuilts_log.append(artifactId+'-'+version)
 
-def get_updated_artifact_ver_map():
+def get_updated_version_maps():
 	try:
 		# Run git status --porcelain to get the names of the libraries that have changed
 		# (cut -c4- removes the change-type-character from git status output)
@@ -167,7 +167,8 @@ def get_updated_artifact_ver_map():
 		print_e('FAIL: No artifacts to import from build ID %s' %  build_id)
 		return None
 	# Iterate through the git diff output to map libraries to their new versions
-	artifact_ver_map = {}
+	artifactId_ver_map = {}
+	groupId_ver_map = {}
 	diff = iter(gitdiff_ouput.splitlines())
 	for line in diff:
 		file_path_list = line.decode().split('/')
@@ -179,15 +180,42 @@ def get_updated_artifact_ver_map():
 		# So, we need to go get it if it's not there
 		if len(file_path_list) <= 3 or file_path_list[3] == "":
 			# New library, so we need to check full directory tree to get version(s)
-			if not update_new_artifacts(line.decode(), artifact_ver_map, groupId):
+			if not update_new_artifacts(line.decode(), groupId_ver_map, artifactId_ver_map, groupId):
 				continue
 		else:
 			version = file_path_list[3]
-			update_artifact_ver_map(artifact_ver_map, groupId, artifactId, version)
-	return artifact_ver_map
+			update_version_maps(groupId_ver_map, artifactId_ver_map, groupId, artifactId, version)
+	return groupId_ver_map, artifactId_ver_map
+
+# Inserts new groupdId into PublishDocsRules.kt
+def insert_new_groupId_into_pdr(pdr_lines, num_lines, new_groupId, groupId_ver_map):
+	new_groupId_insert_line = 0
+	for i in range(num_lines):
+		cur_line = pdr_lines[i]
+		# Skip any line that doesn't declare a version
+		if 'LibraryGroups' not in cur_line: continue
+		groupId = cur_line.split('LibraryGroups.')[1].split(',')[0]
+		# Skip any line that does contain a version
+		cur_line_split = cur_line.split('\"')
+		if len(cur_line_split) < 2: continue
+		# Iterate through until you found the alphabetical place to insert the new groupId
+		if new_groupId <= groupId:
+			new_groupId_insert_line = i
+			break
+		else:
+			new_groupId_insert_line = i + 1
+	# Failed to find a spot for the new groupID, so append it to the end of the LibraryGroup list
+	pdr_lines.insert(new_groupId_insert_line, "    prebuilts(LibraryGroups." \
+				+ new_groupId.upper() + ", \"" \
+				+ groupId_ver_map[new_groupId] + "\")\n")
+	summary_log.append("PublishDocsRules.kt: ADDED %s with version %s" %(new_groupId.lower(), groupId_ver_map[new_groupId]))
+	publish_docs_log.append(new_groupId.lower()+'-'+groupId_ver_map[new_groupId])
 
 def update_publish_doc_rules():
-	artifact_ver_map = get_updated_artifact_ver_map()
+	groupId_ver_map, artifactId_ver_map = get_updated_version_maps()
+	groupId_found = {}
+	for key in groupId_ver_map:
+		groupId_found[key] = False
 	# Get build the file path of PublicDocRules.kt - this isn't great, open to a better solution
 	if not os.path.exists(PUBLISHDOCSRULES_FP):
 		print_e("PublishDocsRules.kt not in expected location.")
@@ -214,22 +242,27 @@ def update_publish_doc_rules():
 		# Skip any line that does contain a version
 		if not outdated_ver[0].isnumeric():	continue
 		### Update groupId or artifactId ###
-		if artifactId in artifact_ver_map:
+		if artifactId in artifactId_ver_map:
+			groupId_found[groupId] = True
 			# Update version of artifactId
-			if artifact_ver_map[artifactId] != outdated_ver:
+			if artifactId_ver_map[artifactId] != outdated_ver:
 				pdr_lines[i] = cur_line[:ver_index] \
-					+ artifact_ver_map[artifactId] \
+					+ artifactId_ver_map[artifactId] \
 					+ cur_line[ver_index+len(outdated_ver):]
-				summary_log.append("PublishDocsRule.kt: Updated %s from %s to %s" %(artifactId, outdated_ver, artifact_ver_map[artifactId]))
-				publish_docs_log.append(artifactId+'-'+artifact_ver_map[artifactId])
-		if not artifactId and groupId in artifact_ver_map:
+				summary_log.append("PublishDocsRules.kt: Updated %s from %s to %s" %(artifactId, outdated_ver, artifactId_ver_map[artifactId]))
+				publish_docs_log.append(artifactId+'-'+artifactId_ver_map[artifactId])
+		if not artifactId and groupId in groupId_ver_map:
+			groupId_found[groupId] = True
 			# Update version of groupId
-			if artifact_ver_map[groupId] != outdated_ver:
+			if groupId_ver_map[groupId] != outdated_ver:
 				pdr_lines[i] = cur_line[:ver_index] \
-					+ artifact_ver_map[groupId] \
+					+ groupId_ver_map[groupId] \
 					+ cur_line[ver_index+len(outdated_ver):]
-				summary_log.append("PublishDocsRule.kt: Updated %s from %s to %s" %(groupId.lower(), outdated_ver, artifact_ver_map[groupId]))
-				publish_docs_log.append(groupId.lower()+'-'+artifact_ver_map[groupId])
+				summary_log.append("PublishDocsRules.kt: Updated %s from %s to %s" %(groupId.lower(), outdated_ver, groupId_ver_map[groupId]))
+				publish_docs_log.append(groupId.lower()+'-'+groupId_ver_map[groupId])
+	for groupId in groupId_found:
+		if not groupId_found[groupId]:
+			insert_new_groupId_into_pdr(pdr_lines, num_lines, groupId, groupId_ver_map)
 	# Open file for writing and update all lines
 	with open(PUBLISHDOCSRULES_FP, 'w') as f:
 		f.writelines(pdr_lines)
