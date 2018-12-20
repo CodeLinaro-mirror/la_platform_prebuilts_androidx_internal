@@ -118,6 +118,21 @@ def fetch_and_extract(target, build_id, file, artifact_path=None):
 		return None
 	return extract_artifact(artifact_path)
 
+def remove_type_aar_from_pom_files():
+	print("Removing <type>aar</type> from the pom files...", end = '')
+	try:
+		# Comment out <type>aar</type> in our pom files
+		# This is being done as a workaround for b/118385540
+		# TODO: Remove this method once https://github.com/gradle/gradle/issues/7594 is fixed
+		subprocess.check_output("find -name *.pom | xargs sed 's|^      <type>aar</type>$|      <!--<type>aar</type>-->|' -i", shell=True)
+	except subprocess.CalledProcessError:
+		print("failed!")
+		print_e("FAIL: Failed to remove <type>aar</type> from the pom files")
+		summary_log.append("FAILED to remove <type>aar</type> from the pom files")
+		return
+	print("Successful")
+	summary_log.append("<type>aar</type> was removed from the pom files")
+
 def update_new_artifacts(group_id_file_path, groupId_ver_map, artifactId_ver_map, groupId):
 	# Finds each new library having groupId <groupId> under <group_id_file_path> and
 	# updates <groupId_ver_map> and <artifactId_ver_map> with this new library
@@ -395,5 +410,7 @@ if args.no_commit:
 else:
 	if not commit_prebuilts(): sys.exit(1)
 	commit_publish_docs_rules()
+
+remove_type_aar_from_pom_files()
 print_change_summary()
 print("Test and check these changes before uploading to Gerrit")
