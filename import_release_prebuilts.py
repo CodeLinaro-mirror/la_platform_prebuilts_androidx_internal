@@ -373,10 +373,10 @@ parser.add_argument(
 	'source',
 	help='Build server build ID or local Maven ZIP file')
 parser.add_argument(
-	'--all_prebuilts', action="store_true",
+	'--all-prebuilts', action="store_true",
 	help='If specified, updates all AndroidX prebuilts with artifacts from the build ID')
 parser.add_argument(
-	'--skip_publishdocrules', action="store_true",
+	'--skip-publishdocrules', action="store_true",
 	help='If specified, PublishDocsRules.kt will NOT be updated')
 parser.add_argument(
 	'--groups', metavar='groupId', nargs='+',
@@ -391,7 +391,7 @@ parser.add_argument(
 	script will import specific artifacts \"androidx.core:core\", \"androidx.slice:slice-view\",
 	and \"androidx.lifecycle:lifecycle-common\"""")
 parser.add_argument(
-	'--no_commit', action="store_true",
+	'--no-commit', action="store_true",
 	help='If specified, this script will not commit the changes')
 
 # Parse arguments and check for existence of build ID or file
