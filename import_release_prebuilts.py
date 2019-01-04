@@ -74,23 +74,42 @@ def get_repo_androidx_path(repo_dir):
 		return None
 	return repo_androidx_path
 
-def copy_and_merge_artifacts(repo_dir, dest_dir, components):
+def get_groupId_from_artifactId(artifactId):
+	# By convention, androidx namespace is declared as:
+	# androidx.${groupId}:${groupId}-${optionalArtifactIdSuffix}:${version}
+	# Here, artifactId == "${groupId}-${optionalArtifactIdSuffix}"
+	return artifactId.split('-')[0]
+
+def copy_and_merge_artifacts(repo_dir, dest_dir, groupIds, artifactIds):
 	repo_androidx_path = get_repo_androidx_path(repo_dir)
 	if not repo_androidx_path: return None
-	if not components:
+	if not groupIds and not artifactIds:
 		return cp(repo_androidx_path, dest_dir)
-	else:
-		# Only copy over components that were specified on the command line
-		for comp in components:
-			repo_comp_path = os.path.join(repo_androidx_path, comp)
-			if not os.path.exists(repo_comp_path):
-				print_e("Failed to find component %s in the artifact zip file" % comp)
+	if groupIds:
+		# Copy over groupIds that were specified on the command line
+		for group in groupIds:
+			repo_group_path = os.path.join(repo_androidx_path, group)
+			if not os.path.exists(repo_group_path):
+				print_e("Failed to find groupId %s in the artifact zip file" % group)
 				return None
-			dest_comp_path = os.path.join(dest_dir, comp)
-			if not cp(repo_comp_path, dest_comp_path):
-				print_e("Failed to find copy %s to %s" % (repo_comp_path, dest_comp_path))
+			dest_group_path = os.path.join(dest_dir, group)
+			if not cp(repo_group_path, dest_group_path):
+				print_e("Failed to find copy %s to %s" % (repo_group_path, dest_group_path))
 				return None
-		return dest_dir
+	if artifactIds:
+		# Copy over artifactIds that were specified on the command line
+		for artifact in artifactIds:
+			# Get the groupId from the artifactId (in AndroidX, the groupId must be based on the artifactId)
+			artifact_groupId = get_groupId_from_artifactId(artifact)
+			repo_artifact_path = os.path.join(repo_androidx_path, artifact_groupId, artifact)
+			if not os.path.exists(repo_artifact_path):
+				print_e("Failed to find artifactId %s in the artifact zip file" % artifact)
+				return None
+			dest_artifact_path = os.path.join(dest_dir, artifact_groupId, artifact)
+			if not cp(repo_artifact_path, dest_artifact_path):
+				print_e("Failed to find copy %s to %s" % (repo_artifact_path, dest_artifact_path))
+				return None
+	return dest_dir
 
 def fetch_and_extract(target, build_id, file, artifact_path=None):
 	if not artifact_path:
@@ -99,19 +118,62 @@ def fetch_and_extract(target, build_id, file, artifact_path=None):
 		return None
 	return extract_artifact(artifact_path)
 
-def get_new_library_version(file_path):
+def remove_type_aar_from_pom_files():
+	print("Removing <type>aar</type> from the pom files...", end = '')
 	try:
-		ls_output = subprocess.check_output('ls %s' % file_path, shell=True)
+		# Comment out <type>aar</type> in our pom files
+		# This is being done as a workaround for b/118385540
+		# TODO: Remove this method once https://github.com/gradle/gradle/issues/7594 is fixed
+		subprocess.check_output("find -name *.pom | xargs sed 's|^      <type>aar</type>$|      <!--<type>aar</type>-->|' -i", shell=True)
 	except subprocess.CalledProcessError:
-		print_e('Failed to get version for library: %s' % file_path)
-		return None
-	version = ls_output.decode().strip('\n').split(',')[0]
-	if not version[0].isnumeric():
-		print_e('Failed to get version for library: %s' % file_path)
-		return None
-	return version
+		print("failed!")
+		print_e("FAIL: Failed to remove <type>aar</type> from the pom files")
+		summary_log.append("FAILED to remove <type>aar</type> from the pom files")
+		return
+	print("Successful")
+	summary_log.append("<type>aar</type> was removed from the pom files")
 
-def get_updated_components_map():
+def update_new_artifacts(group_id_file_path, groupId_ver_map, artifactId_ver_map, groupId):
+	# Finds each new library having groupId <groupId> under <group_id_file_path> and
+	# updates <groupId_ver_map> and <artifactId_ver_map> with this new library
+	success = False
+	# Walk filepath to get versions for each artifactId
+	for parent_file_path, dirs, _ in os.walk(group_id_file_path):
+		for dir_name in dirs:
+			if dir_name[0].isnumeric():
+				# Version directories have format version as dir_name, for example: 1.1.0-alpha06
+				version = dir_name
+				# Get artifactId from filepath
+				artifactId = parent_file_path.strip('/').split('/')[-1]
+				update_version_maps(groupId_ver_map, artifactId_ver_map, groupId, artifactId, version)
+				success = True
+	if not success:
+		print_e("Failed to find any artifactIds in filepath: %s" % group_id_file_path)
+	return success
+
+def should_update_artifact(groupId, artifactId):
+	# If a artifact or group list was specified and if the artifactId or groupId were NOT specified 
+	# in either list on the command line, return false
+	should_update = False
+	if (args.groups) or (args.artifacts):
+		if (args.groups) and (groupId in args.groups):
+			should_update = True
+		if (args.artifacts) and (artifactId in args.artifacts):
+			should_update = True
+	else:
+		should_update = True
+	return should_update
+
+def update_version_maps(groupId_ver_map, artifactId_ver_map, groupId, artifactId, version):
+	if should_update_artifact(groupId, artifactId):
+		if groupId.upper() not in groupId_ver_map:
+			groupId_ver_map[groupId.upper()] = version
+		if artifactId not in artifactId_ver_map:
+			artifactId_ver_map[artifactId] = version
+			summary_log.append("Prebuilts: %s --> %s" % (artifactId, version))
+			prebuilts_log.append(artifactId+'-'+version)
+
+def get_updated_version_maps():
 	try:
 		# Run git status --porcelain to get the names of the libraries that have changed
 		# (cut -c4- removes the change-type-character from git status output)
@@ -120,33 +182,55 @@ def get_updated_components_map():
 		print_e('FAIL: No artifacts to import from build ID %s' %  build_id)
 		return None
 	# Iterate through the git diff output to map libraries to their new versions
-	component_ver_map = {}
+	artifactId_ver_map = {}
+	groupId_ver_map = {}
 	diff = iter(gitdiff_ouput.splitlines())
 	for line in diff:
 		file_path_list = line.decode().split('/')
-		if len(file_path_list) <= 3:
+		if len(file_path_list) < 3:
 			continue
-		component = file_path_list[1]
-		subcomponent = file_path_list[2]
-		# For new libraries/components, git status doesn't return the directory with the version
+		groupId = file_path_list[1]
+		artifactId = file_path_list[2]
+		# For new libraries/groupIds, git status doesn't return the directory with the version
 		# So, we need to go get it if it's not there
-		version = file_path_list[3] if file_path_list[3] else get_new_library_version(line.decode())
-		if not version: continue
-		# If the component was not specified in the component list on the command line, skip
-		if (args.libraries) and (component not in args.libraries):
-			continue
-		if component.upper() not in component_ver_map:
-			component_ver_map[component.upper()] = version
-			summary_log.append("Prebuilts: %s --> %s" % (component, version))
-			prebuilts_log.append(component)
-		if subcomponent not in component_ver_map:
-			component_ver_map[subcomponent] = version
-			summary_log.append("Prebuilts: %s --> %s" % (subcomponent, version))
-			prebuilts_log.append(subcomponent)
-	return component_ver_map
+		if len(file_path_list) <= 3 or file_path_list[3] == "":
+			# New library, so we need to check full directory tree to get version(s)
+			if not update_new_artifacts(line.decode(), groupId_ver_map, artifactId_ver_map, groupId):
+				continue
+		else:
+			version = file_path_list[3]
+			update_version_maps(groupId_ver_map, artifactId_ver_map, groupId, artifactId, version)
+	return groupId_ver_map, artifactId_ver_map
+
+# Inserts new groupdId into PublishDocsRules.kt
+def insert_new_groupId_into_pdr(pdr_lines, num_lines, new_groupId, groupId_ver_map):
+	new_groupId_insert_line = 0
+	for i in range(num_lines):
+		cur_line = pdr_lines[i]
+		# Skip any line that doesn't declare a version
+		if 'LibraryGroups' not in cur_line: continue
+		groupId = cur_line.split('LibraryGroups.')[1].split(',')[0]
+		# Skip any line that does contain a version
+		cur_line_split = cur_line.split('\"')
+		if len(cur_line_split) < 2: continue
+		# Iterate through until you found the alphabetical place to insert the new groupId
+		if new_groupId <= groupId:
+			new_groupId_insert_line = i
+			break
+		else:
+			new_groupId_insert_line = i + 1
+	# Failed to find a spot for the new groupID, so append it to the end of the LibraryGroup list
+	pdr_lines.insert(new_groupId_insert_line, "    prebuilts(LibraryGroups." \
+				+ new_groupId.upper() + ", \"" \
+				+ groupId_ver_map[new_groupId] + "\")\n")
+	summary_log.append("PublishDocsRules.kt: ADDED %s with version %s" %(new_groupId.lower(), groupId_ver_map[new_groupId]))
+	publish_docs_log.append(new_groupId.lower()+'-'+groupId_ver_map[new_groupId])
 
 def update_publish_doc_rules():
-	component_ver_map = get_updated_components_map()
+	groupId_ver_map, artifactId_ver_map = get_updated_version_maps()
+	groupId_found = {}
+	for key in groupId_ver_map:
+		groupId_found[key] = False
 	# Get build the file path of PublicDocRules.kt - this isn't great, open to a better solution
 	if not os.path.exists(PUBLISHDOCSRULES_FP):
 		print_e("PublishDocsRules.kt not in expected location.")
@@ -159,36 +243,41 @@ def update_publish_doc_rules():
 		cur_line = pdr_lines[i]
 		# Skip any line that doesn't declare a version
 		if 'LibraryGroups' not in cur_line: continue
-		component = cur_line.split('LibraryGroups.')[1].split(',')[0]
-		# Get the subcomponent (if it exists)
+		groupId = cur_line.split('LibraryGroups.')[1].split(',')[0]
+		# Get the artifactId (if it exists)
 		cur_line_split = cur_line.split('\"')
 		# Skip any line that does contain a version
 		if len(cur_line_split) < 2: continue
-		subcomponent = ""
+		artifactId = ""
 		if len(cur_line_split) >= 4:
-			subcomponent = cur_line_split[-4]
+			artifactId = cur_line_split[-4]
 		# Split lines based on quotes and get second to last string - this will be the version
 		outdated_ver = cur_line.split('\"')[-2]
 		ver_index = cur_line.find(outdated_ver)
 		# Skip any line that does contain a version
 		if not outdated_ver[0].isnumeric():	continue
-		### Update component or subcomponent ###
-		if subcomponent in component_ver_map:
-			# Update version of subcomponent
-			if component_ver_map[subcomponent] != outdated_ver:
+		### Update groupId or artifactId ###
+		if artifactId in artifactId_ver_map:
+			groupId_found[groupId] = True
+			# Update version of artifactId
+			if artifactId_ver_map[artifactId] != outdated_ver:
 				pdr_lines[i] = cur_line[:ver_index] \
-					+ component_ver_map[subcomponent] \
+					+ artifactId_ver_map[artifactId] \
 					+ cur_line[ver_index+len(outdated_ver):]
-				summary_log.append("PublishDocsRule.kt: Updated %s from %s to %s" %(subcomponent, outdated_ver, component_ver_map[subcomponent]))
-				publish_docs_log.append(subcomponent)
-		if not subcomponent and component in component_ver_map:
-			# Update version of component
-			if component_ver_map[component] != outdated_ver:
+				summary_log.append("PublishDocsRules.kt: Updated %s from %s to %s" %(artifactId, outdated_ver, artifactId_ver_map[artifactId]))
+				publish_docs_log.append(artifactId+'-'+artifactId_ver_map[artifactId])
+		if not artifactId and groupId in groupId_ver_map:
+			groupId_found[groupId] = True
+			# Update version of groupId
+			if groupId_ver_map[groupId] != outdated_ver:
 				pdr_lines[i] = cur_line[:ver_index] \
-					+ component_ver_map[component] \
+					+ groupId_ver_map[groupId] \
 					+ cur_line[ver_index+len(outdated_ver):]
-				summary_log.append("PublishDocsRule.kt: Updated %s from %s to %s" %(component.lower(), outdated_ver, component_ver_map[component]))
-				publish_docs_log.append(component.lower())
+				summary_log.append("PublishDocsRules.kt: Updated %s from %s to %s" %(groupId.lower(), outdated_ver, groupId_ver_map[groupId]))
+				publish_docs_log.append(groupId.lower()+'-'+groupId_ver_map[groupId])
+	for groupId in groupId_found:
+		if not groupId_found[groupId]:
+			insert_new_groupId_into_pdr(pdr_lines, num_lines, groupId, groupId_ver_map)
 	# Open file for writing and update all lines
 	with open(PUBLISHDOCSRULES_FP, 'w') as f:
 		f.writelines(pdr_lines)
@@ -208,7 +297,7 @@ def update_androidx(target, build_id, local_file, update_all_prebuilts):
 			print_e('Failed to extract AndroidX repository')
 			return False
 		print("Download and extract artifacts... Successful")
-		if not copy_and_merge_artifacts(repo_dir, './androidx', args.libraries):
+		if not copy_and_merge_artifacts(repo_dir, './androidx', args.groups, args.artifacts):
 			print_e('Failed to copy and merge AndroidX repository')
 			return False
 		print("Copy and merge artifacts... Successful")
@@ -256,7 +345,7 @@ def commit_prebuilts():
 		src_msg = "local Maven ZIP %s" % getFile(args)
 	else:
 		src_msg = "build %s" % (getBuildId(args))
-	msg = "Import %s from %s\n\n%s" % (", ".join(prebuilts_log), src_msg, 'Test: N/A')
+	msg = "Import prebuilts %s from %s\n\n%s" % (", ".join(prebuilts_log), src_msg, 'Test: ./gradlew buildOnServer')
 	subprocess.check_call(['git', 'commit', '-m', msg])
 	summary_log.append("1 Commit was made in prebuilts/androidx/internal to commit prebuilts")
 	print("Create commit for prebuilts... Successful")
@@ -290,11 +379,20 @@ parser.add_argument(
 	'--skip_publishdocrules', action="store_true",
 	help='If specified, PublishDocsRules.kt will NOT be updated')
 parser.add_argument(
-	'--libraries', metavar='library', nargs='+',
+	'--groups', metavar='groupId', nargs='+',
 	help="""If specified, only update libraries whose groupId contains the listed text.
-	For example,if you specify \"--libraries paging slice lifecycle\", then this
+	For example, if you specify \"--groups paging slice lifecycle\", then this
 	script will import each library with groupId beginning with \"androidx.paging\", \"androidx.slice\",
 	or \"androidx.lifecycle\"""")
+parser.add_argument(
+	'--artifacts', metavar='artifactId', nargs='+',
+	help="""If specified, only update libraries whose artifactId contains the listed text.
+	For example, if you specify \"--artifacts core slice-view lifecycle-common\", then this
+	script will import specific artifacts \"androidx.core:core\", \"androidx.slice:slice-view\",
+	and \"androidx.lifecycle:lifecycle-common\"""")
+parser.add_argument(
+	'--no_commit', action="store_true",
+	help='If specified, this script will not commit the changes')
 
 # Parse arguments and check for existence of build ID or file
 args = parser.parse_args()
@@ -307,7 +405,12 @@ if not update_androidx('androidx', getBuildId(args), getFile(args), args.all_pre
 	print_e('Failed to update AndroidX, aborting...')
 	sys.exit(1)
 
-if not commit_prebuilts(): sys.exit(1)
-commit_publish_docs_rules()
+if args.no_commit:
+	summary_log.append("These changes were NOT committed.")
+else:
+	if not commit_prebuilts(): sys.exit(1)
+	commit_publish_docs_rules()
+
+remove_type_aar_from_pom_files()
 print_change_summary()
 print("Test and check these changes before uploading to Gerrit")
