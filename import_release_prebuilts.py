@@ -345,7 +345,7 @@ def commit_prebuilts():
 		src_msg = "local Maven ZIP %s" % getFile(args)
 	else:
 		src_msg = "build %s" % (getBuildId(args))
-	msg = "Import prebuilts %s from %s\n\n%s" % (", ".join(prebuilts_log), src_msg, 'Test: ./gradlew buildOnServer')
+	msg = "Import prebuilts %s from %s\n\nThis commit was generated from the command:\n%s\n\n%s" % (", ".join(prebuilts_log), src_msg, " ".join(sys.argv), 'Test: ./gradlew buildOnServer')
 	subprocess.check_call(['git', 'commit', '-m', msg])
 	summary_log.append("1 Commit was made in prebuilts/androidx/internal to commit prebuilts")
 	print("Create commit for prebuilts... Successful")
@@ -359,7 +359,7 @@ def commit_publish_docs_rules():
 	if not staged_changes:
 		summary_log.append("NO CHANGES were made to PublishDocsRules.kt")
 		return False
-	pdr_msg = "Updated PublishDocsRules.kt for %s \n\n%s" % (", ".join(publish_docs_log), 'Test: ./gradlew buildOnServer')
+	pdr_msg = "Updated PublishDocsRules.kt for %s \n\nThis commit was generated from the command:\n%s\n\n%s" % (", ".join(publish_docs_log), " ".join(sys.argv), 'Test: ./gradlew buildOnServer')
 	git_commit_cmd = "git %s commit -m \"%s\"" % (GIT_TREE_ARGS, pdr_msg)
 	subprocess.check_output(git_commit_cmd, stderr=subprocess.STDOUT, shell=True)
 	summary_log.append("1 Commit was made in frameworks/support to commmit changes to PublishDocsRules.kt")
