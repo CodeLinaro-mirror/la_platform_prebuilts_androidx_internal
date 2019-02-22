@@ -345,7 +345,7 @@ def commit_prebuilts():
 		src_msg = "local Maven ZIP %s" % getFile(args)
 	else:
 		src_msg = "build %s" % (getBuildId(args))
-	msg = "Import prebuilts %s from %s\n\n%s" % (", ".join(prebuilts_log), src_msg, 'Test: ./gradlew buildOnServer')
+	msg = "Import prebuilts %s from %s\n\nThis commit was generated from the command:\n%s\n\n%s" % (", ".join(prebuilts_log), src_msg, " ".join(sys.argv), 'Test: ./gradlew buildOnServer')
 	subprocess.check_call(['git', 'commit', '-m', msg])
 	summary_log.append("1 Commit was made in prebuilts/androidx/internal to commit prebuilts")
 	print("Create commit for prebuilts... Successful")
@@ -359,7 +359,7 @@ def commit_publish_docs_rules():
 	if not staged_changes:
 		summary_log.append("NO CHANGES were made to PublishDocsRules.kt")
 		return False
-	pdr_msg = "Updated PublishDocsRules.kt for %s \n\n%s" % (", ".join(publish_docs_log), 'Test: ./gradlew buildOnServer')
+	pdr_msg = "Updated PublishDocsRules.kt for %s \n\nThis commit was generated from the command:\n%s\n\n%s" % (", ".join(publish_docs_log), " ".join(sys.argv), 'Test: ./gradlew buildOnServer')
 	git_commit_cmd = "git %s commit -m \"%s\"" % (GIT_TREE_ARGS, pdr_msg)
 	subprocess.check_output(git_commit_cmd, stderr=subprocess.STDOUT, shell=True)
 	summary_log.append("1 Commit was made in frameworks/support to commmit changes to PublishDocsRules.kt")
@@ -373,10 +373,10 @@ parser.add_argument(
 	'source',
 	help='Build server build ID or local Maven ZIP file')
 parser.add_argument(
-	'--all_prebuilts', action="store_true",
+	'--all-prebuilts', action="store_true",
 	help='If specified, updates all AndroidX prebuilts with artifacts from the build ID')
 parser.add_argument(
-	'--skip_publishdocrules', action="store_true",
+	'--skip-publishdocrules', action="store_true",
 	help='If specified, PublishDocsRules.kt will NOT be updated')
 parser.add_argument(
 	'--groups', metavar='groupId', nargs='+',
@@ -391,7 +391,7 @@ parser.add_argument(
 	script will import specific artifacts \"androidx.core:core\", \"androidx.slice:slice-view\",
 	and \"androidx.lifecycle:lifecycle-common\"""")
 parser.add_argument(
-	'--no_commit', action="store_true",
+	'--no-commit', action="store_true",
 	help='If specified, this script will not commit the changes')
 
 # Parse arguments and check for existence of build ID or file
