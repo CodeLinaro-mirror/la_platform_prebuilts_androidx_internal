@@ -228,8 +228,7 @@ def insert_new_groupId_into_pdr(pdr_lines, num_lines, new_groupId, groupId_ver_m
 	summary_log.append("PublishDocsRules.kt: ADDED %s with version %s" %(new_groupId.lower(), groupId_ver_map[new_groupId]))
 	publish_docs_log.append(new_groupId.lower()+'-'+groupId_ver_map[new_groupId])
 
-def update_publish_doc_rules():
-	groupId_ver_map, artifactId_ver_map = get_updated_version_maps()
+def update_publish_doc_rules(groupId_ver_map, artifactId_ver_map):
 	groupId_found = {}
 	for key in groupId_ver_map:
 		groupId_found[key] = False
@@ -304,8 +303,10 @@ def update_androidx(target, build_id, local_file, update_all_prebuilts):
 			return False
 		print("Copy and merge artifacts... Successful")
 		remove_type_aar_from_pom_files("androidx")
+		# Now that we've merged new prebuilts, we need to update our version map
+		groupId_ver_map, artifactId_ver_map = get_updated_version_maps()
 		if not args.skip_publishdocrules:
-			if not update_publish_doc_rules():
+			if not update_publish_doc_rules(groupId_ver_map, artifactId_ver_map):
 				print_e('Failed to update PublicDocRules.kt')
 				return False
 			print("Update PublishDocsRules.kt... Successful")
