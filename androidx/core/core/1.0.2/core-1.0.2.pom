@@ -2,14 +2,14 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>androidx.room</groupId>
-  <artifactId>room-runtime</artifactId>
-  <version>2.1.0-alpha07</version>
+  <groupId>androidx.core</groupId>
+  <artifactId>core</artifactId>
+  <version>1.0.2</version>
   <packaging>aar</packaging>
-  <name>Android Room-Runtime</name>
-  <description>Android Room-Runtime</description>
-  <url>https://developer.android.com/topic/libraries/architecture/index.html</url>
-  <inceptionYear>2017</inceptionYear>
+  <name>Android Support Library compat</name>
+  <description>The Support Library is a static library that you can add to your Android application in order to use APIs that are either not available for older platform versions or utility APIs that aren't a part of the framework APIs. Compatible on devices running API 14 or later.</description>
+  <url>http://developer.android.com/tools/extras/support-library.html</url>
+  <inceptionYear>2015</inceptionYear>
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
@@ -28,43 +28,29 @@
   </scm>
   <dependencies>
     <dependency>
-      <groupId>androidx.room</groupId>
-      <artifactId>room-common</artifactId>
-      <version>2.1.0-alpha07</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>androidx.sqlite</groupId>
-      <artifactId>sqlite-framework</artifactId>
-      <version>2.0.1</version>
-      <!--<type>aar</type>-->
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>androidx.sqlite</groupId>
-      <artifactId>sqlite</artifactId>
-      <version>2.0.1</version>
-      <!--<type>aar</type>-->
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>androidx.arch.core</groupId>
-      <artifactId>core-runtime</artifactId>
-      <version>2.0.1</version>
-      <!--<type>aar</type>-->
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>androidx.core</groupId>
-      <artifactId>core</artifactId>
-      <version>1.0.0</version>
-      <!--<type>aar</type>-->
+      <groupId>androidx.annotation</groupId>
+      <artifactId>annotation</artifactId>
+      <version>1.0.2</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>androidx.collection</groupId>
       <artifactId>collection</artifactId>
       <version>1.0.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>androidx.lifecycle</groupId>
+      <artifactId>lifecycle-runtime</artifactId>
+      <version>2.0.0</version>
+      <!--<type>aar</type>-->
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>androidx.versionedparcelable</groupId>
+      <artifactId>versionedparcelable</artifactId>
+      <version>1.0.0</version>
+      <!--<type>aar</type>-->
       <scope>compile</scope>
     </dependency>
   </dependencies>
