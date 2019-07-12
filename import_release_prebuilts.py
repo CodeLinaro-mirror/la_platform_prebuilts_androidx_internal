@@ -228,6 +228,52 @@ def insert_new_groupId_into_pdr(pdr_lines, num_lines, new_groupId, groupId_ver_m
 	summary_log.append("PublishDocsRules.kt: ADDED %s with version %s" %(new_groupId.lower(), groupId_ver_map[new_groupId]))
 	publish_docs_log.append(new_groupId.lower()+'-'+groupId_ver_map[new_groupId])
 
+def convert_prerelease_type_to_num(prerelease_type):
+	# Convert a prerelease suffix type to its numeric equivalent
+	if prerelease_type == 'alpha':
+		return 0
+	if prerelease_type == 'beta':
+		return 1
+	if prerelease_type == 'rc':
+		return 2
+	# Stable defaults to 9
+	return 9
+
+def parse_version(version):
+	# Accepts a SemVer androidx version string, such as "1.2.0-alpha02" and 
+	# returns a list of integers representing the version in the following format: 
+	# [<major>,<minor>,<bugfix>,<prerelease-suffix>,<prerelease-suffix-revision>]
+	# For example 1.2.0-alpha02" returns [1,2,0,0,2]
+	version_elements = version.split('-')[0].split('.')
+	version_list = []
+	for element in version_elements:
+		version_list.append(int(element))
+	# Check if version contains prerelease suffix
+	version_prerelease_suffix = version.split('-')[-1]
+	# Account for suffixes with only 1 suffix number, i.e. "1.1.0-alphaX"
+	version_prerelease_suffix_rev = version_prerelease_suffix[-2:]
+	version_prerelease_suffix_type = version_prerelease_suffix[:-2]
+	if not version_prerelease_suffix_rev.isnumeric():
+		version_prerelease_suffix_rev = version_prerelease_suffix[-1:]
+		version_prerelease_suffix_type = version_prerelease_suffix[:-1]
+	version_list.append(convert_prerelease_type_to_num(version_prerelease_suffix_type))
+	if version.find("-") == -1:
+		# Version contains no prerelease suffix
+		version_list.append(99)
+	else:
+		version_list.append(int(version_prerelease_suffix_rev))
+	return version_list
+
+def get_higher_version(version_a, version_b):
+	version_a_list = parse_version(version_a)
+	version_b_list = parse_version(version_b)
+	for i in range(len(version_a_list)):
+		if version_a_list[i] > version_b_list[i]:
+			return version_a
+		if version_a_list[i] < version_b_list[i]:
+			return version_b
+	return version_a
+
 def update_publish_doc_rules(groupId_ver_map, artifactId_ver_map):
 	groupId_found = {}
 	for key in groupId_ver_map:
@@ -260,6 +306,8 @@ def update_publish_doc_rules(groupId_ver_map, artifactId_ver_map):
 		### Update groupId or artifactId ###
 		if artifactId in artifactId_ver_map:
 			groupId_found[groupId] = True
+			# Skip version updates that would decrement to a smaller version
+			if outdated_ver == get_higher_version(outdated_ver, artifactId_ver_map[artifactId]): continue
 			# Update version of artifactId
 			if artifactId_ver_map[artifactId] != outdated_ver:
 				pdr_lines[i] = cur_line[:ver_index] \
@@ -269,6 +317,8 @@ def update_publish_doc_rules(groupId_ver_map, artifactId_ver_map):
 				publish_docs_log.append(artifactId+'-'+artifactId_ver_map[artifactId])
 		if not artifactId and groupId in groupId_ver_map:
 			groupId_found[groupId] = True
+			# Skip version updates that would decrement to a smaller version
+			if outdated_ver == get_higher_version(outdated_ver, groupId_ver_map[groupId]): continue
 			# Update version of groupId
 			if groupId_ver_map[groupId] != outdated_ver:
 				pdr_lines[i] = cur_line[:ver_index] \
