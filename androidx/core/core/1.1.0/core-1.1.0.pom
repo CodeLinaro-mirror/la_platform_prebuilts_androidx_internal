@@ -2,14 +2,14 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>androidx.media2</groupId>
-  <artifactId>media2-widget</artifactId>
-  <version>1.0.0-alpha07</version>
+  <groupId>androidx.core</groupId>
+  <artifactId>core</artifactId>
+  <version>1.1.0</version>
   <packaging>aar</packaging>
-  <name>AndroidX media2 widget library</name>
-  <description>AndroidX Media2 Widget</description>
+  <name>Android Support Library compat</name>
+  <description>The Support Library is a static library that you can add to your Android application in order to use APIs that are either not available for older platform versions or utility APIs that aren't a part of the framework APIs. Compatible on devices running API 14 or later.</description>
   <url>http://developer.android.com/tools/extras/support-library.html</url>
-  <inceptionYear>2018</inceptionYear>
+  <inceptionYear>2015</inceptionYear>
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
@@ -28,44 +28,35 @@
   </scm>
   <dependencies>
     <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>listenablefuture</artifactId>
-      <version>1.0</version>
+      <groupId>androidx.annotation</groupId>
+      <artifactId>annotation</artifactId>
+      <version>1.1.0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>androidx.media2</groupId>
-      <artifactId>media2-common</artifactId>
+      <groupId>androidx.lifecycle</groupId>
+      <artifactId>lifecycle-runtime</artifactId>
+      <version>2.0.0</version>
+      <!--<type>aar</type>-->
+      <scope>compile</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>*</artifactId>
+          <groupId>androidx.annotation</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>androidx.versionedparcelable</groupId>
+      <artifactId>versionedparcelable</artifactId>
+      <version>1.1.0</version>
+      <!--<type>aar</type>-->
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>androidx.collection</groupId>
+      <artifactId>collection</artifactId>
       <version>1.0.0</version>
-      <!--<type>aar</type>-->
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>androidx.media2</groupId>
-      <artifactId>media2-player</artifactId>
-      <version>1.0.0</version>
-      <!--<type>aar</type>-->
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>androidx.media2</groupId>
-      <artifactId>media2-session</artifactId>
-      <version>1.0.0</version>
-      <!--<type>aar</type>-->
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>androidx.appcompat</groupId>
-      <artifactId>appcompat</artifactId>
-      <version>1.0.2</version>
-      <!--<type>aar</type>-->
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>androidx.palette</groupId>
-      <artifactId>palette</artifactId>
-      <version>1.0.0</version>
-      <!--<type>aar</type>-->
       <scope>compile</scope>
     </dependency>
   </dependencies>
