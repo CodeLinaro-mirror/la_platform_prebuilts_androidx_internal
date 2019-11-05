@@ -507,6 +507,12 @@ if not args.source:
 if not usedComposeFlagCorrectly():
 	sys.exit(1)
 
+# Force the user to explicity decide which set of prebuilts to import
+if args.all_prebuilts == False and args.groups == None and args.artifacts == None:
+	print_e("Need to pass an argument such as --all-prebuilts or pass in groupIds or artifactIds")
+	print_e("Run `./import_release_prebuilts.py --help` for more info")
+	sys.exit(1)
+
 if not update_androidx('androidx', getBuildId(args), getFile(args), args.all_prebuilts, args.compose):
 	print_e('Failed to update AndroidX, aborting...')
 	sys.exit(1)
