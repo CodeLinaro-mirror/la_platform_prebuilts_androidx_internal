@@ -345,16 +345,36 @@ def update_publish_doc_rules(groupId_ver_map, artifactId_ver_map):
 		f.writelines(pdr_lines)
 	return True
 
-def update_androidx(target, build_id, local_file, update_all_prebuilts, import_compose):
+def importing_compose():
+	if args.groups:
+		for group in args.groups:
+			if group in ["ui", "compose"]:
+				return True
+	if args.artifacts:
+		for artifact in args.artifacts:
+			if "ui" in artifact or "compose" in artifact:
+				return True
+	return False
+
+def update_androidx(target, build_id, local_file, update_all_prebuilts):
 	try:
 		if build_id:
 			if update_all_prebuilts:
-				artifact_zip_file = ('ui/top-of-tree-m2repository-all-%s.zip' % build_id if import_compose
-					else 'top-of-tree-m2repository-all-%s.zip' % build_id)
+				artifact_zip_file = 'top-of-tree-m2repository-all-%s.zip' % build_id
 			else:
-				artifact_zip_file = ('ui/gmaven-diff-all-%s.zip' % build_id if import_compose
-					else 'gmaven-diff-all-%s.zip' % build_id)
+				artifact_zip_file = 'gmaven-diff-all-%s.zip' % build_id
 			repo_dir = fetch_and_extract("androidx", build_id, artifact_zip_file, None)
+			if importing_compose():
+				if update_all_prebuilts:
+					artifact_zip_file = 'ui/top-of-tree-m2repository-all-%s.zip' % build_id
+				else:
+					artifact_zip_file = 'ui/gmaven-diff-all-%s.zip' % build_id
+				repo_dir_compose = fetch_and_extract("androidx", build_id, artifact_zip_file, None)
+				# Sanity check repos went to the same place
+				if repo_dir != repo_dir_compose:
+					print_e("Something went wrong importing compose!")
+					print_e("The repo directory was `" + repo_dir_compose + "` but should have been `" + repo_dir + "`")
+					sys.exit(1)
 		else:
 			repo_dir = fetch_and_extract("androidx", None, None, local_file)
 		if not repo_dir:
@@ -378,7 +398,7 @@ def update_androidx(target, build_id, local_file, update_all_prebuilts, import_c
 		# Remove temp directories and temp files we've created 
 		rm(repo_dir)
 		rm('%s.zip' % repo_dir)
-		if import_compose: rm('ui')
+		if importing_compose(): rm('ui')
 		rm('.fetch_artifact2.dat')
 
 def print_change_summary():
@@ -401,37 +421,6 @@ def get_file(args):
 	if not source.isnumeric():
 		return args.source
 	return None
-
-# Check that the --compose argument was passed correctly
-# For example:
-# 	Fails: ./import_release_prebuilts.py <BUILDID> --groups compose
-#	Fails: ./import_release_prebuilts.py <BUILDID> --groups compose navigation --compose
-#	Fails: ./import_release_prebuilts.py <BUILDID> --groups navigation --compose
-#	Succeeds: ./import_release_prebuilts.py <BUILDID> --groups compose --compose
-def used_compose_flag_correctly():
-	if args.groups:
-		for group in args.groups:
-			if (group not in ["ui", "compose"]) and (args.compose):
-				print_e("Compose artifacts need to be imported separately from other androidx " +
-					"artifacts.  Please import the compose artifacts separately with the `--compose` " +
-					"argument")
-				return False
-			if (group in ["ui", "compose"]) and (not args.compose):
-				print_e("To import compose artifacts (like androidx.ui or androidx.compose), " +
-					"you need to pass the `--compose` argument")
-				return False
-	if args.artifacts:
-		for artifact in args.artifacts:
-			if ("ui" not in artifact and "compose" not in artifact) and (args.compose):
-				print_e("Compose artifacts need to be imported separately from other androidx " +
-					"artifacts.  Please import the compose artifacts separately with the `--compose` " +
-					"argument")
-				return False
-			if ("ui" in artifact or "compose" in artifact) and (not args.compose):
-				print_e("To import compose artifacts (like androidx.ui or androidx.compose), " +
-					"you need to pass the `--compose` argument")
-				return False
-	return True
 
 def commit_prebuilts():
 	subprocess.check_call(['git', 'add', './androidx'])
@@ -492,9 +481,6 @@ parser.add_argument(
 parser.add_argument(
 	'--no-commit', action="store_true",
 	help='If specified, this script will not commit the changes')
-parser.add_argument(
-	'--compose', action="store_true",
-	help='If specified, this script will look for compose artifacts under the ui/ directory')
 
 # Parse arguments and check for existence of build ID or file
 args = parser.parse_args()
@@ -503,17 +489,13 @@ if not args.source:
 	parser.error("You must specify a build ID or local Maven ZIP file")
 	sys.exit(1)
 
-# Check that user is only trying to get compose with the compose argument
-if not used_compose_flag_correctly():
-	sys.exit(1)
-
 # Force the user to explicity decide which set of prebuilts to import
 if args.all_prebuilts == False and args.groups == None and args.artifacts == None:
 	print_e("Need to pass an argument such as --all-prebuilts or pass in groupIds or artifactIds")
 	print_e("Run `./import_release_prebuilts.py --help` for more info")
 	sys.exit(1)
 
-if not update_androidx('androidx', get_build_id(args), get_file(args), args.all_prebuilts, args.compose):
+if not update_androidx('androidx', get_build_id(args), get_file(args), args.all_prebuilts):
 	print_e('Failed to update AndroidX, aborting...')
 	sys.exit(1)
 
