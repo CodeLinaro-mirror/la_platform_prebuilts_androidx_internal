@@ -387,7 +387,7 @@ def print_change_summary():
 		print(change)
 
 # Check if build ID exists and is a number
-def getBuildId(args):
+def get_build_id(args):
 	source = args.source
 	number_text = source[:]
 	if not number_text.isnumeric():
@@ -396,7 +396,7 @@ def getBuildId(args):
 	return source
 
 # Check if file exists and is not a number
-def getFile(args):
+def get_file(args):
 	source = args.source
 	if not source.isnumeric():
 		return args.source
@@ -408,7 +408,7 @@ def getFile(args):
 #	Fails: ./import_release_prebuilts.py <BUILDID> --groups compose navigation --compose
 #	Fails: ./import_release_prebuilts.py <BUILDID> --groups navigation --compose
 #	Succeeds: ./import_release_prebuilts.py <BUILDID> --groups compose --compose
-def usedComposeFlagCorrectly():
+def used_compose_flag_correctly():
 	if args.groups:
 		for group in args.groups:
 			if (group not in ["ui", "compose"]) and (args.compose):
@@ -441,9 +441,9 @@ def commit_prebuilts():
 		print_e("There are no prebuilts changes to commit!  Check build id.")
 		return False
 	if not args.source.isnumeric():
-		src_msg = "local Maven ZIP %s" % getFile(args)
+		src_msg = "local Maven ZIP %s" % get_file(args)
 	else:
-		src_msg = "build %s" % (getBuildId(args))
+		src_msg = "build %s" % (get_build_id(args))
 	msg = "Import prebuilts %s from %s\n\nThis commit was generated from the command:\n%s\n\n%s" % (", ".join(prebuilts_log), src_msg, " ".join(sys.argv), 'Test: ./gradlew buildOnServer')
 	subprocess.check_call(['git', 'commit', '-m', msg])
 	summary_log.append("1 Commit was made in prebuilts/androidx/internal to commit prebuilts")
@@ -504,10 +504,16 @@ if not args.source:
 	sys.exit(1)
 
 # Check that user is only trying to get compose with the compose argument
-if not usedComposeFlagCorrectly():
+if not used_compose_flag_correctly():
 	sys.exit(1)
 
-if not update_androidx('androidx', getBuildId(args), getFile(args), args.all_prebuilts, args.compose):
+# Force the user to explicity decide which set of prebuilts to import
+if args.all_prebuilts == False and args.groups == None and args.artifacts == None:
+	print_e("Need to pass an argument such as --all-prebuilts or pass in groupIds or artifactIds")
+	print_e("Run `./import_release_prebuilts.py --help` for more info")
+	sys.exit(1)
+
+if not update_androidx('androidx', get_build_id(args), get_file(args), args.all_prebuilts, args.compose):
 	print_e('Failed to update AndroidX, aborting...')
 	sys.exit(1)
 
