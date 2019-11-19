@@ -158,8 +158,11 @@ def should_update_artifact(groupId, artifactId):
 	# in either list on the command line, return false
 	should_update = False
 	if (args.groups) or (args.artifacts):
-		if (args.groups) and (groupId in args.groups):
-			should_update = True
+		if args.groups:
+			if groupId.replace("androidx.", "") in args.groups:
+				should_update = True
+			if groupId in args.groups:
+				should_update = True
 		if (args.artifacts) and (artifactId in args.artifacts):
 			should_update = True
 	else:
@@ -168,8 +171,8 @@ def should_update_artifact(groupId, artifactId):
 
 def update_version_maps(groupId_ver_map, artifactId_ver_map, groupId, artifactId, version):
 	if should_update_artifact(groupId, artifactId):
-		if groupId.upper() not in groupId_ver_map:
-			groupId_ver_map[groupId.upper()] = version
+		if groupId not in groupId_ver_map:
+			groupId_ver_map[groupId] = version
 		if artifactId not in artifactId_ver_map:
 			artifactId_ver_map[artifactId] = version
 			summary_log.append("Prebuilts: %s --> %s" % (artifactId, version))
@@ -189,43 +192,50 @@ def get_updated_version_maps():
 	diff = iter(gitdiff_ouput.splitlines())
 	for line in diff:
 		file_path_list = line.decode().split('/')
-		if len(file_path_list) < 3:
+		if len(file_path_list) < 3 or file_path_list[-1] != "":
 			continue
-		groupId = file_path_list[1]
-		artifactId = file_path_list[2]
+		groupId = ".".join(file_path_list[:-3])
+		artifactId = file_path_list[-3]
+
 		# For new libraries/groupIds, git status doesn't return the directory with the version
 		# So, we need to go get it if it's not there
-		if len(file_path_list) <= 3 or file_path_list[3] == "":
+		if len(file_path_list) == 3:
+			groupId = ".".join(file_path_list[:-1])
 			# New library, so we need to check full directory tree to get version(s)
 			if not update_new_artifacts(line.decode(), groupId_ver_map, artifactId_ver_map, groupId):
 				continue
-		else:
-			version = file_path_list[3]
-			update_version_maps(groupId_ver_map, artifactId_ver_map, groupId, artifactId, version)
+		if len(file_path_list) == 4:
+			groupId = ".".join(file_path_list[:-2])
+			# New library, so we need to check full directory tree to get version(s)
+			if not update_new_artifacts(line.decode(), groupId_ver_map, artifactId_ver_map, groupId):
+				continue
+		version = file_path_list[-2]
+		update_version_maps(groupId_ver_map, artifactId_ver_map, groupId, artifactId, version)
 	return groupId_ver_map, artifactId_ver_map
 
 # Inserts new groupdId into PublishDocsRules.kt
 def insert_new_groupId_into_pdr(pdr_lines, num_lines, new_groupId, groupId_ver_map):
 	new_groupId_insert_line = 0
+	new_groupId_variable_name = new_groupId.replace("androidx.","").replace(".","_").upper()
 	for i in range(num_lines):
 		cur_line = pdr_lines[i]
 		# Skip any line that doesn't declare a version
 		if 'LibraryGroups' not in cur_line: continue
-		groupId = cur_line.split('LibraryGroups.')[1].split(',')[0]
+		groupId_variable_name = cur_line.split('LibraryGroups.')[1].split(',')[0]
 		# Skip any line that does contain a version
 		cur_line_split = cur_line.split('\"')
 		if len(cur_line_split) < 2: continue
 		# Iterate through until you found the alphabetical place to insert the new groupId
-		if new_groupId <= groupId:
+		if new_groupId_variable_name <= groupId_variable_name:
 			new_groupId_insert_line = i
 			break
 		else:
 			new_groupId_insert_line = i + 1
 	# Failed to find a spot for the new groupID, so append it to the end of the LibraryGroup list
 	pdr_lines.insert(new_groupId_insert_line, "    prebuilts(LibraryGroups." \
-				+ new_groupId.upper() + ", \"" \
+				+ new_groupId_variable_name + ", \"" \
 				+ groupId_ver_map[new_groupId] + "\")\n")
-	summary_log.append("PublishDocsRules.kt: ADDED %s with version %s" %(new_groupId.lower(), groupId_ver_map[new_groupId]))
+	summary_log.append("PublishDocsRules.kt: ADDED %s with version %s" %(new_groupId, groupId_ver_map[new_groupId]))
 	publish_docs_log.append(new_groupId.lower()+'-'+groupId_ver_map[new_groupId])
 
 def convert_prerelease_type_to_num(prerelease_type):
@@ -290,7 +300,8 @@ def update_publish_doc_rules(groupId_ver_map, artifactId_ver_map):
 		cur_line = pdr_lines[i]
 		# Skip any line that doesn't declare a version
 		if 'LibraryGroups' not in cur_line: continue
-		groupId = cur_line.split('LibraryGroups.')[1].split(',')[0]
+		groupId_variable_name = cur_line.split('LibraryGroups.')[1].split(',')[0]
+		groupId = "androidx." + groupId_variable_name.replace(".group", "").replace("_", ".").lower()
 		# Get the artifactId (if it exists)
 		cur_line_split = cur_line.split('\"')
 		# Skip any line that does contain a version
