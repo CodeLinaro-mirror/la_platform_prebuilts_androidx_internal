@@ -118,22 +118,20 @@ def fetch_and_extract(target, build_id, file, artifact_path=None):
 		return None
 	return extract_artifact(artifact_path)
 
-def remove_type_aar_from_pom_files(repo_dir):
-	# Only search pom files to in <repo_dir>
+def remove_type_aar_from_pom_files():
 	print("Removing <type>aar</type> from the pom files...", end = '')
 	try:
 		# Comment out <type>aar</type> in our pom files
 		# This is being done as a workaround for b/118385540
 		# TODO: Remove this method once https://github.com/gradle/gradle/issues/7594 is fixed
-		subprocess.check_output("find " + repo_dir + " -name *.pom | xargs sed 's|^      <type>aar</type>$|      <!--<type>aar</type>-->|' -i", shell=True)
+		subprocess.check_output("find -name *.pom | xargs sed 's|^      <type>aar</type>$|      <!--<type>aar</type>-->|' -i", shell=True)
 	except subprocess.CalledProcessError:
 		print("failed!")
 		print_e("FAIL: Failed to remove <type>aar</type> from the pom files")
 		summary_log.append("FAILED to remove <type>aar</type> from the pom files")
-		return False
+		return
 	print("Successful")
 	summary_log.append("<type>aar</type> was removed from the pom files")
-	return True
 
 def update_new_artifacts(group_id_file_path, groupId_ver_map, artifactId_ver_map, groupId):
 	# Finds each new library having groupId <groupId> under <group_id_file_path> and
@@ -228,7 +226,8 @@ def insert_new_groupId_into_pdr(pdr_lines, num_lines, new_groupId, groupId_ver_m
 	summary_log.append("PublishDocsRules.kt: ADDED %s with version %s" %(new_groupId.lower(), groupId_ver_map[new_groupId]))
 	publish_docs_log.append(new_groupId.lower()+'-'+groupId_ver_map[new_groupId])
 
-def update_publish_doc_rules(groupId_ver_map, artifactId_ver_map):
+def update_publish_doc_rules():
+	groupId_ver_map, artifactId_ver_map = get_updated_version_maps()
 	groupId_found = {}
 	for key in groupId_ver_map:
 		groupId_found[key] = False
@@ -302,11 +301,8 @@ def update_androidx(target, build_id, local_file, update_all_prebuilts):
 			print_e('Failed to copy and merge AndroidX repository')
 			return False
 		print("Copy and merge artifacts... Successful")
-		remove_type_aar_from_pom_files("androidx")
-		# Now that we've merged new prebuilts, we need to update our version map
-		groupId_ver_map, artifactId_ver_map = get_updated_version_maps()
 		if not args.skip_publishdocrules:
-			if not update_publish_doc_rules(groupId_ver_map, artifactId_ver_map):
+			if not update_publish_doc_rules():
 				print_e('Failed to update PublicDocRules.kt')
 				return False
 			print("Update PublishDocsRules.kt... Successful")
@@ -415,5 +411,6 @@ else:
 	if not commit_prebuilts(): sys.exit(1)
 	commit_publish_docs_rules()
 
+remove_type_aar_from_pom_files()
 print_change_summary()
 print("Test and check these changes before uploading to Gerrit")
