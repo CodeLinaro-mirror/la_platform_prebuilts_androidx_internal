@@ -158,8 +158,11 @@ def should_update_artifact(groupId, artifactId):
 	# in either list on the command line, return false
 	should_update = False
 	if (args.groups) or (args.artifacts):
-		if (args.groups) and (groupId in args.groups):
-			should_update = True
+		if args.groups:
+			if groupId.replace("androidx.", "") in args.groups:
+				should_update = True
+			if groupId in args.groups:
+				should_update = True
 		if (args.artifacts) and (artifactId in args.artifacts):
 			should_update = True
 	else:
@@ -168,8 +171,8 @@ def should_update_artifact(groupId, artifactId):
 
 def update_version_maps(groupId_ver_map, artifactId_ver_map, groupId, artifactId, version):
 	if should_update_artifact(groupId, artifactId):
-		if groupId.upper() not in groupId_ver_map:
-			groupId_ver_map[groupId.upper()] = version
+		if groupId not in groupId_ver_map:
+			groupId_ver_map[groupId] = version
 		if artifactId not in artifactId_ver_map:
 			artifactId_ver_map[artifactId] = version
 			summary_log.append("Prebuilts: %s --> %s" % (artifactId, version))
@@ -189,43 +192,50 @@ def get_updated_version_maps():
 	diff = iter(gitdiff_ouput.splitlines())
 	for line in diff:
 		file_path_list = line.decode().split('/')
-		if len(file_path_list) < 3:
+		if len(file_path_list) < 3 or file_path_list[-1] != "":
 			continue
-		groupId = file_path_list[1]
-		artifactId = file_path_list[2]
+		groupId = ".".join(file_path_list[:-3])
+		artifactId = file_path_list[-3]
+
 		# For new libraries/groupIds, git status doesn't return the directory with the version
 		# So, we need to go get it if it's not there
-		if len(file_path_list) <= 3 or file_path_list[3] == "":
+		if len(file_path_list) == 3:
+			groupId = ".".join(file_path_list[:-1])
 			# New library, so we need to check full directory tree to get version(s)
 			if not update_new_artifacts(line.decode(), groupId_ver_map, artifactId_ver_map, groupId):
 				continue
-		else:
-			version = file_path_list[3]
-			update_version_maps(groupId_ver_map, artifactId_ver_map, groupId, artifactId, version)
+		if len(file_path_list) == 4:
+			groupId = ".".join(file_path_list[:-2])
+			# New library, so we need to check full directory tree to get version(s)
+			if not update_new_artifacts(line.decode(), groupId_ver_map, artifactId_ver_map, groupId):
+				continue
+		version = file_path_list[-2]
+		update_version_maps(groupId_ver_map, artifactId_ver_map, groupId, artifactId, version)
 	return groupId_ver_map, artifactId_ver_map
 
 # Inserts new groupdId into PublishDocsRules.kt
 def insert_new_groupId_into_pdr(pdr_lines, num_lines, new_groupId, groupId_ver_map):
 	new_groupId_insert_line = 0
+	new_groupId_variable_name = new_groupId.replace("androidx.","").replace(".","_").upper()
 	for i in range(num_lines):
 		cur_line = pdr_lines[i]
 		# Skip any line that doesn't declare a version
 		if 'LibraryGroups' not in cur_line: continue
-		groupId = cur_line.split('LibraryGroups.')[1].split(',')[0]
+		groupId_variable_name = cur_line.split('LibraryGroups.')[1].split(',')[0]
 		# Skip any line that does contain a version
 		cur_line_split = cur_line.split('\"')
 		if len(cur_line_split) < 2: continue
 		# Iterate through until you found the alphabetical place to insert the new groupId
-		if new_groupId <= groupId:
+		if new_groupId_variable_name <= groupId_variable_name:
 			new_groupId_insert_line = i
 			break
 		else:
 			new_groupId_insert_line = i + 1
 	# Failed to find a spot for the new groupID, so append it to the end of the LibraryGroup list
 	pdr_lines.insert(new_groupId_insert_line, "    prebuilts(LibraryGroups." \
-				+ new_groupId.upper() + ", \"" \
+				+ new_groupId_variable_name + ", \"" \
 				+ groupId_ver_map[new_groupId] + "\")\n")
-	summary_log.append("PublishDocsRules.kt: ADDED %s with version %s" %(new_groupId.lower(), groupId_ver_map[new_groupId]))
+	summary_log.append("PublishDocsRules.kt: ADDED %s with version %s" %(new_groupId, groupId_ver_map[new_groupId]))
 	publish_docs_log.append(new_groupId.lower()+'-'+groupId_ver_map[new_groupId])
 
 def convert_prerelease_type_to_num(prerelease_type):
@@ -290,7 +300,8 @@ def update_publish_doc_rules(groupId_ver_map, artifactId_ver_map):
 		cur_line = pdr_lines[i]
 		# Skip any line that doesn't declare a version
 		if 'LibraryGroups' not in cur_line: continue
-		groupId = cur_line.split('LibraryGroups.')[1].split(',')[0]
+		groupId_variable_name = cur_line.split('LibraryGroups.')[1].split(',')[0]
+		groupId = "androidx." + groupId_variable_name.replace(".group", "").replace("_", ".").lower()
 		# Get the artifactId (if it exists)
 		cur_line_split = cur_line.split('\"')
 		# Skip any line that does contain a version
@@ -334,6 +345,17 @@ def update_publish_doc_rules(groupId_ver_map, artifactId_ver_map):
 		f.writelines(pdr_lines)
 	return True
 
+def importing_compose():
+	if args.groups:
+		for group in args.groups:
+			if group in ["ui", "compose"]:
+				return True
+	if args.artifacts:
+		for artifact in args.artifacts:
+			if "ui" in artifact or "compose" in artifact:
+				return True
+	return False
+
 def update_androidx(target, build_id, local_file, update_all_prebuilts):
 	try:
 		if build_id:
@@ -342,6 +364,17 @@ def update_androidx(target, build_id, local_file, update_all_prebuilts):
 			else:
 				artifact_zip_file = 'gmaven-diff-all-%s.zip' % build_id
 			repo_dir = fetch_and_extract("androidx", build_id, artifact_zip_file, None)
+			if importing_compose():
+				if update_all_prebuilts:
+					artifact_zip_file = 'ui/top-of-tree-m2repository-all-%s.zip' % build_id
+				else:
+					artifact_zip_file = 'ui/gmaven-diff-all-%s.zip' % build_id
+				repo_dir_compose = fetch_and_extract("androidx", build_id, artifact_zip_file, None)
+				# Sanity check repos went to the same place
+				if repo_dir != repo_dir_compose:
+					print_e("Something went wrong importing compose!")
+					print_e("The repo directory was `" + repo_dir_compose + "` but should have been `" + repo_dir + "`")
+					sys.exit(1)
 		else:
 			repo_dir = fetch_and_extract("androidx", None, None, local_file)
 		if not repo_dir:
@@ -365,6 +398,7 @@ def update_androidx(target, build_id, local_file, update_all_prebuilts):
 		# Remove temp directories and temp files we've created 
 		rm(repo_dir)
 		rm('%s.zip' % repo_dir)
+		if importing_compose(): rm('ui')
 		rm('.fetch_artifact2.dat')
 
 def print_change_summary():
@@ -373,7 +407,7 @@ def print_change_summary():
 		print(change)
 
 # Check if build ID exists and is a number
-def getBuildId(args):
+def get_build_id(args):
 	source = args.source
 	number_text = source[:]
 	if not number_text.isnumeric():
@@ -382,7 +416,7 @@ def getBuildId(args):
 	return source
 
 # Check if file exists and is not a number
-def getFile(args):
+def get_file(args):
 	source = args.source
 	if not source.isnumeric():
 		return args.source
@@ -396,9 +430,9 @@ def commit_prebuilts():
 		print_e("There are no prebuilts changes to commit!  Check build id.")
 		return False
 	if not args.source.isnumeric():
-		src_msg = "local Maven ZIP %s" % getFile(args)
+		src_msg = "local Maven ZIP %s" % get_file(args)
 	else:
-		src_msg = "build %s" % (getBuildId(args))
+		src_msg = "build %s" % (get_build_id(args))
 	msg = "Import prebuilts %s from %s\n\nThis commit was generated from the command:\n%s\n\n%s" % (", ".join(prebuilts_log), src_msg, " ".join(sys.argv), 'Test: ./gradlew buildOnServer')
 	subprocess.check_call(['git', 'commit', '-m', msg])
 	summary_log.append("1 Commit was made in prebuilts/androidx/internal to commit prebuilts")
@@ -455,7 +489,13 @@ if not args.source:
 	parser.error("You must specify a build ID or local Maven ZIP file")
 	sys.exit(1)
 
-if not update_androidx('androidx', getBuildId(args), getFile(args), args.all_prebuilts):
+# Force the user to explicity decide which set of prebuilts to import
+if args.all_prebuilts == False and args.groups == None and args.artifacts == None:
+	print_e("Need to pass an argument such as --all-prebuilts or pass in groupIds or artifactIds")
+	print_e("Run `./import_release_prebuilts.py --help` for more info")
+	sys.exit(1)
+
+if not update_androidx('androidx', get_build_id(args), get_file(args), args.all_prebuilts):
 	print_e('Failed to update AndroidX, aborting...')
 	sys.exit(1)
 
