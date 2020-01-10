@@ -14,7 +14,7 @@ FETCH_ARTIFACT = '/google/data/ro/projects/android/fetch_artifact'
 PUBLISHDOCSRULES_REL = './buildSrc/src/main/kotlin/androidx/build/PublishDocsRules.kt'
 FRAMEWORKS_SUPPORT_FP = os.path.abspath(os.path.join(os.getcwd(), '..', '..', '..', 'frameworks', 'support'))
 PUBLISHDOCSRULES_FP = os.path.join(FRAMEWORKS_SUPPORT_FP, PUBLISHDOCSRULES_REL)
-GIT_TREE_ARGS = '--git-dir=./../../../frameworks/support/.git/ --work-tree=./../../../frameworks/support/'
+GIT_TREE_ARGS = '-C ./../../../frameworks/support/'
 summary_log = []
 publish_docs_log = []
 prebuilts_log = []
