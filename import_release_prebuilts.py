@@ -14,7 +14,7 @@ FETCH_ARTIFACT = '/google/data/ro/projects/android/fetch_artifact'
 PUBLISHDOCSRULES_REL = './buildSrc/src/main/kotlin/androidx/build/PublishDocsRules.kt'
 FRAMEWORKS_SUPPORT_FP = os.path.abspath(os.path.join(os.getcwd(), '..', '..', '..', 'frameworks', 'support'))
 PUBLISHDOCSRULES_FP = os.path.join(FRAMEWORKS_SUPPORT_FP, PUBLISHDOCSRULES_REL)
-GIT_TREE_ARGS = '--git-dir=./../../../frameworks/support/.git/ --work-tree=./../../../frameworks/support/'
+GIT_TREE_ARGS = '-C ./../../../frameworks/support/'
 summary_log = []
 publish_docs_log = []
 prebuilts_log = []
@@ -137,7 +137,8 @@ def remove_type_aar_from_pom_files(repo_dir):
 
 def update_new_artifacts(group_id_file_path, groupId_ver_map, artifactId_ver_map, groupId):
 	# Finds each new library having groupId <groupId> under <group_id_file_path> and
-	# updates <groupId_ver_map> and <artifactId_ver_map> with this new library
+	#     updates <groupId_ver_map> and <artifactId_ver_map> with this new library
+	# Returns True iff at least one library was found
 	success = False
 	# Walk filepath to get versions for each artifactId
 	for parent_file_path, dirs, _ in os.walk(group_id_file_path):
@@ -202,12 +203,12 @@ def get_updated_version_maps():
 		if len(file_path_list) == 3:
 			groupId = ".".join(file_path_list[:-1])
 			# New library, so we need to check full directory tree to get version(s)
-			if not update_new_artifacts(line.decode(), groupId_ver_map, artifactId_ver_map, groupId):
+			if update_new_artifacts(line.decode(), groupId_ver_map, artifactId_ver_map, groupId):
 				continue
 		if len(file_path_list) == 4:
 			groupId = ".".join(file_path_list[:-2])
 			# New library, so we need to check full directory tree to get version(s)
-			if not update_new_artifacts(line.decode(), groupId_ver_map, artifactId_ver_map, groupId):
+			if update_new_artifacts(line.decode(), groupId_ver_map, artifactId_ver_map, groupId):
 				continue
 		version = file_path_list[-2]
 		update_version_maps(groupId_ver_map, artifactId_ver_map, groupId, artifactId, version)
