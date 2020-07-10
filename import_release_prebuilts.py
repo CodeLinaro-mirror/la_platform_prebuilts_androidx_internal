@@ -5,6 +5,7 @@ import argparse
 import subprocess
 from shutil import rmtree
 from distutils.dir_util import copy_tree
+import glob
 
 # cd into directory of script
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -133,6 +134,15 @@ def remove_type_aar_from_pom_files(repo_dir):
 		return False
 	print("Successful")
 	summary_log.append("<type>aar</type> was removed from the pom files")
+	return True
+
+def remove_maven_metadata_files(repo_dir):
+	# Only search for maven-metadata files to in <repo_dir>
+	print("Removing maven-metadata.xml* files from the import...", end = '')
+	for maven_metadata_file in glob.glob(repo_dir + "/**/maven-metadata.xml*", recursive=True):
+		os.remove(maven_metadata_file)
+	print("Successful")
+	summary_log.append("Removed maven-metadata.xml* files from the import")
 	return True
 
 def update_new_artifacts(group_id_file_path, groupId_ver_map, artifactId_ver_map, groupId):
@@ -357,19 +367,13 @@ def importing_compose():
 				return True
 	return False
 
-def update_androidx(target, build_id, local_file, update_all_prebuilts):
+def update_androidx(target, build_id, local_file):
 	try:
 		if build_id:
-			if update_all_prebuilts:
-				artifact_zip_file = 'top-of-tree-m2repository-all-%s.zip' % build_id
-			else:
-				artifact_zip_file = 'gmaven-diff-all-%s.zip' % build_id
+			artifact_zip_file = 'top-of-tree-m2repository-all-%s.zip' % build_id
 			repo_dir = fetch_and_extract("androidx", build_id, artifact_zip_file, None)
 			if importing_compose():
-				if update_all_prebuilts:
-					artifact_zip_file = 'ui/top-of-tree-m2repository-all-%s.zip' % build_id
-				else:
-					artifact_zip_file = 'ui/gmaven-diff-all-%s.zip' % build_id
+				artifact_zip_file = 'ui/top-of-tree-m2repository-all-%s.zip' % build_id
 				repo_dir_compose = fetch_and_extract("androidx", build_id, artifact_zip_file, None)
 				# Sanity check repos went to the same place
 				if repo_dir != repo_dir_compose:
@@ -387,6 +391,7 @@ def update_androidx(target, build_id, local_file, update_all_prebuilts):
 			return False
 		print("Copy and merge artifacts... Successful")
 		remove_type_aar_from_pom_files("androidx")
+		remove_maven_metadata_files("androidx")
 		# Now that we've merged new prebuilts, we need to update our version map
 		groupId_ver_map, artifactId_ver_map = get_updated_version_maps()
 		if not args.skip_publishdocrules:
@@ -457,7 +462,9 @@ def commit_publish_docs_rules():
 
 # Set up input arguments
 parser = argparse.ArgumentParser(
-	description=('Import AndroidX prebuilts from the Android Build Server and if necessary, update PublishDocsRules.kt.  By default, uses gmaven-diff-all-<BUILDID>.zip to get artifacts.'))
+	description=("""Import AndroidX prebuilts from the Android Build Server
+		and if necessary, update PublishDocsRules.kt.  By default, uses
+		top-of-tree-m2repository-all-<BUILDID>.zip to get artifacts."""))
 parser.add_argument(
 	'source',
 	help='Build server build ID or local Maven ZIP file')
@@ -496,7 +503,7 @@ if args.all_prebuilts == False and args.groups == None and args.artifacts == Non
 	print_e("Run `./import_release_prebuilts.py --help` for more info")
 	sys.exit(1)
 
-if not update_androidx('androidx', get_build_id(args), get_file(args), args.all_prebuilts):
+if not update_androidx('androidx', get_build_id(args), get_file(args)):
 	print_e('Failed to update AndroidX, aborting...')
 	sys.exit(1)
 
