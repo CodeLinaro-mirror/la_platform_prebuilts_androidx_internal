@@ -5,6 +5,7 @@ import argparse
 import subprocess
 from shutil import rmtree
 from distutils.dir_util import copy_tree
+import glob
 
 # cd into directory of script
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -14,7 +15,7 @@ FETCH_ARTIFACT = '/google/data/ro/projects/android/fetch_artifact'
 PUBLISHDOCSRULES_REL = './buildSrc/src/main/kotlin/androidx/build/PublishDocsRules.kt'
 FRAMEWORKS_SUPPORT_FP = os.path.abspath(os.path.join(os.getcwd(), '..', '..', '..', 'frameworks', 'support'))
 PUBLISHDOCSRULES_FP = os.path.join(FRAMEWORKS_SUPPORT_FP, PUBLISHDOCSRULES_REL)
-GIT_TREE_ARGS = '--git-dir=./../../../frameworks/support/.git/ --work-tree=./../../../frameworks/support/'
+GIT_TREE_ARGS = '-C ./../../../frameworks/support/'
 summary_log = []
 publish_docs_log = []
 prebuilts_log = []
@@ -135,9 +136,19 @@ def remove_type_aar_from_pom_files(repo_dir):
 	summary_log.append("<type>aar</type> was removed from the pom files")
 	return True
 
+def remove_maven_metadata_files(repo_dir):
+	# Only search for maven-metadata files to in <repo_dir>
+	print("Removing maven-metadata.xml* files from the import...", end = '')
+	for maven_metadata_file in glob.glob(repo_dir + "/**/maven-metadata.xml*", recursive=True):
+		os.remove(maven_metadata_file)
+	print("Successful")
+	summary_log.append("Removed maven-metadata.xml* files from the import")
+	return True
+
 def update_new_artifacts(group_id_file_path, groupId_ver_map, artifactId_ver_map, groupId):
 	# Finds each new library having groupId <groupId> under <group_id_file_path> and
-	# updates <groupId_ver_map> and <artifactId_ver_map> with this new library
+	#     updates <groupId_ver_map> and <artifactId_ver_map> with this new library
+	# Returns True iff at least one library was found
 	success = False
 	# Walk filepath to get versions for each artifactId
 	for parent_file_path, dirs, _ in os.walk(group_id_file_path):
@@ -158,8 +169,11 @@ def should_update_artifact(groupId, artifactId):
 	# in either list on the command line, return false
 	should_update = False
 	if (args.groups) or (args.artifacts):
-		if (args.groups) and (groupId in args.groups):
-			should_update = True
+		if args.groups:
+			if groupId.replace("androidx.", "") in args.groups:
+				should_update = True
+			if groupId in args.groups:
+				should_update = True
 		if (args.artifacts) and (artifactId in args.artifacts):
 			should_update = True
 	else:
@@ -168,8 +182,8 @@ def should_update_artifact(groupId, artifactId):
 
 def update_version_maps(groupId_ver_map, artifactId_ver_map, groupId, artifactId, version):
 	if should_update_artifact(groupId, artifactId):
-		if groupId.upper() not in groupId_ver_map:
-			groupId_ver_map[groupId.upper()] = version
+		if groupId not in groupId_ver_map:
+			groupId_ver_map[groupId] = version
 		if artifactId not in artifactId_ver_map:
 			artifactId_ver_map[artifactId] = version
 			summary_log.append("Prebuilts: %s --> %s" % (artifactId, version))
@@ -189,43 +203,50 @@ def get_updated_version_maps():
 	diff = iter(gitdiff_ouput.splitlines())
 	for line in diff:
 		file_path_list = line.decode().split('/')
-		if len(file_path_list) < 3:
+		if len(file_path_list) < 3 or file_path_list[-1] != "":
 			continue
-		groupId = file_path_list[1]
-		artifactId = file_path_list[2]
+		groupId = ".".join(file_path_list[:-3])
+		artifactId = file_path_list[-3]
+
 		# For new libraries/groupIds, git status doesn't return the directory with the version
 		# So, we need to go get it if it's not there
-		if len(file_path_list) <= 3 or file_path_list[3] == "":
+		if len(file_path_list) == 3:
+			groupId = ".".join(file_path_list[:-1])
 			# New library, so we need to check full directory tree to get version(s)
-			if not update_new_artifacts(line.decode(), groupId_ver_map, artifactId_ver_map, groupId):
+			if update_new_artifacts(line.decode(), groupId_ver_map, artifactId_ver_map, groupId):
 				continue
-		else:
-			version = file_path_list[3]
-			update_version_maps(groupId_ver_map, artifactId_ver_map, groupId, artifactId, version)
+		if len(file_path_list) == 4:
+			groupId = ".".join(file_path_list[:-2])
+			# New library, so we need to check full directory tree to get version(s)
+			if update_new_artifacts(line.decode(), groupId_ver_map, artifactId_ver_map, groupId):
+				continue
+		version = file_path_list[-2]
+		update_version_maps(groupId_ver_map, artifactId_ver_map, groupId, artifactId, version)
 	return groupId_ver_map, artifactId_ver_map
 
 # Inserts new groupdId into PublishDocsRules.kt
 def insert_new_groupId_into_pdr(pdr_lines, num_lines, new_groupId, groupId_ver_map):
 	new_groupId_insert_line = 0
+	new_groupId_variable_name = new_groupId.replace("androidx.","").replace(".","_").upper()
 	for i in range(num_lines):
 		cur_line = pdr_lines[i]
 		# Skip any line that doesn't declare a version
 		if 'LibraryGroups' not in cur_line: continue
-		groupId = cur_line.split('LibraryGroups.')[1].split(',')[0]
+		groupId_variable_name = cur_line.split('LibraryGroups.')[1].split(',')[0]
 		# Skip any line that does contain a version
 		cur_line_split = cur_line.split('\"')
 		if len(cur_line_split) < 2: continue
 		# Iterate through until you found the alphabetical place to insert the new groupId
-		if new_groupId <= groupId:
+		if new_groupId_variable_name <= groupId_variable_name:
 			new_groupId_insert_line = i
 			break
 		else:
 			new_groupId_insert_line = i + 1
 	# Failed to find a spot for the new groupID, so append it to the end of the LibraryGroup list
 	pdr_lines.insert(new_groupId_insert_line, "    prebuilts(LibraryGroups." \
-				+ new_groupId.upper() + ", \"" \
+				+ new_groupId_variable_name + ", \"" \
 				+ groupId_ver_map[new_groupId] + "\")\n")
-	summary_log.append("PublishDocsRules.kt: ADDED %s with version %s" %(new_groupId.lower(), groupId_ver_map[new_groupId]))
+	summary_log.append("PublishDocsRules.kt: ADDED %s with version %s" %(new_groupId, groupId_ver_map[new_groupId]))
 	publish_docs_log.append(new_groupId.lower()+'-'+groupId_ver_map[new_groupId])
 
 def convert_prerelease_type_to_num(prerelease_type):
@@ -290,7 +311,8 @@ def update_publish_doc_rules(groupId_ver_map, artifactId_ver_map):
 		cur_line = pdr_lines[i]
 		# Skip any line that doesn't declare a version
 		if 'LibraryGroups' not in cur_line: continue
-		groupId = cur_line.split('LibraryGroups.')[1].split(',')[0]
+		groupId_variable_name = cur_line.split('LibraryGroups.')[1].split(',')[0]
+		groupId = "androidx." + groupId_variable_name.replace(".group", "").replace("_", ".").lower()
 		# Get the artifactId (if it exists)
 		cur_line_split = cur_line.split('\"')
 		# Skip any line that does contain a version
@@ -334,16 +356,30 @@ def update_publish_doc_rules(groupId_ver_map, artifactId_ver_map):
 		f.writelines(pdr_lines)
 	return True
 
-def update_androidx(target, build_id, local_file, update_all_prebuilts, import_compose):
+def importing_compose():
+	if args.groups:
+		for group in args.groups:
+			if group in ["ui", "compose"]:
+				return True
+	if args.artifacts:
+		for artifact in args.artifacts:
+			if "ui" in artifact or "compose" in artifact:
+				return True
+	return False
+
+def update_androidx(target, build_id, local_file):
 	try:
 		if build_id:
-			if update_all_prebuilts:
-				artifact_zip_file = ('ui/top-of-tree-m2repository-all-%s.zip' % build_id if import_compose
-					else 'top-of-tree-m2repository-all-%s.zip' % build_id)
-			else:
-				artifact_zip_file = ('ui/gmaven-diff-all-%s.zip' % build_id if import_compose
-					else 'gmaven-diff-all-%s.zip' % build_id)
+			artifact_zip_file = 'top-of-tree-m2repository-all-%s.zip' % build_id
 			repo_dir = fetch_and_extract("androidx", build_id, artifact_zip_file, None)
+			if importing_compose():
+				artifact_zip_file = 'ui/top-of-tree-m2repository-all-%s.zip' % build_id
+				repo_dir_compose = fetch_and_extract("androidx", build_id, artifact_zip_file, None)
+				# Sanity check repos went to the same place
+				if repo_dir != repo_dir_compose:
+					print_e("Something went wrong importing compose!")
+					print_e("The repo directory was `" + repo_dir_compose + "` but should have been `" + repo_dir + "`")
+					sys.exit(1)
 		else:
 			repo_dir = fetch_and_extract("androidx", None, None, local_file)
 		if not repo_dir:
@@ -355,6 +391,7 @@ def update_androidx(target, build_id, local_file, update_all_prebuilts, import_c
 			return False
 		print("Copy and merge artifacts... Successful")
 		remove_type_aar_from_pom_files("androidx")
+		remove_maven_metadata_files("androidx")
 		# Now that we've merged new prebuilts, we need to update our version map
 		groupId_ver_map, artifactId_ver_map = get_updated_version_maps()
 		if not args.skip_publishdocrules:
@@ -367,7 +404,7 @@ def update_androidx(target, build_id, local_file, update_all_prebuilts, import_c
 		# Remove temp directories and temp files we've created 
 		rm(repo_dir)
 		rm('%s.zip' % repo_dir)
-		if import_compose: rm('ui')
+		if importing_compose(): rm('ui')
 		rm('.fetch_artifact2.dat')
 
 def print_change_summary():
@@ -376,7 +413,7 @@ def print_change_summary():
 		print(change)
 
 # Check if build ID exists and is a number
-def getBuildId(args):
+def get_build_id(args):
 	source = args.source
 	number_text = source[:]
 	if not number_text.isnumeric():
@@ -385,42 +422,11 @@ def getBuildId(args):
 	return source
 
 # Check if file exists and is not a number
-def getFile(args):
+def get_file(args):
 	source = args.source
 	if not source.isnumeric():
 		return args.source
 	return None
-
-# Check that the --compose argument was passed correctly
-# For example:
-# 	Fails: ./import_release_prebuilts.py <BUILDID> --groups compose
-#	Fails: ./import_release_prebuilts.py <BUILDID> --groups compose navigation --compose
-#	Fails: ./import_release_prebuilts.py <BUILDID> --groups navigation --compose
-#	Succeeds: ./import_release_prebuilts.py <BUILDID> --groups compose --compose
-def usedComposeFlagCorrectly():
-	if args.groups:
-		for group in args.groups:
-			if (group not in ["ui", "compose"]) and (args.compose):
-				print_e("Compose artifacts need to be imported separately from other androidx " +
-					"artifacts.  Please import the compose artifacts separately with the `--compose` " +
-					"argument")
-				return False
-			if (group in ["ui", "compose"]) and (not args.compose):
-				print_e("To import compose artifacts (like androidx.ui or androidx.compose), " +
-					"you need to pass the `--compose` argument")
-				return False
-	if args.artifacts:
-		for artifact in args.artifacts:
-			if ("ui" not in artifact and "compose" not in artifact) and (args.compose):
-				print_e("Compose artifacts need to be imported separately from other androidx " +
-					"artifacts.  Please import the compose artifacts separately with the `--compose` " +
-					"argument")
-				return False
-			if ("ui" in artifact or "compose" in artifact) and (not args.compose):
-				print_e("To import compose artifacts (like androidx.ui or androidx.compose), " +
-					"you need to pass the `--compose` argument")
-				return False
-	return True
 
 def commit_prebuilts():
 	subprocess.check_call(['git', 'add', './androidx'])
@@ -430,9 +436,9 @@ def commit_prebuilts():
 		print_e("There are no prebuilts changes to commit!  Check build id.")
 		return False
 	if not args.source.isnumeric():
-		src_msg = "local Maven ZIP %s" % getFile(args)
+		src_msg = "local Maven ZIP %s" % get_file(args)
 	else:
-		src_msg = "build %s" % (getBuildId(args))
+		src_msg = "build %s" % (get_build_id(args))
 	msg = "Import prebuilts %s from %s\n\nThis commit was generated from the command:\n%s\n\n%s" % (", ".join(prebuilts_log), src_msg, " ".join(sys.argv), 'Test: ./gradlew buildOnServer')
 	subprocess.check_call(['git', 'commit', '-m', msg])
 	summary_log.append("1 Commit was made in prebuilts/androidx/internal to commit prebuilts")
@@ -456,7 +462,9 @@ def commit_publish_docs_rules():
 
 # Set up input arguments
 parser = argparse.ArgumentParser(
-	description=('Import AndroidX prebuilts from the Android Build Server and if necessary, update PublishDocsRules.kt.  By default, uses gmaven-diff-all-<BUILDID>.zip to get artifacts.'))
+	description=("""Import AndroidX prebuilts from the Android Build Server
+		and if necessary, update PublishDocsRules.kt.  By default, uses
+		top-of-tree-m2repository-all-<BUILDID>.zip to get artifacts."""))
 parser.add_argument(
 	'source',
 	help='Build server build ID or local Maven ZIP file')
@@ -481,9 +489,6 @@ parser.add_argument(
 parser.add_argument(
 	'--no-commit', action="store_true",
 	help='If specified, this script will not commit the changes')
-parser.add_argument(
-	'--compose', action="store_true",
-	help='If specified, this script will look for compose artifacts under the ui/ directory')
 
 # Parse arguments and check for existence of build ID or file
 args = parser.parse_args()
@@ -492,11 +497,13 @@ if not args.source:
 	parser.error("You must specify a build ID or local Maven ZIP file")
 	sys.exit(1)
 
-# Check that user is only trying to get compose with the compose argument
-if not usedComposeFlagCorrectly():
+# Force the user to explicity decide which set of prebuilts to import
+if args.all_prebuilts == False and args.groups == None and args.artifacts == None:
+	print_e("Need to pass an argument such as --all-prebuilts or pass in groupIds or artifactIds")
+	print_e("Run `./import_release_prebuilts.py --help` for more info")
 	sys.exit(1)
 
-if not update_androidx('androidx', getBuildId(args), getFile(args), args.all_prebuilts, args.compose):
+if not update_androidx('androidx', get_build_id(args), get_file(args)):
 	print_e('Failed to update AndroidX, aborting...')
 	sys.exit(1)
 
