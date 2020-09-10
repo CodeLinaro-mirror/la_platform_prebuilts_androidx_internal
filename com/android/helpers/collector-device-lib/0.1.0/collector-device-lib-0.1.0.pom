@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.android</groupId>
-  <artifactId>system-metric-helper</artifactId>
+  <artifactId>collector-device-lib</artifactId>
   <version>0.1.0</version>
-  <name>Android System Metric Helper</name>
-  <description>Android System Metric Helper</description>
+  <name>Android Collector Device Library</name>
+  <description>Android Collector Device Library</description>
   <url>https://source.android.com</url>
   <inceptionYear>2020</inceptionYear>
   <licenses>
@@ -28,7 +27,37 @@
   <dependencies>
     <dependency>
       <groupId>com.android</groupId>
-      <artifactId>collector-helper-utilities</artifactId>
+      <artifactId>jank-helper</artifactId>
+      <version>0.1.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.android</groupId>
+      <artifactId>memory-helper</artifactId>
+      <version>0.1.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.android</groupId>
+      <artifactId>perfetto-helper</artifactId>
+      <version>0.1.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.android</groupId>
+      <artifactId>power-helper</artifactId>
+      <version>0.1.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.android</groupId>
+      <artifactId>simpleperf-helper</artifactId>
+      <version>0.1.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.android</groupId>
+      <artifactId>system-metric-helper</artifactId>
       <version>0.1.0</version>
       <scope>compile</scope>
     </dependency>
@@ -54,12 +83,6 @@
       <groupId>androidx.test.uiautomator</groupId>
       <artifactId>uiautomator</artifactId>
       <version>2.2.0</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>29.0-android</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
