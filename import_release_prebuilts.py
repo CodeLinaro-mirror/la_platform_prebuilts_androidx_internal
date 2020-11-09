@@ -12,9 +12,9 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 # See go/fetch_artifact for details on this script.
 FETCH_ARTIFACT = '/google/data/ro/projects/android/fetch_artifact'
-PUBLISHDOCSRULES_REL = './buildSrc/src/main/kotlin/androidx/build/PublishDocsRules.kt'
+DOCS_PUBLIC_BUILD_GRADLE_REL = './docs-public/build.gradle'
 FRAMEWORKS_SUPPORT_FP = os.path.abspath(os.path.join(os.getcwd(), '..', '..', '..', 'frameworks', 'support'))
-PUBLISHDOCSRULES_FP = os.path.join(FRAMEWORKS_SUPPORT_FP, PUBLISHDOCSRULES_REL)
+DOCS_PUBLIC_BUILD_GRADLE_FP = os.path.join(FRAMEWORKS_SUPPORT_FP, DOCS_PUBLIC_BUILD_GRADLE_REL)
 GIT_TREE_ARGS = '-C ./../../../frameworks/support/'
 summary_log = []
 publish_docs_log = []
@@ -158,9 +158,9 @@ def remove_maven_metadata_files(repo_dir):
 	summary_log.append("Removed maven-metadata.xml* files from the import")
 	return True
 
-def update_new_artifacts(group_id_file_path, group_id_ver_map, artifact_id_ver_map, group_id):
+def update_new_artifacts(group_id_file_path, artifact_ver_map, group_id):
 	# Finds each new library having group_id <group_id> under <group_id_file_path> and
-	#     updates <group_id_ver_map> and <artifact_id_ver_map> with this new library
+	#     updates <artifact_ver_map> with this new library
 	# Returns True iff at least one library was found
 	success = False
 	# Walk filepath to get versions for each artifact_id
@@ -175,7 +175,7 @@ def update_new_artifacts(group_id_file_path, group_id_ver_map, artifact_id_ver_m
 				# first 2 directories for new group ids, whereas group ids can have more than
 				# 2 directories, such as androidx.compose.animation
 				real_group_id = ".".join(parent_file_path.strip('/').split('/')[:-1])
-				update_version_maps(group_id_ver_map, artifact_id_ver_map, real_group_id, artifact_id, version)
+				update_version_maps(artifact_ver_map, real_group_id, artifact_id, version)
 				success = True
 	if not success:
 		print_e("Failed to find any artifact_ids in filepath: %s" % group_id_file_path)
@@ -197,16 +197,14 @@ def should_update_artifact(group_id, artifact_id):
 		should_update = True
 	return should_update
 
-def update_version_maps(group_id_ver_map, artifact_id_ver_map, group_id, artifact_id, version):
+def update_version_maps(artifact_ver_map, group_id, artifact_id, version):
 	if should_update_artifact(group_id, artifact_id):
-		if group_id not in group_id_ver_map:
-			group_id_ver_map[group_id] = version
-		if artifact_id not in artifact_id_ver_map:
-			artifact_id_ver_map[artifact_id] = version
-			summary_log.append("Prebuilts: %s --> %s" % (artifact_id, version))
-			prebuilts_log.append(artifact_id+'-'+version)
+		if group_id + ":" + artifact_id not in artifact_ver_map:
+			artifact_ver_map[group_id + ":" + artifact_id] = version
+			summary_log.append("Prebuilts: %s:%s --> %s" % (group_id, artifact_id, version))
+			prebuilts_log.append("%s:%s:%s" % (group_id, artifact_id, version))
 
-def get_updated_version_maps():
+def get_updated_version_map():
 	try:
 		# Run git status --porcelain to get the names of the libraries that have changed
 		# (cut -c4- removes the change-type-character from git status output)
@@ -215,8 +213,7 @@ def get_updated_version_maps():
 		print_e('FAIL: No artifacts to import from build ID %s' %  build_id)
 		return None
 	# Iterate through the git diff output to map libraries to their new versions
-	artifact_id_ver_map = {}
-	group_id_ver_map = {}
+	artifact_ver_map = {}
 	diff = iter(gitdiff_ouput.splitlines())
 	for line in diff:
 		file_path_list = line.decode().split('/')
@@ -230,41 +227,43 @@ def get_updated_version_maps():
 		if len(file_path_list) == 3:
 			group_id = ".".join(file_path_list[:-1])
 			# New library, so we need to check full directory tree to get version(s)
-			if update_new_artifacts(line.decode(), group_id_ver_map, artifact_id_ver_map, group_id):
+			if update_new_artifacts(line.decode(), artifact_ver_map, group_id):
 				continue
 		if len(file_path_list) == 4:
 			group_id = ".".join(file_path_list[:-2])
 			# New library, so we need to check full directory tree to get version(s)
-			if update_new_artifacts(line.decode(), group_id_ver_map, artifact_id_ver_map, group_id):
+			if update_new_artifacts(line.decode(), artifact_ver_map, group_id):
 				continue
 		version = file_path_list[-2]
-		update_version_maps(group_id_ver_map, artifact_id_ver_map, group_id, artifact_id, version)
-	return group_id_ver_map, artifact_id_ver_map
+		update_version_maps(artifact_ver_map, group_id, artifact_id, version)
+	return artifact_ver_map
 
-# Inserts new groupdId into PublishDocsRules.kt
-def insert_new_group_id_into_pdr(pdr_lines, num_lines, new_group_id, group_id_ver_map):
+# Inserts new groupdId into docs-public/build.gradle
+def insert_new_artifact_into_dpbg(dpbg_lines, num_lines, new_maven_coordinates, artifact_ver_map):
 	new_group_id_insert_line = 0
-	new_group_id_variable_name = new_group_id.replace("androidx.","").replace(".","_").upper()
 	for i in range(num_lines):
-		cur_line = pdr_lines[i]
+		cur_line = dpbg_lines[i]
 		# Skip any line that doesn't declare a version
-		if 'LibraryGroups' not in cur_line: continue
-		group_id_variable_name = cur_line.split('LibraryGroups.')[1].split(',')[0]
-		# Skip any line that does contain a version
-		cur_line_split = cur_line.split('\"')
-		if len(cur_line_split) < 2: continue
-		# Iterate through until you found the alphabetical place to insert the new group_id
-		if new_group_id_variable_name <= group_id_variable_name:
-			new_group_id_insert_line = i
+		if 'androidx.' not in cur_line: continue
+		group_id, artifact_id, outdated_ver = get_maven_coordinate_from_docs_public_build_gradle_line(cur_line)
+		# Iterate through until you found the alphabetical place to insert the new artifact
+		if new_maven_coordinates <= group_id + ":" + artifact_id:
+			new_maven_coordinate_insert_line = i
 			break
 		else:
-			new_group_id_insert_line = i + 1
+			new_maven_coordinate_insert_line = i + 1
+	if "sample" in new_maven_coordinates:
+		build_gradle_line_prefix = "prebuiltSamples"
+	else:
+		build_gradle_line_prefix = "prebuilt"
 	# Failed to find a spot for the new groupID, so append it to the end of the LibraryGroup list
-	pdr_lines.insert(new_group_id_insert_line, "    prebuilts(LibraryGroups." \
-				+ new_group_id_variable_name + ", \"" \
-				+ group_id_ver_map[new_group_id] + "\")\n")
-	summary_log.append("PublishDocsRules.kt: ADDED %s with version %s" %(new_group_id, group_id_ver_map[new_group_id]))
-	publish_docs_log.append(new_group_id.lower()+'-'+group_id_ver_map[new_group_id])
+	dpbg_lines.insert(new_maven_coordinate_insert_line,
+					  "    " + build_gradle_line_prefix + "(\"" + \
+					  new_maven_coordinates + ":" + \
+					  artifact_ver_map[new_maven_coordinates] + "\")\n")
+	summary_log.append("docs-public/build.gradle: ADDED %s with version %s" % \
+					   (new_maven_coordinates, artifact_ver_map[new_maven_coordinates]))
+	publish_docs_log.append(new_maven_coordinates + ':' + artifact_ver_map[new_maven_coordinates])
 
 def convert_prerelease_type_to_num(prerelease_type):
 	# Convert a prerelease suffix type to its numeric equivalent
@@ -312,65 +311,63 @@ def get_higher_version(version_a, version_b):
 			return version_b
 	return version_a
 
-def update_publish_doc_rules(group_id_ver_map, artifact_id_ver_map):
-	group_id_found = {}
-	for key in group_id_ver_map:
-		group_id_found[key] = False
+def get_maven_coordinate_from_docs_public_build_gradle_line(line):
+	""" Gets the maven coordinate tuple from docs-public/build.grade
+
+	Example input: `    prebuilt("androidx.core:core:1.5.0-alpha04")`
+	Example ouput: ("androidx.core", "core", "1.5.0-alpha05")
+
+	Args:
+		line: the line in docs-public/build.grade to parse
+
+	Returns:
+		Tuple of (group_id, artifact_id, version)
+	"""
+	coordinates = line.split('"')[1].split(':')
+	group_id = coordinates[0]
+	artifact_id = coordinates[1]
+	version = coordinates[2]
+	return group_id, artifact_id, version
+
+def update_docs_public_build_gradle(artifact_ver_map):
+	artifact_found = {}
+	for key in artifact_ver_map:
+		artifact_found[key] = False
 	# Get build the file path of PublicDocRules.kt - this isn't great, open to a better solution
-	if not os.path.exists(PUBLISHDOCSRULES_FP):
-		print_e("PublishDocsRules.kt not in expected location.")
+	if not os.path.exists(DOCS_PUBLIC_BUILD_GRADLE_FP):
+		print_e("docs-public build.gradle not in expected location. Looked at: %s" % DOCS_PUBLIC_BUILD_GRADLE_FP)
 		return None
 	# Open file for reading and get all lines
-	with open(PUBLISHDOCSRULES_FP, 'r') as f:
-		pdr_lines = f.readlines()
-	num_lines = len(pdr_lines)
+	with open(DOCS_PUBLIC_BUILD_GRADLE_FP, 'r') as f:
+		dpbg_lines = f.readlines()
+	num_lines = len(dpbg_lines)
 	for i in range(num_lines):
-		cur_line = pdr_lines[i]
+		cur_line = dpbg_lines[i]
 		# Skip any line that doesn't declare a version
-		if 'LibraryGroups' not in cur_line: continue
-		group_id_variable_name = cur_line.split('LibraryGroups.')[1].split(',')[0]
-		group_id = "androidx." + group_id_variable_name.replace(".group", "").replace("_", ".").lower()
-		# Get the artifact_id (if it exists)
-		cur_line_split = cur_line.split('\"')
-		# Skip any line that does contain a version
-		if len(cur_line_split) < 2: continue
-		artifact_id = ""
-		if len(cur_line_split) >= 4:
-			artifact_id = cur_line_split[-4]
-		# Split lines based on quotes and get second to last string - this will be the version
-		outdated_ver = cur_line.split('\"')[-2]
+		if 'androidx.' not in cur_line: continue
+		group_id, artifact_id, outdated_ver = get_maven_coordinate_from_docs_public_build_gradle_line(cur_line)
 		ver_index = cur_line.find(outdated_ver)
-		# Skip any line that does contain a version
-		if not outdated_ver[0].isnumeric():	continue
+		artifact_coordinate = group_id + ":" + artifact_id
 		### Update group_id or artifact_id ###
-		if artifact_id in artifact_id_ver_map:
-			group_id_found[group_id] = True
+		if artifact_coordinate in artifact_ver_map:
+			artifact_found[artifact_coordinate] = True
 			# Skip version updates that would decrement to a smaller version
-			if outdated_ver == get_higher_version(outdated_ver, artifact_id_ver_map[artifact_id]): continue
+			if outdated_ver == get_higher_version(outdated_ver, artifact_ver_map[artifact_coordinate]): continue
 			# Update version of artifact_id
-			if artifact_id_ver_map[artifact_id] != outdated_ver:
-				pdr_lines[i] = cur_line[:ver_index] \
-					+ artifact_id_ver_map[artifact_id] \
+			if artifact_ver_map[artifact_coordinate] != outdated_ver:
+				dpbg_lines[i] = cur_line[:ver_index] \
+					+ artifact_ver_map[artifact_coordinate] \
 					+ cur_line[ver_index+len(outdated_ver):]
-				summary_log.append("PublishDocsRules.kt: Updated %s from %s to %s" %(artifact_id, outdated_ver, artifact_id_ver_map[artifact_id]))
-				publish_docs_log.append(artifact_id+'-'+artifact_id_ver_map[artifact_id])
-		if not artifact_id and group_id in group_id_ver_map:
-			group_id_found[group_id] = True
-			# Skip version updates that would decrement to a smaller version
-			if outdated_ver == get_higher_version(outdated_ver, group_id_ver_map[group_id]): continue
-			# Update version of group_id
-			if group_id_ver_map[group_id] != outdated_ver:
-				pdr_lines[i] = cur_line[:ver_index] \
-					+ group_id_ver_map[group_id] \
-					+ cur_line[ver_index+len(outdated_ver):]
-				summary_log.append("PublishDocsRules.kt: Updated %s from %s to %s" %(group_id.lower(), outdated_ver, group_id_ver_map[group_id]))
-				publish_docs_log.append(group_id.lower()+'-'+group_id_ver_map[group_id])
-	for group_id in group_id_found:
-		if not group_id_found[group_id]:
-			insert_new_group_id_into_pdr(pdr_lines, num_lines, group_id, group_id_ver_map)
+				summary_log.append("docs-public/build.gradle: " + \
+								   "Updated %s from %s to %s" % \
+								   (artifact_coordinate, outdated_ver, artifact_ver_map[artifact_coordinate]))
+				publish_docs_log.append(artifact_coordinate + ":" + artifact_ver_map[artifact_coordinate])
+	for artifact in artifact_found:
+		if not artifact_found[artifact]:
+			insert_new_artifact_into_dpbg(dpbg_lines, num_lines, artifact, artifact_ver_map)
 	# Open file for writing and update all lines
-	with open(PUBLISHDOCSRULES_FP, 'w') as f:
-		f.writelines(pdr_lines)
+	with open(DOCS_PUBLIC_BUILD_GRADLE_FP, 'w') as f:
+		f.writelines(dpbg_lines)
 	return True
 
 def update_androidx(target, build_id, local_file):
@@ -391,12 +388,12 @@ def update_androidx(target, build_id, local_file):
 		remove_type_aar_from_pom_files("androidx")
 		remove_maven_metadata_files("androidx")
 		# Now that we've merged new prebuilts, we need to update our version map
-		group_id_ver_map, artifact_id_ver_map = get_updated_version_maps()
-		if not args.skip_publishdocrules:
-			if not update_publish_doc_rules(group_id_ver_map, artifact_id_ver_map):
+		artifact_ver_map = get_updated_version_map()
+		if not args.skip_public_docs:
+			if not update_docs_public_build_gradle(artifact_ver_map):
 				print_e('Failed to update PublicDocRules.kt')
 				return False
-			print("Update PublishDocsRules.kt... Successful")
+			print("Update docs-public/build.gradle... Successful")
 		return True
 	finally:
 		# Remove temp directories and temp files we've created 
@@ -442,25 +439,25 @@ def commit_prebuilts():
 	print("Create commit for prebuilts... Successful")
 	return True
 
-def commit_publish_docs_rules():
-	git_add_cmd =  "git %s add %s"  % (GIT_TREE_ARGS, PUBLISHDOCSRULES_REL)
+def commit_docs_public_build_gradle():
+	git_add_cmd =  "git %s add %s"  % (GIT_TREE_ARGS, DOCS_PUBLIC_BUILD_GRADLE_REL)
 	subprocess.check_output(git_add_cmd, stderr=subprocess.STDOUT, shell=True)
 	git_cached_cmd = "git %s diff --cached" % GIT_TREE_ARGS
 	staged_changes = subprocess.check_output(git_cached_cmd, stderr=subprocess.STDOUT, shell=True)
 	if not staged_changes:
-		summary_log.append("NO CHANGES were made to PublishDocsRules.kt")
+		summary_log.append("NO CHANGES were made to docs-public/build.gradle")
 		return False
-	pdr_msg = "Updated PublishDocsRules.kt for %s \n\nThis commit was generated from the command:\n%s\n\n%s" % (", ".join(publish_docs_log), " ".join(sys.argv), 'Test: ./gradlew buildOnServer')
+	pdr_msg = "Updated docs-public/build.gradle for %s \n\nThis commit was generated from the command:\n%s\n\n%s" % (", ".join(publish_docs_log), " ".join(sys.argv), 'Test: ./gradlew buildOnServer')
 	git_commit_cmd = "git %s commit -m \"%s\"" % (GIT_TREE_ARGS, pdr_msg)
 	subprocess.check_output(git_commit_cmd, stderr=subprocess.STDOUT, shell=True)
-	summary_log.append("1 Commit was made in frameworks/support to commmit changes to PublishDocsRules.kt")
-	print("Create commit for PublishDocsRules.kt... Successful")
+	summary_log.append("1 Commit was made in frameworks/support to commmit changes to docs-public/build.gradle")
+	print("Create commit for docs-public/build.gradle... Successful")
 
 
 # Set up input arguments
 parser = argparse.ArgumentParser(
 	description=("""Import AndroidX prebuilts from the Android Build Server
-		and if necessary, update PublishDocsRules.kt.  By default, uses
+		and if necessary, update docs-public/build.gradle.  By default, uses
 		top-of-tree-m2repository-all-<BUILDID>.zip to get artifacts."""))
 parser.add_argument(
 	'source',
@@ -469,8 +466,8 @@ parser.add_argument(
 	'--all-prebuilts', action="store_true",
 	help='If specified, updates all AndroidX prebuilts with artifacts from the build ID')
 parser.add_argument(
-	'--skip-publishdocrules', action="store_true",
-	help='If specified, PublishDocsRules.kt will NOT be updated')
+	'--skip-public-docs', action="store_true",
+	help='If specified, docs-public/build.gradle will NOT be updated')
 parser.add_argument(
 	'--groups', metavar='group_id', nargs='+',
 	help="""If specified, only update libraries whose group_id contains the listed text.
@@ -508,7 +505,7 @@ if args.no_commit:
 	summary_log.append("These changes were NOT committed.")
 else:
 	if not commit_prebuilts(): sys.exit(1)
-	commit_publish_docs_rules()
+	commit_docs_public_build_gradle()
 
 print_change_summary()
 print("Test and check these changes before uploading to Gerrit")
