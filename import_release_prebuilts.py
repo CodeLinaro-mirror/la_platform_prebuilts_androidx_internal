@@ -43,6 +43,14 @@ def rm(path):
 	elif os.path.exists(path):
 		os.remove(path)
 
+def ask_yes_or_no(question):
+	while(True):
+	    reply = str(input(question+' (y/n): ')).lower().strip()
+	    if reply:
+		    if reply[0] == 'y': return True
+		    if reply[0] == 'n': return False
+	    print("Please respond with y/n")
+
 def fetch_artifact(target, build_id, artifact_path):
 	download_to = os.path.join('.', os.path.dirname(artifact_path))
 	print('Fetching %s from %s with build ID %s ...' % (artifact_path, target, build_id))
@@ -240,6 +248,10 @@ def get_updated_version_map():
 
 # Inserts new groupdId into docs-public/build.gradle
 def insert_new_artifact_into_dpbg(dpbg_lines, num_lines, new_maven_coordinates, artifact_ver_map):
+	should_update_docs = ask_yes_or_no(
+		"Should public docs be updated for new artifact %s?" % new_maven_coordinates)
+	if not should_update_docs:
+		return
 	new_group_id_insert_line = 0
 	for i in range(num_lines):
 		cur_line = dpbg_lines[i]
@@ -253,9 +265,9 @@ def insert_new_artifact_into_dpbg(dpbg_lines, num_lines, new_maven_coordinates, 
 		else:
 			new_maven_coordinate_insert_line = i + 1
 	if "sample" in new_maven_coordinates:
-		build_gradle_line_prefix = "prebuiltSamples"
+		build_gradle_line_prefix = "samples"
 	else:
-		build_gradle_line_prefix = "prebuilt"
+		build_gradle_line_prefix = "docs"
 	# Failed to find a spot for the new groupID, so append it to the end of the LibraryGroup list
 	dpbg_lines.insert(new_maven_coordinate_insert_line,
 					  "    " + build_gradle_line_prefix + "(\"" + \
