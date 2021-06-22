@@ -95,16 +95,24 @@ def get_group_id_sub_path(group_id):
 	"""
 	return group_id.replace("androidx.", "").replace(".", "/")
 
-def get_group_id_from_artifact_id(artifact_id):
-	# By convention, androidx namespace is declared as:
-	# androidx.${group_id}:${group_id}-${optionalArtifactIdSuffix}:${version}
-	# Here, artifact_id == "${group_id}-${optionalArtifactIdSuffix}"
-	return artifact_id.split('-')[0]
+def get_coordinates_from_artifact(artifact):
+	"""Get the group from an artifact
 
-def copy_and_merge_artifacts(repo_dir, dest_dir, group_ids, artifact_ids):
+	Artifacts will have the format: `<group_id>:<artifact_id>`
+
+	Args:
+		artifact: the artifact to obtain the group id for
+
+	Returns:
+		Tuple of (group_id, artifact_id)
+	"""
+	coordinates = artifact.split(':')
+	return coordinates[0], coordinates[1]
+
+def copy_and_merge_artifacts(repo_dir, dest_dir, group_ids, artifacts):
 	repo_androidx_path = get_repo_androidx_path(repo_dir)
 	if not repo_androidx_path: return None
-	if not group_ids and not artifact_ids:
+	if not group_ids and not artifacts:
 		return cp(repo_androidx_path, dest_dir)
 	if group_ids:
 		# Copy over group_ids that were specified on the command line
@@ -118,16 +126,16 @@ def copy_and_merge_artifacts(repo_dir, dest_dir, group_ids, artifact_ids):
 			if not cp(repo_group_path, dest_group_path):
 				print_e("Failed to find copy %s to %s" % (repo_group_path, dest_group_path))
 				return None
-	if artifact_ids:
+	if artifacts:
 		# Copy over artifact_ids that were specified on the command line
-		for artifact in artifact_ids:
-			# Get the group_id from the artifact_id (in AndroidX, the group_id must be based on the artifact_id)
-			artifact_group_id = get_group_id_from_artifact_id(artifact)
-			repo_artifact_path = os.path.join(repo_androidx_path, artifact_group_id, artifact)
+		for artifact in artifacts:
+			group_id, artifact_id = get_coordinates_from_artifact(artifact)
+			group_id_sub_path = get_group_id_sub_path(group_id)
+			repo_artifact_path = os.path.join(repo_androidx_path, group_id_sub_path, artifact_id)
 			if not os.path.exists(repo_artifact_path):
-				print_e("Failed to find artifact_id %s in the artifact zip file" % artifact)
+				print_e("Failed to find artifact %s in the artifact zip file" % artifact)
 				return None
-			dest_artifact_path = os.path.join(dest_dir, artifact_group_id, artifact)
+			dest_artifact_path = os.path.join(dest_dir, group_id_sub_path, artifact_id)
 			if not cp(repo_artifact_path, dest_artifact_path):
 				print_e("Failed to find copy %s to %s" % (repo_artifact_path, dest_artifact_path))
 				return None
@@ -166,7 +174,7 @@ def remove_maven_metadata_files(repo_dir):
 	summary_log.append("Removed maven-metadata.xml* files from the import")
 	return True
 
-def update_new_artifacts(group_id_file_path, artifact_ver_map, group_id):
+def update_new_artifacts(group_id_file_path, artifact_ver_map, group_id, groups, artifacts):
 	# Finds each new library having group_id <group_id> under <group_id_file_path> and
 	#     updates <artifact_ver_map> with this new library
 	# Returns True iff at least one library was found
@@ -183,36 +191,41 @@ def update_new_artifacts(group_id_file_path, artifact_ver_map, group_id):
 				# first 2 directories for new group ids, whereas group ids can have more than
 				# 2 directories, such as androidx.compose.animation
 				real_group_id = ".".join(parent_file_path.strip('/').split('/')[:-1])
-				update_version_maps(artifact_ver_map, real_group_id, artifact_id, version)
+				update_version_maps(artifact_ver_map,
+									real_group_id,
+									artifact_id,
+									version,
+									groups,
+									artifacts)
 				success = True
 	if not success:
 		print_e("Failed to find any artifact_ids in filepath: %s" % group_id_file_path)
 	return success
 
-def should_update_artifact(group_id, artifact_id):
+def should_update_artifact(group_id, artifact_id, groups, artifacts):
 	# If a artifact or group list was specified and if the artifact_id or group_id were NOT specified
 	# in either list on the command line, return false
 	should_update = False
-	if (args.groups) or (args.artifacts):
-		if args.groups:
-			if group_id.replace("androidx.", "") in args.groups:
+	if (groups) or (artifacts):
+		if groups:
+			if group_id.replace("androidx.", "") in groups:
 				should_update = True
-			if group_id in args.groups:
+			if group_id in groups:
 				should_update = True
-		if (args.artifacts) and (artifact_id in args.artifacts):
+		if artifacts and ("%s:%s" % (group_id, artifact_id) in artifacts):
 			should_update = True
 	else:
 		should_update = True
 	return should_update
 
-def update_version_maps(artifact_ver_map, group_id, artifact_id, version):
-	if should_update_artifact(group_id, artifact_id):
+def update_version_maps(artifact_ver_map, group_id, artifact_id, version, groups, artifacts):
+	if should_update_artifact(group_id, artifact_id, groups, artifacts):
 		if group_id + ":" + artifact_id not in artifact_ver_map:
 			artifact_ver_map[group_id + ":" + artifact_id] = version
 			summary_log.append("Prebuilts: %s:%s --> %s" % (group_id, artifact_id, version))
 			prebuilts_log.append("%s:%s:%s" % (group_id, artifact_id, version))
 
-def get_updated_version_map():
+def get_updated_version_map(groups, artifacts):
 	try:
 		# Run git status --porcelain to get the names of the libraries that have changed
 		# (cut -c4- removes the change-type-character from git status output)
@@ -235,15 +248,15 @@ def get_updated_version_map():
 		if len(file_path_list) == 3:
 			group_id = ".".join(file_path_list[:-1])
 			# New library, so we need to check full directory tree to get version(s)
-			if update_new_artifacts(line.decode(), artifact_ver_map, group_id):
+			if update_new_artifacts(line.decode(), artifact_ver_map, group_id, groups, artifacts):
 				continue
 		if len(file_path_list) == 4:
 			group_id = ".".join(file_path_list[:-2])
 			# New library, so we need to check full directory tree to get version(s)
-			if update_new_artifacts(line.decode(), artifact_ver_map, group_id):
+			if update_new_artifacts(line.decode(), artifact_ver_map, group_id, groups, artifacts):
 				continue
 		version = file_path_list[-2]
-		update_version_maps(artifact_ver_map, group_id, artifact_id, version)
+		update_version_maps(artifact_ver_map, group_id, artifact_id, version, groups, artifacts)
 	return artifact_ver_map
 
 # Inserts new groupdId into docs-public/build.gradle
@@ -323,6 +336,33 @@ def get_higher_version(version_a, version_b):
 			return version_b
 	return version_a
 
+def find_invalidly_formatted_artifact(artifacts):
+	"""Validates that the artifacts are correctly written.
+
+	Artifacts need to be written as "<group_id>:<artifact_id>"
+	Valid: "androidx.core:core"
+	Valid: "androidx.foo.bar:bar"
+	Invalid: "foo"
+	Invalid: "foo:foo-bar"
+
+	Args:
+		artifacts: the list of artifacts to validate.
+
+	Returns:
+		artifactId that fails or None
+	"""
+	for artifact in artifacts:
+		if not artifact.startswith("androidx."):
+			return artifact
+		if artifact.count(":") != 1:
+			return artifact
+		coordinates = artifact.split(":")
+		for piece in coordinates:
+			if not piece.replace("androidx.", ""):
+				return artifact
+	return None
+
+
 def get_maven_coordinate_from_docs_public_build_gradle_line(line):
 	""" Gets the maven coordinate tuple from docs-public/build.grade
 
@@ -382,7 +422,7 @@ def update_docs_public_build_gradle(artifact_ver_map):
 		f.writelines(dpbg_lines)
 	return True
 
-def update_androidx(target, build_id, local_file):
+def update_androidx(target, build_id, local_file, groups, artifacts, skip_public_docs):
 	try:
 		if build_id:
 			artifact_zip_file = 'top-of-tree-m2repository-all-%s.zip' % build_id
@@ -393,15 +433,15 @@ def update_androidx(target, build_id, local_file):
 			print_e('Failed to extract AndroidX repository')
 			return False
 		print("Download and extract artifacts... Successful")
-		if not copy_and_merge_artifacts(repo_dir, './androidx', args.groups, args.artifacts):
+		if not copy_and_merge_artifacts(repo_dir, './androidx', groups, artifacts):
 			print_e('Failed to copy and merge AndroidX repository')
 			return False
 		print("Copy and merge artifacts... Successful")
 		remove_type_aar_from_pom_files("androidx")
 		remove_maven_metadata_files("androidx")
 		# Now that we've merged new prebuilts, we need to update our version map
-		artifact_ver_map = get_updated_version_map()
-		if not args.skip_public_docs:
+		artifact_ver_map = get_updated_version_map(groups, artifacts)
+		if not skip_public_docs:
 			if not update_docs_public_build_gradle(artifact_ver_map):
 				print_e('Failed to update PublicDocRules.kt')
 				return False
@@ -434,7 +474,7 @@ def get_file(args):
 		return args.source
 	return None
 
-def commit_prebuilts():
+def commit_prebuilts(args):
 	subprocess.check_call(['git', 'add', './androidx'])
 	# ensure that we've actually made a change:
 	staged_changes = subprocess.check_output('git diff --cached', stderr=subprocess.STDOUT, shell=True)
@@ -489,35 +529,53 @@ parser.add_argument(
 parser.add_argument(
 	'--artifacts', metavar='artifact_id', nargs='+',
 	help="""If specified, only update libraries whose artifact_id contains the listed text.
-	For example, if you specify \"--artifacts core slice-view lifecycle-common\", then this
-	script will import specific artifacts \"androidx.core:core\", \"androidx.slice:slice-view\",
-	and \"androidx.lifecycle:lifecycle-common\"""")
+	For example, if you specify \"--artifacts androidx.core:core androidx.core:slice-view
+	androidx.lifecycle:lifecycle-common\", then this script will import specific artifacts
+	\"androidx.core:core\", \"androidx.slice:slice-view\", and
+	\"androidx.lifecycle:lifecycle-common\"""")
 parser.add_argument(
 	'--no-commit', action="store_true",
 	help='If specified, this script will not commit the changes')
 
-# Parse arguments and check for existence of build ID or file
-args = parser.parse_args()
-args.file = True
-if not args.source:
-	parser.error("You must specify a build ID or local Maven ZIP file")
-	sys.exit(1)
+def main(args):
+	# Parse arguments and check for existence of build ID or file
+	args = parser.parse_args()
+	args.file = True
+	if not args.source:
+		parser.error("You must specify a build ID or local Maven ZIP file")
+		sys.exit(1)
 
-# Force the user to explicity decide which set of prebuilts to import
-if args.all_prebuilts == False and args.groups == None and args.artifacts == None:
-	print_e("Need to pass an argument such as --all-prebuilts or pass in group_ids or artifact_ids")
-	print_e("Run `./import_release_prebuilts.py --help` for more info")
-	sys.exit(1)
+	# Force the user to explicity decide which set of prebuilts to import
+	if args.all_prebuilts == False and args.groups == None and args.artifacts == None:
+		print_e("Need to pass an argument such as --all-prebuilts or pass in group_ids or artifact_ids")
+		print_e("Run `./import_release_prebuilts.py --help` for more info")
+		sys.exit(1)
 
-if not update_androidx('androidx', get_build_id(args), get_file(args)):
-	print_e('Failed to update AndroidX, aborting...')
-	sys.exit(1)
+	if (args.artifacts):
+		invalid_artifact = find_invalidly_formatted_artifact(args.artifacts)
+		if invalid_artifact:
+			print_e("The following artifact_id is malformed: ", invalid_artifact)
+			print_e("Please format artifacts as <group_id>:<artifact_id>, such "
+					"as: `androidx.foo.bar:bar`")
+			sys.exit(1)
 
-if args.no_commit:
-	summary_log.append("These changes were NOT committed.")
-else:
-	if not commit_prebuilts(): sys.exit(1)
-	commit_docs_public_build_gradle()
+	if not update_androidx('androidx',
+						   get_build_id(args),
+						   get_file(args),
+						   args.groups,
+						   args.artifacts,
+						   args.skip_public_docs):
+		print_e('Failed to update AndroidX, aborting...')
+		sys.exit(1)
 
-print_change_summary()
-print("Test and check these changes before uploading to Gerrit")
+	if args.no_commit:
+		summary_log.append("These changes were NOT committed.")
+	else:
+		if not commit_prebuilts(args): sys.exit(1)
+		commit_docs_public_build_gradle()
+
+	print_change_summary()
+	print("Test and check these changes before uploading to Gerrit")
+
+if __name__ == '__main__':
+    main(sys.argv)
