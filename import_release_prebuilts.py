@@ -212,7 +212,7 @@ def should_update_artifact(group_id, artifact_id, groups, artifacts):
 				should_update = True
 			if group_id in groups:
 				should_update = True
-		if (artifacts) and (artifact_id in artifacts):
+		if artifacts and ("%s:%s" % (group_id, artifact_id) in artifacts):
 			should_update = True
 	else:
 		should_update = True
