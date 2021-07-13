@@ -381,16 +381,29 @@ def get_maven_coordinate_from_docs_public_build_gradle_line(line):
 	version = coordinates[2]
 	return group_id, artifact_id, version
 
-def update_docs_public_build_gradle(artifact_ver_map):
+
+def generate_updated_docs_public_build_gradle(artifact_ver_map,
+											  build_gradle_file):
+	""" Creates an updated build_gradle_file lines.
+
+	Iterates over the provided build_gradle_file and constructs
+	the lines of an updated build.gradle with the new versions in the
+	artifact version map.
+
+	Does not write anything to disk.
+
+	Args:
+		artifact_ver_map: map of updated artifacts to their new versions.
+		build_gradle_file: docs-public/build.gradle to read and update.
+
+	Returns:
+		lines up for updated file to be written to disk.
+	"""
 	artifact_found = {}
 	for key in artifact_ver_map:
 		artifact_found[key] = False
-	# Get build the file path of PublicDocRules.kt - this isn't great, open to a better solution
-	if not os.path.exists(DOCS_PUBLIC_BUILD_GRADLE_FP):
-		print_e("docs-public build.gradle not in expected location. Looked at: %s" % DOCS_PUBLIC_BUILD_GRADLE_FP)
-		return None
 	# Open file for reading and get all lines
-	with open(DOCS_PUBLIC_BUILD_GRADLE_FP, 'r') as f:
+	with open(build_gradle_file, 'r') as f:
 		dpbg_lines = f.readlines()
 	num_lines = len(dpbg_lines)
 	for i in range(num_lines):
@@ -417,8 +430,17 @@ def update_docs_public_build_gradle(artifact_ver_map):
 	for artifact in artifact_found:
 		if not artifact_found[artifact]:
 			insert_new_artifact_into_dpbg(dpbg_lines, num_lines, artifact, artifact_ver_map)
+	return dpbg_lines
+
+
+def update_docs_public_build_gradle(artifact_ver_map, build_gradle_file=DOCS_PUBLIC_BUILD_GRADLE_FP):
+	# Get build the file path of PublicDocRules.kt - this isn't great, open to a better solution
+	if not os.path.exists(build_gradle_file):
+		print_e("docs-public build.gradle not in expected location. Looked at: %s" % build_gradle_file)
+		return None
+	dpbg_lines = generate_updated_docs_public_build_gradle(artifact_ver_map, build_gradle_file)
 	# Open file for writing and update all lines
-	with open(DOCS_PUBLIC_BUILD_GRADLE_FP, 'w') as f:
+	with open(build_gradle_file, 'w') as f:
 		f.writelines(dpbg_lines)
 	return True
 
