@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 
-import os, sys, zipfile
-import argparse
-import subprocess
-from shutil import rmtree
+from collections import defaultdict
 from distutils.dir_util import copy_tree
+from shutil import rmtree
+import argparse
 import glob
+import os, sys, zipfile
+import subprocess
 
 # cd into directory of script
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -481,19 +482,15 @@ def print_change_summary():
 		print(change)
 
 # Check if build ID exists and is a number
-def get_build_id(args):
-	source = args.source
-	number_text = source[:]
-	if not number_text.isnumeric():
+def get_build_id(source):
+	if not source.isnumeric():
 		return None
-	args.file = False
 	return source
 
 # Check if file exists and is not a number
-def get_file(args):
-	source = args.source
+def get_file(source):
 	if not source.isnumeric():
-		return args.source
+		return source
 	return None
 
 def commit_prebuilts(args):
@@ -528,13 +525,58 @@ def commit_docs_public_build_gradle():
 	print("Create commit for docs-public/build.gradle... Successful")
 
 
+def parse_long_form(long_form, source_to_artifact):
+	"""Parses the long form syntax into a list of source(buildIds) to artifacts
+
+	This method takes a string long_form of the syntax:
+	`<build id 1>/<group id>,<build id 2>/<group id>:<artifact id>`
+
+	It reads throught the string and parses the correct builds and artifacts/groups
+	into a map of build ID to groups and artifacts.
+
+	Args:
+		long_form: string to parse into a map of source to groups/artifacts
+		source_to_artifact: map of type defaultdict(lambda: defaultdict(list))
+
+	Returns:
+		source_to_artifact on success, None on failure
+	"""
+	if '/' not in long_form:
+		print_e("The long form syntax requires slashs to separate the build Id or source.")
+		return None
+	if '.' not in long_form:
+		print_e("The long form syntax needs to include the full groupId/artifactId.")
+		return None
+	if 'androidx' not in long_form:
+		print_e("The long form syntax needs to contain androidx.")
+		return None
+
+	import_items = long_form.split(',')
+
+	for item in import_items:
+		if item.count('/') != 1:
+			print_e("The long form syntax requires the format "
+					"<build Id>/<group Id> or <build Id>/<group Id>:<artifact Id>.")
+			return None
+		source = item.split('/')[0]
+		if not source:
+			print_e("The long form syntax requires a build Id or source to be "
+					"specified for every artifact.")
+			return None
+		artifact = item.split('/')[1]
+		if ':' in artifact:
+			source_to_artifact[source]['artifacts'].append(artifact)
+		else:
+			source_to_artifact[source]['groups'].append(artifact)
+	return source_to_artifact
+
 # Set up input arguments
 parser = argparse.ArgumentParser(
 	description=("""Import AndroidX prebuilts from the Android Build Server
 		and if necessary, update docs-public/build.gradle.  By default, uses
 		top-of-tree-m2repository-all-<BUILDID>.zip to get artifacts."""))
 parser.add_argument(
-	'source',
+	'--source',
 	help='Build server build ID or local Maven ZIP file')
 parser.add_argument(
 	'--all-prebuilts', action="store_true",
@@ -558,37 +600,56 @@ parser.add_argument(
 parser.add_argument(
 	'--no-commit', action="store_true",
 	help='If specified, this script will not commit the changes')
+parser.add_argument(
+	'--long-form',
+	help=('If specified, the following argument must be a comma separated listed '
+		  'of all groups and artifact.  Groups are specified as '
+		  '`<build id>/<group id>` and artifacts are specified as '
+		  '`<build id>/<group id>:<artifact id>`.  The full format is: '
+		  '`<build id 1>/<group id>,,'
+		  '<build id 2>/<group id>:<artifact id>,...`'
+		 ))
+
 
 def main(args):
 	# Parse arguments and check for existence of build ID or file
 	args = parser.parse_args()
-	args.file = True
-	if not args.source:
-		parser.error("You must specify a build ID or local Maven ZIP file")
-		sys.exit(1)
+	source_to_artifact = defaultdict(lambda: defaultdict(list))
 
-	# Force the user to explicity decide which set of prebuilts to import
-	if args.all_prebuilts == False and args.groups == None and args.artifacts == None:
-		print_e("Need to pass an argument such as --all-prebuilts or pass in group_ids or artifact_ids")
-		print_e("Run `./import_release_prebuilts.py --help` for more info")
-		sys.exit(1)
-
-	if (args.artifacts):
-		invalid_artifact = find_invalidly_formatted_artifact(args.artifacts)
-		if invalid_artifact:
-			print_e("The following artifact_id is malformed: ", invalid_artifact)
-			print_e("Please format artifacts as <group_id>:<artifact_id>, such "
-					"as: `androidx.foo.bar:bar`")
+	if args.long_form:
+		if not parse_long_form(args.long_form, source_to_artifact):
+			exit(1)
+	else:
+		args.file = True
+		if not args.source:
+			parser.error("You must specify a build ID or local Maven ZIP file")
 			sys.exit(1)
+		# Force the user to explicity decide which set of prebuilts to import
+		if args.all_prebuilts == False and args.groups == None and args.artifacts == None:
+			print_e("Need to pass an argument such as --all-prebuilts or pass in group_ids or artifact_ids")
+			print_e("Run `./import_release_prebuilts.py --help` for more info")
+			sys.exit(1)
+		source_to_artifact[args.source]['groups'] = args.groups
+		source_to_artifact[args.source]['artifacts'] = args.artifacts
 
-	if not update_androidx('androidx',
-						   get_build_id(args),
-						   get_file(args),
-						   args.groups,
-						   args.artifacts,
-						   args.skip_public_docs):
-		print_e('Failed to update AndroidX, aborting...')
-		sys.exit(1)
+	for source in source_to_artifact:
+		if source_to_artifact[source].get('artifacts'):
+			invalid_artifact = find_invalidly_formatted_artifact(
+				source_to_artifact[source].get('artifacts'))
+			if invalid_artifact:
+				print_e("The following artifact_id is malformed: ", invalid_artifact)
+				print_e("Please format artifacts as <group_id>:<artifact_id>, such "
+						"as: `androidx.foo.bar:bar`")
+				sys.exit(1)
+
+		if not update_androidx('androidx',
+							   get_build_id(source),
+							   get_file(source),
+							   source_to_artifact[source].get('groups'),
+							   source_to_artifact[source].get('artifacts'),
+							   args.skip_public_docs):
+			print_e('Failed to update AndroidX, aborting...')
+			sys.exit(1)
 
 	if args.no_commit:
 		summary_log.append("These changes were NOT committed.")
