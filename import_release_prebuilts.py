@@ -219,14 +219,14 @@ def should_update_artifact(group_id, artifact_id, groups, artifacts):
 		should_update = True
 	return should_update
 
-def update_version_maps(artifact_ver_map, group_id, artifact_id, version, groups, artifacts):
+def update_version_maps(artifact_ver_map, group_id, artifact_id, version, groups, artifacts, source):
 	if should_update_artifact(group_id, artifact_id, groups, artifacts):
 		if group_id + ":" + artifact_id not in artifact_ver_map:
 			artifact_ver_map[group_id + ":" + artifact_id] = version
 			summary_log.append("Prebuilts: %s:%s --> %s" % (group_id, artifact_id, version))
-			prebuilts_log.append("%s:%s:%s" % (group_id, artifact_id, version))
+			prebuilts_log.append("%s:%s:%s from %s" % (group_id, artifact_id, version, source))
 
-def get_updated_version_map(groups, artifacts):
+def get_updated_version_map(groups, artifacts, source):
 	try:
 		# Run git status --porcelain to get the names of the libraries that have changed
 		# (cut -c4- removes the change-type-character from git status output)
@@ -257,7 +257,7 @@ def get_updated_version_map(groups, artifacts):
 			if update_new_artifacts(line.decode(), artifact_ver_map, group_id, groups, artifacts):
 				continue
 		version = file_path_list[-2]
-		update_version_maps(artifact_ver_map, group_id, artifact_id, version, groups, artifacts)
+		update_version_maps(artifact_ver_map, group_id, artifact_id, version, groups, artifacts, source)
 	return artifact_ver_map
 
 # Inserts new groupdId into docs-public/build.gradle
@@ -463,7 +463,8 @@ def update_androidx(target, build_id, local_file, groups, artifacts, skip_public
 		remove_type_aar_from_pom_files("androidx")
 		remove_maven_metadata_files("androidx")
 		# Now that we've merged new prebuilts, we need to update our version map
-		artifact_ver_map = get_updated_version_map(groups, artifacts)
+		source = "ab/%s" % build_id if build_id else local_file
+		artifact_ver_map = get_updated_version_map(groups, artifacts, source)
 		if not skip_public_docs:
 			if not update_docs_public_build_gradle(artifact_ver_map):
 				print_e('Failed to update PublicDocRules.kt')
@@ -483,12 +484,14 @@ def print_change_summary():
 
 # Check if build ID exists and is a number
 def get_build_id(source):
+	if not source: return None
 	if not source.isnumeric():
 		return None
 	return source
 
 # Check if file exists and is not a number
 def get_file(source):
+	if not source: return None
 	if not source.isnumeric():
 		return source
 	return None
@@ -500,11 +503,9 @@ def commit_prebuilts(args):
 	if not staged_changes:
 		print_e("There are no prebuilts changes to commit!  Check build id.")
 		return False
-	if not args.source.isnumeric():
-		src_msg = "local Maven ZIP %s" % get_file(args)
-	else:
-		src_msg = "build %s" % (get_build_id(args))
-	msg = "Import prebuilts %s from %s\n\nThis commit was generated from the command:\n%s\n\n%s" % (", ".join(prebuilts_log), src_msg, " ".join(sys.argv), 'Test: ./gradlew buildOnServer')
+	msg = ("Import prebuilts for:\n\n- %s\n\n"
+		   "This commit was generated from the command:"
+		   "\n%s\n\n%s" % ("\n- ".join(prebuilts_log), " ".join(sys.argv), 'Test: ./gradlew buildOnServer'))
 	subprocess.check_call(['git', 'commit', '-m', msg])
 	summary_log.append("1 Commit was made in prebuilts/androidx/internal to commit prebuilts")
 	print("Create commit for prebuilts... Successful")
@@ -518,7 +519,9 @@ def commit_docs_public_build_gradle():
 	if not staged_changes:
 		summary_log.append("NO CHANGES were made to docs-public/build.gradle")
 		return False
-	pdr_msg = "Updated docs-public/build.gradle for %s \n\nThis commit was generated from the command:\n%s\n\n%s" % (", ".join(publish_docs_log), " ".join(sys.argv), 'Test: ./gradlew buildOnServer')
+	pdr_msg = ("Updated docs-public/build.gradle for the following artifacts:" + \
+			   "\n\n- %s \n\nThis commit was generated from the command:"
+			   "\n%s\n\n%s" % ("\n- ".join(publish_docs_log), " ".join(sys.argv), 'Test: ./gradlew buildOnServer'))
 	git_commit_cmd = "git %s commit -m \"%s\"" % (GIT_TREE_ARGS, pdr_msg)
 	subprocess.check_output(git_commit_cmd, stderr=subprocess.STDOUT, shell=True)
 	summary_log.append("1 Commit was made in frameworks/support to commmit changes to docs-public/build.gradle")
@@ -620,7 +623,6 @@ def main(args):
 		if not parse_long_form(args.long_form, source_to_artifact):
 			exit(1)
 	else:
-		args.file = True
 		if not args.source:
 			parser.error("You must specify a build ID or local Maven ZIP file")
 			sys.exit(1)
