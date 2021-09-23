@@ -15,10 +15,11 @@
 # limitations under the License.
 #
 
+from collections import defaultdict
+from import_release_prebuilts import *
+from unittest.mock import patch
 import os
 import unittest
-from unittest.mock import patch
-from import_release_prebuilts import *
 
 DOCS_PUBLIC_BUILD_GRADLE_REL_TEST = './docs-public/test_build.gradle'
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -138,6 +139,101 @@ class TestVersionUpdates(unittest.TestCase):
             "}\n"
         ]
         self.assertEqual(new_lines, correct_outline_lines)
+
+
+class TestLongFormSyntax(unittest.TestCase):
+
+    def test_correct_syntax_is_parsed(self):
+        long_form_test_str = "1111/androidx.foo"
+        source_to_artifact = defaultdict(lambda: defaultdict(list))
+        parse_long_form(long_form_test_str, source_to_artifact)
+        self.assertTrue(source_to_artifact.get("1111"))
+        self.assertTrue(source_to_artifact["1111"].get("groups"))
+        self.assertFalse(source_to_artifact["1111"].get("artifacts"))
+        self.assertEqual(source_to_artifact["1111"]["groups"],
+                         ["androidx.foo"])
+
+        long_form_test_str = "1111/androidx.foo:foo-bar"
+        source_to_artifact = defaultdict(lambda: defaultdict(list))
+        parse_long_form(long_form_test_str, source_to_artifact)
+        self.assertTrue(source_to_artifact.get("1111"))
+        self.assertFalse(source_to_artifact["1111"].get("groups"))
+        self.assertTrue(source_to_artifact["1111"].get("artifacts"))
+        self.assertEqual(source_to_artifact["1111"]["artifacts"],
+                         ["androidx.foo:foo-bar"])
+
+        long_form_test_str = "1111/androidx.foo,2222/androidx.foo:foo-bar"
+        source_to_artifact = defaultdict(lambda: defaultdict(list))
+        parse_long_form(long_form_test_str, source_to_artifact)
+        self.assertTrue(source_to_artifact.get("1111"))
+        self.assertTrue(source_to_artifact["1111"].get("groups"))
+        self.assertFalse(source_to_artifact["1111"].get("artifacts"))
+        self.assertEqual(source_to_artifact["1111"]["groups"],
+                         ["androidx.foo"])
+        self.assertTrue(source_to_artifact.get("2222"))
+        self.assertFalse(source_to_artifact["2222"].get("groups"))
+        self.assertTrue(source_to_artifact["2222"].get("artifacts"))
+        self.assertEqual(source_to_artifact["2222"]["artifacts"],
+                         ["androidx.foo:foo-bar"])
+
+        long_form_test_str = ("1111/androidx.foo,1111/androidx.bar:bar,"
+                              "2222/androidx.foo,3333/androidx.bar:bar,"
+                              "3333/androidx.qux,4444/androidx.qux:qux,"
+                              "4444/androidx.qux:qux-ktx")
+        source_to_artifact = defaultdict(lambda: defaultdict(list))
+        parse_long_form(long_form_test_str, source_to_artifact)
+        self.assertTrue(source_to_artifact.get("1111"))
+        self.assertTrue(source_to_artifact["1111"].get("groups"))
+        self.assertTrue(source_to_artifact["1111"].get("artifacts"))
+        self.assertEqual(source_to_artifact["1111"]["groups"],
+                         ["androidx.foo"])
+        self.assertEqual(source_to_artifact["1111"]["artifacts"],
+                         ["androidx.bar:bar"])
+        self.assertTrue(source_to_artifact.get("2222"))
+        self.assertTrue(source_to_artifact["2222"].get("groups"))
+        self.assertFalse(source_to_artifact["2222"].get("artifacts"))
+        self.assertEqual(source_to_artifact["2222"]["groups"],
+                         ["androidx.foo"])
+        self.assertTrue(source_to_artifact.get("3333"))
+        self.assertTrue(source_to_artifact["3333"].get("groups"))
+        self.assertTrue(source_to_artifact["3333"].get("artifacts"))
+        self.assertEqual(source_to_artifact["3333"]["groups"],
+                         ["androidx.qux"])
+        self.assertEqual(source_to_artifact["3333"]["artifacts"],
+                         ["androidx.bar:bar"])
+        self.assertTrue(source_to_artifact.get("4444"))
+        self.assertFalse(source_to_artifact["4444"].get("groups"))
+        self.assertTrue(source_to_artifact["4444"].get("artifacts"))
+        self.assertEqual(source_to_artifact["4444"]["artifacts"],
+                         ["androidx.qux:qux", "androidx.qux:qux-ktx"])
+
+    def test_incorrect_syntax_throws_error(self):
+        long_form_test_str = "1111androidx.foo"
+        source_to_artifact = defaultdict(lambda: defaultdict(list))
+        result = parse_long_form(long_form_test_str, source_to_artifact)
+        self.assertFalse(result)
+
+        long_form_test_str = "1111/foo"
+        source_to_artifact = defaultdict(lambda: defaultdict(list))
+        result = parse_long_form(long_form_test_str, source_to_artifact)
+        self.assertFalse(result)
+
+        long_form_test_str = "1111/androidx-foo"
+        source_to_artifact = defaultdict(lambda: defaultdict(list))
+        result = parse_long_form(long_form_test_str, source_to_artifact)
+        self.assertFalse(result)
+
+        long_form_test_str = "1111/androidx.foo,2222/androidx.foo/foo-bar"
+        source_to_artifact = defaultdict(lambda: defaultdict(list))
+        result = parse_long_form(long_form_test_str, source_to_artifact)
+        self.assertFalse(result)
+
+        long_form_test_str = ("1111/androidx.foo,1111/androidx.bar:bar,"
+                              "2222/androidx.foo,/androidx.bar:bar,"
+                              "3333/androidx.qux,4444/androidx.qux:qux,"
+                              "4444/androidx.qux:qux-ktx")
+        result = parse_long_form(long_form_test_str, source_to_artifact)
+        self.assertFalse(result)
 
 
 if __name__ == '__main__':

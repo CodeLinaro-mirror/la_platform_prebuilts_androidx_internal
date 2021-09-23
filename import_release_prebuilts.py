@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 
-import os, sys, zipfile
-import argparse
-import subprocess
-from shutil import rmtree
+from collections import defaultdict
 from distutils.dir_util import copy_tree
+from shutil import rmtree
+import argparse
 import glob
+import os, sys, zipfile
+import subprocess
 
 # cd into directory of script
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -218,14 +219,14 @@ def should_update_artifact(group_id, artifact_id, groups, artifacts):
 		should_update = True
 	return should_update
 
-def update_version_maps(artifact_ver_map, group_id, artifact_id, version, groups, artifacts):
+def update_version_maps(artifact_ver_map, group_id, artifact_id, version, groups, artifacts, source):
 	if should_update_artifact(group_id, artifact_id, groups, artifacts):
 		if group_id + ":" + artifact_id not in artifact_ver_map:
 			artifact_ver_map[group_id + ":" + artifact_id] = version
 			summary_log.append("Prebuilts: %s:%s --> %s" % (group_id, artifact_id, version))
-			prebuilts_log.append("%s:%s:%s" % (group_id, artifact_id, version))
+			prebuilts_log.append("%s:%s:%s from %s" % (group_id, artifact_id, version, source))
 
-def get_updated_version_map(groups, artifacts):
+def get_updated_version_map(groups, artifacts, source):
 	try:
 		# Run git status --porcelain to get the names of the libraries that have changed
 		# (cut -c4- removes the change-type-character from git status output)
@@ -256,7 +257,7 @@ def get_updated_version_map(groups, artifacts):
 			if update_new_artifacts(line.decode(), artifact_ver_map, group_id, groups, artifacts):
 				continue
 		version = file_path_list[-2]
-		update_version_maps(artifact_ver_map, group_id, artifact_id, version, groups, artifacts)
+		update_version_maps(artifact_ver_map, group_id, artifact_id, version, groups, artifacts, source)
 	return artifact_ver_map
 
 # Inserts new groupdId into docs-public/build.gradle
@@ -462,7 +463,8 @@ def update_androidx(target, build_id, local_file, groups, artifacts, skip_public
 		remove_type_aar_from_pom_files("androidx")
 		remove_maven_metadata_files("androidx")
 		# Now that we've merged new prebuilts, we need to update our version map
-		artifact_ver_map = get_updated_version_map(groups, artifacts)
+		source = "ab/%s" % build_id if build_id else local_file
+		artifact_ver_map = get_updated_version_map(groups, artifacts, source)
 		if not skip_public_docs:
 			if not update_docs_public_build_gradle(artifact_ver_map):
 				print_e('Failed to update PublicDocRules.kt')
@@ -481,19 +483,17 @@ def print_change_summary():
 		print(change)
 
 # Check if build ID exists and is a number
-def get_build_id(args):
-	source = args.source
-	number_text = source[:]
-	if not number_text.isnumeric():
+def get_build_id(source):
+	if not source: return None
+	if not source.isnumeric():
 		return None
-	args.file = False
 	return source
 
 # Check if file exists and is not a number
-def get_file(args):
-	source = args.source
+def get_file(source):
+	if not source: return None
 	if not source.isnumeric():
-		return args.source
+		return source
 	return None
 
 def commit_prebuilts(args):
@@ -503,11 +503,9 @@ def commit_prebuilts(args):
 	if not staged_changes:
 		print_e("There are no prebuilts changes to commit!  Check build id.")
 		return False
-	if not args.source.isnumeric():
-		src_msg = "local Maven ZIP %s" % get_file(args)
-	else:
-		src_msg = "build %s" % (get_build_id(args))
-	msg = "Import prebuilts %s from %s\n\nThis commit was generated from the command:\n%s\n\n%s" % (", ".join(prebuilts_log), src_msg, " ".join(sys.argv), 'Test: ./gradlew buildOnServer')
+	msg = ("Import prebuilts for:\n\n- %s\n\n"
+		   "This commit was generated from the command:"
+		   "\n%s\n\n%s" % ("\n- ".join(prebuilts_log), " ".join(sys.argv), 'Test: ./gradlew buildOnServer'))
 	subprocess.check_call(['git', 'commit', '-m', msg])
 	summary_log.append("1 Commit was made in prebuilts/androidx/internal to commit prebuilts")
 	print("Create commit for prebuilts... Successful")
@@ -521,12 +519,59 @@ def commit_docs_public_build_gradle():
 	if not staged_changes:
 		summary_log.append("NO CHANGES were made to docs-public/build.gradle")
 		return False
-	pdr_msg = "Updated docs-public/build.gradle for %s \n\nThis commit was generated from the command:\n%s\n\n%s" % (", ".join(publish_docs_log), " ".join(sys.argv), 'Test: ./gradlew buildOnServer')
+	pdr_msg = ("Updated docs-public/build.gradle for the following artifacts:" + \
+			   "\n\n- %s \n\nThis commit was generated from the command:"
+			   "\n%s\n\n%s" % ("\n- ".join(publish_docs_log), " ".join(sys.argv), 'Test: ./gradlew buildOnServer'))
 	git_commit_cmd = "git %s commit -m \"%s\"" % (GIT_TREE_ARGS, pdr_msg)
 	subprocess.check_output(git_commit_cmd, stderr=subprocess.STDOUT, shell=True)
 	summary_log.append("1 Commit was made in frameworks/support to commmit changes to docs-public/build.gradle")
 	print("Create commit for docs-public/build.gradle... Successful")
 
+
+def parse_long_form(long_form, source_to_artifact):
+	"""Parses the long form syntax into a list of source(buildIds) to artifacts
+
+	This method takes a string long_form of the syntax:
+	`<build id 1>/<group id>,<build id 2>/<group id>:<artifact id>`
+
+	It reads throught the string and parses the correct builds and artifacts/groups
+	into a map of build ID to groups and artifacts.
+
+	Args:
+		long_form: string to parse into a map of source to groups/artifacts
+		source_to_artifact: map of type defaultdict(lambda: defaultdict(list))
+
+	Returns:
+		source_to_artifact on success, None on failure
+	"""
+	if '/' not in long_form:
+		print_e("The long form syntax requires slashs to separate the build Id or source.")
+		return None
+	if '.' not in long_form:
+		print_e("The long form syntax needs to include the full groupId/artifactId.")
+		return None
+	if 'androidx' not in long_form:
+		print_e("The long form syntax needs to contain androidx.")
+		return None
+
+	import_items = long_form.split(',')
+
+	for item in import_items:
+		if item.count('/') != 1:
+			print_e("The long form syntax requires the format "
+					"<build Id>/<group Id> or <build Id>/<group Id>:<artifact Id>.")
+			return None
+		source = item.split('/')[0]
+		if not source:
+			print_e("The long form syntax requires a build Id or source to be "
+					"specified for every artifact.")
+			return None
+		artifact = item.split('/')[1]
+		if ':' in artifact:
+			source_to_artifact[source]['artifacts'].append(artifact)
+		else:
+			source_to_artifact[source]['groups'].append(artifact)
+	return source_to_artifact
 
 # Set up input arguments
 parser = argparse.ArgumentParser(
@@ -534,7 +579,7 @@ parser = argparse.ArgumentParser(
 		and if necessary, update docs-public/build.gradle.  By default, uses
 		top-of-tree-m2repository-all-<BUILDID>.zip to get artifacts."""))
 parser.add_argument(
-	'source',
+	'--source',
 	help='Build server build ID or local Maven ZIP file')
 parser.add_argument(
 	'--all-prebuilts', action="store_true",
@@ -558,37 +603,55 @@ parser.add_argument(
 parser.add_argument(
 	'--no-commit', action="store_true",
 	help='If specified, this script will not commit the changes')
+parser.add_argument(
+	'--long-form',
+	help=('If specified, the following argument must be a comma separated listed '
+		  'of all groups and artifact.  Groups are specified as '
+		  '`<build id>/<group id>` and artifacts are specified as '
+		  '`<build id>/<group id>:<artifact id>`.  The full format is: '
+		  '`<build id 1>/<group id>,,'
+		  '<build id 2>/<group id>:<artifact id>,...`'
+		 ))
+
 
 def main(args):
 	# Parse arguments and check for existence of build ID or file
 	args = parser.parse_args()
-	args.file = True
-	if not args.source:
-		parser.error("You must specify a build ID or local Maven ZIP file")
-		sys.exit(1)
+	source_to_artifact = defaultdict(lambda: defaultdict(list))
 
-	# Force the user to explicity decide which set of prebuilts to import
-	if args.all_prebuilts == False and args.groups == None and args.artifacts == None:
-		print_e("Need to pass an argument such as --all-prebuilts or pass in group_ids or artifact_ids")
-		print_e("Run `./import_release_prebuilts.py --help` for more info")
-		sys.exit(1)
-
-	if (args.artifacts):
-		invalid_artifact = find_invalidly_formatted_artifact(args.artifacts)
-		if invalid_artifact:
-			print_e("The following artifact_id is malformed: ", invalid_artifact)
-			print_e("Please format artifacts as <group_id>:<artifact_id>, such "
-					"as: `androidx.foo.bar:bar`")
+	if args.long_form:
+		if not parse_long_form(args.long_form, source_to_artifact):
+			exit(1)
+	else:
+		if not args.source:
+			parser.error("You must specify a build ID or local Maven ZIP file")
 			sys.exit(1)
+		# Force the user to explicity decide which set of prebuilts to import
+		if args.all_prebuilts == False and args.groups == None and args.artifacts == None:
+			print_e("Need to pass an argument such as --all-prebuilts or pass in group_ids or artifact_ids")
+			print_e("Run `./import_release_prebuilts.py --help` for more info")
+			sys.exit(1)
+		source_to_artifact[args.source]['groups'] = args.groups
+		source_to_artifact[args.source]['artifacts'] = args.artifacts
 
-	if not update_androidx('androidx',
-						   get_build_id(args),
-						   get_file(args),
-						   args.groups,
-						   args.artifacts,
-						   args.skip_public_docs):
-		print_e('Failed to update AndroidX, aborting...')
-		sys.exit(1)
+	for source in source_to_artifact:
+		if source_to_artifact[source].get('artifacts'):
+			invalid_artifact = find_invalidly_formatted_artifact(
+				source_to_artifact[source].get('artifacts'))
+			if invalid_artifact:
+				print_e("The following artifact_id is malformed: ", invalid_artifact)
+				print_e("Please format artifacts as <group_id>:<artifact_id>, such "
+						"as: `androidx.foo.bar:bar`")
+				sys.exit(1)
+
+		if not update_androidx('androidx',
+							   get_build_id(source),
+							   get_file(source),
+							   source_to_artifact[source].get('groups'),
+							   source_to_artifact[source].get('artifacts'),
+							   args.skip_public_docs):
+			print_e('Failed to update AndroidX, aborting...')
+			sys.exit(1)
 
 	if args.no_commit:
 		summary_log.append("These changes were NOT committed.")
