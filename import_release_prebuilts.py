@@ -175,7 +175,7 @@ def remove_maven_metadata_files(repo_dir):
 	summary_log.append("Removed maven-metadata.xml* files from the import")
 	return True
 
-def update_new_artifacts(group_id_file_path, artifact_ver_map, group_id, groups, artifacts):
+def update_new_artifacts(group_id_file_path, artifact_ver_map, group_id, groups, artifacts, source):
 	# Finds each new library having group_id <group_id> under <group_id_file_path> and
 	#     updates <artifact_ver_map> with this new library
 	# Returns True iff at least one library was found
@@ -197,7 +197,8 @@ def update_new_artifacts(group_id_file_path, artifact_ver_map, group_id, groups,
 									artifact_id,
 									version,
 									groups,
-									artifacts)
+									artifacts,
+									source)
 				success = True
 	if not success:
 		print_e("Failed to find any artifact_ids in filepath: %s" % group_id_file_path)
@@ -249,12 +250,12 @@ def get_updated_version_map(groups, artifacts, source):
 		if len(file_path_list) == 3:
 			group_id = ".".join(file_path_list[:-1])
 			# New library, so we need to check full directory tree to get version(s)
-			if update_new_artifacts(line.decode(), artifact_ver_map, group_id, groups, artifacts):
+			if update_new_artifacts(line.decode(), artifact_ver_map, group_id, groups, artifacts, source):
 				continue
 		if len(file_path_list) == 4:
 			group_id = ".".join(file_path_list[:-2])
 			# New library, so we need to check full directory tree to get version(s)
-			if update_new_artifacts(line.decode(), artifact_ver_map, group_id, groups, artifacts):
+			if update_new_artifacts(line.decode(), artifact_ver_map, group_id, groups, artifacts, source):
 				continue
 		version = file_path_list[-2]
 		update_version_maps(artifact_ver_map, group_id, artifact_id, version, groups, artifacts, source)
