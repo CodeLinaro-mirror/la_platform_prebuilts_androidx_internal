@@ -235,6 +235,89 @@ class TestLongFormSyntax(unittest.TestCase):
         result = parse_long_form(long_form_test_str, source_to_artifact)
         self.assertFalse(result)
 
+class TestDocsUpdate(unittest.TestCase):
+
+    def test_should_update_docs_returns_false(self):
+        self.assertFalse(should_update_docs(
+            "androidx.appsearch:appsearch-compiler"))
+        self.assertFalse(should_update_docs(
+            "androidx.appsearch:appsearch-debug-view"))
+        self.assertFalse(should_update_docs(
+            "androidx.benchmark:benchmark-gradle-plugin"))
+        self.assertFalse(should_update_docs(
+            "androidx.compose:compiler:compiler"))
+        self.assertFalse(should_update_docs(
+            "androidx.compose:compiler:compiler-hosted"))
+        self.assertFalse(should_update_docs(
+            "androidx.compose:material:material-icons-extended"))
+        self.assertFalse(should_update_docs(
+            "androidx.compose:ui:ui-android-stubs"))
+        self.assertFalse(should_update_docs(
+            "androidx.compose:ui:ui-test-manifest"))
+        self.assertFalse(should_update_docs(
+            "androidx.hilt:hilt-compiler"))
+        self.assertFalse(should_update_docs(
+            "androidx.inspection:inspection-gradle-plugin"))
+        self.assertFalse(should_update_docs(
+            "androidx.jetifier:jetifier-processor"))
+        self.assertFalse(should_update_docs(
+            "androidx.lifecycle:lifecycle-compiler"))
+        self.assertFalse(should_update_docs(
+            "androidx.media2:media2-exoplayer"))
+        self.assertFalse(should_update_docs(
+            "androidx.navigation:navigation-safe-args-generator"))
+        self.assertFalse(should_update_docs(
+            "androidx.navigation:navigation-safe-args-gradle-plugin"))
+        self.assertFalse(should_update_docs(
+            "androidx.remotecallback:remotecallback-processor"))
+        self.assertFalse(should_update_docs(
+            "androidx.resourceinspection:resourceinspection-processor"))
+        self.assertFalse(should_update_docs(
+            "androidx.room:room-compiler"))
+        self.assertFalse(should_update_docs(
+            "androidx.room:room-compiler-processing"))
+        self.assertFalse(should_update_docs(
+            "androidx.room:room-compiler-processing-testing"))
+        self.assertFalse(should_update_docs(
+            "androidx.versionedparcelable:versionedparcelable-compiler"))
+
+    def test_should_update_docs_returns_true(self):
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.foo:foo-bar"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.camera:camera-video"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.collection:collection"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.compose:material:material:material-samples"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.compose:ui:ui-graphics"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.dynamicanimation:dynamicanimation-ktx"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.emoji2:emoji2-views-helper"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.glance:glance-appwidget"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.lifecycle:lifecycle-common-java8"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.media2:media2-session"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.paging:paging-samples"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.remotecallback:remotecallback"))
 
 if __name__ == '__main__':
     unittest.main()
