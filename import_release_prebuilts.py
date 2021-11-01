@@ -261,11 +261,42 @@ def get_updated_version_map(groups, artifacts, source):
 		update_version_maps(artifact_ver_map, group_id, artifact_id, version, groups, artifacts, source)
 	return artifact_ver_map
 
+
+def should_update_docs(new_maven_coordinates):
+	"""Users heuristics to determine if new_maven_coordinates should have public docs
+
+	If no keyword is found, we ask the user.  These are
+	heuristic keywords that cover common artifacts that
+	contain no user-facing code or for exoplayer, is a
+	jar-jar'd artifact.
+
+	Args:
+		new_maven_coordinates: the coordinate to check for
+
+	Returns:
+		True for public docs, false for no public docs
+	"""
+	keywords_to_ignore = [
+		"extended",
+		"android-stubs",
+		"manifest",
+		"compiler",
+		"safe-args",
+		"processor",
+		"exoplayer",
+		"gradle",
+		"debug",
+	]
+	for keyword in keywords_to_ignore:
+		if keyword in new_maven_coordinates:
+			return False
+	return ask_yes_or_no(
+		"Should public docs be updated for new artifact %s?" % new_maven_coordinates)
+
+
 # Inserts new groupdId into docs-public/build.gradle
 def insert_new_artifact_into_dpbg(dpbg_lines, num_lines, new_maven_coordinates, artifact_ver_map):
-	should_update_docs = ask_yes_or_no(
-		"Should public docs be updated for new artifact %s?" % new_maven_coordinates)
-	if not should_update_docs:
+	if not should_update_docs(new_maven_coordinates):
 		return
 	new_group_id_insert_line = 0
 	for i in range(num_lines):
