@@ -62,7 +62,7 @@ def fetch_artifact(target, build_id, artifact_path):
 	fetch_cmd = [FETCH_ARTIFACT, '--bid', str(build_id), '--target', target, artifact_path,
 				 download_to]
 	try:
-		subprocess.check_output(fetch_cmd, stderr=subprocess.STDOUT)
+		subprocess.check_call(fetch_cmd, stderr=subprocess.STDOUT)
 	except subprocess.CalledProcessError:
 		print_e('FAIL: Unable to retrieve %s artifact for build ID %s' % (artifact_path, build_id))
 		print_e('Please make sure you are authenticated for build server access!')
@@ -156,7 +156,7 @@ def remove_type_aar_from_pom_files(repo_dir):
 		# Comment out <type>aar</type> in our pom files
 		# This is being done as a workaround for b/118385540
 		# TODO: Remove this method once https://github.com/gradle/gradle/issues/7594 is fixed
-		subprocess.check_output("find " + repo_dir + " -name *.pom | xargs sed 's|^      <type>aar</type>$|      <!--<type>aar</type>-->|' -i", shell=True)
+		subprocess.check_call("find " + repo_dir + " -name *.pom | xargs sed 's|^      <type>aar</type>$|      <!--<type>aar</type>-->|' -i", shell=True)
 	except subprocess.CalledProcessError:
 		print("failed!")
 		print_e("FAIL: Failed to remove <type>aar</type> from the pom files")
@@ -478,6 +478,7 @@ def update_docs_public_build_gradle(artifact_ver_map, build_gradle_file=DOCS_PUB
 	return True
 
 def update_androidx(target, build_id, local_file, groups, artifacts, skip_public_docs):
+	repo_dir = None
 	try:
 		if build_id:
 			artifact_zip_file = 'top-of-tree-m2repository-all-%s.zip' % build_id
@@ -504,9 +505,10 @@ def update_androidx(target, build_id, local_file, groups, artifacts, skip_public
 			print("Update docs-public/build.gradle... Successful")
 		return True
 	finally:
-		# Remove temp directories and temp files we've created 
-		rm(repo_dir)
-		rm('%s.zip' % repo_dir)
+		# Remove temp directories and temp files we've created
+		if repo_dir is not None:
+			rm(repo_dir)
+			rm('%s.zip' % repo_dir)
 		rm('.fetch_artifact2.dat')
 
 def print_change_summary():
@@ -545,7 +547,7 @@ def commit_prebuilts(args):
 
 def commit_docs_public_build_gradle():
 	git_add_cmd =  "git %s add %s"  % (GIT_TREE_ARGS, DOCS_PUBLIC_BUILD_GRADLE_REL)
-	subprocess.check_output(git_add_cmd, stderr=subprocess.STDOUT, shell=True)
+	subprocess.check_call(git_add_cmd, stderr=subprocess.STDOUT, shell=True)
 	git_cached_cmd = "git %s diff --cached" % GIT_TREE_ARGS
 	staged_changes = subprocess.check_output(git_cached_cmd, stderr=subprocess.STDOUT, shell=True)
 	if not staged_changes:
@@ -555,7 +557,7 @@ def commit_docs_public_build_gradle():
 			   "\n\n- %s \n\nThis commit was generated from the command:"
 			   "\n%s\n\n%s" % ("\n- ".join(publish_docs_log), " ".join(sys.argv), 'Test: ./gradlew buildOnServer'))
 	git_commit_cmd = "git %s commit -m \"%s\"" % (GIT_TREE_ARGS, pdr_msg)
-	subprocess.check_output(git_commit_cmd, stderr=subprocess.STDOUT, shell=True)
+	subprocess.check_call(git_commit_cmd, stderr=subprocess.STDOUT, shell=True)
 	summary_log.append("1 Commit was made in frameworks/support to commmit changes to docs-public/build.gradle")
 	print("Create commit for docs-public/build.gradle... Successful")
 
