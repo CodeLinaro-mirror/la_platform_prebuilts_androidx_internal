@@ -1,0 +1,151 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.room",
+    "module": "room-guava",
+    "version": "2.4.0-alpha01",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.8.1",
+      "buildId:": "7296226"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.4.0-alpha01"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.4.0-alpha01"
+          },
+          "excludes": [
+            {
+              "group": "com.google.guava",
+              "module": "listenablefuture"
+            }
+          ]
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.0.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "room-guava-2.4.0-alpha01.aar",
+          "url": "room-guava-2.4.0-alpha01.aar",
+          "size": 6200,
+          "sha512": "82aad69340a275572ec15d9041b72add0c1d2501cfbef9fcbcf124f17b551e116952d0cc858bb3d822a448a453dde3d0631b4b68d31ca1b1b9114054f329f43c",
+          "sha256": "d8766b1be8b3d23e884d606ecbd211f075c27b2f06e945eb9b8fe12fcc7aafc5",
+          "sha1": "ef297b9975f279aac48b21c29737c4748afd84e2",
+          "md5": "987faa44907ffcebcfa4610a6573b791"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.arch.core",
+          "module": "core-runtime",
+          "version": {
+            "requires": "2.0.1"
+          }
+        },
+        {
+          "group": "androidx.concurrent",
+          "module": "concurrent-futures",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.4.0-alpha01"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.4.0-alpha01"
+          },
+          "excludes": [
+            {
+              "group": "com.google.guava",
+              "module": "listenablefuture"
+            }
+          ]
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.0.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "room-guava-2.4.0-alpha01.aar",
+          "url": "room-guava-2.4.0-alpha01.aar",
+          "size": 6200,
+          "sha512": "82aad69340a275572ec15d9041b72add0c1d2501cfbef9fcbcf124f17b551e116952d0cc858bb3d822a448a453dde3d0631b4b68d31ca1b1b9114054f329f43c",
+          "sha256": "d8766b1be8b3d23e884d606ecbd211f075c27b2f06e945eb9b8fe12fcc7aafc5",
+          "sha1": "ef297b9975f279aac48b21c29737c4748afd84e2",
+          "md5": "987faa44907ffcebcfa4610a6573b791"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "room-guava-2.4.0-alpha01-sources.jar",
+          "url": "room-guava-2.4.0-alpha01-sources.jar",
+          "size": 2318,
+          "sha512": "ea237a44254696dc6b4801272eed75efb3423a0f7b6cf52cb68985391e87d1ea692827e6cddc3eb18643bb64d67cd98670aa789315c0ccefdde0ef1a879f3319",
+          "sha256": "a3039da852e20ee176fa16f157026c6664aac788206943e28d61a5523baab83f",
+          "sha1": "f4a1ac22b3999fbc255d6080bb7fa17a1cadf010",
+          "md5": "3c0127cff1092e7410435c8ac64157b5"
+        }
+      ]
+    }
+  ]
+}
