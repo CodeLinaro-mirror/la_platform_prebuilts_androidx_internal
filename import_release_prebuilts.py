@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 
-import os, sys, zipfile
-import argparse
-import subprocess
-from shutil import rmtree
+from collections import defaultdict
 from distutils.dir_util import copy_tree
+from shutil import rmtree
+import argparse
 import glob
+import os, sys, zipfile
+import subprocess
 
 # cd into directory of script
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -61,7 +62,7 @@ def fetch_artifact(target, build_id, artifact_path):
 	fetch_cmd = [FETCH_ARTIFACT, '--bid', str(build_id), '--target', target, artifact_path,
 				 download_to]
 	try:
-		subprocess.check_output(fetch_cmd, stderr=subprocess.STDOUT)
+		subprocess.check_call(fetch_cmd, stderr=subprocess.STDOUT)
 	except subprocess.CalledProcessError:
 		print_e('FAIL: Unable to retrieve %s artifact for build ID %s' % (artifact_path, build_id))
 		print_e('Please make sure you are authenticated for build server access!')
@@ -95,16 +96,24 @@ def get_group_id_sub_path(group_id):
 	"""
 	return group_id.replace("androidx.", "").replace(".", "/")
 
-def get_group_id_from_artifact_id(artifact_id):
-	# By convention, androidx namespace is declared as:
-	# androidx.${group_id}:${group_id}-${optionalArtifactIdSuffix}:${version}
-	# Here, artifact_id == "${group_id}-${optionalArtifactIdSuffix}"
-	return artifact_id.split('-')[0]
+def get_coordinates_from_artifact(artifact):
+	"""Get the group from an artifact
 
-def copy_and_merge_artifacts(repo_dir, dest_dir, group_ids, artifact_ids):
+	Artifacts will have the format: `<group_id>:<artifact_id>`
+
+	Args:
+		artifact: the artifact to obtain the group id for
+
+	Returns:
+		Tuple of (group_id, artifact_id)
+	"""
+	coordinates = artifact.split(':')
+	return coordinates[0], coordinates[1]
+
+def copy_and_merge_artifacts(repo_dir, dest_dir, group_ids, artifacts):
 	repo_androidx_path = get_repo_androidx_path(repo_dir)
 	if not repo_androidx_path: return None
-	if not group_ids and not artifact_ids:
+	if not group_ids and not artifacts:
 		return cp(repo_androidx_path, dest_dir)
 	if group_ids:
 		# Copy over group_ids that were specified on the command line
@@ -118,16 +127,16 @@ def copy_and_merge_artifacts(repo_dir, dest_dir, group_ids, artifact_ids):
 			if not cp(repo_group_path, dest_group_path):
 				print_e("Failed to find copy %s to %s" % (repo_group_path, dest_group_path))
 				return None
-	if artifact_ids:
+	if artifacts:
 		# Copy over artifact_ids that were specified on the command line
-		for artifact in artifact_ids:
-			# Get the group_id from the artifact_id (in AndroidX, the group_id must be based on the artifact_id)
-			artifact_group_id = get_group_id_from_artifact_id(artifact)
-			repo_artifact_path = os.path.join(repo_androidx_path, artifact_group_id, artifact)
+		for artifact in artifacts:
+			group_id, artifact_id = get_coordinates_from_artifact(artifact)
+			group_id_sub_path = get_group_id_sub_path(group_id)
+			repo_artifact_path = os.path.join(repo_androidx_path, group_id_sub_path, artifact_id)
 			if not os.path.exists(repo_artifact_path):
-				print_e("Failed to find artifact_id %s in the artifact zip file" % artifact)
+				print_e("Failed to find artifact %s in the artifact zip file" % artifact)
 				return None
-			dest_artifact_path = os.path.join(dest_dir, artifact_group_id, artifact)
+			dest_artifact_path = os.path.join(dest_dir, group_id_sub_path, artifact_id)
 			if not cp(repo_artifact_path, dest_artifact_path):
 				print_e("Failed to find copy %s to %s" % (repo_artifact_path, dest_artifact_path))
 				return None
@@ -147,7 +156,7 @@ def remove_type_aar_from_pom_files(repo_dir):
 		# Comment out <type>aar</type> in our pom files
 		# This is being done as a workaround for b/118385540
 		# TODO: Remove this method once https://github.com/gradle/gradle/issues/7594 is fixed
-		subprocess.check_output("find " + repo_dir + " -name *.pom | xargs sed 's|^      <type>aar</type>$|      <!--<type>aar</type>-->|' -i", shell=True)
+		subprocess.check_call("find " + repo_dir + " -name *.pom | xargs sed 's|^      <type>aar</type>$|      <!--<type>aar</type>-->|' -i", shell=True)
 	except subprocess.CalledProcessError:
 		print("failed!")
 		print_e("FAIL: Failed to remove <type>aar</type> from the pom files")
@@ -166,7 +175,7 @@ def remove_maven_metadata_files(repo_dir):
 	summary_log.append("Removed maven-metadata.xml* files from the import")
 	return True
 
-def update_new_artifacts(group_id_file_path, artifact_ver_map, group_id):
+def update_new_artifacts(group_id_file_path, artifact_ver_map, group_id, groups, artifacts, source):
 	# Finds each new library having group_id <group_id> under <group_id_file_path> and
 	#     updates <artifact_ver_map> with this new library
 	# Returns True iff at least one library was found
@@ -183,36 +192,42 @@ def update_new_artifacts(group_id_file_path, artifact_ver_map, group_id):
 				# first 2 directories for new group ids, whereas group ids can have more than
 				# 2 directories, such as androidx.compose.animation
 				real_group_id = ".".join(parent_file_path.strip('/').split('/')[:-1])
-				update_version_maps(artifact_ver_map, real_group_id, artifact_id, version)
+				update_version_maps(artifact_ver_map,
+									real_group_id,
+									artifact_id,
+									version,
+									groups,
+									artifacts,
+									source)
 				success = True
 	if not success:
 		print_e("Failed to find any artifact_ids in filepath: %s" % group_id_file_path)
 	return success
 
-def should_update_artifact(group_id, artifact_id):
+def should_update_artifact(group_id, artifact_id, groups, artifacts):
 	# If a artifact or group list was specified and if the artifact_id or group_id were NOT specified
 	# in either list on the command line, return false
 	should_update = False
-	if (args.groups) or (args.artifacts):
-		if args.groups:
-			if group_id.replace("androidx.", "") in args.groups:
+	if (groups) or (artifacts):
+		if groups:
+			if group_id.replace("androidx.", "") in groups:
 				should_update = True
-			if group_id in args.groups:
+			if group_id in groups:
 				should_update = True
-		if (args.artifacts) and (artifact_id in args.artifacts):
+		if artifacts and ("%s:%s" % (group_id, artifact_id) in artifacts):
 			should_update = True
 	else:
 		should_update = True
 	return should_update
 
-def update_version_maps(artifact_ver_map, group_id, artifact_id, version):
-	if should_update_artifact(group_id, artifact_id):
+def update_version_maps(artifact_ver_map, group_id, artifact_id, version, groups, artifacts, source):
+	if should_update_artifact(group_id, artifact_id, groups, artifacts):
 		if group_id + ":" + artifact_id not in artifact_ver_map:
 			artifact_ver_map[group_id + ":" + artifact_id] = version
 			summary_log.append("Prebuilts: %s:%s --> %s" % (group_id, artifact_id, version))
-			prebuilts_log.append("%s:%s:%s" % (group_id, artifact_id, version))
+			prebuilts_log.append("%s:%s:%s from %s" % (group_id, artifact_id, version, source))
 
-def get_updated_version_map():
+def get_updated_version_map(groups, artifacts, source):
 	try:
 		# Run git status --porcelain to get the names of the libraries that have changed
 		# (cut -c4- removes the change-type-character from git status output)
@@ -235,22 +250,53 @@ def get_updated_version_map():
 		if len(file_path_list) == 3:
 			group_id = ".".join(file_path_list[:-1])
 			# New library, so we need to check full directory tree to get version(s)
-			if update_new_artifacts(line.decode(), artifact_ver_map, group_id):
+			if update_new_artifacts(line.decode(), artifact_ver_map, group_id, groups, artifacts, source):
 				continue
 		if len(file_path_list) == 4:
 			group_id = ".".join(file_path_list[:-2])
 			# New library, so we need to check full directory tree to get version(s)
-			if update_new_artifacts(line.decode(), artifact_ver_map, group_id):
+			if update_new_artifacts(line.decode(), artifact_ver_map, group_id, groups, artifacts, source):
 				continue
 		version = file_path_list[-2]
-		update_version_maps(artifact_ver_map, group_id, artifact_id, version)
+		update_version_maps(artifact_ver_map, group_id, artifact_id, version, groups, artifacts, source)
 	return artifact_ver_map
+
+
+def should_update_docs(new_maven_coordinates):
+	"""Users heuristics to determine if new_maven_coordinates should have public docs
+
+	If no keyword is found, we ask the user.  These are
+	heuristic keywords that cover common artifacts that
+	contain no user-facing code or for exoplayer, is a
+	jar-jar'd artifact.
+
+	Args:
+		new_maven_coordinates: the coordinate to check for
+
+	Returns:
+		True for public docs, false for no public docs
+	"""
+	keywords_to_ignore = [
+		"extended",
+		"android-stubs",
+		"manifest",
+		"compiler",
+		"safe-args",
+		"processor",
+		"exoplayer",
+		"gradle",
+		"debug",
+	]
+	for keyword in keywords_to_ignore:
+		if keyword in new_maven_coordinates:
+			return False
+	return ask_yes_or_no(
+		"Should public docs be updated for new artifact %s?" % new_maven_coordinates)
+
 
 # Inserts new groupdId into docs-public/build.gradle
 def insert_new_artifact_into_dpbg(dpbg_lines, num_lines, new_maven_coordinates, artifact_ver_map):
-	should_update_docs = ask_yes_or_no(
-		"Should public docs be updated for new artifact %s?" % new_maven_coordinates)
-	if not should_update_docs:
+	if not should_update_docs(new_maven_coordinates):
 		return
 	new_group_id_insert_line = 0
 	for i in range(num_lines):
@@ -323,6 +369,33 @@ def get_higher_version(version_a, version_b):
 			return version_b
 	return version_a
 
+def find_invalidly_formatted_artifact(artifacts):
+	"""Validates that the artifacts are correctly written.
+
+	Artifacts need to be written as "<group_id>:<artifact_id>"
+	Valid: "androidx.core:core"
+	Valid: "androidx.foo.bar:bar"
+	Invalid: "foo"
+	Invalid: "foo:foo-bar"
+
+	Args:
+		artifacts: the list of artifacts to validate.
+
+	Returns:
+		artifactId that fails or None
+	"""
+	for artifact in artifacts:
+		if not artifact.startswith("androidx."):
+			return artifact
+		if artifact.count(":") != 1:
+			return artifact
+		coordinates = artifact.split(":")
+		for piece in coordinates:
+			if not piece.replace("androidx.", ""):
+				return artifact
+	return None
+
+
 def get_maven_coordinate_from_docs_public_build_gradle_line(line):
 	""" Gets the maven coordinate tuple from docs-public/build.grade
 
@@ -341,16 +414,29 @@ def get_maven_coordinate_from_docs_public_build_gradle_line(line):
 	version = coordinates[2]
 	return group_id, artifact_id, version
 
-def update_docs_public_build_gradle(artifact_ver_map):
+
+def generate_updated_docs_public_build_gradle(artifact_ver_map,
+											  build_gradle_file):
+	""" Creates an updated build_gradle_file lines.
+
+	Iterates over the provided build_gradle_file and constructs
+	the lines of an updated build.gradle with the new versions in the
+	artifact version map.
+
+	Does not write anything to disk.
+
+	Args:
+		artifact_ver_map: map of updated artifacts to their new versions.
+		build_gradle_file: docs-public/build.gradle to read and update.
+
+	Returns:
+		lines up for updated file to be written to disk.
+	"""
 	artifact_found = {}
 	for key in artifact_ver_map:
 		artifact_found[key] = False
-	# Get build the file path of PublicDocRules.kt - this isn't great, open to a better solution
-	if not os.path.exists(DOCS_PUBLIC_BUILD_GRADLE_FP):
-		print_e("docs-public build.gradle not in expected location. Looked at: %s" % DOCS_PUBLIC_BUILD_GRADLE_FP)
-		return None
 	# Open file for reading and get all lines
-	with open(DOCS_PUBLIC_BUILD_GRADLE_FP, 'r') as f:
+	with open(build_gradle_file, 'r') as f:
 		dpbg_lines = f.readlines()
 	num_lines = len(dpbg_lines)
 	for i in range(num_lines):
@@ -377,12 +463,22 @@ def update_docs_public_build_gradle(artifact_ver_map):
 	for artifact in artifact_found:
 		if not artifact_found[artifact]:
 			insert_new_artifact_into_dpbg(dpbg_lines, num_lines, artifact, artifact_ver_map)
+	return dpbg_lines
+
+
+def update_docs_public_build_gradle(artifact_ver_map, build_gradle_file=DOCS_PUBLIC_BUILD_GRADLE_FP):
+	# Get build the file path of PublicDocRules.kt - this isn't great, open to a better solution
+	if not os.path.exists(build_gradle_file):
+		print_e("docs-public build.gradle not in expected location. Looked at: %s" % build_gradle_file)
+		return None
+	dpbg_lines = generate_updated_docs_public_build_gradle(artifact_ver_map, build_gradle_file)
 	# Open file for writing and update all lines
-	with open(DOCS_PUBLIC_BUILD_GRADLE_FP, 'w') as f:
+	with open(build_gradle_file, 'w') as f:
 		f.writelines(dpbg_lines)
 	return True
 
-def update_androidx(target, build_id, local_file):
+def update_androidx(target, build_id, local_file, groups, artifacts, skip_public_docs):
+	repo_dir = None
 	try:
 		if build_id:
 			artifact_zip_file = 'top-of-tree-m2repository-all-%s.zip' % build_id
@@ -393,24 +489,26 @@ def update_androidx(target, build_id, local_file):
 			print_e('Failed to extract AndroidX repository')
 			return False
 		print("Download and extract artifacts... Successful")
-		if not copy_and_merge_artifacts(repo_dir, './androidx', args.groups, args.artifacts):
+		if not copy_and_merge_artifacts(repo_dir, './androidx', groups, artifacts):
 			print_e('Failed to copy and merge AndroidX repository')
 			return False
 		print("Copy and merge artifacts... Successful")
 		remove_type_aar_from_pom_files("androidx")
 		remove_maven_metadata_files("androidx")
 		# Now that we've merged new prebuilts, we need to update our version map
-		artifact_ver_map = get_updated_version_map()
-		if not args.skip_public_docs:
+		source = "ab/%s" % build_id if build_id else local_file
+		artifact_ver_map = get_updated_version_map(groups, artifacts, source)
+		if not skip_public_docs:
 			if not update_docs_public_build_gradle(artifact_ver_map):
 				print_e('Failed to update PublicDocRules.kt')
 				return False
 			print("Update docs-public/build.gradle... Successful")
 		return True
 	finally:
-		# Remove temp directories and temp files we've created 
-		rm(repo_dir)
-		rm('%s.zip' % repo_dir)
+		# Remove temp directories and temp files we've created
+		if repo_dir is not None:
+			rm(repo_dir)
+			rm('%s.zip' % repo_dir)
 		rm('.fetch_artifact2.dat')
 
 def print_change_summary():
@@ -419,33 +517,29 @@ def print_change_summary():
 		print(change)
 
 # Check if build ID exists and is a number
-def get_build_id(args):
-	source = args.source
-	number_text = source[:]
-	if not number_text.isnumeric():
+def get_build_id(source):
+	if not source: return None
+	if not source.isnumeric():
 		return None
-	args.file = False
 	return source
 
 # Check if file exists and is not a number
-def get_file(args):
-	source = args.source
+def get_file(source):
+	if not source: return None
 	if not source.isnumeric():
-		return args.source
+		return source
 	return None
 
-def commit_prebuilts():
+def commit_prebuilts(args):
 	subprocess.check_call(['git', 'add', './androidx'])
 	# ensure that we've actually made a change:
 	staged_changes = subprocess.check_output('git diff --cached', stderr=subprocess.STDOUT, shell=True)
 	if not staged_changes:
 		print_e("There are no prebuilts changes to commit!  Check build id.")
 		return False
-	if not args.source.isnumeric():
-		src_msg = "local Maven ZIP %s" % get_file(args)
-	else:
-		src_msg = "build %s" % (get_build_id(args))
-	msg = "Import prebuilts %s from %s\n\nThis commit was generated from the command:\n%s\n\n%s" % (", ".join(prebuilts_log), src_msg, " ".join(sys.argv), 'Test: ./gradlew buildOnServer')
+	msg = ("Import prebuilts for:\n\n- %s\n\n"
+		   "This commit was generated from the command:"
+		   "\n%s\n\n%s" % ("\n- ".join(prebuilts_log), " ".join(sys.argv), 'Test: ./gradlew buildOnServer'))
 	subprocess.check_call(['git', 'commit', '-m', msg])
 	summary_log.append("1 Commit was made in prebuilts/androidx/internal to commit prebuilts")
 	print("Create commit for prebuilts... Successful")
@@ -453,18 +547,65 @@ def commit_prebuilts():
 
 def commit_docs_public_build_gradle():
 	git_add_cmd =  "git %s add %s"  % (GIT_TREE_ARGS, DOCS_PUBLIC_BUILD_GRADLE_REL)
-	subprocess.check_output(git_add_cmd, stderr=subprocess.STDOUT, shell=True)
+	subprocess.check_call(git_add_cmd, stderr=subprocess.STDOUT, shell=True)
 	git_cached_cmd = "git %s diff --cached" % GIT_TREE_ARGS
 	staged_changes = subprocess.check_output(git_cached_cmd, stderr=subprocess.STDOUT, shell=True)
 	if not staged_changes:
 		summary_log.append("NO CHANGES were made to docs-public/build.gradle")
 		return False
-	pdr_msg = "Updated docs-public/build.gradle for %s \n\nThis commit was generated from the command:\n%s\n\n%s" % (", ".join(publish_docs_log), " ".join(sys.argv), 'Test: ./gradlew buildOnServer')
+	pdr_msg = ("Updated docs-public/build.gradle for the following artifacts:" + \
+			   "\n\n- %s \n\nThis commit was generated from the command:"
+			   "\n%s\n\n%s" % ("\n- ".join(publish_docs_log), " ".join(sys.argv), 'Test: ./gradlew buildOnServer'))
 	git_commit_cmd = "git %s commit -m \"%s\"" % (GIT_TREE_ARGS, pdr_msg)
-	subprocess.check_output(git_commit_cmd, stderr=subprocess.STDOUT, shell=True)
+	subprocess.check_call(git_commit_cmd, stderr=subprocess.STDOUT, shell=True)
 	summary_log.append("1 Commit was made in frameworks/support to commmit changes to docs-public/build.gradle")
 	print("Create commit for docs-public/build.gradle... Successful")
 
+
+def parse_long_form(long_form, source_to_artifact):
+	"""Parses the long form syntax into a list of source(buildIds) to artifacts
+
+	This method takes a string long_form of the syntax:
+	`<build id 1>/<group id>,<build id 2>/<group id>:<artifact id>`
+
+	It reads throught the string and parses the correct builds and artifacts/groups
+	into a map of build ID to groups and artifacts.
+
+	Args:
+		long_form: string to parse into a map of source to groups/artifacts
+		source_to_artifact: map of type defaultdict(lambda: defaultdict(list))
+
+	Returns:
+		source_to_artifact on success, None on failure
+	"""
+	if '/' not in long_form:
+		print_e("The long form syntax requires slashs to separate the build Id or source.")
+		return None
+	if '.' not in long_form:
+		print_e("The long form syntax needs to include the full groupId/artifactId.")
+		return None
+	if 'androidx' not in long_form:
+		print_e("The long form syntax needs to contain androidx.")
+		return None
+
+	import_items = long_form.split(',')
+
+	for item in import_items:
+		if item.count('/') != 1:
+			print_e("The long form syntax requires the format "
+					"<build Id>/<group Id> or <build Id>/<group Id>:<artifact Id>.")
+			return None
+		source = item.split('/')[0]
+		if not source:
+			print_e("The long form syntax requires a build Id or source to be "
+					"specified for every artifact.")
+			return None
+		artifact = item.split('/')[1]
+		if ':' in artifact:
+			source_to_artifact[source]['artifacts'].append(artifact)
+		else:
+			source_to_artifact[source]['groups'].append(artifact)
+	return source_to_artifact
 
 # Set up input arguments
 parser = argparse.ArgumentParser(
@@ -472,7 +613,7 @@ parser = argparse.ArgumentParser(
 		and if necessary, update docs-public/build.gradle.  By default, uses
 		top-of-tree-m2repository-all-<BUILDID>.zip to get artifacts."""))
 parser.add_argument(
-	'source',
+	'--source',
 	help='Build server build ID or local Maven ZIP file')
 parser.add_argument(
 	'--all-prebuilts', action="store_true",
@@ -489,35 +630,71 @@ parser.add_argument(
 parser.add_argument(
 	'--artifacts', metavar='artifact_id', nargs='+',
 	help="""If specified, only update libraries whose artifact_id contains the listed text.
-	For example, if you specify \"--artifacts core slice-view lifecycle-common\", then this
-	script will import specific artifacts \"androidx.core:core\", \"androidx.slice:slice-view\",
-	and \"androidx.lifecycle:lifecycle-common\"""")
+	For example, if you specify \"--artifacts androidx.core:core androidx.core:slice-view
+	androidx.lifecycle:lifecycle-common\", then this script will import specific artifacts
+	\"androidx.core:core\", \"androidx.slice:slice-view\", and
+	\"androidx.lifecycle:lifecycle-common\"""")
 parser.add_argument(
 	'--no-commit', action="store_true",
 	help='If specified, this script will not commit the changes')
+parser.add_argument(
+	'--long-form',
+	help=('If specified, the following argument must be a comma separated listed '
+		  'of all groups and artifact.  Groups are specified as '
+		  '`<build id>/<group id>` and artifacts are specified as '
+		  '`<build id>/<group id>:<artifact id>`.  The full format is: '
+		  '`<build id 1>/<group id>,,'
+		  '<build id 2>/<group id>:<artifact id>,...`'
+		 ))
 
-# Parse arguments and check for existence of build ID or file
-args = parser.parse_args()
-args.file = True
-if not args.source:
-	parser.error("You must specify a build ID or local Maven ZIP file")
-	sys.exit(1)
 
-# Force the user to explicity decide which set of prebuilts to import
-if args.all_prebuilts == False and args.groups == None and args.artifacts == None:
-	print_e("Need to pass an argument such as --all-prebuilts or pass in group_ids or artifact_ids")
-	print_e("Run `./import_release_prebuilts.py --help` for more info")
-	sys.exit(1)
+def main(args):
+	# Parse arguments and check for existence of build ID or file
+	args = parser.parse_args()
+	source_to_artifact = defaultdict(lambda: defaultdict(list))
 
-if not update_androidx('androidx', get_build_id(args), get_file(args)):
-	print_e('Failed to update AndroidX, aborting...')
-	sys.exit(1)
+	if args.long_form:
+		if not parse_long_form(args.long_form, source_to_artifact):
+			exit(1)
+	else:
+		if not args.source:
+			parser.error("You must specify a build ID or local Maven ZIP file")
+			sys.exit(1)
+		# Force the user to explicity decide which set of prebuilts to import
+		if args.all_prebuilts == False and args.groups == None and args.artifacts == None:
+			print_e("Need to pass an argument such as --all-prebuilts or pass in group_ids or artifact_ids")
+			print_e("Run `./import_release_prebuilts.py --help` for more info")
+			sys.exit(1)
+		source_to_artifact[args.source]['groups'] = args.groups
+		source_to_artifact[args.source]['artifacts'] = args.artifacts
 
-if args.no_commit:
-	summary_log.append("These changes were NOT committed.")
-else:
-	if not commit_prebuilts(): sys.exit(1)
-	commit_docs_public_build_gradle()
+	for source in source_to_artifact:
+		if source_to_artifact[source].get('artifacts'):
+			invalid_artifact = find_invalidly_formatted_artifact(
+				source_to_artifact[source].get('artifacts'))
+			if invalid_artifact:
+				print_e("The following artifact_id is malformed: ", invalid_artifact)
+				print_e("Please format artifacts as <group_id>:<artifact_id>, such "
+						"as: `androidx.foo.bar:bar`")
+				sys.exit(1)
 
-print_change_summary()
-print("Test and check these changes before uploading to Gerrit")
+		if not update_androidx('androidx',
+							   get_build_id(source),
+							   get_file(source),
+							   source_to_artifact[source].get('groups'),
+							   source_to_artifact[source].get('artifacts'),
+							   args.skip_public_docs):
+			print_e('Failed to update AndroidX, aborting...')
+			sys.exit(1)
+
+	if args.no_commit:
+		summary_log.append("These changes were NOT committed.")
+	else:
+		if not commit_prebuilts(args): sys.exit(1)
+		commit_docs_public_build_gradle()
+
+	print_change_summary()
+	print("Test and check these changes before uploading to Gerrit")
+
+if __name__ == '__main__':
+    main(sys.argv)
