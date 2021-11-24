@@ -280,6 +280,8 @@ class TestDocsUpdate(unittest.TestCase):
             "androidx.room:room-compiler-processing-testing"))
         self.assertFalse(should_update_docs(
             "androidx.versionedparcelable:versionedparcelable-compiler"))
+        self.assertFalse(should_update_docs(
+            "androidx.compose.animation:animation-tooling-internal"))
 
     def test_should_update_docs_returns_true(self):
         with unittest.mock.patch('builtins.input', return_value="yes"):
