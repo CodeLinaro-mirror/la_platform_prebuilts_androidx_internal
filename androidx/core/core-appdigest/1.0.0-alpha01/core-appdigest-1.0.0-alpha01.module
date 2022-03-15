@@ -10,12 +10,12 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "7.0"
+      "version": "7.2"
     }
   },
   "variants": [
     {
-      "name": "releaseApiPublication",
+      "name": "releaseVariantReleaseApiPublication",
       "attributes": {
         "org.gradle.category": "library",
         "org.gradle.dependency.bundling": "external",
@@ -29,29 +29,22 @@
           "version": {
             "requires": "1.0.0"
           }
-        },
-        {
-          "group": "androidx.core",
-          "module": "core",
-          "version": {
-            "requires": "1.0.0"
-          }
         }
       ],
       "files": [
         {
           "name": "core-appdigest-1.0.0-alpha01.aar",
           "url": "core-appdigest-1.0.0-alpha01.aar",
-          "size": 15015,
-          "sha512": "fc2c25596910c58f54ac7b5b9935ce85d34f004e6fc0939148309e47e5a376bd194cf7a00939e895e1bcdfeb716fca01d79e182437df662f3f55c92e98ba79cf",
-          "sha256": "e63c82729ebfb65d27936e756ba309024228474935f26b7351a9528d9ce3c706",
-          "sha1": "623e984a806ba16bd5760dbd3f8455a4224fe650",
-          "md5": "887244311cc5ddd6563254da14d89214"
+          "size": 23771,
+          "sha512": "d4fcdfbcb6bbd8b1ee83a05b3288a52e1d4ba0aacc5905a830c61db957ee471e71b2d02f0b77719a66e9581a5b8b5796fec92359095d35aa7669b5ee0f404722",
+          "sha256": "e46082b7c6e6243d3bb37a03f14be884e0ac319445ba68c6e2f160852462ccf6",
+          "sha1": "a62ddf9489a73433de29c535285fc697f27cfc97",
+          "md5": "95967ac6fd676855652cd07baf26e172"
         }
       ]
     },
     {
-      "name": "releaseRuntimePublication",
+      "name": "releaseVariantReleaseRuntimePublication",
       "attributes": {
         "org.gradle.category": "library",
         "org.gradle.dependency.bundling": "external",
@@ -60,6 +53,13 @@
       },
       "dependencies": [
         {
+          "group": "androidx.core",
+          "module": "core",
+          "version": {
+            "requires": "1.7.0-rc01"
+          }
+        },
+        {
           "group": "androidx.concurrent",
           "module": "concurrent-futures",
           "version": {
@@ -67,15 +67,22 @@
           }
         },
         {
-          "group": "androidx.annotation",
-          "module": "annotation",
+          "group": "org.bouncycastle",
+          "module": "bcprov-jdk15on",
           "version": {
-            "requires": "1.0.0"
+            "requires": "1.65"
           }
         },
         {
-          "group": "androidx.core",
-          "module": "core",
+          "group": "org.bouncycastle",
+          "module": "bcpkix-jdk15on",
+          "version": {
+            "requires": "1.56"
+          }
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
           "version": {
             "requires": "1.0.0"
           }
@@ -85,11 +92,11 @@
         {
           "name": "core-appdigest-1.0.0-alpha01.aar",
           "url": "core-appdigest-1.0.0-alpha01.aar",
-          "size": 15015,
-          "sha512": "fc2c25596910c58f54ac7b5b9935ce85d34f004e6fc0939148309e47e5a376bd194cf7a00939e895e1bcdfeb716fca01d79e182437df662f3f55c92e98ba79cf",
-          "sha256": "e63c82729ebfb65d27936e756ba309024228474935f26b7351a9528d9ce3c706",
-          "sha1": "623e984a806ba16bd5760dbd3f8455a4224fe650",
-          "md5": "887244311cc5ddd6563254da14d89214"
+          "size": 23771,
+          "sha512": "d4fcdfbcb6bbd8b1ee83a05b3288a52e1d4ba0aacc5905a830c61db957ee471e71b2d02f0b77719a66e9581a5b8b5796fec92359095d35aa7669b5ee0f404722",
+          "sha256": "e46082b7c6e6243d3bb37a03f14be884e0ac319445ba68c6e2f160852462ccf6",
+          "sha1": "a62ddf9489a73433de29c535285fc697f27cfc97",
+          "md5": "95967ac6fd676855652cd07baf26e172"
         }
       ]
     },
@@ -105,11 +112,11 @@
         {
           "name": "core-appdigest-1.0.0-alpha01-sources.jar",
           "url": "core-appdigest-1.0.0-alpha01-sources.jar",
-          "size": 9690,
-          "sha512": "ac53cebb81f1feb51dc35234a409eb37302a7e7faf698ecfcd8943e6ba4425d6b5e80c7af24ba627c77ea7ff84eae1c033386f5a6ccd2e0101102fb22431048b",
-          "sha256": "d3259d0479864303aaff41a42d09cf38bc21c8f8642a6e34d483e8f292168a67",
-          "sha1": "52edf34957a79f1238f71d72e15d13af17c98b13",
-          "md5": "2484eda0ae8d41cd91ad956617fbbc18"
+          "size": 14005,
+          "sha512": "f247bf1cdb579b0865d7b69611395311b66f558307faa4ffb3e4ce0af634f00adfff3c2f9b9635a9fe20233d14fff73501e20bf88a7dc0f8df4b2e49f120bd90",
+          "sha256": "b69c062a07e50213a6d563c7dd235f3240fc5cabc8d326481bf52b8cff812bfc",
+          "sha1": "5a26f5817b0b2b768cc76efbdc2ce0067271bda1",
+          "md5": "38a868f7f42aaaf742b0f24d301a802d"
         }
       ]
     }
