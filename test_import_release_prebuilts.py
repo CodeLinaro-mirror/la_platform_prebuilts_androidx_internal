@@ -78,6 +78,27 @@ class TestArtifactVerification(unittest.TestCase):
         self.assertEqual("androidx.foo.bar", group_id)
         self.assertEqual("bar-qux", artifact_id)
 
+    def test_get_sample_coordinates_from_artifact(self):
+        group_id, artifact_id = get_sample_coordinates_from_artifact(
+            "androidx.foo:foo")
+        self.assertEqual("androidx.foo", group_id)
+        self.assertEqual("foo-samples", artifact_id)
+
+        group_id, artifact_id = get_sample_coordinates_from_artifact(
+            "androidx.foo.bar:bar")
+        self.assertEqual("androidx.foo.bar", group_id)
+        self.assertEqual("bar-samples", artifact_id)
+
+        group_id, artifact_id = get_sample_coordinates_from_artifact(
+            "androidx.foo:foo-bar")
+        self.assertEqual("androidx.foo", group_id)
+        self.assertEqual("foo-bar-samples", artifact_id)
+
+        group_id, artifact_id = get_sample_coordinates_from_artifact(
+            "androidx.foo.bar:bar-qux")
+        self.assertEqual("androidx.foo.bar", group_id)
+        self.assertEqual("bar-qux-samples", artifact_id)
+
 
 class TestVersionUpdates(unittest.TestCase):
 
@@ -280,6 +301,8 @@ class TestDocsUpdate(unittest.TestCase):
             "androidx.room:room-compiler-processing-testing"))
         self.assertFalse(should_update_docs(
             "androidx.versionedparcelable:versionedparcelable-compiler"))
+        self.assertFalse(should_update_docs(
+            "androidx.compose.animation:animation-tooling-internal"))
 
     def test_should_update_docs_returns_true(self):
         with unittest.mock.patch('builtins.input', return_value="yes"):
