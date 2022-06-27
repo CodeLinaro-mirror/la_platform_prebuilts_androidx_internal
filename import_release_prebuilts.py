@@ -271,7 +271,7 @@ def get_updated_version_map(groups, artifacts, source):
 	diff = iter(gitdiff_ouput.splitlines())
 	for line in diff:
 		file_path_list = line.decode().split('/')
-		if len(file_path_list) < 3 or file_path_list[-1] != "":
+		if len(file_path_list) < 3:
 			continue
 		group_id = ".".join(file_path_list[:-3])
 		artifact_id = file_path_list[-3]
