@@ -303,6 +303,10 @@ class TestDocsUpdate(unittest.TestCase):
             "androidx.versionedparcelable:versionedparcelable-compiler"))
         self.assertFalse(should_update_docs(
             "androidx.compose.animation:animation-tooling-internal"))
+        self.assertFalse(should_update_docs(
+            "androidx.collection:collection-jvm"))
+        self.assertFalse(should_update_docs(
+            "androidx.datastore:datastore-jvm"))
 
     def test_should_update_docs_returns_true(self):
         with unittest.mock.patch('builtins.input', return_value="yes"):
@@ -314,6 +318,9 @@ class TestDocsUpdate(unittest.TestCase):
         with unittest.mock.patch('builtins.input', return_value="yes"):
             self.assertTrue(should_update_docs(
                 "androidx.collection:collection"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.datstore:datstore"))
         with unittest.mock.patch('builtins.input', return_value="yes"):
             self.assertTrue(should_update_docs(
                 "androidx.compose:material:material:material-samples"))
