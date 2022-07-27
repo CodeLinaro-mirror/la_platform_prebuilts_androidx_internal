@@ -307,6 +307,12 @@ class TestDocsUpdate(unittest.TestCase):
             "androidx.collection:collection-jvm"))
         self.assertFalse(should_update_docs(
             "androidx.datastore:datastore-jvm"))
+        self.assertFalse(should_update_docs(
+            "androidx.camera:camera-camera2-pipe"))
+        self.assertFalse(should_update_docs(
+            "androidx.camera:camera-camera2-pipe-integration"))
+        self.assertFalse(should_update_docs(
+            "androidx.camera:camera-camera2-pipe-testing"))
 
     def test_should_update_docs_returns_true(self):
         with unittest.mock.patch('builtins.input', return_value="yes"):
@@ -348,6 +354,12 @@ class TestDocsUpdate(unittest.TestCase):
         with unittest.mock.patch('builtins.input', return_value="yes"):
             self.assertTrue(should_update_docs(
                 "androidx.remotecallback:remotecallback"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.camera:camera-camera2"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.camera:camera-view"))
 
 if __name__ == '__main__':
     unittest.main()
