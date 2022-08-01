@@ -62,7 +62,7 @@ def fetch_artifact(target, build_id, artifact_path):
 	fetch_cmd = [FETCH_ARTIFACT, '--bid', str(build_id), '--target', target, artifact_path,
 				 download_to]
 	try:
-		subprocess.check_output(fetch_cmd, stderr=subprocess.STDOUT)
+		subprocess.check_call(fetch_cmd, stderr=subprocess.STDOUT)
 	except subprocess.CalledProcessError:
 		print_e('FAIL: Unable to retrieve %s artifact for build ID %s' % (artifact_path, build_id))
 		print_e('Please make sure you are authenticated for build server access!')
@@ -97,18 +97,34 @@ def get_group_id_sub_path(group_id):
 	return group_id.replace("androidx.", "").replace(".", "/")
 
 def get_coordinates_from_artifact(artifact):
-	"""Get the group from an artifact
+	"""Get the individual maven coordinates from an artifact
 
 	Artifacts will have the format: `<group_id>:<artifact_id>`
 
 	Args:
-		artifact: the artifact to obtain the group id for
+		artifact: the artifact to obtain the coorindates for
 
 	Returns:
 		Tuple of (group_id, artifact_id)
 	"""
 	coordinates = artifact.split(':')
 	return coordinates[0], coordinates[1]
+
+def get_sample_coordinates_from_artifact(artifact):
+	"""Get the individual maven coordinates from an artifact
+
+	Artifacts will have the format: `<group_id>:<artifact_id>`
+
+	Most samples will live at `<group_id>:<artifact_id>-samples`
+
+	Args:
+		artifact: the artifact to obtain the sample coorindates for
+
+	Returns:
+		Tuple of (group_id, artifact_id)
+	"""
+	coordinates = artifact.split(':')
+	return coordinates[0], coordinates[1] + "-samples"
 
 def copy_and_merge_artifacts(repo_dir, dest_dir, group_ids, artifacts):
 	repo_androidx_path = get_repo_androidx_path(repo_dir)
@@ -128,6 +144,7 @@ def copy_and_merge_artifacts(repo_dir, dest_dir, group_ids, artifacts):
 				print_e("Failed to find copy %s to %s" % (repo_group_path, dest_group_path))
 				return None
 	if artifacts:
+		artifact_samples_found = []
 		# Copy over artifact_ids that were specified on the command line
 		for artifact in artifacts:
 			group_id, artifact_id = get_coordinates_from_artifact(artifact)
@@ -140,6 +157,20 @@ def copy_and_merge_artifacts(repo_dir, dest_dir, group_ids, artifacts):
 			if not cp(repo_artifact_path, dest_artifact_path):
 				print_e("Failed to find copy %s to %s" % (repo_artifact_path, dest_artifact_path))
 				return None
+			# Attempt to find a cooresponding samples project and copy it as well.
+			# This only needs to be done for artifacts because the samples artifact
+			# is implicitly included when we import whole groups.
+			group_id, artifact_samples_id = get_sample_coordinates_from_artifact(artifact)
+			repo_artifact_samples_path = os.path.join(repo_androidx_path, group_id_sub_path, artifact_samples_id)
+			if os.path.exists(repo_artifact_samples_path):
+				dest_artifact_path = os.path.join(dest_dir, group_id_sub_path, artifact_samples_id)
+				if not cp(repo_artifact_samples_path, dest_artifact_path):
+					print_e("Failed to find copy %s to %s" % (repo_artifact_samples_path, dest_artifact_path))
+					return None
+				artifact_samples_found.append("%s:%s" % (group_id, artifact_samples_id))
+		# Finally update our list of artifacts we have updated.  This ensures
+		# that the script prints an accurate list of updated artifacts.
+		artifacts.extend(artifact_samples_found)
 	return dest_dir
 
 def fetch_and_extract(target, build_id, file, artifact_path=None):
@@ -156,7 +187,7 @@ def remove_type_aar_from_pom_files(repo_dir):
 		# Comment out <type>aar</type> in our pom files
 		# This is being done as a workaround for b/118385540
 		# TODO: Remove this method once https://github.com/gradle/gradle/issues/7594 is fixed
-		subprocess.check_output("find " + repo_dir + " -name *.pom | xargs sed 's|^      <type>aar</type>$|      <!--<type>aar</type>-->|' -i", shell=True)
+		subprocess.check_call("find " + repo_dir + " -name *.pom | xargs sed 's|^      <type>aar</type>$|      <!--<type>aar</type>-->|' -i", shell=True)
 	except subprocess.CalledProcessError:
 		print("failed!")
 		print_e("FAIL: Failed to remove <type>aar</type> from the pom files")
@@ -240,7 +271,7 @@ def get_updated_version_map(groups, artifacts, source):
 	diff = iter(gitdiff_ouput.splitlines())
 	for line in diff:
 		file_path_list = line.decode().split('/')
-		if len(file_path_list) < 3 or file_path_list[-1] != "":
+		if len(file_path_list) < 3:
 			continue
 		group_id = ".".join(file_path_list[:-3])
 		artifact_id = file_path_list[-3]
@@ -261,17 +292,51 @@ def get_updated_version_map(groups, artifacts, source):
 		update_version_maps(artifact_ver_map, group_id, artifact_id, version, groups, artifacts, source)
 	return artifact_ver_map
 
+
+def should_update_docs(new_maven_coordinates):
+	"""Users heuristics to determine if new_maven_coordinates should have public docs
+
+	If no keyword is found, we ask the user.  These are
+	heuristic keywords that cover common artifacts that
+	contain no user-facing code or for exoplayer, is a
+	jar-jar'd artifact.
+
+	Args:
+		new_maven_coordinates: the coordinate to check for
+
+	Returns:
+		True for public docs, false for no public docs
+	"""
+	keywords_to_ignore = [
+		"extended",
+		"android-stubs",
+		"manifest",
+		"compiler",
+		"safe-args",
+		"processor",
+		"exoplayer",
+		"gradle",
+		"debug",
+		"internal",
+		"jvm",
+		"pipe",
+	]
+	for keyword in keywords_to_ignore:
+		if keyword in new_maven_coordinates:
+			return False
+	return ask_yes_or_no(
+		"Should public docs be updated for new artifact %s?" % new_maven_coordinates)
+
+
 # Inserts new groupdId into docs-public/build.gradle
 def insert_new_artifact_into_dpbg(dpbg_lines, num_lines, new_maven_coordinates, artifact_ver_map):
-	should_update_docs = ask_yes_or_no(
-		"Should public docs be updated for new artifact %s?" % new_maven_coordinates)
-	if not should_update_docs:
+	if not should_update_docs(new_maven_coordinates):
 		return
 	new_group_id_insert_line = 0
 	for i in range(num_lines):
 		cur_line = dpbg_lines[i]
 		# Skip any line that doesn't declare a version
-		if 'androidx.' not in cur_line: continue
+		if 'androidx.' not in cur_line or 'namespace' in cur_line: continue
 		group_id, artifact_id, outdated_ver = get_maven_coordinate_from_docs_public_build_gradle_line(cur_line)
 		# Iterate through until you found the alphabetical place to insert the new artifact
 		if new_maven_coordinates <= group_id + ":" + artifact_id:
@@ -410,8 +475,8 @@ def generate_updated_docs_public_build_gradle(artifact_ver_map,
 	num_lines = len(dpbg_lines)
 	for i in range(num_lines):
 		cur_line = dpbg_lines[i]
-		# Skip any line that doesn't declare a version
-		if 'androidx.' not in cur_line: continue
+		# Skip any line that doesn't declare a version or skip a line that defines the namespace
+		if 'androidx.' not in cur_line or 'namespace' in cur_line : continue
 		group_id, artifact_id, outdated_ver = get_maven_coordinate_from_docs_public_build_gradle_line(cur_line)
 		ver_index = cur_line.find(outdated_ver)
 		artifact_coordinate = group_id + ":" + artifact_id
@@ -447,6 +512,7 @@ def update_docs_public_build_gradle(artifact_ver_map, build_gradle_file=DOCS_PUB
 	return True
 
 def update_androidx(target, build_id, local_file, groups, artifacts, skip_public_docs):
+	repo_dir = None
 	try:
 		if build_id:
 			artifact_zip_file = 'top-of-tree-m2repository-all-%s.zip' % build_id
@@ -473,9 +539,10 @@ def update_androidx(target, build_id, local_file, groups, artifacts, skip_public
 			print("Update docs-public/build.gradle... Successful")
 		return True
 	finally:
-		# Remove temp directories and temp files we've created 
-		rm(repo_dir)
-		rm('%s.zip' % repo_dir)
+		# Remove temp directories and temp files we've created
+		if repo_dir is not None:
+			rm(repo_dir)
+			rm('%s.zip' % repo_dir)
 		rm('.fetch_artifact2.dat')
 
 def print_change_summary():
@@ -514,7 +581,7 @@ def commit_prebuilts(args):
 
 def commit_docs_public_build_gradle():
 	git_add_cmd =  "git %s add %s"  % (GIT_TREE_ARGS, DOCS_PUBLIC_BUILD_GRADLE_REL)
-	subprocess.check_output(git_add_cmd, stderr=subprocess.STDOUT, shell=True)
+	subprocess.check_call(git_add_cmd, stderr=subprocess.STDOUT, shell=True)
 	git_cached_cmd = "git %s diff --cached" % GIT_TREE_ARGS
 	staged_changes = subprocess.check_output(git_cached_cmd, stderr=subprocess.STDOUT, shell=True)
 	if not staged_changes:
@@ -524,7 +591,7 @@ def commit_docs_public_build_gradle():
 			   "\n\n- %s \n\nThis commit was generated from the command:"
 			   "\n%s\n\n%s" % ("\n- ".join(publish_docs_log), " ".join(sys.argv), 'Test: ./gradlew buildOnServer'))
 	git_commit_cmd = "git %s commit -m \"%s\"" % (GIT_TREE_ARGS, pdr_msg)
-	subprocess.check_output(git_commit_cmd, stderr=subprocess.STDOUT, shell=True)
+	subprocess.check_call(git_commit_cmd, stderr=subprocess.STDOUT, shell=True)
 	summary_log.append("1 Commit was made in frameworks/support to commmit changes to docs-public/build.gradle")
 	print("Create commit for docs-public/build.gradle... Successful")
 
