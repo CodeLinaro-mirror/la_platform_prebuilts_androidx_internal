@@ -271,7 +271,7 @@ def get_updated_version_map(groups, artifacts, source):
 	diff = iter(gitdiff_ouput.splitlines())
 	for line in diff:
 		file_path_list = line.decode().split('/')
-		if len(file_path_list) < 3 or file_path_list[-1] != "":
+		if len(file_path_list) < 3:
 			continue
 		group_id = ".".join(file_path_list[:-3])
 		artifact_id = file_path_list[-3]
@@ -318,6 +318,8 @@ def should_update_docs(new_maven_coordinates):
 		"gradle",
 		"debug",
 		"internal",
+		"jvm",
+		"pipe",
 	]
 	for keyword in keywords_to_ignore:
 		if keyword in new_maven_coordinates:
@@ -334,7 +336,7 @@ def insert_new_artifact_into_dpbg(dpbg_lines, num_lines, new_maven_coordinates, 
 	for i in range(num_lines):
 		cur_line = dpbg_lines[i]
 		# Skip any line that doesn't declare a version
-		if 'androidx.' not in cur_line: continue
+		if 'androidx.' not in cur_line or 'namespace' in cur_line: continue
 		group_id, artifact_id, outdated_ver = get_maven_coordinate_from_docs_public_build_gradle_line(cur_line)
 		# Iterate through until you found the alphabetical place to insert the new artifact
 		if new_maven_coordinates <= group_id + ":" + artifact_id:
@@ -473,8 +475,8 @@ def generate_updated_docs_public_build_gradle(artifact_ver_map,
 	num_lines = len(dpbg_lines)
 	for i in range(num_lines):
 		cur_line = dpbg_lines[i]
-		# Skip any line that doesn't declare a version
-		if 'androidx.' not in cur_line: continue
+		# Skip any line that doesn't declare a version or skip a line that defines the namespace
+		if 'androidx.' not in cur_line or 'namespace' in cur_line : continue
 		group_id, artifact_id, outdated_ver = get_maven_coordinate_from_docs_public_build_gradle_line(cur_line)
 		ver_index = cur_line.find(outdated_ver)
 		artifact_coordinate = group_id + ":" + artifact_id
