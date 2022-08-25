@@ -320,6 +320,7 @@ def should_update_docs(new_maven_coordinates):
 		"internal",
 		"jvm",
 		"pipe",
+		"binary",
 	]
 	for keyword in keywords_to_ignore:
 		if keyword in new_maven_coordinates:
