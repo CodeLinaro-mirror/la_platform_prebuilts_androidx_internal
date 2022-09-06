@@ -313,6 +313,8 @@ class TestDocsUpdate(unittest.TestCase):
             "androidx.camera:camera-camera2-pipe-integration"))
         self.assertFalse(should_update_docs(
             "androidx.camera:camera-camera2-pipe-testing"))
+        self.assertFalse(should_update_docs(
+            "androidx.tracing:tracing-perfetto-binary"))
 
     def test_should_update_docs_returns_true(self):
         with unittest.mock.patch('builtins.input', return_value="yes"):
