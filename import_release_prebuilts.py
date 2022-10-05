@@ -486,6 +486,8 @@ def generate_updated_docs_public_build_gradle(artifact_ver_map,
 			artifact_found[artifact_coordinate] = True
 			# Skip version updates that would decrement to a smaller version
 			if outdated_ver == get_higher_version(outdated_ver, artifact_ver_map[artifact_coordinate]): continue
+			# Skip updating -dev versions in public docs
+			if "-dev" in artifact_ver_map[artifact_coordinate] :continue
 			# Update version of artifact_id
 			if artifact_ver_map[artifact_coordinate] != outdated_ver:
 				dpbg_lines[i] = cur_line[:ver_index] \
@@ -535,7 +537,7 @@ def update_androidx(target, build_id, local_file, groups, artifacts, skip_public
 		artifact_ver_map = get_updated_version_map(groups, artifacts, source)
 		if not skip_public_docs:
 			if not update_docs_public_build_gradle(artifact_ver_map):
-				print_e('Failed to update PublicDocRules.kt')
+				print_e('Failed to update docs-public/build.gradle')
 				return False
 			print("Update docs-public/build.gradle... Successful")
 		return True
