@@ -78,6 +78,27 @@ class TestArtifactVerification(unittest.TestCase):
         self.assertEqual("androidx.foo.bar", group_id)
         self.assertEqual("bar-qux", artifact_id)
 
+    def test_get_sample_coordinates_from_artifact(self):
+        group_id, artifact_id = get_sample_coordinates_from_artifact(
+            "androidx.foo:foo")
+        self.assertEqual("androidx.foo", group_id)
+        self.assertEqual("foo-samples", artifact_id)
+
+        group_id, artifact_id = get_sample_coordinates_from_artifact(
+            "androidx.foo.bar:bar")
+        self.assertEqual("androidx.foo.bar", group_id)
+        self.assertEqual("bar-samples", artifact_id)
+
+        group_id, artifact_id = get_sample_coordinates_from_artifact(
+            "androidx.foo:foo-bar")
+        self.assertEqual("androidx.foo", group_id)
+        self.assertEqual("foo-bar-samples", artifact_id)
+
+        group_id, artifact_id = get_sample_coordinates_from_artifact(
+            "androidx.foo.bar:bar-qux")
+        self.assertEqual("androidx.foo.bar", group_id)
+        self.assertEqual("bar-qux-samples", artifact_id)
+
 
 class TestVersionUpdates(unittest.TestCase):
 
@@ -282,6 +303,18 @@ class TestDocsUpdate(unittest.TestCase):
             "androidx.versionedparcelable:versionedparcelable-compiler"))
         self.assertFalse(should_update_docs(
             "androidx.compose.animation:animation-tooling-internal"))
+        self.assertFalse(should_update_docs(
+            "androidx.collection:collection-jvm"))
+        self.assertFalse(should_update_docs(
+            "androidx.datastore:datastore-jvm"))
+        self.assertFalse(should_update_docs(
+            "androidx.camera:camera-camera2-pipe"))
+        self.assertFalse(should_update_docs(
+            "androidx.camera:camera-camera2-pipe-integration"))
+        self.assertFalse(should_update_docs(
+            "androidx.camera:camera-camera2-pipe-testing"))
+        self.assertFalse(should_update_docs(
+            "androidx.tracing:tracing-perfetto-binary"))
 
     def test_should_update_docs_returns_true(self):
         with unittest.mock.patch('builtins.input', return_value="yes"):
@@ -293,6 +326,9 @@ class TestDocsUpdate(unittest.TestCase):
         with unittest.mock.patch('builtins.input', return_value="yes"):
             self.assertTrue(should_update_docs(
                 "androidx.collection:collection"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.datstore:datstore"))
         with unittest.mock.patch('builtins.input', return_value="yes"):
             self.assertTrue(should_update_docs(
                 "androidx.compose:material:material:material-samples"))
@@ -320,6 +356,12 @@ class TestDocsUpdate(unittest.TestCase):
         with unittest.mock.patch('builtins.input', return_value="yes"):
             self.assertTrue(should_update_docs(
                 "androidx.remotecallback:remotecallback"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.camera:camera-camera2"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.camera:camera-view"))
 
 if __name__ == '__main__':
     unittest.main()
