@@ -1,0 +1,150 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.room",
+    "module": "room-guava",
+    "version": "2.5.0-rc01",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.5"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.5.0-rc01"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.5.0-rc01"
+          },
+          "excludes": [
+            {
+              "group": "com.google.guava",
+              "module": "listenablefuture"
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "name": "room-guava-2.5.0-rc01.aar",
+          "url": "room-guava-2.5.0-rc01.aar",
+          "size": 6909,
+          "sha512": "b2139bdcf8d93ea1ce69e07f50f4b7a986382ccf85c98828968a728442f6d71f085a9391cb242ef6d925ea8e05aaa1292e613238ad603441a1db1fbced7d646b",
+          "sha256": "12b82262caef7b7286a277f8be964f9490529b044ec9533315427920970d299d",
+          "sha1": "9b2110c27f258f4d7f3ca416d4a09e6d0bab983b",
+          "md5": "f087236cb84038fbe0feb8477f4c3785"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.arch.core",
+          "module": "core-runtime",
+          "version": {
+            "requires": "2.0.1"
+          }
+        },
+        {
+          "group": "androidx.concurrent",
+          "module": "concurrent-futures",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.5.0-rc01"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.5.0-rc01"
+          },
+          "excludes": [
+            {
+              "group": "com.google.guava",
+              "module": "listenablefuture"
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "name": "room-guava-2.5.0-rc01.aar",
+          "url": "room-guava-2.5.0-rc01.aar",
+          "size": 6909,
+          "sha512": "b2139bdcf8d93ea1ce69e07f50f4b7a986382ccf85c98828968a728442f6d71f085a9391cb242ef6d925ea8e05aaa1292e613238ad603441a1db1fbced7d646b",
+          "sha256": "12b82262caef7b7286a277f8be964f9490529b044ec9533315427920970d299d",
+          "sha1": "9b2110c27f258f4d7f3ca416d4a09e6d0bab983b",
+          "md5": "f087236cb84038fbe0feb8477f4c3785"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "room-guava-2.5.0-rc01-sources.jar",
+          "url": "room-guava-2.5.0-rc01-sources.jar",
+          "size": 2362,
+          "sha512": "9aba5cabb9c3b225d02e83fa95580a85cea01669543d4270e5889424493e08f31f929fd1606677c01faf55ab4218836329319afcc3de2ffc823f171b8e85cbca",
+          "sha256": "158d4cdfa7e990720f10633f32ae0d43478a7af4008d49554c8a2b81883a731d",
+          "sha1": "4cb73006e500fbea67ef95ee4a03b97eef62f295",
+          "md5": "aeef46739353f9103f9245e02cff72c3"
+        }
+      ]
+    }
+  ]
+}
