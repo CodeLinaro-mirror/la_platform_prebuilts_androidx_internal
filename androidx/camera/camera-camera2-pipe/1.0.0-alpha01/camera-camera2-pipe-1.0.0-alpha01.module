@@ -10,12 +10,13 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "7.6"
+      "version": "6.8.1",
+      "buildId:": "7277888"
     }
   },
   "variants": [
     {
-      "name": "releaseVariantReleaseApiPublication",
+      "name": "releaseApiPublication",
       "attributes": {
         "org.gradle.category": "library",
         "org.gradle.dependency.bundling": "external",
@@ -27,14 +28,21 @@
           "group": "androidx.annotation",
           "module": "annotation",
           "version": {
-            "requires": "1.2.0"
+            "requires": "1.0.0"
           }
         },
         {
           "group": "org.jetbrains.kotlin",
           "module": "kotlin-stdlib",
           "version": {
-            "requires": "1.7.21"
+            "requires": "1.4.32"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-android",
+          "version": {
+            "requires": "1.4.3"
           }
         },
         {
@@ -43,29 +51,22 @@
           "version": {
             "requires": "0.13.1"
           }
-        },
-        {
-          "group": "org.jetbrains.kotlinx",
-          "module": "kotlinx-coroutines-android",
-          "version": {
-            "requires": "1.6.4"
-          }
         }
       ],
       "files": [
         {
           "name": "camera-camera2-pipe-1.0.0-alpha01.aar",
           "url": "camera-camera2-pipe-1.0.0-alpha01.aar",
-          "size": 597639,
-          "sha512": "56739dbfb2cee8236ad0b9502f723d9af197701cd48ce21974af26d4084f167c42d10ba31ea5022685afa2cf47f7b0573ba262c336d9f88e70fac676e472c8e2",
-          "sha256": "ea7a530ca22351db745d14b1be27433bd25c6fbdea0db9564e87c09a69284176",
-          "sha1": "ea95b9983a327c3cd352e6a5c5c4571ab514cf3e",
-          "md5": "45f24c1d87544f89f0d0814b84ac14cf"
+          "size": 480205,
+          "sha512": "b668a1415c99afcc6f0cbff0b2f9ba16fa7e6b5cb6627c3a6602438177f47879a2f2001024f4e568baaa48c5088037d7c6e606d5bcdd1c1351a9746c5c3e054c",
+          "sha256": "7e74460b9a3a07f2d7dd65d46676be502f9c6079640b5f66bfd4af524c7d6ff9",
+          "sha1": "f9ada22574556aaad7539e40298b54c1b2e4304e",
+          "md5": "e1e3278076184d4248051b291dbbbb40"
         }
       ]
     },
     {
-      "name": "releaseVariantReleaseRuntimePublication",
+      "name": "releaseRuntimePublication",
       "attributes": {
         "org.gradle.category": "library",
         "org.gradle.dependency.bundling": "external",
@@ -77,21 +78,21 @@
           "group": "androidx.annotation",
           "module": "annotation",
           "version": {
-            "requires": "1.2.0"
-          }
-        },
-        {
-          "group": "com.google.dagger",
-          "module": "dagger",
-          "version": {
-            "requires": "2.44"
+            "requires": "1.0.0"
           }
         },
         {
           "group": "org.jetbrains.kotlin",
           "module": "kotlin-stdlib",
           "version": {
-            "requires": "1.7.21"
+            "requires": "1.4.32"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-android",
+          "version": {
+            "requires": "1.4.3"
           }
         },
         {
@@ -102,10 +103,10 @@
           }
         },
         {
-          "group": "org.jetbrains.kotlinx",
-          "module": "kotlinx-coroutines-android",
+          "group": "com.google.dagger",
+          "module": "dagger",
           "version": {
-            "requires": "1.6.4"
+            "requires": "2.34"
           }
         }
       ],
@@ -113,11 +114,11 @@
         {
           "name": "camera-camera2-pipe-1.0.0-alpha01.aar",
           "url": "camera-camera2-pipe-1.0.0-alpha01.aar",
-          "size": 597639,
-          "sha512": "56739dbfb2cee8236ad0b9502f723d9af197701cd48ce21974af26d4084f167c42d10ba31ea5022685afa2cf47f7b0573ba262c336d9f88e70fac676e472c8e2",
-          "sha256": "ea7a530ca22351db745d14b1be27433bd25c6fbdea0db9564e87c09a69284176",
-          "sha1": "ea95b9983a327c3cd352e6a5c5c4571ab514cf3e",
-          "md5": "45f24c1d87544f89f0d0814b84ac14cf"
+          "size": 480205,
+          "sha512": "b668a1415c99afcc6f0cbff0b2f9ba16fa7e6b5cb6627c3a6602438177f47879a2f2001024f4e568baaa48c5088037d7c6e606d5bcdd1c1351a9746c5c3e054c",
+          "sha256": "7e74460b9a3a07f2d7dd65d46676be502f9c6079640b5f66bfd4af524c7d6ff9",
+          "sha1": "f9ada22574556aaad7539e40298b54c1b2e4304e",
+          "md5": "e1e3278076184d4248051b291dbbbb40"
         }
       ]
     },
@@ -133,11 +134,11 @@
         {
           "name": "camera-camera2-pipe-1.0.0-alpha01-sources.jar",
           "url": "camera-camera2-pipe-1.0.0-alpha01-sources.jar",
-          "size": 141844,
-          "sha512": "9f17024c5882a6bb90435e1777eeda887257791f843b4b7af88da6b073925aec980e8549bc4f1e9a18471c1a1255f2677d5877919616cb662a673ed317f04ae1",
-          "sha256": "97710069255f742d21e2c9176c7462bcce88bc380f5765a6edea648f39767538",
-          "sha1": "d5d3affdaae97904b7269600d0cd1556564198b6",
-          "md5": "9cfc765448c7fba4944ff90f0f8ddc2f"
+          "size": 106357,
+          "sha512": "eea91cdb0f3b3fb3251403d1d2fa4f1a293d12074595644a7d5943bfb34ac12b9ad47ddfd6499b9b20f5d482ee9fc0c3e9d7e0ce1b5c7ad3196262204115cd4c",
+          "sha256": "a2012c30729e59bcca7574872b2010ad1d71730f4120921e8e45f002ad88e6e0",
+          "sha1": "8a118e418dae17b9b4210646acb3ddbd625ce3df",
+          "md5": "d4aab920f90c36cc59604760f05abfe3"
         }
       ]
     }
