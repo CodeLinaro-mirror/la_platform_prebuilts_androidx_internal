@@ -253,10 +253,11 @@ def should_update_artifact(group_id, artifact_id, groups, artifacts):
 
 def update_version_maps(artifact_ver_map, group_id, artifact_id, version, groups, artifacts, source):
 	if should_update_artifact(group_id, artifact_id, groups, artifacts):
-		if group_id + ":" + artifact_id not in artifact_ver_map:
-			artifact_ver_map[group_id + ":" + artifact_id] = version
-			summary_log.append("Prebuilts: %s:%s --> %s" % (group_id, artifact_id, version))
-			prebuilts_log.append("%s:%s:%s from %s" % (group_id, artifact_id, version, source))
+		if group_id + ":" + artifact_id in artifact_ver_map:
+			version = get_higher_version(version_a = version, version_b = artifact_ver_map[group_id + ":" + artifact_id])
+		artifact_ver_map[group_id + ":" + artifact_id] = version
+		summary_log.append("Prebuilts: %s:%s --> %s" % (group_id, artifact_id, version))
+		prebuilts_log.append("%s:%s:%s from %s" % (group_id, artifact_id, version, source))
 
 def get_updated_version_map(groups, artifacts, source):
 	try:
@@ -264,7 +265,7 @@ def get_updated_version_map(groups, artifacts, source):
 		# (cut -c4- removes the change-type-character from git status output)
 		gitdiff_ouput = subprocess.check_output('git status --porcelain | cut -c4-', shell=True)
 	except subprocess.CalledProcessError:
-		print_e('FAIL: No artifacts to import from build ID %s' %  build_id)
+		print_e('FAIL: No artifacts to import from build ID %s' %  source)
 		return None
 	# Iterate through the git diff output to map libraries to their new versions
 	artifact_ver_map = {}
