@@ -253,10 +253,11 @@ def should_update_artifact(group_id, artifact_id, groups, artifacts):
 
 def update_version_maps(artifact_ver_map, group_id, artifact_id, version, groups, artifacts, source):
 	if should_update_artifact(group_id, artifact_id, groups, artifacts):
-		if group_id + ":" + artifact_id not in artifact_ver_map:
-			artifact_ver_map[group_id + ":" + artifact_id] = version
-			summary_log.append("Prebuilts: %s:%s --> %s" % (group_id, artifact_id, version))
-			prebuilts_log.append("%s:%s:%s from %s" % (group_id, artifact_id, version, source))
+		if group_id + ":" + artifact_id in artifact_ver_map:
+			version = get_higher_version(version_a = version, version_b = artifact_ver_map[group_id + ":" + artifact_id])
+		artifact_ver_map[group_id + ":" + artifact_id] = version
+		summary_log.append("Prebuilts: %s:%s --> %s" % (group_id, artifact_id, version))
+		prebuilts_log.append("%s:%s:%s from %s" % (group_id, artifact_id, version, source))
 
 def get_updated_version_map(groups, artifacts, source):
 	try:
@@ -264,7 +265,7 @@ def get_updated_version_map(groups, artifacts, source):
 		# (cut -c4- removes the change-type-character from git status output)
 		gitdiff_ouput = subprocess.check_output('git status --porcelain | cut -c4-', shell=True)
 	except subprocess.CalledProcessError:
-		print_e('FAIL: No artifacts to import from build ID %s' %  build_id)
+		print_e('FAIL: No artifacts to import from build ID %s' %  source)
 		return None
 	# Iterate through the git diff output to map libraries to their new versions
 	artifact_ver_map = {}
@@ -320,6 +321,7 @@ def should_update_docs(new_maven_coordinates):
 		"internal",
 		"jvm",
 		"pipe",
+		"binary",
 	]
 	for keyword in keywords_to_ignore:
 		if keyword in new_maven_coordinates:
@@ -485,6 +487,8 @@ def generate_updated_docs_public_build_gradle(artifact_ver_map,
 			artifact_found[artifact_coordinate] = True
 			# Skip version updates that would decrement to a smaller version
 			if outdated_ver == get_higher_version(outdated_ver, artifact_ver_map[artifact_coordinate]): continue
+			# Skip updating -dev versions in public docs
+			if "-dev" in artifact_ver_map[artifact_coordinate] :continue
 			# Update version of artifact_id
 			if artifact_ver_map[artifact_coordinate] != outdated_ver:
 				dpbg_lines[i] = cur_line[:ver_index] \
@@ -534,7 +538,7 @@ def update_androidx(target, build_id, local_file, groups, artifacts, skip_public
 		artifact_ver_map = get_updated_version_map(groups, artifacts, source)
 		if not skip_public_docs:
 			if not update_docs_public_build_gradle(artifact_ver_map):
-				print_e('Failed to update PublicDocRules.kt')
+				print_e('Failed to update docs-public/build.gradle')
 				return False
 			print("Update docs-public/build.gradle... Successful")
 		return True
