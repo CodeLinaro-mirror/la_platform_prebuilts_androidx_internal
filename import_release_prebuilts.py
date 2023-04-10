@@ -180,23 +180,6 @@ def fetch_and_extract(target, build_id, file, artifact_path=None):
 		return None
 	return extract_artifact(artifact_path)
 
-def remove_type_aar_from_pom_files(repo_dir):
-	# Only search pom files to in <repo_dir>
-	print("Removing <type>aar</type> from the pom files...", end = '')
-	try:
-		# Comment out <type>aar</type> in our pom files
-		# This is being done as a workaround for b/118385540
-		# TODO: Remove this method once https://github.com/gradle/gradle/issues/7594 is fixed
-		subprocess.check_call("find " + repo_dir + " -name *.pom | xargs sed 's|^      <type>aar</type>$|      <!--<type>aar</type>-->|' -i", shell=True)
-	except subprocess.CalledProcessError:
-		print("failed!")
-		print_e("FAIL: Failed to remove <type>aar</type> from the pom files")
-		summary_log.append("FAILED to remove <type>aar</type> from the pom files")
-		return False
-	print("Successful")
-	summary_log.append("<type>aar</type> was removed from the pom files")
-	return True
-
 def remove_maven_metadata_files(repo_dir):
 	# Only search for maven-metadata files to in <repo_dir>
 	print("Removing maven-metadata.xml* files from the import...", end = '')
@@ -531,7 +514,6 @@ def update_androidx(target, build_id, local_file, groups, artifacts, skip_public
 			print_e('Failed to copy and merge AndroidX repository')
 			return False
 		print("Copy and merge artifacts... Successful")
-		remove_type_aar_from_pom_files("androidx")
 		remove_maven_metadata_files("androidx")
 		# Now that we've merged new prebuilts, we need to update our version map
 		source = "ab/%s" % build_id if build_id else local_file
