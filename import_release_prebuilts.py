@@ -304,7 +304,15 @@ def should_update_docs(new_maven_coordinates):
 		"internal",
 		"jvm",
 		"pipe",
-		"binary",
+		"binary"
+		"linux",
+		"android",
+		"macosx64",
+		"macosarm64",
+		"iosarm64",
+		"iossimulatorarm64",
+		"iosx64",
+		"linuxx64"
 	]
 	for keyword in keywords_to_ignore:
 		if keyword in new_maven_coordinates:
@@ -498,14 +506,20 @@ def update_docs_public_build_gradle(artifact_ver_map, build_gradle_file=DOCS_PUB
 		f.writelines(dpbg_lines)
 	return True
 
-def update_androidx(target, build_id, local_file, groups, artifacts, skip_public_docs):
+def update_androidx(target, build_id, local_file, groups, artifacts, skip_public_docs, kmp_docs):
 	repo_dir = None
 	try:
 		if build_id:
 			artifact_zip_file = 'top-of-tree-m2repository-all-%s.zip' % build_id
-			repo_dir = fetch_and_extract("androidx", build_id, artifact_zip_file, None)
+			if not kmp_docs:
+				repo_dir = fetch_and_extract("androidx", build_id, artifact_zip_file, None)
+			else:
+				repo_dir = fetch_and_extract("androidx_multiplatform_mac", build_id, artifact_zip_file, None)
 		else:
-			repo_dir = fetch_and_extract("androidx", None, None, local_file)
+			if not kmp_docs:
+				repo_dir = fetch_and_extract("androidx", None, None, local_file)
+			else:
+				repo_dir = fetch_and_extract("androidx_multiplatform_mac", None, None, local_file)
 		if not repo_dir:
 			print_e('Failed to extract AndroidX repository')
 			return False
@@ -642,6 +656,9 @@ parser.add_argument(
 	'--skip-public-docs', action="store_true",
 	help='If specified, docs-public/build.gradle will NOT be updated')
 parser.add_argument(
+		'--kmp-docs', action="store_true",
+		help='If specified, import kmp artifacts')
+parser.add_argument(
 	'--groups', metavar='group_id', nargs='+',
 	help="""If specified, only update libraries whose group_id contains the listed text.
 	For example, if you specify \"--groups paging slice lifecycle\", then this
@@ -703,7 +720,8 @@ def main(args):
 							   get_file(source),
 							   source_to_artifact[source].get('groups'),
 							   source_to_artifact[source].get('artifacts'),
-							   args.skip_public_docs):
+							   args.skip_public_docs,
+								 args.kmp_docs):
 			print_e('Failed to update AndroidX, aborting...')
 			sys.exit(1)
 
