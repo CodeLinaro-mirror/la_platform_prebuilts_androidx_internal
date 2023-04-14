@@ -180,23 +180,6 @@ def fetch_and_extract(target, build_id, file, artifact_path=None):
 		return None
 	return extract_artifact(artifact_path)
 
-def remove_type_aar_from_pom_files(repo_dir):
-	# Only search pom files to in <repo_dir>
-	print("Removing <type>aar</type> from the pom files...", end = '')
-	try:
-		# Comment out <type>aar</type> in our pom files
-		# This is being done as a workaround for b/118385540
-		# TODO: Remove this method once https://github.com/gradle/gradle/issues/7594 is fixed
-		subprocess.check_call("find " + repo_dir + " -name *.pom | xargs sed 's|^      <type>aar</type>$|      <!--<type>aar</type>-->|' -i", shell=True)
-	except subprocess.CalledProcessError:
-		print("failed!")
-		print_e("FAIL: Failed to remove <type>aar</type> from the pom files")
-		summary_log.append("FAILED to remove <type>aar</type> from the pom files")
-		return False
-	print("Successful")
-	summary_log.append("<type>aar</type> was removed from the pom files")
-	return True
-
 def remove_maven_metadata_files(repo_dir):
 	# Only search for maven-metadata files to in <repo_dir>
 	print("Removing maven-metadata.xml* files from the import...", end = '')
@@ -321,7 +304,15 @@ def should_update_docs(new_maven_coordinates):
 		"internal",
 		"jvm",
 		"pipe",
-		"binary",
+		"binary"
+		"linux",
+		"android",
+		"macosx64",
+		"macosarm64",
+		"iosarm64",
+		"iossimulatorarm64",
+		"iosx64",
+		"linuxx64"
 	]
 	for keyword in keywords_to_ignore:
 		if keyword in new_maven_coordinates:
@@ -515,14 +506,20 @@ def update_docs_public_build_gradle(artifact_ver_map, build_gradle_file=DOCS_PUB
 		f.writelines(dpbg_lines)
 	return True
 
-def update_androidx(target, build_id, local_file, groups, artifacts, skip_public_docs):
+def update_androidx(target, build_id, local_file, groups, artifacts, skip_public_docs, kmp_docs):
 	repo_dir = None
 	try:
 		if build_id:
 			artifact_zip_file = 'top-of-tree-m2repository-all-%s.zip' % build_id
-			repo_dir = fetch_and_extract("androidx", build_id, artifact_zip_file, None)
+			if not kmp_docs:
+				repo_dir = fetch_and_extract("androidx", build_id, artifact_zip_file, None)
+			else:
+				repo_dir = fetch_and_extract("androidx_multiplatform_mac", build_id, artifact_zip_file, None)
 		else:
-			repo_dir = fetch_and_extract("androidx", None, None, local_file)
+			if not kmp_docs:
+				repo_dir = fetch_and_extract("androidx", None, None, local_file)
+			else:
+				repo_dir = fetch_and_extract("androidx_multiplatform_mac", None, None, local_file)
 		if not repo_dir:
 			print_e('Failed to extract AndroidX repository')
 			return False
@@ -531,7 +528,6 @@ def update_androidx(target, build_id, local_file, groups, artifacts, skip_public
 			print_e('Failed to copy and merge AndroidX repository')
 			return False
 		print("Copy and merge artifacts... Successful")
-		remove_type_aar_from_pom_files("androidx")
 		remove_maven_metadata_files("androidx")
 		# Now that we've merged new prebuilts, we need to update our version map
 		source = "ab/%s" % build_id if build_id else local_file
@@ -660,6 +656,9 @@ parser.add_argument(
 	'--skip-public-docs', action="store_true",
 	help='If specified, docs-public/build.gradle will NOT be updated')
 parser.add_argument(
+		'--kmp-docs', action="store_true",
+		help='If specified, import kmp artifacts')
+parser.add_argument(
 	'--groups', metavar='group_id', nargs='+',
 	help="""If specified, only update libraries whose group_id contains the listed text.
 	For example, if you specify \"--groups paging slice lifecycle\", then this
@@ -721,7 +720,8 @@ def main(args):
 							   get_file(source),
 							   source_to_artifact[source].get('groups'),
 							   source_to_artifact[source].get('artifacts'),
-							   args.skip_public_docs):
+							   args.skip_public_docs,
+								 args.kmp_docs):
 			print_e('Failed to update AndroidX, aborting...')
 			sys.exit(1)
 
