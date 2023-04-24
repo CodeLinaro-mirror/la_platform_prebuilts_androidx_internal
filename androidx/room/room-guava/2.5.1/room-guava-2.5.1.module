@@ -1,0 +1,150 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.room",
+    "module": "room-guava",
+    "version": "2.5.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.5"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.5.1"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.5.1"
+          },
+          "excludes": [
+            {
+              "group": "com.google.guava",
+              "module": "listenablefuture"
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "name": "room-guava-2.5.1.aar",
+          "url": "room-guava-2.5.1.aar",
+          "size": 6904,
+          "sha512": "b02095be53f9929abf2b5da8d9005ee84d917efd16f323bce3270531207e54d8bb6b8fb6ac53fe3f9b5ac55224d9e04d2ad7f09e6317077a3e75cfc589d3913c",
+          "sha256": "c5e510b33d5cfc11e241e93069e9dbb5d74bb90a8d039e477f9b90aadff37f8f",
+          "sha1": "172d5ff3124ffd0e24527b3fb33641096193056d",
+          "md5": "99d49ef14c0f89898417425719707c81"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.arch.core",
+          "module": "core-runtime",
+          "version": {
+            "requires": "2.0.1"
+          }
+        },
+        {
+          "group": "androidx.concurrent",
+          "module": "concurrent-futures",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.5.1"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.5.1"
+          },
+          "excludes": [
+            {
+              "group": "com.google.guava",
+              "module": "listenablefuture"
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "name": "room-guava-2.5.1.aar",
+          "url": "room-guava-2.5.1.aar",
+          "size": 6904,
+          "sha512": "b02095be53f9929abf2b5da8d9005ee84d917efd16f323bce3270531207e54d8bb6b8fb6ac53fe3f9b5ac55224d9e04d2ad7f09e6317077a3e75cfc589d3913c",
+          "sha256": "c5e510b33d5cfc11e241e93069e9dbb5d74bb90a8d039e477f9b90aadff37f8f",
+          "sha1": "172d5ff3124ffd0e24527b3fb33641096193056d",
+          "md5": "99d49ef14c0f89898417425719707c81"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "room-guava-2.5.1-sources.jar",
+          "url": "room-guava-2.5.1-sources.jar",
+          "size": 2362,
+          "sha512": "9aba5cabb9c3b225d02e83fa95580a85cea01669543d4270e5889424493e08f31f929fd1606677c01faf55ab4218836329319afcc3de2ffc823f171b8e85cbca",
+          "sha256": "158d4cdfa7e990720f10633f32ae0d43478a7af4008d49554c8a2b81883a731d",
+          "sha1": "4cb73006e500fbea67ef95ee4a03b97eef62f295",
+          "md5": "aeef46739353f9103f9245e02cff72c3"
+        }
+      ]
+    }
+  ]
+}
