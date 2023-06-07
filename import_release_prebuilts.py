@@ -97,18 +97,34 @@ def get_group_id_sub_path(group_id):
 	return group_id.replace("androidx.", "").replace(".", "/")
 
 def get_coordinates_from_artifact(artifact):
-	"""Get the group from an artifact
+	"""Get the individual maven coordinates from an artifact
 
 	Artifacts will have the format: `<group_id>:<artifact_id>`
 
 	Args:
-		artifact: the artifact to obtain the group id for
+		artifact: the artifact to obtain the coorindates for
 
 	Returns:
 		Tuple of (group_id, artifact_id)
 	"""
 	coordinates = artifact.split(':')
 	return coordinates[0], coordinates[1]
+
+def get_sample_coordinates_from_artifact(artifact):
+	"""Get the individual maven coordinates from an artifact
+
+	Artifacts will have the format: `<group_id>:<artifact_id>`
+
+	Most samples will live at `<group_id>:<artifact_id>-samples`
+
+	Args:
+		artifact: the artifact to obtain the sample coorindates for
+
+	Returns:
+		Tuple of (group_id, artifact_id)
+	"""
+	coordinates = artifact.split(':')
+	return coordinates[0], coordinates[1] + "-samples"
 
 def copy_and_merge_artifacts(repo_dir, dest_dir, group_ids, artifacts):
 	repo_androidx_path = get_repo_androidx_path(repo_dir)
@@ -128,6 +144,7 @@ def copy_and_merge_artifacts(repo_dir, dest_dir, group_ids, artifacts):
 				print_e("Failed to find copy %s to %s" % (repo_group_path, dest_group_path))
 				return None
 	if artifacts:
+		artifact_samples_found = []
 		# Copy over artifact_ids that were specified on the command line
 		for artifact in artifacts:
 			group_id, artifact_id = get_coordinates_from_artifact(artifact)
@@ -140,6 +157,20 @@ def copy_and_merge_artifacts(repo_dir, dest_dir, group_ids, artifacts):
 			if not cp(repo_artifact_path, dest_artifact_path):
 				print_e("Failed to find copy %s to %s" % (repo_artifact_path, dest_artifact_path))
 				return None
+			# Attempt to find a cooresponding samples project and copy it as well.
+			# This only needs to be done for artifacts because the samples artifact
+			# is implicitly included when we import whole groups.
+			group_id, artifact_samples_id = get_sample_coordinates_from_artifact(artifact)
+			repo_artifact_samples_path = os.path.join(repo_androidx_path, group_id_sub_path, artifact_samples_id)
+			if os.path.exists(repo_artifact_samples_path):
+				dest_artifact_path = os.path.join(dest_dir, group_id_sub_path, artifact_samples_id)
+				if not cp(repo_artifact_samples_path, dest_artifact_path):
+					print_e("Failed to find copy %s to %s" % (repo_artifact_samples_path, dest_artifact_path))
+					return None
+				artifact_samples_found.append("%s:%s" % (group_id, artifact_samples_id))
+		# Finally update our list of artifacts we have updated.  This ensures
+		# that the script prints an accurate list of updated artifacts.
+		artifacts.extend(artifact_samples_found)
 	return dest_dir
 
 def fetch_and_extract(target, build_id, file, artifact_path=None):
@@ -222,10 +253,11 @@ def should_update_artifact(group_id, artifact_id, groups, artifacts):
 
 def update_version_maps(artifact_ver_map, group_id, artifact_id, version, groups, artifacts, source):
 	if should_update_artifact(group_id, artifact_id, groups, artifacts):
-		if group_id + ":" + artifact_id not in artifact_ver_map:
-			artifact_ver_map[group_id + ":" + artifact_id] = version
-			summary_log.append("Prebuilts: %s:%s --> %s" % (group_id, artifact_id, version))
-			prebuilts_log.append("%s:%s:%s from %s" % (group_id, artifact_id, version, source))
+		if group_id + ":" + artifact_id in artifact_ver_map:
+			version = get_higher_version(version_a = version, version_b = artifact_ver_map[group_id + ":" + artifact_id])
+		artifact_ver_map[group_id + ":" + artifact_id] = version
+		summary_log.append("Prebuilts: %s:%s --> %s" % (group_id, artifact_id, version))
+		prebuilts_log.append("%s:%s:%s from %s" % (group_id, artifact_id, version, source))
 
 def get_updated_version_map(groups, artifacts, source):
 	try:
@@ -233,14 +265,14 @@ def get_updated_version_map(groups, artifacts, source):
 		# (cut -c4- removes the change-type-character from git status output)
 		gitdiff_ouput = subprocess.check_output('git status --porcelain | cut -c4-', shell=True)
 	except subprocess.CalledProcessError:
-		print_e('FAIL: No artifacts to import from build ID %s' %  build_id)
+		print_e('FAIL: No artifacts to import from build ID %s' %  source)
 		return None
 	# Iterate through the git diff output to map libraries to their new versions
 	artifact_ver_map = {}
 	diff = iter(gitdiff_ouput.splitlines())
 	for line in diff:
 		file_path_list = line.decode().split('/')
-		if len(file_path_list) < 3 or file_path_list[-1] != "":
+		if len(file_path_list) < 3:
 			continue
 		group_id = ".".join(file_path_list[:-3])
 		artifact_id = file_path_list[-3]
@@ -286,6 +318,10 @@ def should_update_docs(new_maven_coordinates):
 		"exoplayer",
 		"gradle",
 		"debug",
+		"internal",
+		"jvm",
+		"pipe",
+		"binary",
 	]
 	for keyword in keywords_to_ignore:
 		if keyword in new_maven_coordinates:
@@ -302,7 +338,7 @@ def insert_new_artifact_into_dpbg(dpbg_lines, num_lines, new_maven_coordinates, 
 	for i in range(num_lines):
 		cur_line = dpbg_lines[i]
 		# Skip any line that doesn't declare a version
-		if 'androidx.' not in cur_line: continue
+		if 'androidx.' not in cur_line or 'namespace' in cur_line: continue
 		group_id, artifact_id, outdated_ver = get_maven_coordinate_from_docs_public_build_gradle_line(cur_line)
 		# Iterate through until you found the alphabetical place to insert the new artifact
 		if new_maven_coordinates <= group_id + ":" + artifact_id:
@@ -441,8 +477,8 @@ def generate_updated_docs_public_build_gradle(artifact_ver_map,
 	num_lines = len(dpbg_lines)
 	for i in range(num_lines):
 		cur_line = dpbg_lines[i]
-		# Skip any line that doesn't declare a version
-		if 'androidx.' not in cur_line: continue
+		# Skip any line that doesn't declare a version or skip a line that defines the namespace
+		if 'androidx.' not in cur_line or 'namespace' in cur_line : continue
 		group_id, artifact_id, outdated_ver = get_maven_coordinate_from_docs_public_build_gradle_line(cur_line)
 		ver_index = cur_line.find(outdated_ver)
 		artifact_coordinate = group_id + ":" + artifact_id
@@ -451,6 +487,8 @@ def generate_updated_docs_public_build_gradle(artifact_ver_map,
 			artifact_found[artifact_coordinate] = True
 			# Skip version updates that would decrement to a smaller version
 			if outdated_ver == get_higher_version(outdated_ver, artifact_ver_map[artifact_coordinate]): continue
+			# Skip updating -dev versions in public docs
+			if "-dev" in artifact_ver_map[artifact_coordinate] :continue
 			# Update version of artifact_id
 			if artifact_ver_map[artifact_coordinate] != outdated_ver:
 				dpbg_lines[i] = cur_line[:ver_index] \
@@ -500,7 +538,7 @@ def update_androidx(target, build_id, local_file, groups, artifacts, skip_public
 		artifact_ver_map = get_updated_version_map(groups, artifacts, source)
 		if not skip_public_docs:
 			if not update_docs_public_build_gradle(artifact_ver_map):
-				print_e('Failed to update PublicDocRules.kt')
+				print_e('Failed to update docs-public/build.gradle')
 				return False
 			print("Update docs-public/build.gradle... Successful")
 		return True
