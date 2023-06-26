@@ -312,7 +312,11 @@ def should_update_docs(new_maven_coordinates):
 		"iosarm64",
 		"iossimulatorarm64",
 		"iosx64",
-		"linuxx64"
+		"linuxx64",
+		"tools-apigenerator",
+		"tools-apipackager",
+		"tools-core",
+		"-proto"
 	]
 	coordinates_after_androidx = new_maven_coordinates.replace("androidx.", "")
 	for keyword in keywords_to_ignore:
