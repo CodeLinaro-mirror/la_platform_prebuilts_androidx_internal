@@ -1,0 +1,241 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.privacysandbox.tools",
+    "module": "tools-apicompiler",
+    "version": "1.0.0-alpha03",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.0"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.8.10"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.privacysandbox.tools",
+          "module": "tools",
+          "version": {
+            "requires": "1.0.0-alpha03"
+          }
+        },
+        {
+          "group": "androidx.privacysandbox.tools",
+          "module": "tools-apigenerator",
+          "version": {
+            "requires": "1.0.0-alpha03"
+          }
+        },
+        {
+          "group": "androidx.privacysandbox.tools",
+          "module": "tools-apipackager",
+          "version": {
+            "requires": "1.0.0-alpha03"
+          }
+        },
+        {
+          "group": "androidx.privacysandbox.tools",
+          "module": "tools-core",
+          "version": {
+            "requires": "1.0.0-alpha03"
+          }
+        },
+        {
+          "group": "androidx.privacysandbox.tools",
+          "module": "tools-testing",
+          "version": {
+            "requires": "1.0.0-alpha03"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "tools-apicompiler-1.0.0-alpha03.jar",
+          "url": "tools-apicompiler-1.0.0-alpha03.jar",
+          "size": 62203,
+          "sha512": "ff9a697d2478b23206913f6368591d15f8991d911d8bec642cdbd7c5235f5bb231c35709528de993e81ef64423f9722f98ffa57173618dff41b7a426a5a738e5",
+          "sha256": "8485ea0408fee04a6f0dd1044a3772d41ef672d6b4fda073fd82552632ff0eb1",
+          "sha1": "c68cd36ef59c2aa131607898a51ef3403a5979ba",
+          "md5": "62c4f67e302e6a66badc61378ca4ba50"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.privacysandbox.tools",
+          "module": "tools",
+          "version": {
+            "requires": "1.0.0-alpha03"
+          }
+        },
+        {
+          "group": "androidx.privacysandbox.tools",
+          "module": "tools-core",
+          "version": {
+            "requires": "1.0.0-alpha03"
+          }
+        },
+        {
+          "group": "com.google.devtools.ksp",
+          "module": "symbol-processing-api",
+          "version": {
+            "requires": "1.8.10-1.0.9"
+          }
+        },
+        {
+          "group": "com.squareup",
+          "module": "kotlinpoet",
+          "version": {
+            "requires": "1.12.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.8.10"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.privacysandbox.tools",
+          "module": "tools",
+          "version": {
+            "requires": "1.0.0-alpha03"
+          }
+        },
+        {
+          "group": "androidx.privacysandbox.tools",
+          "module": "tools-apigenerator",
+          "version": {
+            "requires": "1.0.0-alpha03"
+          }
+        },
+        {
+          "group": "androidx.privacysandbox.tools",
+          "module": "tools-apipackager",
+          "version": {
+            "requires": "1.0.0-alpha03"
+          }
+        },
+        {
+          "group": "androidx.privacysandbox.tools",
+          "module": "tools-core",
+          "version": {
+            "requires": "1.0.0-alpha03"
+          }
+        },
+        {
+          "group": "androidx.privacysandbox.tools",
+          "module": "tools-testing",
+          "version": {
+            "requires": "1.0.0-alpha03"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "tools-apicompiler-1.0.0-alpha03.jar",
+          "url": "tools-apicompiler-1.0.0-alpha03.jar",
+          "size": 62203,
+          "sha512": "ff9a697d2478b23206913f6368591d15f8991d911d8bec642cdbd7c5235f5bb231c35709528de993e81ef64423f9722f98ffa57173618dff41b7a426a5a738e5",
+          "sha256": "8485ea0408fee04a6f0dd1044a3772d41ef672d6b4fda073fd82552632ff0eb1",
+          "sha1": "c68cd36ef59c2aa131607898a51ef3403a5979ba",
+          "md5": "62c4f67e302e6a66badc61378ca4ba50"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.privacysandbox.tools",
+          "module": "tools",
+          "version": {
+            "requires": "1.0.0-alpha03"
+          }
+        },
+        {
+          "group": "androidx.privacysandbox.tools",
+          "module": "tools-apigenerator",
+          "version": {
+            "requires": "1.0.0-alpha03"
+          }
+        },
+        {
+          "group": "androidx.privacysandbox.tools",
+          "module": "tools-apipackager",
+          "version": {
+            "requires": "1.0.0-alpha03"
+          }
+        },
+        {
+          "group": "androidx.privacysandbox.tools",
+          "module": "tools-core",
+          "version": {
+            "requires": "1.0.0-alpha03"
+          }
+        },
+        {
+          "group": "androidx.privacysandbox.tools",
+          "module": "tools-testing",
+          "version": {
+            "requires": "1.0.0-alpha03"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "tools-apicompiler-1.0.0-alpha03-sources.jar",
+          "url": "tools-apicompiler-1.0.0-alpha03-sources.jar",
+          "size": 15010,
+          "sha512": "d1d6b04c8a0bfd9f9e65f0dc40a80ea937f470da379bac820f2a52cdc4795866ea28f3a687eea226f4d84236cf9d60f92194118df6b25305edb49da595800f18",
+          "sha256": "9227db83566c6263e7ded6eb6b72d4d140aafc598755e05f1327ba8b38e0fffa",
+          "sha1": "490886adfcd882ddc61024718e89b106068854b2",
+          "md5": "f3120f9115de84038387c37b7c24c452"
+        }
+      ]
+    }
+  ]
+}
