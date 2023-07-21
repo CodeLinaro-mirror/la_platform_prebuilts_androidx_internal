@@ -129,6 +129,27 @@ class TestVersionUpdates(unittest.TestCase):
         self.assertFalse(should_update_artifact(
             "androidx.foo", "foo", [], ["foo"]))
 
+    def test_update_version_maps_should_update(self):
+        artifact_ver_map = {
+            "androidx.bar:bar": "1.1.0",
+        }
+        final_artifact_ver_map={
+            "androidx.bar:bar": "1.2.0-alpha01"
+        }
+        update_version_maps(artifact_ver_map, "androidx.bar", "bar", "1.2.0-alpha01", "androidx.bar", "androidx.bar:bar", 123456)
+        self.assertEquals(artifact_ver_map, final_artifact_ver_map)
+
+    def test_update_version_maps_should_not_update(self):
+        artifact_ver_map = {
+            "androidx.bar:bar": "1.2.0-alpha01",
+        }
+        final_artifact_ver_map={
+            "androidx.bar:bar": "1.2.0-alpha01"
+        }
+
+        update_version_maps(artifact_ver_map, "androidx.bar", "bar", "1.1.0", "androidx.bar", "androidx.bar:bar", 123456)
+        self.assertEquals(artifact_ver_map, final_artifact_ver_map)
+
     def test_update_docs_public_build_gradle(self):
         # Get the current state of the build.gradle file.
         with open(DOCS_PUBLIC_BUILD_GRADLE_FP_TEST, 'r') as f:
