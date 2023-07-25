@@ -1,0 +1,471 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.room",
+    "module": "room-guava",
+    "version": "2.6.0-alpha02",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.0"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          },
+          "excludes": [
+            {
+              "group": "com.google.guava",
+              "module": "listenablefuture"
+            }
+          ]
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing-testing",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-gradle-plugin",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-ktx",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-migration",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-guava",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava2",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava3",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava2",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava3",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-testing",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "room-guava-2.6.0-alpha02.aar",
+          "url": "room-guava-2.6.0-alpha02.aar",
+          "size": 6980,
+          "sha512": "e743006243d72ca40a513127244e5bd59e7c8f036903cd81f48591ae7b192b8d4a3b7142d3cec20463747183b3575e8881d2765723e8ac81599d2329b788b68d",
+          "sha256": "88182187ed572bf7393dbf2d2f666d4217a9319603c3bcbc221ed3c843288ecf",
+          "sha1": "edf828f56b641010023e75effc397dec23e73b29",
+          "md5": "3579e2311ab327ea15f3c71ffe702c05"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.arch.core",
+          "module": "core-runtime",
+          "version": {
+            "requires": "2.2.0"
+          }
+        },
+        {
+          "group": "androidx.concurrent",
+          "module": "concurrent-futures",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          },
+          "excludes": [
+            {
+              "group": "com.google.guava",
+              "module": "listenablefuture"
+            }
+          ]
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing-testing",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-gradle-plugin",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-ktx",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-migration",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-guava",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava2",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava3",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava2",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava3",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-testing",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "room-guava-2.6.0-alpha02.aar",
+          "url": "room-guava-2.6.0-alpha02.aar",
+          "size": 6980,
+          "sha512": "e743006243d72ca40a513127244e5bd59e7c8f036903cd81f48591ae7b192b8d4a3b7142d3cec20463747183b3575e8881d2765723e8ac81599d2329b788b68d",
+          "sha256": "88182187ed572bf7393dbf2d2f666d4217a9319603c3bcbc221ed3c843288ecf",
+          "sha1": "edf828f56b641010023e75effc397dec23e73b29",
+          "md5": "3579e2311ab327ea15f3c71ffe702c05"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing-testing",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-gradle-plugin",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-ktx",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-migration",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-guava",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava2",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava3",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava2",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava3",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-testing",
+          "version": {
+            "requires": "2.6.0-alpha02"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "room-guava-2.6.0-alpha02-sources.jar",
+          "url": "room-guava-2.6.0-alpha02-sources.jar",
+          "size": 2358,
+          "sha512": "8deb79bb27841622430b726828bdb09c0672731aad8bcff11a06cc2ccd96cdd7120a5f7c29a37a8786c9c6e7d691a993c32db9d18232d95df4fc5fcb639b3ac8",
+          "sha256": "7274c7c282ad8248e5f18a940532229109da5ad32d0bf7bcdcebc8a3aa4f098a",
+          "sha1": "512fa158e8e068ae820fb0f8844968e4b1359f84",
+          "md5": "41852ee3a8f1f472fc4a8188f555628f"
+        }
+      ]
+    }
+  ]
+}
