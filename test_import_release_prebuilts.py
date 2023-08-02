@@ -129,6 +129,27 @@ class TestVersionUpdates(unittest.TestCase):
         self.assertFalse(should_update_artifact(
             "androidx.foo", "foo", [], ["foo"]))
 
+    def test_update_version_maps_should_update(self):
+        artifact_ver_map = {
+            "androidx.bar:bar": "1.1.0",
+        }
+        final_artifact_ver_map={
+            "androidx.bar:bar": "1.2.0-alpha01"
+        }
+        update_version_maps(artifact_ver_map, "androidx.bar", "bar", "1.2.0-alpha01", "androidx.bar", "androidx.bar:bar", 123456)
+        self.assertEquals(artifact_ver_map, final_artifact_ver_map)
+
+    def test_update_version_maps_should_not_update(self):
+        artifact_ver_map = {
+            "androidx.bar:bar": "1.2.0-alpha01",
+        }
+        final_artifact_ver_map={
+            "androidx.bar:bar": "1.2.0-alpha01"
+        }
+
+        update_version_maps(artifact_ver_map, "androidx.bar", "bar", "1.1.0", "androidx.bar", "androidx.bar:bar", 123456)
+        self.assertEquals(artifact_ver_map, final_artifact_ver_map)
+
     def test_update_docs_public_build_gradle(self):
         # Get the current state of the build.gradle file.
         with open(DOCS_PUBLIC_BUILD_GRADLE_FP_TEST, 'r') as f:
@@ -315,6 +336,24 @@ class TestDocsUpdate(unittest.TestCase):
             "androidx.camera:camera-camera2-pipe-testing"))
         self.assertFalse(should_update_docs(
             "androidx.tracing:tracing-perfetto-binary"))
+        self.assertFalse(should_update_docs(
+            "androidx.datastore:datastore-android"))
+        self.assertFalse(should_update_docs(
+            "androidx.safeparcel:safeparcel-processor"))
+        self.assertFalse(should_update_docs(
+            "androidx.privacysandbox.tools:tools-apicompiler"))
+        self.assertFalse(should_update_docs(
+            "androidx.privacysandbox.tools:tools-apigenerator"))
+        self.assertFalse(should_update_docs(
+            "androidx.privacysandbox.tools:tools-apipackager"))
+        self.assertFalse(should_update_docs(
+            "androidx.privacysandbox.tools:tools-core"))
+        self.assertFalse(should_update_docs(
+            "androidx.resourceinspection:resourceinspection-processor"))
+        self.assertFalse(should_update_docs(
+            "androidx.glance:glance-appwidget-proto"))
+        self.assertFalse(should_update_docs(
+            "androidx.wear.tiles:tiles-proto"))
 
     def test_should_update_docs_returns_true(self):
         with unittest.mock.patch('builtins.input', return_value="yes"):
@@ -362,6 +401,9 @@ class TestDocsUpdate(unittest.TestCase):
         with unittest.mock.patch('builtins.input', return_value="yes"):
             self.assertTrue(should_update_docs(
                 "androidx.camera:camera-view"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.wear.protolayout:protolayout"))
 
 if __name__ == '__main__':
     unittest.main()
