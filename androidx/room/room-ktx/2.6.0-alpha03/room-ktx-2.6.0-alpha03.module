@@ -1,0 +1,645 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.room",
+    "module": "room-ktx",
+    "version": "2.6.0-alpha03",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.3-rc-1"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.8.22"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-android",
+          "version": {
+            "requires": "1.7.1"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing-testing",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-guava",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-gradle-plugin",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-migration",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-guava",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava2",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava3",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava2",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava3",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-testing",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        }
+      ],
+      "files": [
+        {
+          "name": "room-ktx-2.6.0-alpha03.aar",
+          "url": "room-ktx-2.6.0-alpha03.aar",
+          "size": 39238,
+          "sha512": "4cc0b881c20640216889b7d767461a2e4e7efc3c0363c5aa3f1de6ea25ddb383f752d848f3b96ba89886ca71347d25ff0885e33905ddaebcec5f626bec9ef7e8",
+          "sha256": "ed7dc9edd2f4a37e66bad259bd5c107cbbd000b07c41bfa6f75ef456042aeb56",
+          "sha1": "3a53d9211f3532d4252adced7917281f78953299",
+          "md5": "2f309b5389e1446bf4a335744fb3c446"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.8.22"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-android",
+          "version": {
+            "requires": "1.7.1"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing-testing",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-guava",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-gradle-plugin",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-migration",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-guava",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava2",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava3",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava2",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava3",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-testing",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        }
+      ],
+      "files": [
+        {
+          "name": "room-ktx-2.6.0-alpha03.aar",
+          "url": "room-ktx-2.6.0-alpha03.aar",
+          "size": 39238,
+          "sha512": "4cc0b881c20640216889b7d767461a2e4e7efc3c0363c5aa3f1de6ea25ddb383f752d848f3b96ba89886ca71347d25ff0885e33905ddaebcec5f626bec9ef7e8",
+          "sha256": "ed7dc9edd2f4a37e66bad259bd5c107cbbd000b07c41bfa6f75ef456042aeb56",
+          "sha1": "3a53d9211f3532d4252adced7917281f78953299",
+          "md5": "2f309b5389e1446bf4a335744fb3c446"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing-testing",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-guava",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-gradle-plugin",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-migration",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-guava",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava2",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava3",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava2",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava3",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-testing",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        }
+      ],
+      "files": [
+        {
+          "name": "room-ktx-2.6.0-alpha03-sources.jar",
+          "url": "room-ktx-2.6.0-alpha03-sources.jar",
+          "size": 6915,
+          "sha512": "89be0dc376b1e2c2108ce8ce07f099aa6a77fadeb7c3492497e7ca4978305eee701c0aa05540e981c8930d784482cb8cab28f0dcbda6fb54c310c5afd026f140",
+          "sha256": "3118f596d5c3e70a2f8934db3d9655a71753f8d313dff794ab6b3ee1bf967547",
+          "sha1": "dde5739324784ec695041f2c447905111a8adbe6",
+          "md5": "7c6168fcf0542c0f8840f453ee7b9498"
+        }
+      ]
+    },
+    {
+      "name": "libraryVersionMetadata",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.usage": "library-version-metadata"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing-testing",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-guava",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-gradle-plugin",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-migration",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-guava",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava2",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava3",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava2",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava3",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-testing",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-ktx is in atomic group androidx.room"
+        }
+      ],
+      "files": [
+        {
+          "name": "room-ktx-2.6.0-alpha03-versionMetadata.json",
+          "url": "room-ktx-2.6.0-alpha03-versionMetadata.json",
+          "size": 822,
+          "sha512": "6f68fe680259802fe3771b491036c7a4b882da0b13943d069eb106d7469ea7c7f5475cecd0423dbb37188c215cdeaab0f3cf50696107e342802799422cb7b976",
+          "sha256": "5d3de387d9822b82e59b1e7ffa8f93385a245d6095e4d38cef8aacb4c1f31bdb",
+          "sha1": "96952a17bd7faed38168fa5f3e3821226c9249f8",
+          "md5": "345225262ff69e88c11426813dec422a"
+        }
+      ]
+    }
+  ]
+}
