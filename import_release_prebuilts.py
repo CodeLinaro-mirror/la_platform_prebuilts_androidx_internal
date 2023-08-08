@@ -2,6 +2,7 @@
 
 from collections import defaultdict
 from distutils.dir_util import copy_tree
+from distutils.errors import DistutilsFileError
 from shutil import rmtree
 import argparse
 import glob
@@ -334,7 +335,7 @@ def insert_new_artifact_into_dpbg(dpbg_lines, num_lines, new_maven_coordinates, 
 	for i in range(num_lines):
 		cur_line = dpbg_lines[i]
 		# Skip any line that doesn't declare a version
-		if 'androidx.' not in cur_line or 'namespace' in cur_line: continue
+		if 'androidx.' not in cur_line or 'namespace' in cur_line or '//' in cur_line: continue
 		group_id, artifact_id, outdated_ver = get_maven_coordinate_from_docs_public_build_gradle_line(cur_line)
 		# Iterate through until you found the alphabetical place to insert the new artifact
 		if new_maven_coordinates <= group_id + ":" + artifact_id:
@@ -474,7 +475,7 @@ def generate_updated_docs_public_build_gradle(artifact_ver_map,
 	for i in range(num_lines):
 		cur_line = dpbg_lines[i]
 		# Skip any line that doesn't declare a version or skip a line that defines the namespace
-		if 'androidx.' not in cur_line or 'namespace' in cur_line : continue
+		if 'androidx.' not in cur_line or 'namespace' in cur_line or '//' in cur_line : continue
 		group_id, artifact_id, outdated_ver = get_maven_coordinate_from_docs_public_build_gradle_line(cur_line)
 		ver_index = cur_line.find(outdated_ver)
 		artifact_coordinate = group_id + ":" + artifact_id
