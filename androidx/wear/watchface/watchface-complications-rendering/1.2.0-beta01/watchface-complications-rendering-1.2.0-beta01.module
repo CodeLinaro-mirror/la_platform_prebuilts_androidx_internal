@@ -1,0 +1,549 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.wear.watchface",
+    "module": "watchface-complications-rendering",
+    "version": "1.2.0-beta01",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.3-rc-2"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface",
+          "version": {
+            "requires": "1.2.0-beta01"
+          }
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-complications-data",
+          "version": {
+            "requires": "1.2.0-beta01"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-complications",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-complications-data",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-complications-data-source",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-complications-data-source-ktx",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-client",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-client-guava",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-data",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-editor",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-editor-guava",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-guava",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-style",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        }
+      ],
+      "files": [
+        {
+          "name": "watchface-complications-rendering-1.2.0-beta01.aar",
+          "url": "watchface-complications-rendering-1.2.0-beta01.aar",
+          "size": 69994,
+          "sha512": "537515574ed8ee593f5b805f49f6f651d282874f08736c4aecc3fd91e8cad79bf1999e89396bc224bbd8f6b2f62332fe41b115e6f1068ff17b204bc5a6a245a6",
+          "sha256": "81f095627bc41225fed74bc77d1e29020ee40685d4b01417928d542de57af0e5",
+          "sha1": "3408aa65d4526eb4fbe564b9acdc7933235dc24e",
+          "md5": "b5e4a2d39baddba4897951a31f6233c5"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.core",
+          "module": "core",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.preference",
+          "module": "preference",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface",
+          "version": {
+            "requires": "1.2.0-beta01"
+          }
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-complications-data",
+          "version": {
+            "requires": "1.2.0-beta01"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-complications",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-complications-data",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-complications-data-source",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-complications-data-source-ktx",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-client",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-client-guava",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-data",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-editor",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-editor-guava",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-guava",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-style",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        }
+      ],
+      "files": [
+        {
+          "name": "watchface-complications-rendering-1.2.0-beta01.aar",
+          "url": "watchface-complications-rendering-1.2.0-beta01.aar",
+          "size": 69994,
+          "sha512": "537515574ed8ee593f5b805f49f6f651d282874f08736c4aecc3fd91e8cad79bf1999e89396bc224bbd8f6b2f62332fe41b115e6f1068ff17b204bc5a6a245a6",
+          "sha256": "81f095627bc41225fed74bc77d1e29020ee40685d4b01417928d542de57af0e5",
+          "sha1": "3408aa65d4526eb4fbe564b9acdc7933235dc24e",
+          "md5": "b5e4a2d39baddba4897951a31f6233c5"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-complications",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-complications-data",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-complications-data-source",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-complications-data-source-ktx",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-client",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-client-guava",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-data",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-editor",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-editor-guava",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-guava",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-style",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        }
+      ],
+      "files": [
+        {
+          "name": "watchface-complications-rendering-1.2.0-beta01-sources.jar",
+          "url": "watchface-complications-rendering-1.2.0-beta01-sources.jar",
+          "size": 47745,
+          "sha512": "8640c5925ab3665827fa61c9b3f1ee3cfea792caa3f05ce89cfda93858dabdf4cce1f3eaeed226131309cac189e18337db1357ffa0ead6064e994e89d604c014",
+          "sha256": "daa5d51ecb24430fc73c5ca3810ecf8f1291f357fbe5168be1a40d2cf7c18913",
+          "sha1": "6ba108eceaaf4669ea613dfd44c56b3009c37265",
+          "md5": "47f93d90033135f8a092439dc4820fc7"
+        }
+      ]
+    },
+    {
+      "name": "libraryVersionMetadata",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.usage": "library-version-metadata"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-complications",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-complications-data",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-complications-data-source",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-complications-data-source-ktx",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-client",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-client-guava",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-data",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-editor",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-editor-guava",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-guava",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        },
+        {
+          "group": "androidx.wear.watchface",
+          "module": "watchface-style",
+          "version": {
+            "requires": "1.2.0-beta01"
+          },
+          "reason": "watchface-complications-rendering is in atomic group androidx.wear.watchface"
+        }
+      ],
+      "files": [
+        {
+          "name": "watchface-complications-rendering-1.2.0-beta01-versionMetadata.json",
+          "url": "watchface-complications-rendering-1.2.0-beta01-versionMetadata.json",
+          "size": 7051,
+          "sha512": "f9ad8ed6bce8a7b5c5066ff1c8cff3f30ec9727d657f93268f30c8a4d94d710b2a245333f6ec8f1b36dc9648922accf8c4b3d2a6c3030e11be59ad231340dc18",
+          "sha256": "afe314d34cb1d3369def3e08b0a5b39b1113e345e8bb8856eeee2cff41bc5c43",
+          "sha1": "d4471b30bcf59a13981aadc4cda09208777bb8e0",
+          "md5": "edcf5f7e97c301a24111469b86608bc0"
+        }
+      ]
+    }
+  ]
+}
