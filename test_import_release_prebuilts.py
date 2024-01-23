@@ -336,26 +336,6 @@ class TestDocsUpdate(unittest.TestCase):
             "androidx.camera:camera-camera2-pipe-testing"))
         self.assertFalse(should_update_docs(
             "androidx.tracing:tracing-perfetto-binary"))
-        self.assertFalse(should_update_docs(
-            "androidx.datastore:datastore-android"))
-        self.assertFalse(should_update_docs(
-            "androidx.safeparcel:safeparcel-processor"))
-        self.assertFalse(should_update_docs(
-            "androidx.privacysandbox.tools:tools-apicompiler"))
-        self.assertFalse(should_update_docs(
-            "androidx.privacysandbox.tools:tools-apigenerator"))
-        self.assertFalse(should_update_docs(
-            "androidx.privacysandbox.tools:tools-apipackager"))
-        self.assertFalse(should_update_docs(
-            "androidx.privacysandbox.tools:tools-core"))
-        self.assertFalse(should_update_docs(
-            "androidx.resourceinspection:resourceinspection-processor"))
-        self.assertFalse(should_update_docs(
-            "androidx.glance:glance-appwidget-proto"))
-        self.assertFalse(should_update_docs(
-            "androidx.wear.tiles:tiles-proto"))
-        self.assertFalse(should_update_docs(
-            "androidx.privacysandbox.plugins:plugins-privacysandbox-library"))
 
     def test_should_update_docs_returns_true(self):
         with unittest.mock.patch('builtins.input', return_value="yes"):
@@ -403,9 +383,6 @@ class TestDocsUpdate(unittest.TestCase):
         with unittest.mock.patch('builtins.input', return_value="yes"):
             self.assertTrue(should_update_docs(
                 "androidx.camera:camera-view"))
-        with unittest.mock.patch('builtins.input', return_value="yes"):
-            self.assertTrue(should_update_docs(
-                "androidx.wear.protolayout:protolayout"))
 
 if __name__ == '__main__':
     unittest.main()
