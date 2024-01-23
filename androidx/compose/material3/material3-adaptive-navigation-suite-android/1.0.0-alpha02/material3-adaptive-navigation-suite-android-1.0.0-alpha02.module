@@ -11,7 +11,7 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "8.5"
+      "version": "8.6-rc-1"
     }
   },
   "variants": [
@@ -28,6 +28,13 @@
           "module": "annotation",
           "version": {
             "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation-experimental",
+          "version": {
+            "requires": "1.4.0"
           }
         }
       ],
@@ -73,10 +80,31 @@
           ]
         },
         {
+          "group": "androidx.annotation",
+          "module": "annotation-experimental",
+          "version": {
+            "requires": "1.4.0"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
           "group": "androidx.compose.material3",
           "module": "material3",
           "version": {
-            "requires": "1.2.0-beta02"
+            "requires": "1.2.0-rc01"
           },
           "excludes": [
             {
@@ -97,7 +125,7 @@
           "group": "androidx.compose.material3",
           "module": "material3-adaptive",
           "version": {
-            "requires": "1.0.0-alpha04"
+            "requires": "1.0.0-alpha05"
           },
           "excludes": [
             {
@@ -118,7 +146,7 @@
           "group": "androidx.compose.material3",
           "module": "material3-window-size-class",
           "version": {
-            "requires": "1.2.0-beta02"
+            "requires": "1.2.0-rc01"
           },
           "excludes": [
             {
@@ -139,7 +167,7 @@
           "group": "androidx.compose.ui",
           "module": "ui-util",
           "version": {
-            "requires": "1.6.0-beta01"
+            "requires": "1.6.0-rc01"
           },
           "excludes": [
             {
