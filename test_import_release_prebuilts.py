@@ -354,6 +354,8 @@ class TestDocsUpdate(unittest.TestCase):
             "androidx.glance:glance-appwidget-proto"))
         self.assertFalse(should_update_docs(
             "androidx.wear.tiles:tiles-proto"))
+        self.assertFalse(should_update_docs(
+            "androidx.privacysandbox.plugins:plugins-privacysandbox-library"))
 
     def test_should_update_docs_returns_true(self):
         with unittest.mock.patch('builtins.input', return_value="yes"):
