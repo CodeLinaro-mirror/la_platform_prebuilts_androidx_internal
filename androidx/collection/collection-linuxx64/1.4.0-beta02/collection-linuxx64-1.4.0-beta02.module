@@ -1,0 +1,98 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../collection/1.4.0-beta02/collection-1.4.0-beta02.module",
+    "group": "androidx.collection",
+    "module": "collection",
+    "version": "1.4.0-beta02",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.4"
+    }
+  },
+  "variants": [
+    {
+      "name": "linuxX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "linux_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.7.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.8.22"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.collection",
+          "module": "collection-ktx",
+          "version": {
+            "requires": "1.4.0-beta02"
+          },
+          "reason": "collection is in atomic group androidx.collection"
+        }
+      ],
+      "files": [
+        {
+          "name": "collection.klib",
+          "url": "collection-linuxx64-1.4.0-beta02.klib",
+          "size": 774379,
+          "sha512": "33d5339c404245615f3a3bf5f93eb0f93829356bd8c536eea08a734d2649d338d584eae82b5a73a39e74cb3660209fab99651a40d619785c386d9d1c8671d0fa",
+          "sha256": "1e7aad8aa41e6d0c3e427cba727e5b08750fa8a09d8e371b6f94f50bacb327ac",
+          "sha1": "e8f38845854096e8124468ae0fdace1ac41c017d",
+          "md5": "0e558e030d24ad47a6ee61491204d5d4"
+        }
+      ]
+    },
+    {
+      "name": "linuxX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "linux_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.collection",
+          "module": "collection-ktx",
+          "version": {
+            "requires": "1.4.0-beta02"
+          },
+          "reason": "collection is in atomic group androidx.collection"
+        }
+      ],
+      "files": [
+        {
+          "name": "collection-linuxx64-1.4.0-beta02-sources.jar",
+          "url": "collection-linuxx64-1.4.0-beta02-sources.jar",
+          "size": 227727,
+          "sha512": "d82e9e10fb6925cb6e21f84654c6fbf08cede429962f6cc11df9a712bff9a880af3e6ebbe8c38270684e93f4015a0ac356189a970c8f351a5cbcf122332f61a7",
+          "sha256": "bc7c697766aa83e1cf89a238d5c0c167868b9e288e86052a4e9d0d86d49c4540",
+          "sha1": "3393552bf3b4d802faf9c3730a3cf58b1e06a8d7",
+          "md5": "474c92c902b95be72011a8fda8c50374"
+        }
+      ]
+    }
+  ]
+}
