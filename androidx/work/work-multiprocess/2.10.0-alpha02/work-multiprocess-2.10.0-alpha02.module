@@ -1,0 +1,378 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.work",
+    "module": "work-multiprocess",
+    "version": "2.10.0-alpha02",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.7"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.work",
+          "module": "work-runtime",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          }
+        },
+        {
+          "group": "com.google.guava",
+          "module": "listenablefuture",
+          "version": {
+            "requires": "1.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.8.22"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-android",
+          "version": {
+            "requires": "1.7.3"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.work",
+          "module": "work-gcm",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "work-multiprocess is in atomic group androidx.work"
+        },
+        {
+          "group": "androidx.work",
+          "module": "work-runtime",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "work-multiprocess is in atomic group androidx.work"
+        },
+        {
+          "group": "androidx.work",
+          "module": "work-runtime-ktx",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "work-multiprocess is in atomic group androidx.work"
+        },
+        {
+          "group": "androidx.work",
+          "module": "work-rxjava2",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "work-multiprocess is in atomic group androidx.work"
+        },
+        {
+          "group": "androidx.work",
+          "module": "work-rxjava3",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "work-multiprocess is in atomic group androidx.work"
+        },
+        {
+          "group": "androidx.work",
+          "module": "work-testing",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "work-multiprocess is in atomic group androidx.work"
+        }
+      ],
+      "files": [
+        {
+          "name": "work-multiprocess-2.10.0-alpha02.aar",
+          "url": "work-multiprocess-2.10.0-alpha02.aar",
+          "size": 129596,
+          "sha512": "0930a0db4ad7d05193256bc36ceaf21d90af8493ded02eddb479a37fc9de1a49a52e97a5e03dfbab51f73e11c0ac45678b3182ae3056afa39531603e9e8dfbe5",
+          "sha256": "d9e49cd5b3df46cbf7f0f7a9efa3cfa1d0fedf17af58a259329c5c4da02da8f2",
+          "sha1": "a246a83c4fae4099756e6c31e5e16826a9ec306d",
+          "md5": "f94d2a54a953a4f8b30914b3ff103948"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.concurrent",
+          "module": "concurrent-futures-ktx",
+          "version": {
+            "requires": "1.2.0-alpha03"
+          }
+        },
+        {
+          "group": "androidx.core",
+          "module": "core",
+          "version": {
+            "requires": "1.12.0"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.6.1"
+          }
+        },
+        {
+          "group": "androidx.work",
+          "module": "work-runtime",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          }
+        },
+        {
+          "group": "com.google.guava",
+          "module": "listenablefuture",
+          "version": {
+            "requires": "1.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.8.22"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-android",
+          "version": {
+            "requires": "1.7.3"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.work",
+          "module": "work-gcm",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "work-multiprocess is in atomic group androidx.work"
+        },
+        {
+          "group": "androidx.work",
+          "module": "work-runtime",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "work-multiprocess is in atomic group androidx.work"
+        },
+        {
+          "group": "androidx.work",
+          "module": "work-runtime-ktx",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "work-multiprocess is in atomic group androidx.work"
+        },
+        {
+          "group": "androidx.work",
+          "module": "work-rxjava2",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "work-multiprocess is in atomic group androidx.work"
+        },
+        {
+          "group": "androidx.work",
+          "module": "work-rxjava3",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "work-multiprocess is in atomic group androidx.work"
+        },
+        {
+          "group": "androidx.work",
+          "module": "work-testing",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "work-multiprocess is in atomic group androidx.work"
+        }
+      ],
+      "files": [
+        {
+          "name": "work-multiprocess-2.10.0-alpha02.aar",
+          "url": "work-multiprocess-2.10.0-alpha02.aar",
+          "size": 129596,
+          "sha512": "0930a0db4ad7d05193256bc36ceaf21d90af8493ded02eddb479a37fc9de1a49a52e97a5e03dfbab51f73e11c0ac45678b3182ae3056afa39531603e9e8dfbe5",
+          "sha256": "d9e49cd5b3df46cbf7f0f7a9efa3cfa1d0fedf17af58a259329c5c4da02da8f2",
+          "sha1": "a246a83c4fae4099756e6c31e5e16826a9ec306d",
+          "md5": "f94d2a54a953a4f8b30914b3ff103948"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.work",
+          "module": "work-gcm",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "work-multiprocess is in atomic group androidx.work"
+        },
+        {
+          "group": "androidx.work",
+          "module": "work-runtime",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "work-multiprocess is in atomic group androidx.work"
+        },
+        {
+          "group": "androidx.work",
+          "module": "work-runtime-ktx",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "work-multiprocess is in atomic group androidx.work"
+        },
+        {
+          "group": "androidx.work",
+          "module": "work-rxjava2",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "work-multiprocess is in atomic group androidx.work"
+        },
+        {
+          "group": "androidx.work",
+          "module": "work-rxjava3",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "work-multiprocess is in atomic group androidx.work"
+        },
+        {
+          "group": "androidx.work",
+          "module": "work-testing",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "work-multiprocess is in atomic group androidx.work"
+        }
+      ],
+      "files": [
+        {
+          "name": "work-multiprocess-2.10.0-alpha02-sources.jar",
+          "url": "work-multiprocess-2.10.0-alpha02-sources.jar",
+          "size": 52657,
+          "sha512": "f5367b34a6af61caa1ff2cd70fb3ce8e32c2fd66cb1e321823eb4f29854170d666a2ff3f8988568286d1b5abd94658bf4e6a9649c2e6b71c15958342cb3a377d",
+          "sha256": "4edf21e555ea3b83ae876ee26be477ad4798d946edea7f1caa2488e65487053e",
+          "sha1": "5a9a2f0ca399a8f3f8673107b07e2ddb87b332be",
+          "md5": "516c1531ee473e322ad5c52c1a0094de"
+        }
+      ]
+    },
+    {
+      "name": "libraryVersionMetadata",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.usage": "library-version-metadata"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.work",
+          "module": "work-gcm",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "work-multiprocess is in atomic group androidx.work"
+        },
+        {
+          "group": "androidx.work",
+          "module": "work-runtime",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "work-multiprocess is in atomic group androidx.work"
+        },
+        {
+          "group": "androidx.work",
+          "module": "work-runtime-ktx",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "work-multiprocess is in atomic group androidx.work"
+        },
+        {
+          "group": "androidx.work",
+          "module": "work-rxjava2",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "work-multiprocess is in atomic group androidx.work"
+        },
+        {
+          "group": "androidx.work",
+          "module": "work-rxjava3",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "work-multiprocess is in atomic group androidx.work"
+        },
+        {
+          "group": "androidx.work",
+          "module": "work-testing",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "work-multiprocess is in atomic group androidx.work"
+        }
+      ],
+      "files": [
+        {
+          "name": "work-multiprocess-2.10.0-alpha02-versionMetadata.json",
+          "url": "work-multiprocess-2.10.0-alpha02-versionMetadata.json",
+          "size": 1175,
+          "sha512": "51c75c27a7234528b20cdea2cb897bea3294199a8f85259e09da82059f025bb33535e20510379dd549295f15b1d56d17b3ee649a2a0b3586d7c534ca3d5eb798",
+          "sha256": "ae61fed3b5aa75c62bfe4fa22b949375984e425d9eff173cebfdcbb0004133f8",
+          "sha1": "459103dd8d1c0ecd1dfdbeadc08f140563b7c8e4",
+          "md5": "5f209da3cf3660da5e8d746a1b0eae2e"
+        }
+      ]
+    }
+  ]
+}
