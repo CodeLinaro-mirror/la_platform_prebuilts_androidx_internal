@@ -1,0 +1,201 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.tracing",
+    "module": "tracing-perfetto",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.3.0"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.tracing",
+          "module": "tracing-perfetto-binary",
+          "version": {
+            "requires": "1.0.0"
+          },
+          "reason": "tracing-perfetto is in atomic group androidx.tracing"
+        },
+        {
+          "group": "androidx.tracing",
+          "module": "tracing-perfetto-handshake",
+          "version": {
+            "requires": "1.0.0"
+          },
+          "reason": "tracing-perfetto is in atomic group androidx.tracing"
+        }
+      ],
+      "files": [
+        {
+          "name": "tracing-perfetto-1.0.0.aar",
+          "url": "tracing-perfetto-1.0.0.aar",
+          "size": 36755,
+          "sha512": "69bebcc049c66251225949f2c298bb45a0f07321b70941298d58bdd5faa49bc698067b0cab5b5d18453d6ac4d4adf9bae63e646be532c97f4256e6e2cc3196d7",
+          "sha256": "a9a21fb415cc42497216004f4a35dc45f3158e4ba5ea1a01b449a20180b25a5e",
+          "sha1": "2a15c604277688349fb871307906557e2f9eba90",
+          "md5": "0e448dcae1e8225f73a4d082f9618268"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.3.0"
+          }
+        },
+        {
+          "group": "androidx.startup",
+          "module": "startup-runtime",
+          "version": {
+            "requires": "1.1.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.8.22"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.tracing",
+          "module": "tracing-perfetto-binary",
+          "version": {
+            "requires": "1.0.0"
+          },
+          "reason": "tracing-perfetto is in atomic group androidx.tracing"
+        },
+        {
+          "group": "androidx.tracing",
+          "module": "tracing-perfetto-handshake",
+          "version": {
+            "requires": "1.0.0"
+          },
+          "reason": "tracing-perfetto is in atomic group androidx.tracing"
+        }
+      ],
+      "files": [
+        {
+          "name": "tracing-perfetto-1.0.0.aar",
+          "url": "tracing-perfetto-1.0.0.aar",
+          "size": 36755,
+          "sha512": "69bebcc049c66251225949f2c298bb45a0f07321b70941298d58bdd5faa49bc698067b0cab5b5d18453d6ac4d4adf9bae63e646be532c97f4256e6e2cc3196d7",
+          "sha256": "a9a21fb415cc42497216004f4a35dc45f3158e4ba5ea1a01b449a20180b25a5e",
+          "sha1": "2a15c604277688349fb871307906557e2f9eba90",
+          "md5": "0e448dcae1e8225f73a4d082f9618268"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.tracing",
+          "module": "tracing-perfetto-binary",
+          "version": {
+            "requires": "1.0.0"
+          },
+          "reason": "tracing-perfetto is in atomic group androidx.tracing"
+        },
+        {
+          "group": "androidx.tracing",
+          "module": "tracing-perfetto-handshake",
+          "version": {
+            "requires": "1.0.0"
+          },
+          "reason": "tracing-perfetto is in atomic group androidx.tracing"
+        }
+      ],
+      "files": [
+        {
+          "name": "tracing-perfetto-1.0.0-sources.jar",
+          "url": "tracing-perfetto-1.0.0-sources.jar",
+          "size": 18664,
+          "sha512": "018c81f30bf4a22b983c6718f6cfce46f3d649172124ddf240a2747ce109a45444d68f64189abe601c23f1e650ba0667039de1f64a4cc70e23e40adbd8b0c6b8",
+          "sha256": "78e1b18438b4f190612bdba68d833096fa8ac0774aec593e9a94c5ccf6bf2a55",
+          "sha1": "a2ed70a735cde909330ee4fb34ac545ad0c72523",
+          "md5": "e83b5c21d89c5a1a141c60ad5802091e"
+        }
+      ]
+    },
+    {
+      "name": "libraryVersionMetadata",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.usage": "library-version-metadata"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.tracing",
+          "module": "tracing-perfetto-binary",
+          "version": {
+            "requires": "1.0.0"
+          },
+          "reason": "tracing-perfetto is in atomic group androidx.tracing"
+        },
+        {
+          "group": "androidx.tracing",
+          "module": "tracing-perfetto-handshake",
+          "version": {
+            "requires": "1.0.0"
+          },
+          "reason": "tracing-perfetto is in atomic group androidx.tracing"
+        }
+      ],
+      "files": [
+        {
+          "name": "tracing-perfetto-1.0.0-versionMetadata.json",
+          "url": "tracing-perfetto-1.0.0-versionMetadata.json",
+          "size": 559,
+          "sha512": "b2d8d6146cec2fc2897727c16e9fb9f2d976ad7b1f152886514a4cefe3a552d781c9e3f03aea3d9b3085a884cc6d696ce5435c5d625e9e3f7a989b58b877ace5",
+          "sha256": "02ddbc61aef80c7c02487342146a6b19a42b968b74aeec92ecc33418905f7b87",
+          "sha1": "c207414efcd035908bc478254f1febb97f9bd05f",
+          "md5": "711e5def47468e7ddbdfbee6f6a9b28d"
+        }
+      ]
+    }
+  ]
+}
