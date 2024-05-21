@@ -14,6 +14,9 @@
   <description>Testing components for the Jetpack Camera Library, a library providing a consistent and reliable camera foundation that enables great camera driven experiences across all of Android.</description>
   <url>https://developer.android.com/jetpack/androidx/releases/camera#1.0.0-alpha01</url>
   <inceptionYear>2019</inceptionYear>
+  <organization>
+    <name>The Android Open Source Project</name>
+  </organization>
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
@@ -30,6 +33,20 @@
     <connection>scm:git:https://android.googlesource.com/platform/frameworks/support</connection>
     <url>https://cs.android.com/androidx/platform/frameworks/support</url>
   </scm>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>androidx.camera</groupId>
+        <artifactId>camera-camera2-pipe</artifactId>
+        <version>1.0.0-alpha01</version>
+      </dependency>
+      <dependency>
+        <groupId>androidx.camera</groupId>
+        <artifactId>camera-camera2-pipe-integration</artifactId>
+        <version>1.0.0-alpha01</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <dependencies>
     <dependency>
       <groupId>androidx.annotation</groupId>
@@ -47,14 +64,14 @@
     <dependency>
       <groupId>androidx.camera</groupId>
       <artifactId>camera-core</artifactId>
-      <version>[1.3.2]</version>
+      <version>[1.4.0-beta01]</version>
       <scope>compile</scope>
       <type>aar</type>
     </dependency>
     <dependency>
       <groupId>androidx.camera</groupId>
       <artifactId>camera-video</artifactId>
-      <version>[1.3.2]</version>
+      <version>[1.4.0-beta01]</version>
       <scope>compile</scope>
       <type>aar</type>
     </dependency>
@@ -135,7 +152,7 @@
     <dependency>
       <groupId>org.jetbrains.kotlinx</groupId>
       <artifactId>kotlinx-coroutines-android</artifactId>
-      <version>1.7.1</version>
+      <version>1.7.3</version>
       <scope>runtime</scope>
     </dependency>
   </dependencies>
