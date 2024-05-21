@@ -102,9 +102,23 @@
     </dependency>
     <dependency>
       <groupId>androidx.compose.ui</groupId>
-      <artifactId>ui-text-android</artifactId>
-      <version>1.7.0-beta02</version>
-      <scope>compile</scope>
+      <artifactId>ui-text</artifactId>
+      <version>1.6.0</version>
+      <scope>runtime</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.jetbrains.kotlin</groupId>
+          <artifactId>kotlin-stdlib-common</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.jetbrains.kotlin</groupId>
+          <artifactId>kotlin-test-common</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.jetbrains.kotlin</groupId>
+          <artifactId>kotlin-test-annotations-common</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>androidx.compose.ui</groupId>
