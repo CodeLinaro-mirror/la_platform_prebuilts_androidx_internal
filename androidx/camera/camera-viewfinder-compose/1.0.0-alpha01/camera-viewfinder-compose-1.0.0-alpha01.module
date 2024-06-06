@@ -10,10 +10,30 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "8.5"
+      "version": "8.8-rc-1"
     }
   },
   "variants": [
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "camera-viewfinder-compose-1.0.0-alpha01-sources.jar",
+          "url": "camera-viewfinder-compose-1.0.0-alpha01-sources.jar",
+          "size": 12972,
+          "sha512": "36d09d44ed9d7a04e2cc515e2cbec2f2c1bd6b0f01b7667fef09566bd38ae7179eac8aa5e77cbaae7f35a7507870523855b4c7a3a2f3c0fb230a10ae9c2c0911",
+          "sha256": "9e33e0617e8f3654bd3917b0d36c642aec790d7cd1e5a8ca286238548676e6bc",
+          "sha1": "0ed22f30bab737b079f1537c9a1657cf90d81d0f",
+          "md5": "69f73f31e466de2bb49b038b5cc2aec1"
+        }
+      ]
+    },
     {
       "name": "releaseVariantReleaseApiPublication",
       "attributes": {
@@ -24,56 +44,22 @@
       },
       "dependencies": [
         {
-          "group": "org.jetbrains.kotlin",
-          "module": "kotlin-stdlib",
+          "group": "androidx.camera",
+          "module": "camera-viewfinder-core",
           "version": {
-            "requires": "1.8.22"
+            "requires": "1.4.0-alpha06"
           }
-        }
-      ],
-      "dependencyConstraints": [
-        {
-          "group": "androidx.camera",
-          "module": "camera-camera2-pipe",
-          "version": {
-            "requires": "1.0.0-alpha01"
-          },
-          "reason": "camera-viewfinder-compose is in atomic group androidx.camera"
-        },
-        {
-          "group": "androidx.camera",
-          "module": "camera-camera2-pipe-integration",
-          "version": {
-            "requires": "1.0.0-alpha01"
-          },
-          "reason": "camera-viewfinder-compose is in atomic group androidx.camera"
-        },
-        {
-          "group": "androidx.camera",
-          "module": "camera-effects",
-          "version": {
-            "requires": "1.0.0-alpha01"
-          },
-          "reason": "camera-viewfinder-compose is in atomic group androidx.camera"
-        },
-        {
-          "group": "androidx.camera",
-          "module": "camera-testing",
-          "version": {
-            "requires": "1.0.0-alpha01"
-          },
-          "reason": "camera-viewfinder-compose is in atomic group androidx.camera"
         }
       ],
       "files": [
         {
           "name": "camera-viewfinder-compose-1.0.0-alpha01.aar",
           "url": "camera-viewfinder-compose-1.0.0-alpha01.aar",
-          "size": 2158,
-          "sha512": "97daff29290e78b4b56a098ca257a76c33428391e932b86be43c3be77df97945fa93905165e859e3ebc03c5f9a0f325a959adef4478590c6de1b489d6ebcdc35",
-          "sha256": "59b8901727b18bc9ff769621188968077f2495d275f5af7cf22e28eacf963a68",
-          "sha1": "793a9f545bfb5ffd1bea9d12d5b9fd4f7c858ad7",
-          "md5": "08b7861dd195524439d20ddbef50e407"
+          "size": 38597,
+          "sha512": "df0c1f433cdee9828837a728b75f1439869fe484a7b11ab845dae05d0dc43fdb54e2b80bec5fd4ab79c2d0a2841a6e4e3895f793dabde017d2db2df27decffbf",
+          "sha256": "c11724c498efa2364d4fe1db71b622cc2dd7bc4f2e2442106332bc111c11ebe7",
+          "sha1": "e86545f1d9be4ddf5e6f483b8b695273d35928dd",
+          "md5": "b66cb1e8759720cac8b98aa788ff9e3e"
         }
       ]
     },
@@ -87,110 +73,64 @@
       },
       "dependencies": [
         {
+          "group": "androidx.camera",
+          "module": "camera-viewfinder-core",
+          "version": {
+            "requires": "1.4.0-alpha06"
+          }
+        },
+        {
+          "group": "androidx.compose.foundation",
+          "module": "foundation",
+          "version": {
+            "requires": "1.6.1"
+          }
+        },
+        {
+          "group": "androidx.compose.foundation",
+          "module": "foundation-layout",
+          "version": {
+            "requires": "1.6.1"
+          }
+        },
+        {
+          "group": "androidx.compose.runtime",
+          "module": "runtime",
+          "version": {
+            "requires": "1.6.1"
+          }
+        },
+        {
+          "group": "androidx.core",
+          "module": "core-ktx",
+          "version": {
+            "requires": "1.12.0"
+          }
+        },
+        {
           "group": "org.jetbrains.kotlin",
           "module": "kotlin-stdlib",
           "version": {
             "requires": "1.8.22"
           }
-        }
-      ],
-      "dependencyConstraints": [
-        {
-          "group": "androidx.camera",
-          "module": "camera-camera2-pipe",
-          "version": {
-            "requires": "1.0.0-alpha01"
-          },
-          "reason": "camera-viewfinder-compose is in atomic group androidx.camera"
         },
         {
-          "group": "androidx.camera",
-          "module": "camera-camera2-pipe-integration",
+          "group": "org.jetbrains.kotlinx",
+          "module": "atomicfu",
           "version": {
-            "requires": "1.0.0-alpha01"
-          },
-          "reason": "camera-viewfinder-compose is in atomic group androidx.camera"
-        },
-        {
-          "group": "androidx.camera",
-          "module": "camera-effects",
-          "version": {
-            "requires": "1.0.0-alpha01"
-          },
-          "reason": "camera-viewfinder-compose is in atomic group androidx.camera"
-        },
-        {
-          "group": "androidx.camera",
-          "module": "camera-testing",
-          "version": {
-            "requires": "1.0.0-alpha01"
-          },
-          "reason": "camera-viewfinder-compose is in atomic group androidx.camera"
+            "requires": "0.17.0"
+          }
         }
       ],
       "files": [
         {
           "name": "camera-viewfinder-compose-1.0.0-alpha01.aar",
           "url": "camera-viewfinder-compose-1.0.0-alpha01.aar",
-          "size": 2158,
-          "sha512": "97daff29290e78b4b56a098ca257a76c33428391e932b86be43c3be77df97945fa93905165e859e3ebc03c5f9a0f325a959adef4478590c6de1b489d6ebcdc35",
-          "sha256": "59b8901727b18bc9ff769621188968077f2495d275f5af7cf22e28eacf963a68",
-          "sha1": "793a9f545bfb5ffd1bea9d12d5b9fd4f7c858ad7",
-          "md5": "08b7861dd195524439d20ddbef50e407"
-        }
-      ]
-    },
-    {
-      "name": "sourcesElements",
-      "attributes": {
-        "org.gradle.category": "documentation",
-        "org.gradle.dependency.bundling": "external",
-        "org.gradle.docstype": "sources",
-        "org.gradle.usage": "java-runtime"
-      },
-      "dependencyConstraints": [
-        {
-          "group": "androidx.camera",
-          "module": "camera-camera2-pipe",
-          "version": {
-            "requires": "1.0.0-alpha01"
-          },
-          "reason": "camera-viewfinder-compose is in atomic group androidx.camera"
-        },
-        {
-          "group": "androidx.camera",
-          "module": "camera-camera2-pipe-integration",
-          "version": {
-            "requires": "1.0.0-alpha01"
-          },
-          "reason": "camera-viewfinder-compose is in atomic group androidx.camera"
-        },
-        {
-          "group": "androidx.camera",
-          "module": "camera-effects",
-          "version": {
-            "requires": "1.0.0-alpha01"
-          },
-          "reason": "camera-viewfinder-compose is in atomic group androidx.camera"
-        },
-        {
-          "group": "androidx.camera",
-          "module": "camera-testing",
-          "version": {
-            "requires": "1.0.0-alpha01"
-          },
-          "reason": "camera-viewfinder-compose is in atomic group androidx.camera"
-        }
-      ],
-      "files": [
-        {
-          "name": "camera-viewfinder-compose-1.0.0-alpha01-sources.jar",
-          "url": "camera-viewfinder-compose-1.0.0-alpha01-sources.jar",
-          "size": 794,
-          "sha512": "32e6df4225773993e3931f18b5eb7f36f0cf7b8aec7e6d5aeccf83a555b1b0cdae804c7d028c4552d1a556dc443c386e2a86fb7b1f7dca386a0041fdad7571fc",
-          "sha256": "da96d36f014fcf2d840e20d4de146f859a4a8ded0230213db0584b6133f95ea1",
-          "sha1": "32a09383fe811d118cbd08b1bc63c0cfed8fe9cd",
-          "md5": "fc7975875597ff2669314297d82aad6b"
+          "size": 38597,
+          "sha512": "df0c1f433cdee9828837a728b75f1439869fe484a7b11ab845dae05d0dc43fdb54e2b80bec5fd4ab79c2d0a2841a6e4e3895f793dabde017d2db2df27decffbf",
+          "sha256": "c11724c498efa2364d4fe1db71b622cc2dd7bc4f2e2442106332bc111c11ebe7",
+          "sha1": "e86545f1d9be4ddf5e6f483b8b695273d35928dd",
+          "md5": "b66cb1e8759720cac8b98aa788ff9e3e"
         }
       ]
     },
@@ -201,49 +141,15 @@
         "org.gradle.dependency.bundling": "external",
         "org.gradle.usage": "library-version-metadata"
       },
-      "dependencyConstraints": [
-        {
-          "group": "androidx.camera",
-          "module": "camera-camera2-pipe",
-          "version": {
-            "requires": "1.0.0-alpha01"
-          },
-          "reason": "camera-viewfinder-compose is in atomic group androidx.camera"
-        },
-        {
-          "group": "androidx.camera",
-          "module": "camera-camera2-pipe-integration",
-          "version": {
-            "requires": "1.0.0-alpha01"
-          },
-          "reason": "camera-viewfinder-compose is in atomic group androidx.camera"
-        },
-        {
-          "group": "androidx.camera",
-          "module": "camera-effects",
-          "version": {
-            "requires": "1.0.0-alpha01"
-          },
-          "reason": "camera-viewfinder-compose is in atomic group androidx.camera"
-        },
-        {
-          "group": "androidx.camera",
-          "module": "camera-testing",
-          "version": {
-            "requires": "1.0.0-alpha01"
-          },
-          "reason": "camera-viewfinder-compose is in atomic group androidx.camera"
-        }
-      ],
       "files": [
         {
           "name": "camera-viewfinder-compose-1.0.0-alpha01-versionMetadata.json",
           "url": "camera-viewfinder-compose-1.0.0-alpha01-versionMetadata.json",
-          "size": 2,
-          "sha512": "b25b294cb4deb69ea00a4c3cf3113904801b6015e5956bd019a8570b1fe1d6040e944ef3cdee16d0a46503ca6e659a25f21cf9ceddc13f352a3c98138c15d6af",
-          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-          "sha1": "97d170e1550eee4afc0af065b78cda302a97674c",
-          "md5": "d751713988987e9331980363e24189ce"
+          "size": 1222,
+          "sha512": "dd7593d0f88fde14d661c6cf4a84d479260d3fdfed639e944fe5af7cad7fa5e5d62e6e20f1e129357b189b3b8cc45540e04eb460204424d6d58f7ef88d777f65",
+          "sha256": "35fa5a87376afbb5661a0377bde8b1de4e5124ca469c55c6259cfcec69f50818",
+          "sha1": "2741ad4b690575b785da74ed24f4fed1b52be76f",
+          "md5": "ee4e6f0b3e0ddf16b1ebfe9b09ef857d"
         }
       ]
     }
