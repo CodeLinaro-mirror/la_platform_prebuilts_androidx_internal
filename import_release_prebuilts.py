@@ -293,6 +293,7 @@ def should_update_docs(new_maven_coordinates):
 		True for public docs, false for no public docs
 	"""
 	keywords_to_ignore = [
+		"samples", # sample source jars are now bundled with the sampling library's source jars and aren't their own entries
 		"extended",
 		"android-stubs",
 		"manifest",
@@ -317,7 +318,8 @@ def should_update_docs(new_maven_coordinates):
 		"tools-apigenerator",
 		"tools-apipackager",
 		"tools-core",
-		"-proto"
+		"-proto",
+		"plugins-privacysandbox-library"
 	]
 	coordinates_after_androidx = new_maven_coordinates.replace("androidx.", "")
 	for keyword in keywords_to_ignore:
@@ -343,10 +345,7 @@ def insert_new_artifact_into_dpbg(dpbg_lines, num_lines, new_maven_coordinates, 
 			break
 		else:
 			new_maven_coordinate_insert_line = i + 1
-	if "sample" in new_maven_coordinates:
-		build_gradle_line_prefix = "samples"
-	else:
-		build_gradle_line_prefix = "docs"
+	build_gradle_line_prefix = "docs"
 	# Failed to find a spot for the new groupID, so append it to the end of the LibraryGroup list
 	dpbg_lines.insert(new_maven_coordinate_insert_line,
 					  "    " + build_gradle_line_prefix + "(\"" + \
