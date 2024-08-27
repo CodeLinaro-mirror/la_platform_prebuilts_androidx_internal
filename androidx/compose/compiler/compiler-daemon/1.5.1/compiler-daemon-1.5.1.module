@@ -1,0 +1,199 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.compose.compiler",
+    "module": "compiler-daemon",
+    "version": "1.5.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.0"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.compose.compiler",
+          "module": "compiler",
+          "version": {
+            "requires": "1.5.1"
+          },
+          "reason": "compiler-daemon is in atomic group androidx.compose.compiler"
+        },
+        {
+          "group": "androidx.compose.compiler",
+          "module": "compiler-hosted",
+          "version": {
+            "requires": "1.5.1"
+          },
+          "reason": "compiler-daemon is in atomic group androidx.compose.compiler"
+        }
+      ],
+      "files": [
+        {
+          "name": "compiler-daemon-1.5.1.jar",
+          "url": "compiler-daemon-1.5.1.jar",
+          "size": 18777,
+          "sha512": "0b80dcd87257ae8b611608c5cf681186e5347d291ee364fca5477ff4a0535c12e80f4ca5dda4b5950d667ba50f957da4693da237d183514fc5ad91b6d8d0c2ee",
+          "sha256": "906acf63d1909c24f2318af2fc41b4d79174f6a71dec2db5e91ebe9c9afb0bb4",
+          "sha1": "7bc6d1aa89998956912884e64b904a80181ad804",
+          "md5": "71c3179a68ac352051b2676279279c33"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.compose.compiler",
+          "module": "compiler-hosted",
+          "version": {
+            "requires": "1.5.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-compiler",
+          "version": {
+            "requires": "1.9.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.8.22"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.compose.compiler",
+          "module": "compiler",
+          "version": {
+            "requires": "1.5.1"
+          },
+          "reason": "compiler-daemon is in atomic group androidx.compose.compiler"
+        },
+        {
+          "group": "androidx.compose.compiler",
+          "module": "compiler-hosted",
+          "version": {
+            "requires": "1.5.1"
+          },
+          "reason": "compiler-daemon is in atomic group androidx.compose.compiler"
+        }
+      ],
+      "files": [
+        {
+          "name": "compiler-daemon-1.5.1.jar",
+          "url": "compiler-daemon-1.5.1.jar",
+          "size": 18777,
+          "sha512": "0b80dcd87257ae8b611608c5cf681186e5347d291ee364fca5477ff4a0535c12e80f4ca5dda4b5950d667ba50f957da4693da237d183514fc5ad91b6d8d0c2ee",
+          "sha256": "906acf63d1909c24f2318af2fc41b4d79174f6a71dec2db5e91ebe9c9afb0bb4",
+          "sha1": "7bc6d1aa89998956912884e64b904a80181ad804",
+          "md5": "71c3179a68ac352051b2676279279c33"
+        }
+      ]
+    },
+    {
+      "name": "shadowRuntimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "shadowed",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.compose.compiler",
+          "module": "compiler",
+          "version": {
+            "requires": "1.5.1"
+          },
+          "reason": "compiler-daemon is in atomic group androidx.compose.compiler"
+        },
+        {
+          "group": "androidx.compose.compiler",
+          "module": "compiler-hosted",
+          "version": {
+            "requires": "1.5.1"
+          },
+          "reason": "compiler-daemon is in atomic group androidx.compose.compiler"
+        }
+      ],
+      "files": [
+        {
+          "name": "compiler-daemon-1.5.1-all.jar",
+          "url": "compiler-daemon-1.5.1-all.jar",
+          "size": 68450719,
+          "sha512": "8908d98581b116a296af4ca8cc4190a8f9e8f71069a0193cd0670627523a200f1328cafdc0d20431b300347ebe63886a304adb6e2a2a128fcaa8d8964f896ba8",
+          "sha256": "9ee47de600ad9fcd537f84bde612c6c3f845634cbbb8096e3637e1008beb8e87",
+          "sha1": "c93ba71e374a4c6af547fe1c3883af5794212786",
+          "md5": "eef15db37bcd964d71bc0c7a3f89b118"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.compose.compiler",
+          "module": "compiler",
+          "version": {
+            "requires": "1.5.1"
+          },
+          "reason": "compiler-daemon is in atomic group androidx.compose.compiler"
+        },
+        {
+          "group": "androidx.compose.compiler",
+          "module": "compiler-hosted",
+          "version": {
+            "requires": "1.5.1"
+          },
+          "reason": "compiler-daemon is in atomic group androidx.compose.compiler"
+        }
+      ],
+      "files": [
+        {
+          "name": "compiler-daemon-1.5.1-sources.jar",
+          "url": "compiler-daemon-1.5.1-sources.jar",
+          "size": 4922,
+          "sha512": "1de449cd75e4522c4746328ccdfb59514fe2fac45fc7dc38f2a420c156942b7aceacc8b8c27438060d56ba6409c008315d45df65fa39edc007394d36f6df939b",
+          "sha256": "545b90b10112b2bdb5d5ba51d64e03c034664f624ccdfbb1a1e7c8ad27f453b2",
+          "sha1": "b7feb7603e68dbf6e3a8053767de0e7f2017f214",
+          "md5": "22850fd6b00e301498c3390f676753cb"
+        }
+      ]
+    }
+  ]
+}
