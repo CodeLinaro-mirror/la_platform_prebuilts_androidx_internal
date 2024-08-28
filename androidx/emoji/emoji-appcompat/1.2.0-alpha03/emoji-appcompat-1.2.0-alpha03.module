@@ -10,13 +10,12 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "6.7.1",
-      "buildId:": "7077977"
+      "version": "8.0"
     }
   },
   "variants": [
     {
-      "name": "releaseApiPublication",
+      "name": "releaseVariantReleaseApiPublication",
       "attributes": {
         "org.gradle.category": "library",
         "org.gradle.dependency.bundling": "external",
@@ -25,17 +24,17 @@
       },
       "dependencies": [
         {
-          "group": "androidx.emoji",
-          "module": "emoji",
-          "version": {
-            "requires": "1.2.0-alpha03"
-          }
-        },
-        {
           "group": "androidx.appcompat",
           "module": "appcompat",
           "version": {
             "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.emoji",
+          "module": "emoji",
+          "version": {
+            "requires": "1.2.0-alpha03"
           }
         }
       ],
@@ -43,16 +42,16 @@
         {
           "name": "emoji-appcompat-1.2.0-alpha03.aar",
           "url": "emoji-appcompat-1.2.0-alpha03.aar",
-          "size": 15838,
-          "sha512": "676e9b421c29ef09cf9e46be107fb382662b05c7e492a8506d9b4ca16151ab7ff261069336e5924d6e9a1254e33887d1dac2336761861ac191815c3b05e77936",
-          "sha256": "c2e3c2eff0f53b2ba35ba3da9e63b2b37a59bd753a123ed082ebe884251ee6b2",
-          "sha1": "7221f0e24ad95f1be9acda8432804f40ab7a1b7f",
-          "md5": "02a99cb67d4e4c57852beccdba94f7e9"
+          "size": 5312,
+          "sha512": "24368756de620c18455cf0672a114de87533d436732d2367e967e3f9b6682107ed96190f900b0b4e61f43945dde70da987a7d79be00aad149851660cdda16365",
+          "sha256": "1cfae50f77da0074e8042ce8cac25d17d612f8b46dde881eb21136915abee5e4",
+          "sha1": "86c43ce6feb6e41fb2901ec11f782fcdbb2bf113",
+          "md5": "3f70e410e5077edf1d6a0444a3129027"
         }
       ]
     },
     {
-      "name": "releaseRuntimePublication",
+      "name": "releaseVariantReleaseRuntimePublication",
       "attributes": {
         "org.gradle.category": "library",
         "org.gradle.dependency.bundling": "external",
@@ -61,17 +60,17 @@
       },
       "dependencies": [
         {
-          "group": "androidx.emoji",
-          "module": "emoji",
-          "version": {
-            "requires": "1.2.0-alpha03"
-          }
-        },
-        {
           "group": "androidx.appcompat",
           "module": "appcompat",
           "version": {
             "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.emoji",
+          "module": "emoji",
+          "version": {
+            "requires": "1.2.0-alpha03"
           }
         }
       ],
@@ -79,11 +78,11 @@
         {
           "name": "emoji-appcompat-1.2.0-alpha03.aar",
           "url": "emoji-appcompat-1.2.0-alpha03.aar",
-          "size": 15838,
-          "sha512": "676e9b421c29ef09cf9e46be107fb382662b05c7e492a8506d9b4ca16151ab7ff261069336e5924d6e9a1254e33887d1dac2336761861ac191815c3b05e77936",
-          "sha256": "c2e3c2eff0f53b2ba35ba3da9e63b2b37a59bd753a123ed082ebe884251ee6b2",
-          "sha1": "7221f0e24ad95f1be9acda8432804f40ab7a1b7f",
-          "md5": "02a99cb67d4e4c57852beccdba94f7e9"
+          "size": 5312,
+          "sha512": "24368756de620c18455cf0672a114de87533d436732d2367e967e3f9b6682107ed96190f900b0b4e61f43945dde70da987a7d79be00aad149851660cdda16365",
+          "sha256": "1cfae50f77da0074e8042ce8cac25d17d612f8b46dde881eb21136915abee5e4",
+          "sha1": "86c43ce6feb6e41fb2901ec11f782fcdbb2bf113",
+          "md5": "3f70e410e5077edf1d6a0444a3129027"
         }
       ]
     },
@@ -100,10 +99,24 @@
           "name": "emoji-appcompat-1.2.0-alpha03-sources.jar",
           "url": "emoji-appcompat-1.2.0-alpha03-sources.jar",
           "size": 4355,
-          "sha512": "05730b58fb8391f28050b8cc51cfb42fdfc6c888cbb70b642d1e8b11f82b15946b65f05350de21d4f222e58f2e2d97ed4e195facd843c06552b784e7c4edd8ec",
-          "sha256": "8c37ea1aefdd5d8e36d6fd5d7535c6fdfadd02b61fa51c1e4178b0cec49e6de0",
-          "sha1": "6100352f9c99794e5ec330e4e428e344a7b3a245",
-          "md5": "d708308a2084b09201efe840d9541b78"
+          "sha512": "4b0784c824ce8ca8564cddad11a6915d96fb80180629a991fa3d7107548776fbaf4ed2d7bd1add20bfbdf534801511351051b03449ac9c04a4daed05e2e3fb38",
+          "sha256": "48e665648916a54b5fa2bc27e098dade0a0560c71b513eada5756ae5a8684b2d",
+          "sha1": "11eac9cc6466aae256bc9087b8637b7420f1df42",
+          "md5": "0a9526ea1638d679080f79d1e67c4808"
+        }
+      ]
+    },
+    {
+      "name": "libraryVersionMetadata",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.usage": "library-version-metadata"
+      },
+      "files": [
+        {
+          "name": "emoji-appcompat-1.2.0-alpha03-versionMetadata.json",
+          "url": "emoji-appcompat-1.2.0-alpha03-versionMetadata.json"
         }
       ]
     }
