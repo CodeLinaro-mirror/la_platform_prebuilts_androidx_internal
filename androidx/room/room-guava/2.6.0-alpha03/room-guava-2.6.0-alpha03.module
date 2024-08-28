@@ -1,0 +1,657 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.room",
+    "module": "room-guava",
+    "version": "2.6.0-alpha03",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.3-rc-1"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "excludes": [
+            {
+              "group": "com.google.guava",
+              "module": "listenablefuture"
+            }
+          ]
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing-testing",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-gradle-plugin",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-ktx",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-migration",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-guava",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava2",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava3",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava2",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava3",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-testing",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        }
+      ],
+      "files": [
+        {
+          "name": "room-guava-2.6.0-alpha03.aar",
+          "url": "room-guava-2.6.0-alpha03.aar",
+          "size": 7087,
+          "sha512": "a6433d7cd8d922666ff85095e3e3881fd66a341d4e34459f0012d9e45f67ce2e177e63206f004956c5f186752ffc12b927703d6247f98778e2c83e6c2e102318",
+          "sha256": "2921c84acc10ff40e2b40398dd6ac127a44b135073bb8704e0b4704f37be21b0",
+          "sha1": "5f7b6c625ace797c10bb03b855eb3364ce78ad32",
+          "md5": "b9e54002d28c58cfa594779defc6eaad"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.arch.core",
+          "module": "core-runtime",
+          "version": {
+            "requires": "2.2.0"
+          }
+        },
+        {
+          "group": "androidx.concurrent",
+          "module": "concurrent-futures",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "excludes": [
+            {
+              "group": "com.google.guava",
+              "module": "listenablefuture"
+            }
+          ]
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing-testing",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-gradle-plugin",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-ktx",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-migration",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-guava",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava2",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava3",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava2",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava3",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-testing",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        }
+      ],
+      "files": [
+        {
+          "name": "room-guava-2.6.0-alpha03.aar",
+          "url": "room-guava-2.6.0-alpha03.aar",
+          "size": 7087,
+          "sha512": "a6433d7cd8d922666ff85095e3e3881fd66a341d4e34459f0012d9e45f67ce2e177e63206f004956c5f186752ffc12b927703d6247f98778e2c83e6c2e102318",
+          "sha256": "2921c84acc10ff40e2b40398dd6ac127a44b135073bb8704e0b4704f37be21b0",
+          "sha1": "5f7b6c625ace797c10bb03b855eb3364ce78ad32",
+          "md5": "b9e54002d28c58cfa594779defc6eaad"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing-testing",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-gradle-plugin",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-ktx",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-migration",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-guava",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava2",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava3",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava2",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava3",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-testing",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        }
+      ],
+      "files": [
+        {
+          "name": "room-guava-2.6.0-alpha03-sources.jar",
+          "url": "room-guava-2.6.0-alpha03-sources.jar",
+          "size": 2395,
+          "sha512": "b9cfba6b18afbd36870f898ed1c9a625397322957c38023ab106b0ded355b14e841de34752de28c0945325c532749d262131f0f3abd837b4fe14bc770f0af656",
+          "sha256": "41addb638c8084be82bd3712f32747df53e9a7b45e6ad873e3a1a4001da84a00",
+          "sha1": "e09aad5d4466db7e4e7e11eb05fb8b828c7c783f",
+          "md5": "766e97be189de6a0503fd2b481e24027"
+        }
+      ]
+    },
+    {
+      "name": "libraryVersionMetadata",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.usage": "library-version-metadata"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing-testing",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-gradle-plugin",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-ktx",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-migration",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-guava",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava2",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava3",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava2",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava3",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-testing",
+          "version": {
+            "requires": "2.6.0-alpha03"
+          },
+          "reason": "room-guava is in atomic group androidx.room"
+        }
+      ],
+      "files": [
+        {
+          "name": "room-guava-2.6.0-alpha03-versionMetadata.json",
+          "url": "room-guava-2.6.0-alpha03-versionMetadata.json",
+          "size": 2,
+          "sha512": "b25b294cb4deb69ea00a4c3cf3113904801b6015e5956bd019a8570b1fe1d6040e944ef3cdee16d0a46503ca6e659a25f21cf9ceddc13f352a3c98138c15d6af",
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "sha1": "97d170e1550eee4afc0af065b78cda302a97674c",
+          "md5": "d751713988987e9331980363e24189ce"
+        }
+      ]
+    }
+  ]
+}
