@@ -1,0 +1,419 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../paging-compose/3.3.0-alpha04/paging-compose-3.3.0-alpha04.module",
+    "group": "androidx.paging",
+    "module": "paging-compose",
+    "version": "3.3.0-alpha04",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.7-rc-1"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.compose.foundation",
+          "module": "foundation",
+          "version": {
+            "requires": "1.5.0"
+          }
+        },
+        {
+          "group": "androidx.compose.runtime",
+          "module": "runtime",
+          "version": {
+            "requires": "1.5.0"
+          }
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-common",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.paging",
+          "module": "paging-common",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-common-ktx",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-guava",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-runtime",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-runtime-ktx",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-rxjava2",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-rxjava2-ktx",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-rxjava3",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-testing",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        }
+      ],
+      "files": [
+        {
+          "name": "paging-compose-release.aar",
+          "url": "paging-compose-android-3.3.0-alpha04.aar",
+          "size": 25588,
+          "sha512": "a534dea9bb74e993ce40ffb3e82a553cb4fd05aa79f695994788d5c6cb99db7016e98b101254d066889f905eb1ce6db3a05bb020c08564aaf422a2cc52dc4319",
+          "sha256": "8df484a42f950d38c4364e54d7bf41962c5bbce8dec6f45d49e61018b5566150",
+          "sha1": "3eeac85c25820ad20527a36cc2bd377d04588b41",
+          "md5": "134848c48af6e85462d299818df5c424"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.compose.foundation",
+          "module": "foundation",
+          "version": {
+            "requires": "1.5.0"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "androidx.compose.runtime",
+          "module": "runtime",
+          "version": {
+            "requires": "1.5.0"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-common",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.8.22"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.paging",
+          "module": "paging-common",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-common-ktx",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-guava",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-runtime",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-runtime-ktx",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-rxjava2",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-rxjava2-ktx",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-rxjava3",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-testing",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        }
+      ],
+      "files": [
+        {
+          "name": "paging-compose-release.aar",
+          "url": "paging-compose-android-3.3.0-alpha04.aar",
+          "size": 25588,
+          "sha512": "a534dea9bb74e993ce40ffb3e82a553cb4fd05aa79f695994788d5c6cb99db7016e98b101254d066889f905eb1ce6db3a05bb020c08564aaf422a2cc52dc4319",
+          "sha256": "8df484a42f950d38c4364e54d7bf41962c5bbce8dec6f45d49e61018b5566150",
+          "sha1": "3eeac85c25820ad20527a36cc2bd377d04588b41",
+          "md5": "134848c48af6e85462d299818df5c424"
+        }
+      ]
+    },
+    {
+      "name": "releaseSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "fake-sources",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.paging",
+          "module": "paging-common",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-common-ktx",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-guava",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-runtime",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-runtime-ktx",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-rxjava2",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-rxjava2-ktx",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-rxjava3",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-testing",
+          "version": {
+            "requires": "3.3.0-alpha04"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        }
+      ],
+      "files": [
+        {
+          "name": "paging-compose-android-3.3.0-alpha04-sources.jar",
+          "url": "paging-compose-android-3.3.0-alpha04-sources.jar",
+          "size": 7066,
+          "sha512": "a5b821bfabd5cfe44dfac52551b31132ef61286291b5a1b8dbc4954cb41e69c0b8e0fa066b9f571fc7016cc185a6547d6e1c037a96b2789d5376fc03a14816b5",
+          "sha256": "2bf53df78966d4d8c538376e52155f9748eed182576706f8e40d67baac2f83d5",
+          "sha1": "84ac408e6ff2a75eaa50d3f96491e4b78224ef5d",
+          "md5": "5b385c772134a4e0ffb51fb17f47a70a"
+        },
+        {
+          "name": "paging-compose-3.3.0-alpha04-samples-sources.jar",
+          "url": "paging-compose-android-3.3.0-alpha04-samples-sources.jar",
+          "size": 6202,
+          "sha512": "83a760566dc4b88ffc94aa01435a1410ba4146d282209cfdafe12a8a643ea75a320580f5c45ef2f72d45f13f0a004d0daf2b7ae0f2dae1a42d9731fcb282a6bc",
+          "sha256": "27d1b6075e7e872a64be2224a321b763fbf291c46847efa5f26ca60127a98508",
+          "sha1": "ca26a0c735c804f50802d6a9bfd5d86acdc4bbdf",
+          "md5": "d70812003680936ca1fffde2ddc393c1"
+        }
+      ]
+    }
+  ]
+}
