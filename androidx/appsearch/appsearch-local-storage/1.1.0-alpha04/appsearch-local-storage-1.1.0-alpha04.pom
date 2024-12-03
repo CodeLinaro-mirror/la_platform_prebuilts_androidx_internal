@@ -14,6 +14,9 @@
   <description>An implementation of AppSearchSession which uses local app storage and a local copy of the search library</description>
   <url>https://developer.android.com/jetpack/androidx/releases/appsearch#1.1.0-alpha04</url>
   <inceptionYear>2020</inceptionYear>
+  <organization>
+    <name>The Android Open Source Project</name>
+  </organization>
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
@@ -54,6 +57,11 @@
       </dependency>
       <dependency>
         <groupId>androidx.appsearch</groupId>
+        <artifactId>appsearch-external-protobuf</artifactId>
+        <version>1.1.0-alpha04</version>
+      </dependency>
+      <dependency>
+        <groupId>androidx.appsearch</groupId>
         <artifactId>appsearch-ktx</artifactId>
         <version>1.1.0-alpha04</version>
       </dependency>
@@ -73,7 +81,7 @@
     <dependency>
       <groupId>androidx.annotation</groupId>
       <artifactId>annotation</artifactId>
-      <version>1.1.0</version>
+      <version>1.8.1</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -84,9 +92,15 @@
       <type>aar</type>
     </dependency>
     <dependency>
+      <groupId>androidx.appsearch</groupId>
+      <artifactId>appsearch-external-protobuf</artifactId>
+      <version>[1.1.0-alpha04]</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
       <groupId>androidx.collection</groupId>
       <artifactId>collection</artifactId>
-      <version>1.2.0</version>
+      <version>1.4.2</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
@@ -98,7 +112,7 @@
     <dependency>
       <groupId>androidx.core</groupId>
       <artifactId>core</artifactId>
-      <version>1.2.0</version>
+      <version>1.6.0</version>
       <scope>runtime</scope>
       <type>aar</type>
     </dependency>

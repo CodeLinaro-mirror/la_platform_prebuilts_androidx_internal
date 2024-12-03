@@ -10,10 +10,96 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "8.0"
+      "version": "8.9"
     }
   },
   "variants": [
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.appsearch",
+          "module": "appsearch",
+          "version": {
+            "requires": "1.1.0-alpha04"
+          },
+          "reason": "appsearch-play-services-storage is in atomic group androidx.appsearch"
+        },
+        {
+          "group": "androidx.appsearch",
+          "module": "appsearch-builtin-types",
+          "version": {
+            "requires": "1.1.0-alpha04"
+          },
+          "reason": "appsearch-play-services-storage is in atomic group androidx.appsearch"
+        },
+        {
+          "group": "androidx.appsearch",
+          "module": "appsearch-compiler",
+          "version": {
+            "requires": "1.1.0-alpha04"
+          },
+          "reason": "appsearch-play-services-storage is in atomic group androidx.appsearch"
+        },
+        {
+          "group": "androidx.appsearch",
+          "module": "appsearch-debug-view",
+          "version": {
+            "requires": "1.1.0-alpha04"
+          },
+          "reason": "appsearch-play-services-storage is in atomic group androidx.appsearch"
+        },
+        {
+          "group": "androidx.appsearch",
+          "module": "appsearch-external-protobuf",
+          "version": {
+            "requires": "1.1.0-alpha04"
+          },
+          "reason": "appsearch-play-services-storage is in atomic group androidx.appsearch"
+        },
+        {
+          "group": "androidx.appsearch",
+          "module": "appsearch-ktx",
+          "version": {
+            "requires": "1.1.0-alpha04"
+          },
+          "reason": "appsearch-play-services-storage is in atomic group androidx.appsearch"
+        },
+        {
+          "group": "androidx.appsearch",
+          "module": "appsearch-local-storage",
+          "version": {
+            "requires": "1.1.0-alpha04"
+          },
+          "reason": "appsearch-play-services-storage is in atomic group androidx.appsearch"
+        },
+        {
+          "group": "androidx.appsearch",
+          "module": "appsearch-platform-storage",
+          "version": {
+            "requires": "1.1.0-alpha04"
+          },
+          "reason": "appsearch-play-services-storage is in atomic group androidx.appsearch"
+        }
+      ],
+      "files": [
+        {
+          "name": "appsearch-play-services-storage-1.1.0-alpha04-sources.jar",
+          "url": "appsearch-play-services-storage-1.1.0-alpha04-sources.jar",
+          "size": 34912,
+          "sha512": "6e9ff6bf43d32e0d32480fe41d053b414baeb5c8bfc013db9cfc54eadd2751c1727088c9463d6489d91bfb72c7da0cbf61e902610e8774ab6cea4e81fe07bbb1",
+          "sha256": "e7db41e25136fac00a0a5b3fc8fd060539fe6d06162c43612a2ef52e46e4c6d3",
+          "sha1": "df1f89fa0ea65f8bca8f8f9e77fcf759a39d75bd",
+          "md5": "5dd939d38455cbd2def2e35b54bc7fe8"
+        }
+      ]
+    },
     {
       "name": "releaseVariantReleaseApiPublication",
       "attributes": {
@@ -57,6 +143,14 @@
         },
         {
           "group": "androidx.appsearch",
+          "module": "appsearch-external-protobuf",
+          "version": {
+            "requires": "1.1.0-alpha04"
+          },
+          "reason": "appsearch-play-services-storage is in atomic group androidx.appsearch"
+        },
+        {
+          "group": "androidx.appsearch",
           "module": "appsearch-ktx",
           "version": {
             "requires": "1.1.0-alpha04"
@@ -84,11 +178,11 @@
         {
           "name": "appsearch-play-services-storage-1.1.0-alpha04.aar",
           "url": "appsearch-play-services-storage-1.1.0-alpha04.aar",
-          "size": 36916,
-          "sha512": "c6eaef69e21f3b86f2b36d90bdc66a05b54a71cbabf9c88efd814d1a80c9e189cabf61f672128ac57d16a2c5a7f4651e9bb5200228ca9cc71f451ddea2bddf96",
-          "sha256": "6e060c5a129a5e79cdd1cb719ecea4fff903a24a47cc3e3c91dcc30280c185ce",
-          "sha1": "7b4f9e0c948027adad7674bd315180fa2b2c5cc2",
-          "md5": "71b7839834a8a8b73155eac1832c5658"
+          "size": 49374,
+          "sha512": "a3d117eadf13ed0b75ee311c256aabe164d79f85d9ba01aa69ab230013f7000b169cfff883811c7b26f7d2158da9dd56549a23c7744f81d556034cb3e801f330",
+          "sha256": "aeb4e939365f055a92769aca7f2bb99aaff65fb1c732fabd4b8f193880fb1a28",
+          "sha1": "f538c9e3aeadceb4a83ca7a8f6ef7a52700f372c",
+          "md5": "62788a483c222f213cb7c2b44639d6d9"
         }
       ]
     },
@@ -112,7 +206,7 @@
           "group": "androidx.collection",
           "module": "collection",
           "version": {
-            "requires": "1.2.0"
+            "requires": "1.4.2"
           }
         },
         {
@@ -126,7 +220,7 @@
           "group": "androidx.core",
           "module": "core",
           "version": {
-            "requires": "1.12.0-beta01"
+            "requires": "1.12.0"
           }
         },
         {
@@ -182,6 +276,14 @@
         },
         {
           "group": "androidx.appsearch",
+          "module": "appsearch-external-protobuf",
+          "version": {
+            "requires": "1.1.0-alpha04"
+          },
+          "reason": "appsearch-play-services-storage is in atomic group androidx.appsearch"
+        },
+        {
+          "group": "androidx.appsearch",
           "module": "appsearch-ktx",
           "version": {
             "requires": "1.1.0-alpha04"
@@ -209,89 +311,11 @@
         {
           "name": "appsearch-play-services-storage-1.1.0-alpha04.aar",
           "url": "appsearch-play-services-storage-1.1.0-alpha04.aar",
-          "size": 36916,
-          "sha512": "c6eaef69e21f3b86f2b36d90bdc66a05b54a71cbabf9c88efd814d1a80c9e189cabf61f672128ac57d16a2c5a7f4651e9bb5200228ca9cc71f451ddea2bddf96",
-          "sha256": "6e060c5a129a5e79cdd1cb719ecea4fff903a24a47cc3e3c91dcc30280c185ce",
-          "sha1": "7b4f9e0c948027adad7674bd315180fa2b2c5cc2",
-          "md5": "71b7839834a8a8b73155eac1832c5658"
-        }
-      ]
-    },
-    {
-      "name": "sourcesElements",
-      "attributes": {
-        "org.gradle.category": "documentation",
-        "org.gradle.dependency.bundling": "external",
-        "org.gradle.docstype": "sources",
-        "org.gradle.usage": "java-runtime"
-      },
-      "dependencyConstraints": [
-        {
-          "group": "androidx.appsearch",
-          "module": "appsearch",
-          "version": {
-            "requires": "1.1.0-alpha04"
-          },
-          "reason": "appsearch-play-services-storage is in atomic group androidx.appsearch"
-        },
-        {
-          "group": "androidx.appsearch",
-          "module": "appsearch-builtin-types",
-          "version": {
-            "requires": "1.1.0-alpha04"
-          },
-          "reason": "appsearch-play-services-storage is in atomic group androidx.appsearch"
-        },
-        {
-          "group": "androidx.appsearch",
-          "module": "appsearch-compiler",
-          "version": {
-            "requires": "1.1.0-alpha04"
-          },
-          "reason": "appsearch-play-services-storage is in atomic group androidx.appsearch"
-        },
-        {
-          "group": "androidx.appsearch",
-          "module": "appsearch-debug-view",
-          "version": {
-            "requires": "1.1.0-alpha04"
-          },
-          "reason": "appsearch-play-services-storage is in atomic group androidx.appsearch"
-        },
-        {
-          "group": "androidx.appsearch",
-          "module": "appsearch-ktx",
-          "version": {
-            "requires": "1.1.0-alpha04"
-          },
-          "reason": "appsearch-play-services-storage is in atomic group androidx.appsearch"
-        },
-        {
-          "group": "androidx.appsearch",
-          "module": "appsearch-local-storage",
-          "version": {
-            "requires": "1.1.0-alpha04"
-          },
-          "reason": "appsearch-play-services-storage is in atomic group androidx.appsearch"
-        },
-        {
-          "group": "androidx.appsearch",
-          "module": "appsearch-platform-storage",
-          "version": {
-            "requires": "1.1.0-alpha04"
-          },
-          "reason": "appsearch-play-services-storage is in atomic group androidx.appsearch"
-        }
-      ],
-      "files": [
-        {
-          "name": "appsearch-play-services-storage-1.1.0-alpha04-sources.jar",
-          "url": "appsearch-play-services-storage-1.1.0-alpha04-sources.jar",
-          "size": 24581,
-          "sha512": "b6f2c3ed3468af10f025e87588d9e7897863f101decef5a17b8a41935b239602adc2ba856495d4fab64081abcb8aba6fbd866cfaab4e43e74f2226f05b719977",
-          "sha256": "5372b5566eab2121276b20858694c557db1fcb3c876b15f8ef93ccf5318e3b46",
-          "sha1": "8b8f99319d4e202750f4ba6e9171d4673f25839b",
-          "md5": "00a5c0dbf272cb500dae3b9bb2435816"
+          "size": 49374,
+          "sha512": "a3d117eadf13ed0b75ee311c256aabe164d79f85d9ba01aa69ab230013f7000b169cfff883811c7b26f7d2158da9dd56549a23c7744f81d556034cb3e801f330",
+          "sha256": "aeb4e939365f055a92769aca7f2bb99aaff65fb1c732fabd4b8f193880fb1a28",
+          "sha1": "f538c9e3aeadceb4a83ca7a8f6ef7a52700f372c",
+          "md5": "62788a483c222f213cb7c2b44639d6d9"
         }
       ]
     },
@@ -337,6 +361,14 @@
         },
         {
           "group": "androidx.appsearch",
+          "module": "appsearch-external-protobuf",
+          "version": {
+            "requires": "1.1.0-alpha04"
+          },
+          "reason": "appsearch-play-services-storage is in atomic group androidx.appsearch"
+        },
+        {
+          "group": "androidx.appsearch",
           "module": "appsearch-ktx",
           "version": {
             "requires": "1.1.0-alpha04"
@@ -364,11 +396,11 @@
         {
           "name": "appsearch-play-services-storage-1.1.0-alpha04-versionMetadata.json",
           "url": "appsearch-play-services-storage-1.1.0-alpha04-versionMetadata.json",
-          "size": 1291,
-          "sha512": "8222831de4cd75250945510d224e7726101474ed13f98fa5d9aeacd3dc17fb55292154e1e8a9e8541621de80b307b9edcac9170eea9cfe0d1480308f71afa0e4",
-          "sha256": "aee4acfb3cfca5be475644da0f333bc8304cf40bf57d2d78931943d1e5d1f544",
-          "sha1": "8995a547e1bfaae06854dc4d881e5f3576bd9b64",
-          "md5": "fe208365039b6484ae8fd99a29f7e123"
+          "size": 1584,
+          "sha512": "e5b4bb183559d827b3d24a87f0ffb4f8fd21749b7682dce3538820d776e5927ecf74efc07e8d4c11bc97bffd571cf986cefca21e9e693a183824c7a0160997dd",
+          "sha256": "7285c743d62555194c07463da07f0bd93df643bc55a5c7fb862f30ba8896d422",
+          "sha1": "2b06a04e8203f52f83631567d06ac10ef33f0f95",
+          "md5": "240097ebefac16a5274c0a49a2389d2e"
         }
       ]
     }
