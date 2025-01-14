@@ -1,0 +1,132 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../sqlite/2.5.0-alpha10/sqlite-2.5.0-alpha10.module",
+    "group": "androidx.sqlite",
+    "module": "sqlite",
+    "version": "2.5.0-alpha10",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.10.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "linuxX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "linux_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.8.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.8.22"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.sqlite",
+          "module": "sqlite-framework",
+          "version": {
+            "requires": "2.5.0-alpha10"
+          },
+          "reason": "sqlite is in atomic group androidx.sqlite"
+        },
+        {
+          "group": "androidx.sqlite",
+          "module": "sqlite-bundled",
+          "version": {
+            "requires": "2.5.0-alpha10"
+          },
+          "reason": "sqlite is in atomic group androidx.sqlite"
+        },
+        {
+          "group": "androidx.sqlite",
+          "module": "sqlite-ktx",
+          "version": {
+            "requires": "2.5.0-alpha10"
+          },
+          "reason": "sqlite is in atomic group androidx.sqlite"
+        }
+      ],
+      "files": [
+        {
+          "name": "sqlite.klib",
+          "url": "sqlite-linuxx64-2.5.0-alpha10.klib",
+          "size": 18408,
+          "sha512": "c29239265fa270a4171441ff6c354732b9773362b2a3836b7f5d2e313e9211d9328aaa42f627922608b513334fec31021296b8f0e0e8ba6c2154a920d27ea524",
+          "sha256": "bc4bdf76fbd5f84c12062208b32aaefdb6e7524f25391a2c27198c5cd41084e0",
+          "sha1": "5cbd417b1f5d5b72332294dd4f29332652bfcbcb",
+          "md5": "3ff29eea8293272ff8b18b2041e6e71f"
+        }
+      ]
+    },
+    {
+      "name": "linuxX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "linux_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.sqlite",
+          "module": "sqlite-framework",
+          "version": {
+            "requires": "2.5.0-alpha10"
+          },
+          "reason": "sqlite is in atomic group androidx.sqlite"
+        },
+        {
+          "group": "androidx.sqlite",
+          "module": "sqlite-bundled",
+          "version": {
+            "requires": "2.5.0-alpha10"
+          },
+          "reason": "sqlite is in atomic group androidx.sqlite"
+        },
+        {
+          "group": "androidx.sqlite",
+          "module": "sqlite-ktx",
+          "version": {
+            "requires": "2.5.0-alpha10"
+          },
+          "reason": "sqlite is in atomic group androidx.sqlite"
+        }
+      ],
+      "files": [
+        {
+          "name": "sqlite-linuxx64-2.5.0-alpha10-sources.jar",
+          "url": "sqlite-linuxx64-2.5.0-alpha10-sources.jar",
+          "size": 11441,
+          "sha512": "96e7c7281c7739b917713ca6889be7c5bf69358ae8fe89571a1038b28500585ee6e1d83525d4ac8f934dc4b62787d6d888ad84f564325f8cba49873a704a969a",
+          "sha256": "83296d8a89b6f36d6870ddf3643c33ba74e4685cd7984367ea594b23d60b5a84",
+          "sha1": "711c8092de290d0126a8f3bfbc0e3de33df20dbb",
+          "md5": "60acfad06245413206cc1eec5806f854"
+        }
+      ]
+    }
+  ]
+}
