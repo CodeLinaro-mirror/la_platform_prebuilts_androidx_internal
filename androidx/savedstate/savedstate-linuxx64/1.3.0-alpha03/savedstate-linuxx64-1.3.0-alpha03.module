@@ -1,0 +1,107 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../savedstate/1.3.0-alpha03/savedstate-1.3.0-alpha03.module",
+    "group": "androidx.savedstate",
+    "module": "savedstate",
+    "version": "1.3.0-alpha03",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.10.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "linuxX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "linux_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.8.0"
+          }
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-common",
+          "version": {
+            "requires": "2.9.0-alpha05"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.8.22"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.savedstate",
+          "module": "savedstate-ktx",
+          "version": {
+            "requires": "1.3.0-alpha03"
+          },
+          "reason": "savedstate is in atomic group androidx.savedstate"
+        }
+      ],
+      "files": [
+        {
+          "name": "savedstate.klib",
+          "url": "savedstate-linuxx64-1.3.0-alpha03.klib",
+          "size": 45231,
+          "sha512": "5dd640c84a2002b23eff2873b9194620dda1e25b43516c37d43938837a91943fd652b0761c57437fb8db551cd4be69d0eb5f85caa8fd672531cfa0c145cc79ee",
+          "sha256": "60bd23dda28fa4faa9f9b6e9b5d84bf7c35f0ebf2e78aa744531bb7e1f4c3596",
+          "sha1": "62fb74d5170ecc60a905316de94672d5eddfc445",
+          "md5": "1649f9226836fa5a798befbbf4d16327"
+        }
+      ]
+    },
+    {
+      "name": "linuxX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "linux_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.savedstate",
+          "module": "savedstate-ktx",
+          "version": {
+            "requires": "1.3.0-alpha03"
+          },
+          "reason": "savedstate is in atomic group androidx.savedstate"
+        }
+      ],
+      "files": [
+        {
+          "name": "savedstate-linuxx64-1.3.0-alpha03-sources.jar",
+          "url": "savedstate-linuxx64-1.3.0-alpha03-sources.jar",
+          "size": 25032,
+          "sha512": "1c568b16579b23b1dcbba2bf2abcbd182339dd37ad713dc57dd6f08c28290d777369c7ff1b3b4c490d92f553937ebb8369dccfe96e29f02e6192e0005190f2ff",
+          "sha256": "10fe3cf95676259b5872a0c4b725ee4c6f92a4bd2a6f95e7b54eb276c72fcbf6",
+          "sha1": "3aa15799b672400274956e16de72bded15004f08",
+          "md5": "d629ecc1601ba5a02edfc64cf7e24c46"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../collection/1.5.0-alpha04/collection-1.5.0-alpha04.module",
+    "group": "androidx.collection",
+    "module": "collection",
+    "version": "1.5.0-alpha04",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.10.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "linuxArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "linux_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.9.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.9.24"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.collection",
+          "module": "collection-ktx",
+          "version": {
+            "requires": "1.5.0-alpha04"
+          },
+          "reason": "collection is in atomic group androidx.collection"
+        }
+      ],
+      "files": [
+        {
+          "name": "collection.klib",
+          "url": "collection-linuxarm64-1.5.0-alpha04.klib",
+          "size": 950313,
+          "sha512": "a334ec35a93f9f6932f34ddae614f8399707c3c2210d5f312ba822490b882dad6538260fa46cae87b78f0a3205ac720efa41f97b9e87ab9e18fed6946b3016e8",
+          "sha256": "f6e8a8abccfd6aa44b8f1c34ff9b90f8357f879ef896c2dc85c491e0f8a09ad3",
+          "sha1": "6d8efa9254e4da615810125b138fafa8f2b486e6",
+          "md5": "9cdeeee1008d2064e735271ce65ac995"
+        }
+      ]
+    },
+    {
+      "name": "linuxArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "linux_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.collection",
+          "module": "collection-ktx",
+          "version": {
+            "requires": "1.5.0-alpha04"
+          },
+          "reason": "collection is in atomic group androidx.collection"
+        }
+      ],
+      "files": [
+        {
+          "name": "collection-linuxarm64-1.5.0-alpha04-sources.jar",
+          "url": "collection-linuxarm64-1.5.0-alpha04-sources.jar",
+          "size": 282468,
+          "sha512": "7092d45616241b9f303da23a5d1197824587860f4a19e83042fd1dc76e74dc07917e9c68c95d7bb03c753a6ef6c1ac64109b638cc31cd9b71ef7d66478d52de6",
+          "sha256": "38b6a2a1a2eaebf80fe43202d76139965847d6d2d6a9d391a9337afd4dd79375",
+          "sha1": "15de5781772522f466f09ab1f19e526a24182a0b",
+          "md5": "87332f3ccb7474a3283ae4f0b11d2571"
+        }
+      ]
+    }
+  ]
+}
