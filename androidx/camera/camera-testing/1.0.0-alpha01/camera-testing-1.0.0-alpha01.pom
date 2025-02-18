@@ -45,14 +45,53 @@
         <artifactId>camera-camera2-pipe-integration</artifactId>
         <version>1.0.0-alpha01</version>
       </dependency>
+      <dependency>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <artifactId>kotlin-stdlib</artifactId>
+        <version>1.8.22</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <dependencies>
     <dependency>
-      <groupId>androidx.annotation</groupId>
-      <artifactId>annotation</artifactId>
-      <version>1.2.0</version>
+      <groupId>androidx.test.uiautomator</groupId>
+      <artifactId>uiautomator</artifactId>
+      <version>2.2.0</version>
+      <scope>runtime</scope>
+      <type>aar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.jspecify</groupId>
+      <artifactId>jspecify</artifactId>
+      <version>1.0.0</version>
       <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>androidx.camera</groupId>
+      <artifactId>camera-lifecycle</artifactId>
+      <version>[1.5.0-alpha05]</version>
+      <scope>compile</scope>
+      <type>aar</type>
+    </dependency>
+    <dependency>
+      <groupId>androidx.camera</groupId>
+      <artifactId>camera-video</artifactId>
+      <version>[1.5.0-alpha05]</version>
+      <scope>compile</scope>
+      <type>aar</type>
+    </dependency>
+    <dependency>
+      <groupId>androidx.test</groupId>
+      <artifactId>core</artifactId>
+      <version>1.5.0</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>androidx.camera</groupId>
+      <artifactId>camera-camera2-pipe-integration</artifactId>
+      <version>[1.0.0-alpha01]</version>
+      <scope>runtime</scope>
+      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>androidx.appcompat</groupId>
@@ -62,26 +101,6 @@
       <type>aar</type>
     </dependency>
     <dependency>
-      <groupId>androidx.camera</groupId>
-      <artifactId>camera-core</artifactId>
-      <version>[1.4.0-beta02]</version>
-      <scope>compile</scope>
-      <type>aar</type>
-    </dependency>
-    <dependency>
-      <groupId>androidx.camera</groupId>
-      <artifactId>camera-video</artifactId>
-      <version>[1.4.0-beta02]</version>
-      <scope>compile</scope>
-      <type>aar</type>
-    </dependency>
-    <dependency>
-      <groupId>androidx.concurrent</groupId>
-      <artifactId>concurrent-futures</artifactId>
-      <version>1.0.0</version>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
       <groupId>androidx.core</groupId>
       <artifactId>core</artifactId>
       <version>1.1.0</version>
@@ -89,9 +108,22 @@
       <type>aar</type>
     </dependency>
     <dependency>
+      <groupId>androidx.camera</groupId>
+      <artifactId>camera-core</artifactId>
+      <version>[1.5.0-alpha05]</version>
+      <scope>compile</scope>
+      <type>aar</type>
+    </dependency>
+    <dependency>
+      <groupId>androidx.annotation</groupId>
+      <artifactId>annotation</artifactId>
+      <version>1.8.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
       <groupId>androidx.test</groupId>
-      <artifactId>core</artifactId>
-      <version>1.5.0</version>
+      <artifactId>runner</artifactId>
+      <version>1.5.2</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
@@ -101,9 +133,9 @@
       <scope>runtime</scope>
     </dependency>
     <dependency>
-      <groupId>androidx.test</groupId>
-      <artifactId>runner</artifactId>
-      <version>1.5.2</version>
+      <groupId>androidx.concurrent</groupId>
+      <artifactId>concurrent-futures</artifactId>
+      <version>1.0.0</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
@@ -113,17 +145,21 @@
       <scope>runtime</scope>
     </dependency>
     <dependency>
-      <groupId>androidx.test.espresso</groupId>
-      <artifactId>espresso-idling-resource</artifactId>
-      <version>3.5.0</version>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-stdlib</artifactId>
       <scope>runtime</scope>
     </dependency>
     <dependency>
-      <groupId>androidx.test.uiautomator</groupId>
-      <artifactId>uiautomator</artifactId>
-      <version>2.2.0</version>
+      <groupId>org.jetbrains.kotlinx</groupId>
+      <artifactId>atomicfu</artifactId>
+      <version>0.17.0</version>
       <scope>runtime</scope>
-      <type>aar</type>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.2</version>
+      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>com.google.guava</groupId>
@@ -138,21 +174,15 @@
       <scope>runtime</scope>
     </dependency>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.13.2</version>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.jetbrains.kotlin</groupId>
-      <artifactId>kotlin-stdlib</artifactId>
-      <version>1.8.22</version>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
       <groupId>org.jetbrains.kotlinx</groupId>
       <artifactId>kotlinx-coroutines-android</artifactId>
       <version>1.7.3</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>androidx.test.espresso</groupId>
+      <artifactId>espresso-idling-resource</artifactId>
+      <version>3.5.0</version>
       <scope>runtime</scope>
     </dependency>
   </dependencies>
