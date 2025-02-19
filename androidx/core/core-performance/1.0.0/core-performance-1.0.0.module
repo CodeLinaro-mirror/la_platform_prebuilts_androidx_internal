@@ -10,10 +10,40 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "8.7-rc-1"
+      "version": "8.12",
+      "buildId:": "13070254"
     }
   },
   "variants": [
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "core-performance-1.0.0-sources.jar",
+          "url": "core-performance-1.0.0-sources.jar",
+          "size": 7437,
+          "sha512": "2cae516e2491aafa11ccda4f7fd34a7a7d8bee2fd9b5823bcaffe20548d536cdca513a3d064385b746f72596b5eca0fbd20b29de64119262f0c89dc8f696f804",
+          "sha256": "5c3a3ef4c6ca34c4081d8162ee3d3422098004a4fb148e77ea371650cc79849b",
+          "sha1": "18457fa527711f2cef03fce69569c4e3f874cf94",
+          "md5": "39545ef4e05190a237510583a7c92e9f"
+        },
+        {
+          "name": "core-performance-1.0.0-samples-sources.jar",
+          "url": "core-performance-1.0.0-samples-sources.jar",
+          "size": 5960,
+          "sha512": "213440471ef17457a27fdc76445a67e66e1cd19b94c4a0804432bed26b3f61c266e66aefffd2d4298e1a951e95458153a19b849cc37793735c298af9f40731f7",
+          "sha256": "6b61acb1853d8be11bd434cbdeffd824f8329a5c5852268677ff887738e79ce3",
+          "sha1": "4492d226f8758effc3fe48655e98d9c178463ef0",
+          "md5": "f72cdf0b74825eae0442b98fc7969858"
+        }
+      ]
+    },
     {
       "name": "releaseVariantReleaseApiPublication",
       "attributes": {
@@ -23,6 +53,12 @@
         "org.gradle.usage": "java-api"
       },
       "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib"
+        }
+      ],
+      "dependencyConstraints": [
         {
           "group": "org.jetbrains.kotlin",
           "module": "kotlin-stdlib",
@@ -35,11 +71,11 @@
         {
           "name": "core-performance-1.0.0.aar",
           "url": "core-performance-1.0.0.aar",
-          "size": 5302,
-          "sha512": "b18bad740b2606f5ac355fc93e05f442bfb19fa6d127f33b08df1b143339ea79fae17ee6476f631d611722a7bb86c59b00daf3ac479dab564bd187ee57343b98",
-          "sha256": "38be8bca71fab83fcba1dca8dd0d57dbdb068bce23ae3d3330992f5711f01d86",
-          "sha1": "ad648ecbdce50a4c8cccb36b3e4060001f857a69",
-          "md5": "8df805778d8c1b913dad6963c785316c"
+          "size": 8962,
+          "sha512": "67e629fdd6a2edbce5dd2f956362a7250bd25f781d6256377ee0b00dd4483141effb214da7317c639f14659202d626a2af5a841ed92b883b9d1679c986a9e51e",
+          "sha256": "6f330fa889e014c8be42bca96ae03a777894239e462ccc1947d3893557105326",
+          "sha1": "80ea3cb0e5a72236cea3786e60178465b785b6d1",
+          "md5": "0ce3320d6e7c11d572287ea8ca6b5dc5"
         }
       ]
     },
@@ -54,10 +90,7 @@
       "dependencies": [
         {
           "group": "org.jetbrains.kotlin",
-          "module": "kotlin-stdlib",
-          "version": {
-            "requires": "1.8.22"
-          }
+          "module": "kotlin-stdlib"
         },
         {
           "group": "org.jetbrains.kotlinx",
@@ -67,44 +100,24 @@
           }
         }
       ],
+      "dependencyConstraints": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.8.22"
+          }
+        }
+      ],
       "files": [
         {
           "name": "core-performance-1.0.0.aar",
           "url": "core-performance-1.0.0.aar",
-          "size": 5302,
-          "sha512": "b18bad740b2606f5ac355fc93e05f442bfb19fa6d127f33b08df1b143339ea79fae17ee6476f631d611722a7bb86c59b00daf3ac479dab564bd187ee57343b98",
-          "sha256": "38be8bca71fab83fcba1dca8dd0d57dbdb068bce23ae3d3330992f5711f01d86",
-          "sha1": "ad648ecbdce50a4c8cccb36b3e4060001f857a69",
-          "md5": "8df805778d8c1b913dad6963c785316c"
-        }
-      ]
-    },
-    {
-      "name": "sourcesElements",
-      "attributes": {
-        "org.gradle.category": "documentation",
-        "org.gradle.dependency.bundling": "external",
-        "org.gradle.docstype": "sources",
-        "org.gradle.usage": "java-runtime"
-      },
-      "files": [
-        {
-          "name": "core-performance-1.0.0-sources.jar",
-          "url": "core-performance-1.0.0-sources.jar",
-          "size": 3298,
-          "sha512": "7d9f20a3098f4408f9498cb06bc0fce7a58592c942d07cd23d564ba83ee525f0a15b80c796363095b73683dd6d44f2eea7a145bb43fc7fba892adffa2e9e602a",
-          "sha256": "3ac6dd0115a9e4ec986950d9eb7767a85d0124d2990ec32ab8cf4ef790f3c35b",
-          "sha1": "122356a9ad8dc6751ad9b7930c35c856ab17b75c",
-          "md5": "d3a0ebb6dfe1865036487e0f15f3af86"
-        },
-        {
-          "name": "core-performance-1.0.0-samples-sources.jar",
-          "url": "core-performance-1.0.0-samples-sources.jar",
-          "size": 1793,
-          "sha512": "9b425832d11e66f537f9af77f6fa52edbafac7161271c4d4da6461f46d59edd8300e7b950a1207269a0b22656311c024e2bf7cdb64cc9c8e1cf9b20f02a8b578",
-          "sha256": "d010e6200daa28b4b85d2be82a027179d9cfe5ee42ae3f0f926dfc06111a2c74",
-          "sha1": "4afec8d344be46fa9fb1bf000a891a9f2247a4b7",
-          "md5": "af5193ead4d24913b6b0175d51744d0a"
+          "size": 8962,
+          "sha512": "67e629fdd6a2edbce5dd2f956362a7250bd25f781d6256377ee0b00dd4483141effb214da7317c639f14659202d626a2af5a841ed92b883b9d1679c986a9e51e",
+          "sha256": "6f330fa889e014c8be42bca96ae03a777894239e462ccc1947d3893557105326",
+          "sha1": "80ea3cb0e5a72236cea3786e60178465b785b6d1",
+          "md5": "0ce3320d6e7c11d572287ea8ca6b5dc5"
         }
       ]
     },
@@ -119,11 +132,11 @@
         {
           "name": "core-performance-1.0.0-versionMetadata.json",
           "url": "core-performance-1.0.0-versionMetadata.json",
-          "size": 378,
-          "sha512": "7088f77f5112542ef2d89640bf0ffaa58ba678d6e0f2893f95e372b1ab9cb2d1841285bfc09f3cf6caf754837b762dd0d7782fe3ffd4a9ac6237f01222098cea",
-          "sha256": "b19dc238fd2e77d7e9016fff524a85b7b5d8458bfacb8804be94d0f236a5df0c",
-          "sha1": "0666699a506c89952ef9a12e9cb5ca55b7766591",
-          "md5": "b43bb0be751f31227d79ed4350fc01c5"
+          "size": 320,
+          "sha512": "88a320fe7a48d21270318f62f3735709e5e487f5b8e98ca217484f1ebc0d58d67d7a79f4b18c2399a02759ba309f5806d01a52a8b0b123ea6661def487cda103",
+          "sha256": "17256bf92dcdf0d757fa018e9e7fc8b540326b370cd8a5c51bfd064a6263cc50",
+          "sha1": "84639f65362e69324a880ad49e979fc1ce211f8c",
+          "md5": "fe8d1ea227b65627fbe4a1dc026f0a1b"
         }
       ]
     }
