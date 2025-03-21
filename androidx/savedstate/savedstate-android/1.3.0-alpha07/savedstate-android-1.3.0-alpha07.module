@@ -1,0 +1,367 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../savedstate/1.3.0-alpha07/savedstate-1.3.0-alpha07.module",
+    "group": "androidx.savedstate",
+    "module": "savedstate",
+    "version": "1.3.0-alpha07",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.12",
+      "buildId:": "12961777"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.8.0"
+          }
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.8.1"
+          }
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-common",
+          "version": {
+            "requires": "2.9.0-alpha09"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib"
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-core",
+          "version": {
+            "requires": "1.7.3"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-serialization-core",
+          "version": {
+            "requires": "1.6.3"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.savedstate",
+          "module": "savedstate-compose",
+          "version": {
+            "requires": "1.3.0-alpha07"
+          },
+          "reason": "savedstate is in atomic group androidx.savedstate"
+        },
+        {
+          "group": "androidx.savedstate",
+          "module": "savedstate-ktx",
+          "version": {
+            "requires": "1.3.0-alpha07"
+          },
+          "reason": "savedstate is in atomic group androidx.savedstate"
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.9.24"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "savedstate-release.aar",
+          "url": "savedstate-android-1.3.0-alpha07.aar",
+          "size": 125578,
+          "sha512": "5d9bf93740011029dcd3083256f197943ab0099db3a1fb7c229a8b492421b7a36397bb565cb83cc9c360eb4f3fa711d99d9dda8462d791e835bc1a2a9e06a4db",
+          "sha256": "b757ac503b67e9fa028020d9f9fa7672317a3f3c1c06205024ec9eda9103bfe4",
+          "sha1": "52c13ee4d59acd7187f6c58e15ec068f2baf9ca2",
+          "md5": "7184b6fb4098f3e1a77ba21500537e37"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.8.0"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.8.1"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "androidx.core",
+          "module": "core-ktx",
+          "version": {
+            "requires": "1.13.1"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "androidx.core",
+          "module": "core-viewtree",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-common",
+          "version": {
+            "requires": "2.9.0-alpha09"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-core",
+          "version": {
+            "requires": "1.7.3"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-serialization-core",
+          "version": {
+            "requires": "1.6.3"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.savedstate",
+          "module": "savedstate-compose",
+          "version": {
+            "requires": "1.3.0-alpha07"
+          },
+          "reason": "savedstate is in atomic group androidx.savedstate"
+        },
+        {
+          "group": "androidx.savedstate",
+          "module": "savedstate-ktx",
+          "version": {
+            "requires": "1.3.0-alpha07"
+          },
+          "reason": "savedstate is in atomic group androidx.savedstate"
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.9.24"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "savedstate-release.aar",
+          "url": "savedstate-android-1.3.0-alpha07.aar",
+          "size": 125578,
+          "sha512": "5d9bf93740011029dcd3083256f197943ab0099db3a1fb7c229a8b492421b7a36397bb565cb83cc9c360eb4f3fa711d99d9dda8462d791e835bc1a2a9e06a4db",
+          "sha256": "b757ac503b67e9fa028020d9f9fa7672317a3f3c1c06205024ec9eda9103bfe4",
+          "sha1": "52c13ee4d59acd7187f6c58e15ec068f2baf9ca2",
+          "md5": "7184b6fb4098f3e1a77ba21500537e37"
+        }
+      ]
+    },
+    {
+      "name": "releaseSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "fake-sources",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.savedstate",
+          "module": "savedstate-compose",
+          "version": {
+            "requires": "1.3.0-alpha07"
+          },
+          "reason": "savedstate is in atomic group androidx.savedstate"
+        },
+        {
+          "group": "androidx.savedstate",
+          "module": "savedstate-ktx",
+          "version": {
+            "requires": "1.3.0-alpha07"
+          },
+          "reason": "savedstate is in atomic group androidx.savedstate"
+        }
+      ],
+      "files": [
+        {
+          "name": "savedstate-1.3.0-alpha07-samples-sources.jar",
+          "url": "savedstate-android-1.3.0-alpha07-samples-sources.jar",
+          "size": 7219,
+          "sha512": "c31f249a042c0b509f5a00225b7c7dfbf10ca31ee63d9b7f63ea798056cece33c8f07a1373fc98badcfd8ede087f28dc295dcca67826d92a48cc1e18ea33a647",
+          "sha256": "9a37759b8f909beaed3d5b36a37e02597220b5b337d98f963ab80c3b70774737",
+          "sha1": "7009d62978b433a9206399ebd795d6109608130f",
+          "md5": "89d3d00f4e2b15df134fb8dd4227cb7d"
+        },
+        {
+          "name": "savedstate-android-1.3.0-alpha07-sources.jar",
+          "url": "savedstate-android-1.3.0-alpha07-sources.jar",
+          "size": 43052,
+          "sha512": "2e9b12e0cd06cc9b4c339d524a69bbb58abbff100984eaa53b343cc2da0453f0575c247bb214bfd0170e31fae56730fff23e948a91adedad520d58bc7253a516",
+          "sha256": "6b323064746a2410ef087856e93494467b94ede1b05dc50fd898ad75cf433a16",
+          "sha1": "6f61130eccaeb78b5f088daf5f6a3bcefb229b3b",
+          "md5": "20709308f2a5b8942cdfa7967bd63cb6"
+        }
+      ]
+    }
+  ]
+}

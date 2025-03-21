@@ -1,0 +1,454 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../adaptive-layout/1.0.0/adaptive-layout-1.0.0.module",
+    "group": "androidx.compose.material3.adaptive",
+    "module": "adaptive-layout",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.8"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation-experimental",
+          "version": {
+            "requires": "1.4.0"
+          }
+        },
+        {
+          "group": "androidx.compose.animation",
+          "module": "animation-core",
+          "version": {
+            "requires": "1.7.0"
+          }
+        },
+        {
+          "group": "androidx.compose.material3.adaptive",
+          "module": "adaptive",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "androidx.compose.ui",
+          "module": "ui",
+          "version": {
+            "requires": "1.7.0"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.compose.material3.adaptive",
+          "module": "adaptive",
+          "version": {
+            "requires": "1.0.0"
+          },
+          "reason": "adaptive-layout is in atomic group androidx.compose.material3.adaptive"
+        },
+        {
+          "group": "androidx.compose.material3.adaptive",
+          "module": "adaptive-navigation",
+          "version": {
+            "requires": "1.0.0"
+          },
+          "reason": "adaptive-layout is in atomic group androidx.compose.material3.adaptive"
+        }
+      ],
+      "files": [
+        {
+          "name": "adaptive-layout-release.aar",
+          "url": "adaptive-layout-android-1.0.0.aar",
+          "size": 175880,
+          "sha512": "dc032bea6e0bf5bd81babbcd0b5a85a456ab0317a5a750782febaea7aaf2480d278515fc1abf766f630a9efcfd2737ba87c829d81081b394646ed6d37e748b16",
+          "sha256": "139a39ac98fed4c642ba1c0ebb7e10f5415b9b786d3e1c70384bfaf1b218b2b4",
+          "sha1": "3863e93f8f8cc92d65bfdb798e260417784327a7",
+          "md5": "fafe7eeadd2dc548fa42d8259ff34b88"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.1.0"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation-experimental",
+          "version": {
+            "requires": "1.4.0"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "androidx.compose.animation",
+          "module": "animation",
+          "version": {
+            "requires": "1.7.0"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "androidx.compose.animation",
+          "module": "animation-core",
+          "version": {
+            "requires": "1.7.0"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "androidx.compose.foundation",
+          "module": "foundation",
+          "version": {
+            "requires": "1.6.5"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "androidx.compose.foundation",
+          "module": "foundation-layout",
+          "version": {
+            "requires": "1.6.5"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "androidx.compose.material3.adaptive",
+          "module": "adaptive",
+          "version": {
+            "requires": "1.0.0"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "androidx.compose.ui",
+          "module": "ui",
+          "version": {
+            "requires": "1.7.0"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "androidx.compose.ui",
+          "module": "ui-geometry",
+          "version": {
+            "requires": "1.6.5"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "androidx.compose.ui",
+          "module": "ui-util",
+          "version": {
+            "requires": "1.6.5"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "androidx.window",
+          "module": "window-core",
+          "version": {
+            "requires": "1.3.0"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.8.22"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.8.22"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.compose.material3.adaptive",
+          "module": "adaptive",
+          "version": {
+            "requires": "1.0.0"
+          },
+          "reason": "adaptive-layout is in atomic group androidx.compose.material3.adaptive"
+        },
+        {
+          "group": "androidx.compose.material3.adaptive",
+          "module": "adaptive-navigation",
+          "version": {
+            "requires": "1.0.0"
+          },
+          "reason": "adaptive-layout is in atomic group androidx.compose.material3.adaptive"
+        }
+      ],
+      "files": [
+        {
+          "name": "adaptive-layout-release.aar",
+          "url": "adaptive-layout-android-1.0.0.aar",
+          "size": 175880,
+          "sha512": "dc032bea6e0bf5bd81babbcd0b5a85a456ab0317a5a750782febaea7aaf2480d278515fc1abf766f630a9efcfd2737ba87c829d81081b394646ed6d37e748b16",
+          "sha256": "139a39ac98fed4c642ba1c0ebb7e10f5415b9b786d3e1c70384bfaf1b218b2b4",
+          "sha1": "3863e93f8f8cc92d65bfdb798e260417784327a7",
+          "md5": "fafe7eeadd2dc548fa42d8259ff34b88"
+        }
+      ]
+    },
+    {
+      "name": "releaseSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "fake-sources",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.compose.material3.adaptive",
+          "module": "adaptive",
+          "version": {
+            "requires": "1.0.0"
+          },
+          "reason": "adaptive-layout is in atomic group androidx.compose.material3.adaptive"
+        },
+        {
+          "group": "androidx.compose.material3.adaptive",
+          "module": "adaptive-navigation",
+          "version": {
+            "requires": "1.0.0"
+          },
+          "reason": "adaptive-layout is in atomic group androidx.compose.material3.adaptive"
+        }
+      ],
+      "files": [
+        {
+          "name": "adaptive-layout-1.0.0-samples-sources.jar",
+          "url": "adaptive-layout-android-1.0.0-samples-sources.jar",
+          "size": 4295,
+          "sha512": "c6e2097adb2d8f8adb4a9ab27cfb2c9da63abc14d3cac8848493365343bd0cfe542ed6c182f251c233333a7d8b9cdf223606034d494644b34cd4edd6f6cf6ccf",
+          "sha256": "231efdc01c59b85451a553bd02674900032aa0cd58273c859ecccbf32606c4fd",
+          "sha1": "9ded2717ed46cb8820c49d9e46594baa3ed9a51d",
+          "md5": "3e47118ecee7c8122dfce6da7f77f48c"
+        },
+        {
+          "name": "adaptive-layout-android-1.0.0-sources.jar",
+          "url": "adaptive-layout-android-1.0.0-sources.jar",
+          "size": 37122,
+          "sha512": "3bfaa5852e655d2e76dc35747af9eafbfbab118f959584ad12d4c218c132f20a89bc18225861cccebe9aba564cd98728cabd6efd2023ebda33c16b3167250a13",
+          "sha256": "bb31b010ad846d7f99f04d5cc8417dd57954d5221589511c4b5d7e8d685c5c09",
+          "sha1": "7192b58e85908da1b9514f21b58e253a2a41bb6d",
+          "md5": "690ed6fa0d077762059729d77f6962a7"
+        }
+      ]
+    }
+  ]
+}
