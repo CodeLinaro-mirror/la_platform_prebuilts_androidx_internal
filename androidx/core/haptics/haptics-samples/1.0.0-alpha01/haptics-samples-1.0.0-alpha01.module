@@ -10,95 +10,11 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "8.7-rc-1"
+      "version": "8.12",
+      "buildId:": "13070254"
     }
   },
   "variants": [
-    {
-      "name": "releaseVariantReleaseApiPublication",
-      "attributes": {
-        "org.gradle.category": "library",
-        "org.gradle.dependency.bundling": "external",
-        "org.gradle.libraryelements": "aar",
-        "org.gradle.usage": "java-api"
-      },
-      "dependencies": [
-        {
-          "group": "org.jetbrains.kotlin",
-          "module": "kotlin-stdlib",
-          "version": {
-            "requires": "1.8.22"
-          }
-        }
-      ],
-      "dependencyConstraints": [
-        {
-          "group": "androidx.core.haptics",
-          "module": "haptics",
-          "version": {
-            "requires": "1.0.0-alpha01"
-          },
-          "reason": "haptics-samples is in atomic group androidx.core.haptics"
-        }
-      ],
-      "files": [
-        {
-          "name": "haptics-samples-1.0.0-alpha01.aar",
-          "url": "haptics-samples-1.0.0-alpha01.aar",
-          "size": 9003,
-          "sha512": "12932c5f9f63bf78a0d6c3aaaa94c54cc8afd9a76af23c4cf023e5615f1c176c52a69e15e4ede8d7fb766f484e983c7d7141f3674a7aa72cfd69fae2d42815bc",
-          "sha256": "c5383a2ad03df8e3102eb19717d6b57d379aafeb4bd2760dab3764c3dea7b522",
-          "sha1": "8060853ba23e9eba51ac973ad2acdb058f9fd02a",
-          "md5": "b2b21df5cb43f78d468f592d95bffd64"
-        }
-      ]
-    },
-    {
-      "name": "releaseVariantReleaseRuntimePublication",
-      "attributes": {
-        "org.gradle.category": "library",
-        "org.gradle.dependency.bundling": "external",
-        "org.gradle.libraryelements": "aar",
-        "org.gradle.usage": "java-runtime"
-      },
-      "dependencies": [
-        {
-          "group": "androidx.core.haptics",
-          "module": "haptics",
-          "version": {
-            "requires": "1.0.0-alpha01"
-          }
-        },
-        {
-          "group": "org.jetbrains.kotlin",
-          "module": "kotlin-stdlib",
-          "version": {
-            "requires": "1.8.22"
-          }
-        }
-      ],
-      "dependencyConstraints": [
-        {
-          "group": "androidx.core.haptics",
-          "module": "haptics",
-          "version": {
-            "requires": "1.0.0-alpha01"
-          },
-          "reason": "haptics-samples is in atomic group androidx.core.haptics"
-        }
-      ],
-      "files": [
-        {
-          "name": "haptics-samples-1.0.0-alpha01.aar",
-          "url": "haptics-samples-1.0.0-alpha01.aar",
-          "size": 9003,
-          "sha512": "12932c5f9f63bf78a0d6c3aaaa94c54cc8afd9a76af23c4cf023e5615f1c176c52a69e15e4ede8d7fb766f484e983c7d7141f3674a7aa72cfd69fae2d42815bc",
-          "sha256": "c5383a2ad03df8e3102eb19717d6b57d379aafeb4bd2760dab3764c3dea7b522",
-          "sha1": "8060853ba23e9eba51ac973ad2acdb058f9fd02a",
-          "md5": "b2b21df5cb43f78d468f592d95bffd64"
-        }
-      ]
-    },
     {
       "name": "sourcesElements",
       "attributes": {
@@ -121,11 +37,104 @@
         {
           "name": "haptics-samples-1.0.0-alpha01-sources.jar",
           "url": "haptics-samples-1.0.0-alpha01-sources.jar",
-          "size": 4733,
-          "sha512": "d70b6ef047e21fbcc4078fc3745c17ddbf66c85046a84465b648c800312da90178b098d08be0774d4d17166f4e2f760276662d15c9bb83f1ec2245f9d7480749",
-          "sha256": "e215660960282ab8f4e8969ccac0359df507124a16831ca68a9e2dc85be489c8",
-          "sha1": "352bd02d6ceced0d9f19aed9b5bc6e7137413c0a",
-          "md5": "796855e759cff9daa29bc3c9ac0b8378"
+          "size": 9064,
+          "sha512": "4c3a4367b3e3e7ecf8a8a8d57a0a6f6c36549f499e6d28b3939d3f713c053e9cb0f486c1ffa1da7637cd62231af74b8c35b0d2bcc9db75270d5759ddf39dff19",
+          "sha256": "9a7635cbbe98e1298ff7c4e5e374e3935eb2416842e9a3d931d6c755700ca801",
+          "sha1": "698ca311c6b1dd4e1701f78cc2e5dec4d604527a",
+          "md5": "fee40f62be623c83bfcb38d08455de05"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib"
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.core.haptics",
+          "module": "haptics",
+          "version": {
+            "requires": "1.0.0-alpha01"
+          },
+          "reason": "haptics-samples is in atomic group androidx.core.haptics"
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.8.22"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "haptics-samples-1.0.0-alpha01.aar",
+          "url": "haptics-samples-1.0.0-alpha01.aar",
+          "size": 13011,
+          "sha512": "26d095e8e068ef5e7821f576acdf5d94671fe26af34f4c1e347e1472acbb213b03c2dcc9efb88ef5124d916896d1c215a488fb3c5c3d02e86b43d224d8f41cf7",
+          "sha256": "07722d67f9b387f030be937b0a71332c614c380cdc7a47932b3c19e054a40a02",
+          "sha1": "c6582af44c073a064d232f3068c310eb9fdeb23e",
+          "md5": "52ab325d5e64c1eb349e177ff5d43e43"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.core.haptics",
+          "module": "haptics",
+          "version": {
+            "requires": "1.0.0-alpha01"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib"
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.core.haptics",
+          "module": "haptics",
+          "version": {
+            "requires": "1.0.0-alpha01"
+          },
+          "reason": "haptics-samples is in atomic group androidx.core.haptics"
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.8.22"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "haptics-samples-1.0.0-alpha01.aar",
+          "url": "haptics-samples-1.0.0-alpha01.aar",
+          "size": 13011,
+          "sha512": "26d095e8e068ef5e7821f576acdf5d94671fe26af34f4c1e347e1472acbb213b03c2dcc9efb88ef5124d916896d1c215a488fb3c5c3d02e86b43d224d8f41cf7",
+          "sha256": "07722d67f9b387f030be937b0a71332c614c380cdc7a47932b3c19e054a40a02",
+          "sha1": "c6582af44c073a064d232f3068c310eb9fdeb23e",
+          "md5": "52ab325d5e64c1eb349e177ff5d43e43"
         }
       ]
     }
