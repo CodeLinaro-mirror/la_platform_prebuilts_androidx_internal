@@ -2,6 +2,7 @@
 
 from collections import defaultdict
 from distutils.dir_util import copy_tree
+from distutils.errors import DistutilsFileError
 from shutil import rmtree
 import argparse
 import glob
@@ -292,6 +293,7 @@ def should_update_docs(new_maven_coordinates):
 		True for public docs, false for no public docs
 	"""
 	keywords_to_ignore = [
+		"samples", # sample source jars are now bundled with the sampling library's source jars and aren't their own entries
 		"extended",
 		"android-stubs",
 		"manifest",
@@ -304,7 +306,7 @@ def should_update_docs(new_maven_coordinates):
 		"internal",
 		"jvm",
 		"pipe",
-		"binary"
+		"binary",
 		"linux",
 		"android",
 		"macosx64",
@@ -312,10 +314,16 @@ def should_update_docs(new_maven_coordinates):
 		"iosarm64",
 		"iossimulatorarm64",
 		"iosx64",
-		"linuxx64"
+		"linuxx64",
+		"tools-apigenerator",
+		"tools-apipackager",
+		"tools-core",
+		"-proto",
+		"plugins-privacysandbox-library"
 	]
+	coordinates_after_androidx = new_maven_coordinates.replace("androidx.", "")
 	for keyword in keywords_to_ignore:
-		if keyword in new_maven_coordinates:
+		if keyword in coordinates_after_androidx:
 			return False
 	return ask_yes_or_no(
 		"Should public docs be updated for new artifact %s?" % new_maven_coordinates)
@@ -329,7 +337,7 @@ def insert_new_artifact_into_dpbg(dpbg_lines, num_lines, new_maven_coordinates, 
 	for i in range(num_lines):
 		cur_line = dpbg_lines[i]
 		# Skip any line that doesn't declare a version
-		if 'androidx.' not in cur_line or 'namespace' in cur_line: continue
+		if 'androidx.' not in cur_line or 'namespace' in cur_line or '//' in cur_line: continue
 		group_id, artifact_id, outdated_ver = get_maven_coordinate_from_docs_public_build_gradle_line(cur_line)
 		# Iterate through until you found the alphabetical place to insert the new artifact
 		if new_maven_coordinates <= group_id + ":" + artifact_id:
@@ -337,10 +345,7 @@ def insert_new_artifact_into_dpbg(dpbg_lines, num_lines, new_maven_coordinates, 
 			break
 		else:
 			new_maven_coordinate_insert_line = i + 1
-	if "sample" in new_maven_coordinates:
-		build_gradle_line_prefix = "samples"
-	else:
-		build_gradle_line_prefix = "docs"
+	build_gradle_line_prefix = "docs"
 	# Failed to find a spot for the new groupID, so append it to the end of the LibraryGroup list
 	dpbg_lines.insert(new_maven_coordinate_insert_line,
 					  "    " + build_gradle_line_prefix + "(\"" + \
@@ -469,7 +474,7 @@ def generate_updated_docs_public_build_gradle(artifact_ver_map,
 	for i in range(num_lines):
 		cur_line = dpbg_lines[i]
 		# Skip any line that doesn't declare a version or skip a line that defines the namespace
-		if 'androidx.' not in cur_line or 'namespace' in cur_line : continue
+		if 'androidx.' not in cur_line or 'namespace' in cur_line or '//' in cur_line : continue
 		group_id, artifact_id, outdated_ver = get_maven_coordinate_from_docs_public_build_gradle_line(cur_line)
 		ver_index = cur_line.find(outdated_ver)
 		artifact_coordinate = group_id + ":" + artifact_id
