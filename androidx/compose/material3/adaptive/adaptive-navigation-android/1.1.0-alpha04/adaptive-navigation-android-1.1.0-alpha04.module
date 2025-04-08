@@ -1,0 +1,332 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../adaptive-navigation/1.1.0-alpha04/adaptive-navigation-1.1.0-alpha04.module",
+    "group": "androidx.compose.material3.adaptive",
+    "module": "adaptive-navigation",
+    "version": "1.1.0-alpha04",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.10.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.8.1"
+          }
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation-experimental",
+          "version": {
+            "requires": "1.4.1"
+          }
+        },
+        {
+          "group": "androidx.compose.material3.adaptive",
+          "module": "adaptive-layout",
+          "version": {
+            "requires": "1.1.0-alpha04"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.compose.material3.adaptive",
+          "module": "adaptive",
+          "version": {
+            "requires": "1.1.0-alpha04"
+          },
+          "reason": "adaptive-navigation is in atomic group androidx.compose.material3.adaptive"
+        },
+        {
+          "group": "androidx.compose.material3.adaptive",
+          "module": "adaptive-layout",
+          "version": {
+            "requires": "1.1.0-alpha04"
+          },
+          "reason": "adaptive-navigation is in atomic group androidx.compose.material3.adaptive"
+        },
+        {
+          "group": "androidx.compose.material3.adaptive",
+          "module": "adaptive-render-strategy",
+          "version": {
+            "requires": "1.1.0-alpha04"
+          },
+          "reason": "adaptive-navigation is in atomic group androidx.compose.material3.adaptive"
+        }
+      ],
+      "files": [
+        {
+          "name": "adaptive-navigation-release.aar",
+          "url": "adaptive-navigation-android-1.1.0-alpha04.aar",
+          "size": 54571,
+          "sha512": "589a9609608b5dee455836f7b1d7a011a8b434980a2917562445be920ac49753e56b6e2767fc1f1f7a3252a373d68ff01c076d545a322cac7fa8d39fddc24ecf",
+          "sha256": "6f081d86659e8f8a93b0eed534d3cc03cf066a9107193b84da033be072e16055",
+          "sha1": "fd9b8efe2d018fcc58d3979bf4329f107338a636",
+          "md5": "03be72cb3734fb2110df220fc7ab1e0b"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.activity",
+          "module": "activity-compose",
+          "version": {
+            "requires": "1.8.2"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.8.1"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation-experimental",
+          "version": {
+            "requires": "1.4.1"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "androidx.compose.foundation",
+          "module": "foundation",
+          "version": {
+            "requires": "1.6.5"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "androidx.compose.material3.adaptive",
+          "module": "adaptive-layout",
+          "version": {
+            "requires": "1.1.0-alpha04"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "androidx.compose.ui",
+          "module": "ui-util",
+          "version": {
+            "requires": "1.6.5"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.8.22"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.compose.material3.adaptive",
+          "module": "adaptive",
+          "version": {
+            "requires": "1.1.0-alpha04"
+          },
+          "reason": "adaptive-navigation is in atomic group androidx.compose.material3.adaptive"
+        },
+        {
+          "group": "androidx.compose.material3.adaptive",
+          "module": "adaptive-layout",
+          "version": {
+            "requires": "1.1.0-alpha04"
+          },
+          "reason": "adaptive-navigation is in atomic group androidx.compose.material3.adaptive"
+        },
+        {
+          "group": "androidx.compose.material3.adaptive",
+          "module": "adaptive-render-strategy",
+          "version": {
+            "requires": "1.1.0-alpha04"
+          },
+          "reason": "adaptive-navigation is in atomic group androidx.compose.material3.adaptive"
+        }
+      ],
+      "files": [
+        {
+          "name": "adaptive-navigation-release.aar",
+          "url": "adaptive-navigation-android-1.1.0-alpha04.aar",
+          "size": 54571,
+          "sha512": "589a9609608b5dee455836f7b1d7a011a8b434980a2917562445be920ac49753e56b6e2767fc1f1f7a3252a373d68ff01c076d545a322cac7fa8d39fddc24ecf",
+          "sha256": "6f081d86659e8f8a93b0eed534d3cc03cf066a9107193b84da033be072e16055",
+          "sha1": "fd9b8efe2d018fcc58d3979bf4329f107338a636",
+          "md5": "03be72cb3734fb2110df220fc7ab1e0b"
+        }
+      ]
+    },
+    {
+      "name": "releaseSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "fake-sources",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.compose.material3.adaptive",
+          "module": "adaptive",
+          "version": {
+            "requires": "1.1.0-alpha04"
+          },
+          "reason": "adaptive-navigation is in atomic group androidx.compose.material3.adaptive"
+        },
+        {
+          "group": "androidx.compose.material3.adaptive",
+          "module": "adaptive-layout",
+          "version": {
+            "requires": "1.1.0-alpha04"
+          },
+          "reason": "adaptive-navigation is in atomic group androidx.compose.material3.adaptive"
+        },
+        {
+          "group": "androidx.compose.material3.adaptive",
+          "module": "adaptive-render-strategy",
+          "version": {
+            "requires": "1.1.0-alpha04"
+          },
+          "reason": "adaptive-navigation is in atomic group androidx.compose.material3.adaptive"
+        }
+      ],
+      "files": [
+        {
+          "name": "adaptive-navigation-android-1.1.0-alpha04-sources.jar",
+          "url": "adaptive-navigation-android-1.1.0-alpha04-sources.jar",
+          "size": 15944,
+          "sha512": "8cca7df54b60a2ef16c0214c4ea7ef656a0f5da3491614460563115fd625772b3b55c614f9d66004719cdee8db397a4387a190bb5327460787f4d28a2f6b26b8",
+          "sha256": "ab44fde9e33cb66f0d0877cd250441ddd2cba01790f1c24bd6a8af7c728950da",
+          "sha1": "b09354356eaa17e515c4a339b5a2cac976f81b81",
+          "md5": "0d6fc1a55002b02b023aa0a0b51b6161"
+        }
+      ]
+    }
+  ]
+}
