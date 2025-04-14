@@ -10,10 +10,31 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "8.0"
+      "version": "8.12",
+      "buildId:": "13119279"
     }
   },
   "variants": [
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "sidecar-1.0.0-rc01-sources.jar",
+          "url": "sidecar-1.0.0-rc01-sources.jar",
+          "size": 10406,
+          "sha512": "fe2e563d1dbace26dc974bf05927d73c5160d97702ca4b095be900cdc14832b4d6c7b39fd8ed5a189f95ba02c5060c434d5565eb9a40caaf32da4310f8accf56",
+          "sha256": "b7858165144fd469e2856946c942873456fd3d497f6faccb3ff361dbcdaf3b21",
+          "sha1": "31f591270c1fb6ff15ed2ea9e88e958988fd699e",
+          "md5": "1104f2729805d7d2ff4efa40257da577"
+        }
+      ]
+    },
     {
       "name": "releaseVariantReleaseApiPublication",
       "attributes": {
@@ -22,15 +43,24 @@
         "org.gradle.libraryelements": "aar",
         "org.gradle.usage": "java-api"
       },
+      "dependencies": [
+        {
+          "group": "org.jspecify",
+          "module": "jspecify",
+          "version": {
+            "requires": "1.0.0"
+          }
+        }
+      ],
       "files": [
         {
           "name": "sidecar-1.0.0-rc01.aar",
           "url": "sidecar-1.0.0-rc01.aar",
-          "size": 6050,
-          "sha512": "dbda41e956faabeea26ce4702c9fe5d39a11babbcf82fd15e7b8cb88d7b7e025dcd3a2c9b2838bb9f0b57a09e3fc2a84111b4eba26aa6d4c98f52d8d068ec916",
-          "sha256": "df150f24ac9b9ede7b088f46b8365645aa2c4b8a4386847ff03d60acc0bfbf85",
-          "sha1": "17c725e463dbbeb5e308fdd5b2710aeab0fb2256",
-          "md5": "f04e305fe70245ab6f5e9bc8e22a3b6b"
+          "size": 9526,
+          "sha512": "a4d508b0873e5e18d506c02e5e74bbb993a06d8edcd03136251293df1afca20baf525d223c7278f07c2aa7c9c551f3bf47ccbcb3e771929ba2cde0d800e36996",
+          "sha256": "14c8f56050e4a22b5af3e2b252bf1494dd0b3d0e7ee0758e8a885fa237fd925e",
+          "sha1": "a9f264b546fe3fba194998326724deafee48e130",
+          "md5": "b4a74294c8df140fe9201d6c2f32bdb4"
         }
       ]
     },
@@ -47,7 +77,14 @@
           "group": "androidx.annotation",
           "module": "annotation",
           "version": {
-            "requires": "1.1.0"
+            "requires": "1.8.1"
+          }
+        },
+        {
+          "group": "org.jspecify",
+          "module": "jspecify",
+          "version": {
+            "requires": "1.0.0"
           }
         }
       ],
@@ -55,31 +92,30 @@
         {
           "name": "sidecar-1.0.0-rc01.aar",
           "url": "sidecar-1.0.0-rc01.aar",
-          "size": 6050,
-          "sha512": "dbda41e956faabeea26ce4702c9fe5d39a11babbcf82fd15e7b8cb88d7b7e025dcd3a2c9b2838bb9f0b57a09e3fc2a84111b4eba26aa6d4c98f52d8d068ec916",
-          "sha256": "df150f24ac9b9ede7b088f46b8365645aa2c4b8a4386847ff03d60acc0bfbf85",
-          "sha1": "17c725e463dbbeb5e308fdd5b2710aeab0fb2256",
-          "md5": "f04e305fe70245ab6f5e9bc8e22a3b6b"
+          "size": 9526,
+          "sha512": "a4d508b0873e5e18d506c02e5e74bbb993a06d8edcd03136251293df1afca20baf525d223c7278f07c2aa7c9c551f3bf47ccbcb3e771929ba2cde0d800e36996",
+          "sha256": "14c8f56050e4a22b5af3e2b252bf1494dd0b3d0e7ee0758e8a885fa237fd925e",
+          "sha1": "a9f264b546fe3fba194998326724deafee48e130",
+          "md5": "b4a74294c8df140fe9201d6c2f32bdb4"
         }
       ]
     },
     {
-      "name": "sourcesElements",
+      "name": "libraryVersionMetadata",
       "attributes": {
         "org.gradle.category": "documentation",
         "org.gradle.dependency.bundling": "external",
-        "org.gradle.docstype": "sources",
-        "org.gradle.usage": "java-runtime"
+        "org.gradle.usage": "library-version-metadata"
       },
       "files": [
         {
-          "name": "sidecar-1.0.0-rc01-sources.jar",
-          "url": "sidecar-1.0.0-rc01-sources.jar",
-          "size": 6109,
-          "sha512": "0445d1c97baa84ec789da5b77d26a534b20a171a79673e2ec9c474408d0b225c5415a3f8a0cff09df25a5050de5f31a3ca2d010007307f29c7da2ce68d5a830b",
-          "sha256": "ace6f4b10e085505a258eb29f1a19babf600e6be80a972fe137bf2f32965fb46",
-          "sha1": "ee92796b25fd5d7902cfa8d7ba02df32fbdaa313",
-          "md5": "cdfd8c8139057463c2e7562d52b90b0d"
+          "name": "sidecar-1.0.0-rc01-versionMetadata.json",
+          "url": "sidecar-1.0.0-rc01-versionMetadata.json",
+          "size": 3206,
+          "sha512": "fd020ea39ca697f611b9740223f39667afb6f7004f4b3a1bbbc34af64296a1cf270cdc6be90f3d8e10440f69d993667d9f0295d9d23d177cff7fe2ee0f3ace5a",
+          "sha256": "6cec6b905c715e7069179a54b1363300c72d642c17696d20f60b53c6d463da66",
+          "sha1": "d00d06f6fe8aa802c0ebb2f872b405dcae29ca14",
+          "md5": "bb083c684bd4e621e2ccc3a702aed4aa"
         }
       ]
     }
