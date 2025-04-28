@@ -1,0 +1,326 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../adaptive-navigation/1.0.0/adaptive-navigation-1.0.0.module",
+    "group": "androidx.compose.material3.adaptive",
+    "module": "adaptive-navigation",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.8"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation-experimental",
+          "version": {
+            "requires": "1.4.0"
+          }
+        },
+        {
+          "group": "androidx.compose.material3.adaptive",
+          "module": "adaptive-layout",
+          "version": {
+            "requires": "1.0.0"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.compose.material3.adaptive",
+          "module": "adaptive",
+          "version": {
+            "requires": "1.0.0"
+          },
+          "reason": "adaptive-navigation is in atomic group androidx.compose.material3.adaptive"
+        },
+        {
+          "group": "androidx.compose.material3.adaptive",
+          "module": "adaptive-layout",
+          "version": {
+            "requires": "1.0.0"
+          },
+          "reason": "adaptive-navigation is in atomic group androidx.compose.material3.adaptive"
+        }
+      ],
+      "files": [
+        {
+          "name": "adaptive-navigation-release.aar",
+          "url": "adaptive-navigation-android-1.0.0.aar",
+          "size": 31441,
+          "sha512": "93d6c8dc7dfaeb189116dd1c29debc5c986e5e799e5dac0c4a114a494ce537fe4708950862029582b2b68a728277d1bfd2a12a80d4088a2af65c770e19ac64ff",
+          "sha256": "b96b2891d6d6b9e128b04114018dc4a4bbf050adc960bbfd316156d85cfcde22",
+          "sha1": "acae862e68652c14c450a7ac1f07400c978f45d4",
+          "md5": "5412e15126d7849fc2aa5cf3b71a7a62"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.activity",
+          "module": "activity-compose",
+          "version": {
+            "requires": "1.8.2"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.1.0"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation-experimental",
+          "version": {
+            "requires": "1.4.0"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "androidx.compose.foundation",
+          "module": "foundation",
+          "version": {
+            "requires": "1.6.5"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "androidx.compose.material3.adaptive",
+          "module": "adaptive-layout",
+          "version": {
+            "requires": "1.0.0"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "androidx.compose.ui",
+          "module": "ui-util",
+          "version": {
+            "requires": "1.6.5"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.8.22"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.8.22"
+          },
+          "excludes": [
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-stdlib-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-common"
+            },
+            {
+              "group": "org.jetbrains.kotlin",
+              "module": "kotlin-test-annotations-common"
+            }
+          ]
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.compose.material3.adaptive",
+          "module": "adaptive",
+          "version": {
+            "requires": "1.0.0"
+          },
+          "reason": "adaptive-navigation is in atomic group androidx.compose.material3.adaptive"
+        },
+        {
+          "group": "androidx.compose.material3.adaptive",
+          "module": "adaptive-layout",
+          "version": {
+            "requires": "1.0.0"
+          },
+          "reason": "adaptive-navigation is in atomic group androidx.compose.material3.adaptive"
+        }
+      ],
+      "files": [
+        {
+          "name": "adaptive-navigation-release.aar",
+          "url": "adaptive-navigation-android-1.0.0.aar",
+          "size": 31441,
+          "sha512": "93d6c8dc7dfaeb189116dd1c29debc5c986e5e799e5dac0c4a114a494ce537fe4708950862029582b2b68a728277d1bfd2a12a80d4088a2af65c770e19ac64ff",
+          "sha256": "b96b2891d6d6b9e128b04114018dc4a4bbf050adc960bbfd316156d85cfcde22",
+          "sha1": "acae862e68652c14c450a7ac1f07400c978f45d4",
+          "md5": "5412e15126d7849fc2aa5cf3b71a7a62"
+        }
+      ]
+    },
+    {
+      "name": "releaseSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "fake-sources",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.compose.material3.adaptive",
+          "module": "adaptive",
+          "version": {
+            "requires": "1.0.0"
+          },
+          "reason": "adaptive-navigation is in atomic group androidx.compose.material3.adaptive"
+        },
+        {
+          "group": "androidx.compose.material3.adaptive",
+          "module": "adaptive-layout",
+          "version": {
+            "requires": "1.0.0"
+          },
+          "reason": "adaptive-navigation is in atomic group androidx.compose.material3.adaptive"
+        }
+      ],
+      "files": [
+        {
+          "name": "adaptive-navigation-android-1.0.0-sources.jar",
+          "url": "adaptive-navigation-android-1.0.0-sources.jar",
+          "size": 8823,
+          "sha512": "49b56e989a3fae6268791e9f4dbb8f934196ab7c3825a9e5f8519bbaac965f208d0db0f973dfccb4d10ee6edb4e8df55e98c707b306a5c8ac2454ecf4ff09378",
+          "sha256": "afc62f315aa93a4fa696e4de9979f40860ddcb170a445d7f5375c85f3de9d418",
+          "sha1": "5e1e08be95598741231988ed237a2931f7e565af",
+          "md5": "8c6e49429e39bd7c19337c45e96945a6"
+        }
+      ]
+    }
+  ]
+}
