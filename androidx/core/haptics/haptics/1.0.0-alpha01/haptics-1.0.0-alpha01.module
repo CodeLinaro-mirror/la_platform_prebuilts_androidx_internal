@@ -10,10 +10,40 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "8.7-rc-1"
+      "version": "8.12",
+      "buildId:": "13070254"
     }
   },
   "variants": [
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "haptics-1.0.0-alpha01-sources.jar",
+          "url": "haptics-1.0.0-alpha01-sources.jar",
+          "size": 36265,
+          "sha512": "b2b9c1ec4ec5018278123c40c4ebfbfd3102941c47899a454638a47a4a97fc20eb304bbbc56a7c81bfe5896e22a722f21f1c8a2424c8852a9b99defb2eb4e630",
+          "sha256": "030986361d38308d59ca4b41065df633068eabfd488b01a97d9e2c87d7855501",
+          "sha1": "6ba7733fd1be929adaee660abed7482ad1325966",
+          "md5": "0a8f121f1166a3554bfb226a91c98d36"
+        },
+        {
+          "name": "haptics-1.0.0-alpha01-samples-sources.jar",
+          "url": "haptics-1.0.0-alpha01-samples-sources.jar",
+          "size": 9064,
+          "sha512": "4c3a4367b3e3e7ecf8a8a8d57a0a6f6c36549f499e6d28b3939d3f713c053e9cb0f486c1ffa1da7637cd62231af74b8c35b0d2bcc9db75270d5759ddf39dff19",
+          "sha256": "9a7635cbbe98e1298ff7c4e5e374e3935eb2416842e9a3d931d6c755700ca801",
+          "sha1": "698ca311c6b1dd4e1701f78cc2e5dec4d604527a",
+          "md5": "fee40f62be623c83bfcb38d08455de05"
+        }
+      ]
+    },
     {
       "name": "releaseVariantReleaseApiPublication",
       "attributes": {
@@ -23,6 +53,12 @@
         "org.gradle.usage": "java-api"
       },
       "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib"
+        }
+      ],
+      "dependencyConstraints": [
         {
           "group": "org.jetbrains.kotlin",
           "module": "kotlin-stdlib",
@@ -35,11 +71,11 @@
         {
           "name": "haptics-1.0.0-alpha01.aar",
           "url": "haptics-1.0.0-alpha01.aar",
-          "size": 98596,
-          "sha512": "f4fa6ce2394ff133688a7944f7e5530c57c42e5eb445d2d409e0461cbaaa16491614e317b66b8b7fe5b5ad315d33eeaafa16e5645fc55f031996733dd0d965a3",
-          "sha256": "86e91fdf273489a454da6bb80fd9e00009cb96f82886a77f0ec1773c3465fa4b",
-          "sha1": "6b22e7dcb0f53a38138c7818547a9b767b66c6cd",
-          "md5": "946b54701df5f739b2cbfdab22e9bd73"
+          "size": 106220,
+          "sha512": "1769d89a14c90be338272637551f32cdccdc4465c86d7219629a7f806830acad7277b46e01f93efd84c3bc16af4659b384ba23f3bbf9cfc3ffeb84ebd819d78d",
+          "sha256": "1b2acac0fa556836c57addca44fc30ede3ee5f4628df591dadd157d12f562b87",
+          "sha1": "0bd29ddd8f4fb361b321fb1deb9214ead6c32960",
+          "md5": "b29865956f8c1563dcd9de9a580b8dc4"
         }
       ]
     },
@@ -56,21 +92,21 @@
           "group": "androidx.annotation",
           "module": "annotation",
           "version": {
-            "requires": "1.8.0-beta01"
+            "requires": "1.8.1"
           }
         },
         {
           "group": "androidx.core",
           "module": "core",
           "version": {
-            "requires": "1.13.1"
+            "requires": "1.16.0-alpha02"
           }
         },
         {
           "group": "androidx.media",
           "module": "media",
           "version": {
-            "requires": "1.7.0-rc01"
+            "requires": "1.8.0-alpha01"
           }
         },
         {
@@ -80,6 +116,12 @@
             "requires": "1.0.1"
           }
         },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib"
+        }
+      ],
+      "dependencyConstraints": [
         {
           "group": "org.jetbrains.kotlin",
           "module": "kotlin-stdlib",
@@ -92,40 +134,11 @@
         {
           "name": "haptics-1.0.0-alpha01.aar",
           "url": "haptics-1.0.0-alpha01.aar",
-          "size": 98596,
-          "sha512": "f4fa6ce2394ff133688a7944f7e5530c57c42e5eb445d2d409e0461cbaaa16491614e317b66b8b7fe5b5ad315d33eeaafa16e5645fc55f031996733dd0d965a3",
-          "sha256": "86e91fdf273489a454da6bb80fd9e00009cb96f82886a77f0ec1773c3465fa4b",
-          "sha1": "6b22e7dcb0f53a38138c7818547a9b767b66c6cd",
-          "md5": "946b54701df5f739b2cbfdab22e9bd73"
-        }
-      ]
-    },
-    {
-      "name": "sourcesElements",
-      "attributes": {
-        "org.gradle.category": "documentation",
-        "org.gradle.dependency.bundling": "external",
-        "org.gradle.docstype": "sources",
-        "org.gradle.usage": "java-runtime"
-      },
-      "files": [
-        {
-          "name": "haptics-1.0.0-alpha01-sources.jar",
-          "url": "haptics-1.0.0-alpha01-sources.jar",
-          "size": 31885,
-          "sha512": "989e871ca63ebee6ae61784a3dc6ce88299ba62f507e8db625816354b0f7f7a5fb0967bec6e2ff6981359314ecac45688e6fb4ad00f4e125799de414246500cc",
-          "sha256": "dc6862a81aa5598a6c0d910a37bdd78bbf5a4c9df33333c4acc2c784700f05af",
-          "sha1": "cebb91a49839b914258eadcb33e0274b84b223f8",
-          "md5": "4030d7372428d57d0ae1fa2298bc0880"
-        },
-        {
-          "name": "haptics-1.0.0-alpha01-samples-sources.jar",
-          "url": "haptics-1.0.0-alpha01-samples-sources.jar",
-          "size": 4733,
-          "sha512": "d70b6ef047e21fbcc4078fc3745c17ddbf66c85046a84465b648c800312da90178b098d08be0774d4d17166f4e2f760276662d15c9bb83f1ec2245f9d7480749",
-          "sha256": "e215660960282ab8f4e8969ccac0359df507124a16831ca68a9e2dc85be489c8",
-          "sha1": "352bd02d6ceced0d9f19aed9b5bc6e7137413c0a",
-          "md5": "796855e759cff9daa29bc3c9ac0b8378"
+          "size": 106220,
+          "sha512": "1769d89a14c90be338272637551f32cdccdc4465c86d7219629a7f806830acad7277b46e01f93efd84c3bc16af4659b384ba23f3bbf9cfc3ffeb84ebd819d78d",
+          "sha256": "1b2acac0fa556836c57addca44fc30ede3ee5f4628df591dadd157d12f562b87",
+          "sha1": "0bd29ddd8f4fb361b321fb1deb9214ead6c32960",
+          "md5": "b29865956f8c1563dcd9de9a580b8dc4"
         }
       ]
     },
@@ -140,11 +153,11 @@
         {
           "name": "haptics-1.0.0-alpha01-versionMetadata.json",
           "url": "haptics-1.0.0-alpha01-versionMetadata.json",
-          "size": 12878,
-          "sha512": "79560a201ea35a960da23b488a83f146064b345fa4e62bf7d33a28ddece8f74a2f2fb59a911ac2a89b0d23f385de2c08e3c169dc73729568f895cb5e6f96da7a",
-          "sha256": "6e83b633dc80089a93dcc0ce2ba37caee83aded8a4fa38f968c88f5c4ef9cf79",
-          "sha1": "c3214a63b0cd7910ed18fd4205167c508ec76d97",
-          "md5": "e95387e78aa881814a878b42deac6201"
+          "size": 12685,
+          "sha512": "ceec1a24b35b2e22af59dc363af55a0ec11818e40eefac93eb4f34062736cd48f228dcef9ca45340d6c914f8dda80bcaf3b8cf09bd056c1711c428c68173411b",
+          "sha256": "f17f27bcd16237f43882655f26d456e3771aea0340917bf19675741f932eea42",
+          "sha1": "824e22f9beb35870dcf88c92087a39b82a088cbd",
+          "md5": "439408c1eba14e2fd43462ddbb7e35b8"
         }
       ]
     }
