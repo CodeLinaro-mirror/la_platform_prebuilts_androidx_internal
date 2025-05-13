@@ -10,10 +10,49 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "8.6-rc-1"
+      "version": "8.14",
+      "buildId:": "13425844"
     }
   },
   "variants": [
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.camera",
+          "module": "camera-camera2-pipe-integration",
+          "version": {
+            "requires": "1.0.0-alpha01"
+          },
+          "reason": "camera-camera2-pipe is in atomic group androidx.camera"
+        },
+        {
+          "group": "androidx.camera",
+          "module": "camera-testing",
+          "version": {
+            "requires": "1.0.0-alpha01"
+          },
+          "reason": "camera-camera2-pipe is in atomic group androidx.camera"
+        }
+      ],
+      "files": [
+        {
+          "name": "camera-camera2-pipe-1.0.0-alpha01-sources.jar",
+          "url": "camera-camera2-pipe-1.0.0-alpha01-sources.jar",
+          "size": 285096,
+          "sha512": "e641f60f7db3d2a6efc417f3afab0b83b96f68d96eed02cd1e43d604f823d6c311b5d3218fbe9ceafbf1d6104222a07150bcef65c826095853fcd912bc479354",
+          "sha256": "53397e7c4a5c84bde127cc8f1414407415c3575d1c28ac5fba059b197e83a9b6",
+          "sha1": "92d91bdffa49fb32c42b92063d0b48aae5769052",
+          "md5": "3623afd3d79734781c62630545e143bd"
+        }
+      ]
+    },
     {
       "name": "releaseVariantReleaseApiPublication",
       "attributes": {
@@ -27,15 +66,19 @@
           "group": "androidx.annotation",
           "module": "annotation",
           "version": {
-            "requires": "1.2.0"
+            "requires": "1.8.1"
+          }
+        },
+        {
+          "group": "javax.inject",
+          "module": "javax.inject",
+          "version": {
+            "requires": "1"
           }
         },
         {
           "group": "org.jetbrains.kotlin",
-          "module": "kotlin-stdlib",
-          "version": {
-            "requires": "1.8.22"
-          }
+          "module": "kotlin-stdlib"
         },
         {
           "group": "org.jetbrains.kotlinx",
@@ -63,23 +106,22 @@
           "reason": "camera-camera2-pipe is in atomic group androidx.camera"
         },
         {
-          "group": "androidx.camera",
-          "module": "camera-viewfinder-compose",
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
           "version": {
-            "requires": "1.0.0-alpha01"
-          },
-          "reason": "camera-camera2-pipe is in atomic group androidx.camera"
+            "requires": "1.9.24"
+          }
         }
       ],
       "files": [
         {
           "name": "camera-camera2-pipe-1.0.0-alpha01.aar",
           "url": "camera-camera2-pipe-1.0.0-alpha01.aar",
-          "size": 962411,
-          "sha512": "749911e085b1916e6d17ee342d379271be71a04065cc5d2df6e44e4d6f3abfe55c2404a3227e9acd6f6c50d8777cebc072b1935442387ebc279a872a34609836",
-          "sha256": "27364db78aa26317bcfb1c28f7820dbc5fb19d1fec688ecf7cb7609661463d8d",
-          "sha1": "3f9e5e606d8d095de00d4fa1c498c032168df16b",
-          "md5": "6094847b5cc445c2803b4277d104dad6"
+          "size": 1299262,
+          "sha512": "6c64b1ed6fab3096bad19088051a2613341d6852afa670a9e20fdc9af542a5275a760ca1feb238b9619c23a06c5542d782d21c27b703b647e28fa01e46af9db3",
+          "sha256": "d0fd748bf616afad96af2f70f7f23f6b6606cf75f16a58abad8bd54523b24b6a",
+          "sha1": "7571cbd79239e3be589c964326ee2c54bebacc3c",
+          "md5": "7e5daf771b67fbb352c4a8ace3935d8f"
         }
       ]
     },
@@ -96,22 +138,26 @@
           "group": "androidx.annotation",
           "module": "annotation",
           "version": {
-            "requires": "1.2.0"
+            "requires": "1.8.1"
           }
         },
         {
           "group": "com.google.dagger",
           "module": "dagger",
           "version": {
-            "requires": "2.49"
+            "requires": "2.54"
+          }
+        },
+        {
+          "group": "javax.inject",
+          "module": "javax.inject",
+          "version": {
+            "requires": "1"
           }
         },
         {
           "group": "org.jetbrains.kotlin",
-          "module": "kotlin-stdlib",
-          "version": {
-            "requires": "1.8.22"
-          }
+          "module": "kotlin-stdlib"
         },
         {
           "group": "org.jetbrains.kotlinx",
@@ -146,69 +192,22 @@
           "reason": "camera-camera2-pipe is in atomic group androidx.camera"
         },
         {
-          "group": "androidx.camera",
-          "module": "camera-viewfinder-compose",
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
           "version": {
-            "requires": "1.0.0-alpha01"
-          },
-          "reason": "camera-camera2-pipe is in atomic group androidx.camera"
+            "requires": "1.9.24"
+          }
         }
       ],
       "files": [
         {
           "name": "camera-camera2-pipe-1.0.0-alpha01.aar",
           "url": "camera-camera2-pipe-1.0.0-alpha01.aar",
-          "size": 962411,
-          "sha512": "749911e085b1916e6d17ee342d379271be71a04065cc5d2df6e44e4d6f3abfe55c2404a3227e9acd6f6c50d8777cebc072b1935442387ebc279a872a34609836",
-          "sha256": "27364db78aa26317bcfb1c28f7820dbc5fb19d1fec688ecf7cb7609661463d8d",
-          "sha1": "3f9e5e606d8d095de00d4fa1c498c032168df16b",
-          "md5": "6094847b5cc445c2803b4277d104dad6"
-        }
-      ]
-    },
-    {
-      "name": "sourcesElements",
-      "attributes": {
-        "org.gradle.category": "documentation",
-        "org.gradle.dependency.bundling": "external",
-        "org.gradle.docstype": "sources",
-        "org.gradle.usage": "java-runtime"
-      },
-      "dependencyConstraints": [
-        {
-          "group": "androidx.camera",
-          "module": "camera-camera2-pipe-integration",
-          "version": {
-            "requires": "1.0.0-alpha01"
-          },
-          "reason": "camera-camera2-pipe is in atomic group androidx.camera"
-        },
-        {
-          "group": "androidx.camera",
-          "module": "camera-testing",
-          "version": {
-            "requires": "1.0.0-alpha01"
-          },
-          "reason": "camera-camera2-pipe is in atomic group androidx.camera"
-        },
-        {
-          "group": "androidx.camera",
-          "module": "camera-viewfinder-compose",
-          "version": {
-            "requires": "1.0.0-alpha01"
-          },
-          "reason": "camera-camera2-pipe is in atomic group androidx.camera"
-        }
-      ],
-      "files": [
-        {
-          "name": "camera-camera2-pipe-1.0.0-alpha01-sources.jar",
-          "url": "camera-camera2-pipe-1.0.0-alpha01-sources.jar",
-          "size": 226439,
-          "sha512": "a6fd409d157cb8d79f0c1236c1381b3529344a563a971b8fd5ab52fbe3b3e5217d1ff37ffaa79792621eda05271b6a48fcc8df39e494f614b6c441fa4c5ee583",
-          "sha256": "7ca8d11e50ada0d48fda0fbc7f5821b9611decde9e7c9188fad9b8ddbaae9316",
-          "sha1": "e1a8c5db7ff5956de96014220714dce25539a8c5",
-          "md5": "012b22a9c3a130641629dafc9fc8e3d1"
+          "size": 1299262,
+          "sha512": "6c64b1ed6fab3096bad19088051a2613341d6852afa670a9e20fdc9af542a5275a760ca1feb238b9619c23a06c5542d782d21c27b703b647e28fa01e46af9db3",
+          "sha256": "d0fd748bf616afad96af2f70f7f23f6b6606cf75f16a58abad8bd54523b24b6a",
+          "sha1": "7571cbd79239e3be589c964326ee2c54bebacc3c",
+          "md5": "7e5daf771b67fbb352c4a8ace3935d8f"
         }
       ]
     },
@@ -231,14 +230,6 @@
         {
           "group": "androidx.camera",
           "module": "camera-testing",
-          "version": {
-            "requires": "1.0.0-alpha01"
-          },
-          "reason": "camera-camera2-pipe is in atomic group androidx.camera"
-        },
-        {
-          "group": "androidx.camera",
-          "module": "camera-viewfinder-compose",
           "version": {
             "requires": "1.0.0-alpha01"
           },
