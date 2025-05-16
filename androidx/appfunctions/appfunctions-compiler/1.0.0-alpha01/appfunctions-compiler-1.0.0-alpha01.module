@@ -1,0 +1,193 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.appfunctions",
+    "module": "appfunctions-compiler",
+    "version": "1.0.0-alpha01",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14",
+      "buildId:": "13432914"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.google.devtools.ksp",
+          "module": "symbol-processing-api",
+          "version": {
+            "requires": "2.0.10-1.0.24"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib"
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.appfunctions",
+          "module": "appfunctions",
+          "version": {
+            "requires": "1.0.0-alpha01"
+          },
+          "reason": "appfunctions-compiler is in atomic group androidx.appfunctions"
+        },
+        {
+          "group": "androidx.appfunctions",
+          "module": "appfunctions-service",
+          "version": {
+            "requires": "1.0.0-alpha01"
+          },
+          "reason": "appfunctions-compiler is in atomic group androidx.appfunctions"
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.0.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "appfunctions-compiler-1.0.0-alpha01.jar",
+          "url": "appfunctions-compiler-1.0.0-alpha01.jar",
+          "size": 274335,
+          "sha512": "fe74ad81116ec24941ccd7c9af15b39c677fc38dc311f09a21addb4980929d5d3ea501c16cf3b3b12ca7c5d68d813d2bf986e6b5e77dd19af19ff03f6654713f",
+          "sha256": "da1b416137befe5b3c550dc520603ddd01f70bc04cb673c1d62278870dd164b8",
+          "sha1": "5ea641ef4f29f6674b575f8444aa5bf2c6c8edd8",
+          "md5": "9af8865c14c5c97620eb8b09b7406b52"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.7.0"
+          }
+        },
+        {
+          "group": "com.google.devtools.ksp",
+          "module": "symbol-processing-api",
+          "version": {
+            "requires": "2.0.10-1.0.24"
+          }
+        },
+        {
+          "group": "com.squareup",
+          "module": "kotlinpoet",
+          "version": {
+            "requires": "2.0.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib"
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.0.21"
+          }
+        },
+        {
+          "group": "androidx.appfunctions",
+          "module": "appfunctions",
+          "version": {
+            "requires": "1.0.0-alpha01"
+          },
+          "reason": "appfunctions-compiler is in atomic group androidx.appfunctions"
+        },
+        {
+          "group": "androidx.appfunctions",
+          "module": "appfunctions-service",
+          "version": {
+            "requires": "1.0.0-alpha01"
+          },
+          "reason": "appfunctions-compiler is in atomic group androidx.appfunctions"
+        }
+      ],
+      "files": [
+        {
+          "name": "appfunctions-compiler-1.0.0-alpha01.jar",
+          "url": "appfunctions-compiler-1.0.0-alpha01.jar",
+          "size": 274335,
+          "sha512": "fe74ad81116ec24941ccd7c9af15b39c677fc38dc311f09a21addb4980929d5d3ea501c16cf3b3b12ca7c5d68d813d2bf986e6b5e77dd19af19ff03f6654713f",
+          "sha256": "da1b416137befe5b3c550dc520603ddd01f70bc04cb673c1d62278870dd164b8",
+          "sha1": "5ea641ef4f29f6674b575f8444aa5bf2c6c8edd8",
+          "md5": "9af8865c14c5c97620eb8b09b7406b52"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.appfunctions",
+          "module": "appfunctions",
+          "version": {
+            "requires": "1.0.0-alpha01"
+          },
+          "reason": "appfunctions-compiler is in atomic group androidx.appfunctions"
+        },
+        {
+          "group": "androidx.appfunctions",
+          "module": "appfunctions-service",
+          "version": {
+            "requires": "1.0.0-alpha01"
+          },
+          "reason": "appfunctions-compiler is in atomic group androidx.appfunctions"
+        }
+      ],
+      "files": [
+        {
+          "name": "appfunctions-compiler-1.0.0-alpha01-sources.jar",
+          "url": "appfunctions-compiler-1.0.0-alpha01-sources.jar",
+          "size": 82744,
+          "sha512": "89c8bc7430e003fe24b5227ce48701eb0dc173b7c72dde49beab75da121e0ed366023e2d54425dfff7d7c0d3be2b9a66a737a74c2a29b1f99a678eb0807a0dbb",
+          "sha256": "bf79c078e16c72006dbe6802479597737a85ce07b03c60a51aec1e1bc521911e",
+          "sha1": "be036a590dfb1d0ba7461e1ee783548ff7f436c7",
+          "md5": "253f391f101d0e0d2837621cd6b2a4cd"
+        }
+      ]
+    }
+  ]
+}
