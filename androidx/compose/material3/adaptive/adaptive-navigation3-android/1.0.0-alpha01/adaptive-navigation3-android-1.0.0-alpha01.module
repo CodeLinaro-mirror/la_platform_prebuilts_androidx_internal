@@ -12,17 +12,18 @@
   "createdBy": {
     "gradle": {
       "version": "8.14",
-      "buildId:": "13498832"
+      "buildId:": "13635419"
     }
   },
   "variants": [
     {
-      "name": "releaseApiElements-published",
+      "name": "androidApiElements-published",
       "attributes": {
         "org.gradle.category": "library",
         "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
         "org.gradle.usage": "java-api",
-        "org.jetbrains.kotlin.platform.type": "androidJvm"
+        "org.jetbrains.kotlin.platform.type": "jvm"
       },
       "dependencies": [
         {
@@ -36,36 +37,37 @@
           "group": "androidx.compose.material3.adaptive",
           "module": "adaptive-navigation",
           "version": {
-            "requires": "1.2.0-alpha06"
+            "requires": "1.2.0-alpha07"
           }
         },
         {
           "group": "androidx.navigation3",
           "module": "navigation3-ui",
           "version": {
-            "requires": "1.0.0-alpha01"
+            "requires": "1.0.0-alpha04"
           }
         }
       ],
       "files": [
         {
-          "name": "adaptive-navigation3-release.aar",
+          "name": "adaptive-navigation3.aar",
           "url": "adaptive-navigation3-android-1.0.0-alpha01.aar",
-          "size": 52081,
-          "sha512": "8243d9ddd9784c3b5daadaf8a80b7e7244842a7f1018aeb7e1ec98823e7abf820b97b75b00103280e56b316a31b479a874ea5a481de4964320ec8fb2201bdb8f",
-          "sha256": "d958799848c9e7dc61c56c7403f3ba8b2efe8ad3bc50d3b64c4242a967724f7e",
-          "sha1": "948fa3775bdcc06cfc2cd987aba914f92470ceaa",
-          "md5": "7b52e78b5636cfba550a4bd7c0048aac"
+          "size": 48353,
+          "sha512": "7050699795af4aaeb5c59b30a1d98ba9e81c63711290eecd77381c257f0adc6d585e0a20885527c0f23068c62511fa7af24ea21554b91e32fbcf1c3116903e32",
+          "sha256": "1c5105e9513bd49eae20c3347c1060f74979dda564fc855d815720937e7880fd",
+          "sha1": "78cb73e05942027c2825d404f09dd7d72e0ee3ae",
+          "md5": "f0e00a05f93b9e858656199ca72ac76c"
         }
       ]
     },
     {
-      "name": "releaseRuntimeElements-published",
+      "name": "androidRuntimeElements-published",
       "attributes": {
         "org.gradle.category": "library",
         "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
         "org.gradle.usage": "java-runtime",
-        "org.jetbrains.kotlin.platform.type": "androidJvm"
+        "org.jetbrains.kotlin.platform.type": "jvm"
       },
       "dependencies": [
         {
@@ -73,102 +75,32 @@
           "module": "activity-compose",
           "version": {
             "requires": "1.10.1"
-          },
-          "excludes": [
-            {
-              "group": "org.jetbrains.kotlin",
-              "module": "kotlin-stdlib-common"
-            },
-            {
-              "group": "org.jetbrains.kotlin",
-              "module": "kotlin-test-common"
-            },
-            {
-              "group": "org.jetbrains.kotlin",
-              "module": "kotlin-test-annotations-common"
-            }
-          ]
+          }
         },
         {
           "group": "androidx.annotation",
           "module": "annotation",
           "version": {
             "requires": "1.8.1"
-          },
-          "excludes": [
-            {
-              "group": "org.jetbrains.kotlin",
-              "module": "kotlin-stdlib-common"
-            },
-            {
-              "group": "org.jetbrains.kotlin",
-              "module": "kotlin-test-common"
-            },
-            {
-              "group": "org.jetbrains.kotlin",
-              "module": "kotlin-test-annotations-common"
-            }
-          ]
+          }
         },
         {
           "group": "androidx.compose.material3.adaptive",
           "module": "adaptive-navigation",
           "version": {
-            "requires": "1.2.0-alpha06"
-          },
-          "excludes": [
-            {
-              "group": "org.jetbrains.kotlin",
-              "module": "kotlin-stdlib-common"
-            },
-            {
-              "group": "org.jetbrains.kotlin",
-              "module": "kotlin-test-common"
-            },
-            {
-              "group": "org.jetbrains.kotlin",
-              "module": "kotlin-test-annotations-common"
-            }
-          ]
+            "requires": "1.2.0-alpha07"
+          }
         },
         {
           "group": "androidx.navigation3",
           "module": "navigation3-ui",
           "version": {
-            "requires": "1.0.0-alpha01"
-          },
-          "excludes": [
-            {
-              "group": "org.jetbrains.kotlin",
-              "module": "kotlin-stdlib-common"
-            },
-            {
-              "group": "org.jetbrains.kotlin",
-              "module": "kotlin-test-common"
-            },
-            {
-              "group": "org.jetbrains.kotlin",
-              "module": "kotlin-test-annotations-common"
-            }
-          ]
+            "requires": "1.0.0-alpha04"
+          }
         },
         {
           "group": "org.jetbrains.kotlin",
-          "module": "kotlin-stdlib",
-          "excludes": [
-            {
-              "group": "org.jetbrains.kotlin",
-              "module": "kotlin-stdlib-common"
-            },
-            {
-              "group": "org.jetbrains.kotlin",
-              "module": "kotlin-test-common"
-            },
-            {
-              "group": "org.jetbrains.kotlin",
-              "module": "kotlin-test-annotations-common"
-            }
-          ]
+          "module": "kotlin-stdlib"
         }
       ],
       "dependencyConstraints": [
@@ -182,36 +114,36 @@
       ],
       "files": [
         {
-          "name": "adaptive-navigation3-release.aar",
+          "name": "adaptive-navigation3.aar",
           "url": "adaptive-navigation3-android-1.0.0-alpha01.aar",
-          "size": 52081,
-          "sha512": "8243d9ddd9784c3b5daadaf8a80b7e7244842a7f1018aeb7e1ec98823e7abf820b97b75b00103280e56b316a31b479a874ea5a481de4964320ec8fb2201bdb8f",
-          "sha256": "d958799848c9e7dc61c56c7403f3ba8b2efe8ad3bc50d3b64c4242a967724f7e",
-          "sha1": "948fa3775bdcc06cfc2cd987aba914f92470ceaa",
-          "md5": "7b52e78b5636cfba550a4bd7c0048aac"
+          "size": 48353,
+          "sha512": "7050699795af4aaeb5c59b30a1d98ba9e81c63711290eecd77381c257f0adc6d585e0a20885527c0f23068c62511fa7af24ea21554b91e32fbcf1c3116903e32",
+          "sha256": "1c5105e9513bd49eae20c3347c1060f74979dda564fc855d815720937e7880fd",
+          "sha1": "78cb73e05942027c2825d404f09dd7d72e0ee3ae",
+          "md5": "f0e00a05f93b9e858656199ca72ac76c"
         }
       ]
     },
     {
-      "name": "releaseSourcesElements-published",
+      "name": "androidSourcesElements-published",
       "attributes": {
         "org.gradle.category": "documentation",
         "org.gradle.dependency.bundling": "external",
-        "org.gradle.docstype": "fake-sources",
+        "org.gradle.docstype": "sources",
         "org.gradle.jvm.environment": "android",
         "org.gradle.libraryelements": "jar",
         "org.gradle.usage": "java-runtime",
-        "org.jetbrains.kotlin.platform.type": "androidJvm"
+        "org.jetbrains.kotlin.platform.type": "jvm"
       },
       "files": [
         {
           "name": "adaptive-navigation3-android-1.0.0-alpha01-sources.jar",
           "url": "adaptive-navigation3-android-1.0.0-alpha01-sources.jar",
-          "size": 11222,
-          "sha512": "046b4be72ed608df54e1677ef615489fd0e25f26b667c9880a244a760c2cc6294c175ed4b4279707d18f8f8fb32ceba25a676795a9d95f0374a651a29527b2a0",
-          "sha256": "ae0b7355bd9a74c65c66be9610ef4f1dfe2e36c5be3cdaed11d8340ba4feae18",
-          "sha1": "610d0df0c97ab3b8a760c5f862181583ec18e685",
-          "md5": "a79b29c8a51b11b7a5a2fb20ed0091d0"
+          "size": 11196,
+          "sha512": "479a0e3dda2cb5a28bd89891fe52a9133670d13f2f6d4ff794be6949b9e1a6dfff37a2faa4f658a389283802ed3d8b99c11f1c1415d32dec81bde6b5836266f8",
+          "sha256": "6f830852fad081bba8a46de928bb2b9895e2fd85c51eaf152b02369c15cd4c2a",
+          "sha1": "180aa0998e9e09f6b9cf69e97e7bb46f96e8ac24",
+          "md5": "f7a96b53e2c1734a6db75e65a612b568"
         }
       ]
     }
