@@ -11,7 +11,7 @@
   "createdBy": {
     "gradle": {
       "version": "8.14",
-      "buildId:": "13540367"
+      "buildId:": "13657427"
     }
   },
   "variants": [
@@ -229,11 +229,11 @@
         {
           "name": "lifecycle-viewmodel-testing-metadata-2.10.0-alpha01.jar",
           "url": "lifecycle-viewmodel-testing-2.10.0-alpha01.jar",
-          "size": 10279,
-          "sha512": "6afe3e912a027f27b60066e9a9d6c3c274d88b66e70ba40dc8d1bb975dbe7148fb46317c496837171a8d25c43fac7aed3b40922c8591244e9bc3396041c2a95a",
-          "sha256": "d18cb59b0ec6ca3040b8fee72ec619a751c14e01e4879a23fe9c37fabbfe9b7d",
-          "sha1": "b0ae24ec70eaf3f82dbb87504165275324228146",
-          "md5": "b8c1b2f32058fa344c36ac978456e4aa"
+          "size": 10358,
+          "sha512": "4663d6b2f124a44025f929b30c6e04b67bbb16fd80b1533dfdd987b575ca51d144893a6241c2c866d484c9f32f79816bb5de03a43f08e1eb84f0e5c7ad8993d8",
+          "sha256": "b7981bc5c649c59f4c8fa0e2439e8e4fbe7cc17e5cac4b773c29966313a75611",
+          "sha1": "9e648a9b3544fa422b7349ae463849a636112428",
+          "md5": "849ea19e8c2e8e2823bbb58edf669205"
         }
       ]
     },
@@ -579,11 +579,11 @@
         {
           "name": "lifecycle-viewmodel-testing-2.10.0-alpha01-multiplatform-sources.jar",
           "url": "lifecycle-viewmodel-testing-2.10.0-alpha01-multiplatform-sources.jar",
-          "size": 14072,
-          "sha512": "25fcef2b16ee1c2321e361ff13a39a5d609c4a4b93ff21ae2cf03b7ebc1a56cabb55f9fcb7750b306938630284b73ff855e29496604bbc6e233dbe9aaeccaa96",
-          "sha256": "3e73efbbc50691d5aec305b9230a4b6f6c04477001b7a4ed05a511fced6fb3fb",
-          "sha1": "6d6b189323241a48a63718004508a7954c834826",
-          "md5": "c05f1f684e849dc8b8326d87eb623b63"
+          "size": 14155,
+          "sha512": "0ebb1c2729e96d8f58508ebd17dcc09db1c41c29a12ccb99fb39714c5f64859b2aaf2411d22c280223d1bcc6e7b798e0f3260ccedb5f1305c8d9cde0eb5ac149",
+          "sha256": "70ee096a1dcbc60047a8d0979a5cdd2139d98d054c6548990ec3f58d82e369be",
+          "sha1": "52dad61e1c409529acba16b8473d599f227665e0",
+          "md5": "2e636787d7c1e5c9e850bf71d91c5935"
         }
       ]
     },
@@ -761,12 +761,13 @@
       ]
     },
     {
-      "name": "releaseApiElements-published",
+      "name": "androidApiElements-published",
       "attributes": {
         "org.gradle.category": "library",
         "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
         "org.gradle.usage": "java-api",
-        "org.jetbrains.kotlin.platform.type": "androidJvm"
+        "org.jetbrains.kotlin.platform.type": "jvm"
       },
       "available-at": {
         "url": "../../lifecycle-viewmodel-testing-android/2.10.0-alpha01/lifecycle-viewmodel-testing-android-2.10.0-alpha01.module",
@@ -776,12 +777,13 @@
       }
     },
     {
-      "name": "releaseRuntimeElements-published",
+      "name": "androidRuntimeElements-published",
       "attributes": {
         "org.gradle.category": "library",
         "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
         "org.gradle.usage": "java-runtime",
-        "org.jetbrains.kotlin.platform.type": "androidJvm"
+        "org.jetbrains.kotlin.platform.type": "jvm"
       },
       "available-at": {
         "url": "../../lifecycle-viewmodel-testing-android/2.10.0-alpha01/lifecycle-viewmodel-testing-android-2.10.0-alpha01.module",
@@ -791,15 +793,15 @@
       }
     },
     {
-      "name": "releaseSourcesElements-published",
+      "name": "androidSourcesElements-published",
       "attributes": {
         "org.gradle.category": "documentation",
         "org.gradle.dependency.bundling": "external",
-        "org.gradle.docstype": "fake-sources",
+        "org.gradle.docstype": "sources",
         "org.gradle.jvm.environment": "android",
         "org.gradle.libraryelements": "jar",
         "org.gradle.usage": "java-runtime",
-        "org.jetbrains.kotlin.platform.type": "androidJvm"
+        "org.jetbrains.kotlin.platform.type": "jvm"
       },
       "available-at": {
         "url": "../../lifecycle-viewmodel-testing-android/2.10.0-alpha01/lifecycle-viewmodel-testing-android-2.10.0-alpha01.module",
@@ -1015,6 +1017,56 @@
       }
     },
     {
+      "name": "jsApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.js.compiler": "ir",
+        "org.jetbrains.kotlin.platform.type": "js"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-js/2.10.0-alpha01/lifecycle-viewmodel-testing-js-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-js",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "jsRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.js.compiler": "ir",
+        "org.jetbrains.kotlin.platform.type": "js"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-js/2.10.0-alpha01/lifecycle-viewmodel-testing-js-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-js",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "jsSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.js.compiler": "ir",
+        "org.jetbrains.kotlin.platform.type": "js"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-js/2.10.0-alpha01/lifecycle-viewmodel-testing-js-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-js",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
       "name": "linuxArm64ApiElements-published",
       "attributes": {
         "artifactType": "org.jetbrains.kotlin.klib",
@@ -1185,6 +1237,507 @@
         "url": "../../lifecycle-viewmodel-testing-macosx64/2.10.0-alpha01/lifecycle-viewmodel-testing-macosx64-2.10.0-alpha01.module",
         "group": "androidx.lifecycle",
         "module": "lifecycle-viewmodel-testing-macosx64",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "mingwX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "mingw_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-mingwx64/2.10.0-alpha01/lifecycle-viewmodel-testing-mingwx64-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-mingwx64",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "mingwX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "mingw_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-mingwx64/2.10.0-alpha01/lifecycle-viewmodel-testing-mingwx64-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-mingwx64",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "tvosArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "tvos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-tvosarm64/2.10.0-alpha01/lifecycle-viewmodel-testing-tvosarm64-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-tvosarm64",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "tvosArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "tvos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-tvosarm64/2.10.0-alpha01/lifecycle-viewmodel-testing-tvosarm64-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-tvosarm64",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "tvosArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "tvos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-tvosarm64/2.10.0-alpha01/lifecycle-viewmodel-testing-tvosarm64-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-tvosarm64",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "tvosSimulatorArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "tvos_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-tvossimulatorarm64/2.10.0-alpha01/lifecycle-viewmodel-testing-tvossimulatorarm64-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-tvossimulatorarm64",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "tvosSimulatorArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "tvos_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-tvossimulatorarm64/2.10.0-alpha01/lifecycle-viewmodel-testing-tvossimulatorarm64-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-tvossimulatorarm64",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "tvosSimulatorArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "tvos_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-tvossimulatorarm64/2.10.0-alpha01/lifecycle-viewmodel-testing-tvossimulatorarm64-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-tvossimulatorarm64",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "tvosX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "tvos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-tvosx64/2.10.0-alpha01/lifecycle-viewmodel-testing-tvosx64-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-tvosx64",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "tvosX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "tvos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-tvosx64/2.10.0-alpha01/lifecycle-viewmodel-testing-tvosx64-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-tvosx64",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "tvosX64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "tvos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-tvosx64/2.10.0-alpha01/lifecycle-viewmodel-testing-tvosx64-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-tvosx64",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "wasmJsApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.platform.type": "wasm",
+        "org.jetbrains.kotlin.wasm.target": "js"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-wasm-js/2.10.0-alpha01/lifecycle-viewmodel-testing-wasm-js-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-wasm-js",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "wasmJsRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.platform.type": "wasm",
+        "org.jetbrains.kotlin.wasm.target": "js"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-wasm-js/2.10.0-alpha01/lifecycle-viewmodel-testing-wasm-js-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-wasm-js",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "wasmJsSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.platform.type": "wasm",
+        "org.jetbrains.kotlin.wasm.target": "js"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-wasm-js/2.10.0-alpha01/lifecycle-viewmodel-testing-wasm-js-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-wasm-js",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosArm32ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "watchos_arm32",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-watchosarm32/2.10.0-alpha01/lifecycle-viewmodel-testing-watchosarm32-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-watchosarm32",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosArm32SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "watchos_arm32",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-watchosarm32/2.10.0-alpha01/lifecycle-viewmodel-testing-watchosarm32-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-watchosarm32",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosArm32MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "watchos_arm32",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-watchosarm32/2.10.0-alpha01/lifecycle-viewmodel-testing-watchosarm32-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-watchosarm32",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "watchos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-watchosarm64/2.10.0-alpha01/lifecycle-viewmodel-testing-watchosarm64-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-watchosarm64",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "watchos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-watchosarm64/2.10.0-alpha01/lifecycle-viewmodel-testing-watchosarm64-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-watchosarm64",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "watchos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-watchosarm64/2.10.0-alpha01/lifecycle-viewmodel-testing-watchosarm64-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-watchosarm64",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosDeviceArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "watchos_device_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-watchosdevicearm64/2.10.0-alpha01/lifecycle-viewmodel-testing-watchosdevicearm64-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-watchosdevicearm64",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosDeviceArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "watchos_device_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-watchosdevicearm64/2.10.0-alpha01/lifecycle-viewmodel-testing-watchosdevicearm64-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-watchosdevicearm64",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosDeviceArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "watchos_device_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-watchosdevicearm64/2.10.0-alpha01/lifecycle-viewmodel-testing-watchosdevicearm64-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-watchosdevicearm64",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosSimulatorArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "watchos_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-watchossimulatorarm64/2.10.0-alpha01/lifecycle-viewmodel-testing-watchossimulatorarm64-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-watchossimulatorarm64",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosSimulatorArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "watchos_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-watchossimulatorarm64/2.10.0-alpha01/lifecycle-viewmodel-testing-watchossimulatorarm64-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-watchossimulatorarm64",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosSimulatorArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "watchos_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-watchossimulatorarm64/2.10.0-alpha01/lifecycle-viewmodel-testing-watchossimulatorarm64-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-watchossimulatorarm64",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "watchos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-watchosx64/2.10.0-alpha01/lifecycle-viewmodel-testing-watchosx64-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-watchosx64",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "watchos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-watchosx64/2.10.0-alpha01/lifecycle-viewmodel-testing-watchosx64-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-watchosx64",
+        "version": "2.10.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosX64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "watchos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-viewmodel-testing-watchosx64/2.10.0-alpha01/lifecycle-viewmodel-testing-watchosx64-2.10.0-alpha01.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-viewmodel-testing-watchosx64",
         "version": "2.10.0-alpha01"
       }
     }
