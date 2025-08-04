@@ -1,0 +1,213 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.wear",
+    "module": "wear-remote-interactions",
+    "version": "1.2.0-alpha01",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14",
+      "buildId:": "13699310"
+    }
+  },
+  "variants": [
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "wear-remote-interactions-1.2.0-alpha01-sources.jar",
+          "url": "wear-remote-interactions-1.2.0-alpha01-sources.jar",
+          "size": 16784,
+          "sha512": "6d99c50d462579fdb7973a20cf8df8ff6fa42e2fa239812e7cb5a700554f9785f0576e137cac420fea37420972f14a2548aced09431a409758912e9d42ac3b16",
+          "sha256": "c6355b451656014522b6bc7f5a9a93d1efbdfd55b74bf660b4d96b820c0c13da",
+          "sha1": "b547d3895b100e58f17d953871428ee3c6941145",
+          "md5": "e73c30f797f39263d6023b9a1eb19640"
+        },
+        {
+          "name": "wear-remote-interactions-1.2.0-alpha01-samples-sources.jar",
+          "url": "wear-remote-interactions-1.2.0-alpha01-samples-sources.jar",
+          "size": 6050,
+          "sha512": "6f658ad1e6dcd0393e938bc7bc6b5a5382dbbefdf926260527ef43e43b2711fbef3d9d0a4816887c8e2525b7e57265f54bed5b7f4e32d330369a6604703175f5",
+          "sha256": "3f798ea31884ca08f234e3bf31db2289975ad1d591e9fc7a357289f54fef8c08",
+          "sha1": "c8d165cb0a7f37b28ac261f0f9eb0dc4df13cfc8",
+          "md5": "f25dfce14a0ba10026d1e7e9205878fa"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.8.1"
+          }
+        },
+        {
+          "group": "androidx.concurrent",
+          "module": "concurrent-futures-ktx",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "com.google.guava",
+          "module": "listenablefuture",
+          "version": {
+            "requires": "1.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib"
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-core",
+          "version": {
+            "requires": "1.8.1"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.0.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "wear-remote-interactions-1.2.0-alpha01.aar",
+          "url": "wear-remote-interactions-1.2.0-alpha01.aar",
+          "size": 34531,
+          "sha512": "f1aa46914fe648bf2863f9d24753b53f0ff9ef90043f65fcec72cfca3adaeaf6c7b550a9c3ddb5cb9a91f5fe103d2a6ab28e1d46de54e901d3a3be99ab87f937",
+          "sha256": "65d904e4f8170dc9573be5ccc48388f3decd63e3395f4a687a8e3918848a14cf",
+          "sha1": "c4f9940db7bf702ceb14534b1b5fca5b6bb8abeb",
+          "md5": "7d00dc9c641335e2a1373b7336bfb50b"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.8.1"
+          }
+        },
+        {
+          "group": "androidx.concurrent",
+          "module": "concurrent-futures-ktx",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "com.google.android.gms",
+          "module": "play-services-basement",
+          "version": {
+            "requires": "17.0.0"
+          }
+        },
+        {
+          "group": "com.google.android.gms",
+          "module": "play-services-wearable",
+          "version": {
+            "requires": "17.1.0"
+          },
+          "excludes": [
+            {
+              "group": "androidx.core",
+              "module": "*"
+            }
+          ]
+        },
+        {
+          "group": "com.google.guava",
+          "module": "listenablefuture",
+          "version": {
+            "requires": "1.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib"
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-core",
+          "version": {
+            "requires": "1.8.1"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.0.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "wear-remote-interactions-1.2.0-alpha01.aar",
+          "url": "wear-remote-interactions-1.2.0-alpha01.aar",
+          "size": 34531,
+          "sha512": "f1aa46914fe648bf2863f9d24753b53f0ff9ef90043f65fcec72cfca3adaeaf6c7b550a9c3ddb5cb9a91f5fe103d2a6ab28e1d46de54e901d3a3be99ab87f937",
+          "sha256": "65d904e4f8170dc9573be5ccc48388f3decd63e3395f4a687a8e3918848a14cf",
+          "sha1": "c4f9940db7bf702ceb14534b1b5fca5b6bb8abeb",
+          "md5": "7d00dc9c641335e2a1373b7336bfb50b"
+        }
+      ]
+    },
+    {
+      "name": "libraryVersionMetadata",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.usage": "library-version-metadata"
+      },
+      "files": [
+        {
+          "name": "wear-remote-interactions-1.2.0-alpha01-versionMetadata.json",
+          "url": "wear-remote-interactions-1.2.0-alpha01-versionMetadata.json",
+          "size": 2480,
+          "sha512": "bb2930c1bf477db83b3613ff18e12781f5f5b876442fb9dbbf879757251793f8d9502175873c07be9275bbb2ed9d16ca9f4087d6c7f31ad3c039acace019e100",
+          "sha256": "f81265936227f19b41b85b9cb6a5355e6d47b490b62ab0fa65a715a913bdf6fb",
+          "sha1": "cfeb99619336ca9590c9fad2b9d3392c1818e64e",
+          "md5": "53aa4a53f82b607838912fd0b36508bf"
+        }
+      ]
+    }
+  ]
+}
