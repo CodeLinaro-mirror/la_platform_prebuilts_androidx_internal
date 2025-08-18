@@ -15,10 +15,11 @@
 # limitations under the License.
 #
 
+from collections import defaultdict
+from import_release_prebuilts import *
+from unittest.mock import patch
 import os
 import unittest
-from unittest.mock import patch
-from import_release_prebuilts import *
 
 DOCS_PUBLIC_BUILD_GRADLE_REL_TEST = './docs-public/test_build.gradle'
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -77,6 +78,27 @@ class TestArtifactVerification(unittest.TestCase):
         self.assertEqual("androidx.foo.bar", group_id)
         self.assertEqual("bar-qux", artifact_id)
 
+    def test_get_sample_coordinates_from_artifact(self):
+        group_id, artifact_id = get_sample_coordinates_from_artifact(
+            "androidx.foo:foo")
+        self.assertEqual("androidx.foo", group_id)
+        self.assertEqual("foo-samples", artifact_id)
+
+        group_id, artifact_id = get_sample_coordinates_from_artifact(
+            "androidx.foo.bar:bar")
+        self.assertEqual("androidx.foo.bar", group_id)
+        self.assertEqual("bar-samples", artifact_id)
+
+        group_id, artifact_id = get_sample_coordinates_from_artifact(
+            "androidx.foo:foo-bar")
+        self.assertEqual("androidx.foo", group_id)
+        self.assertEqual("foo-bar-samples", artifact_id)
+
+        group_id, artifact_id = get_sample_coordinates_from_artifact(
+            "androidx.foo.bar:bar-qux")
+        self.assertEqual("androidx.foo.bar", group_id)
+        self.assertEqual("bar-qux-samples", artifact_id)
+
 
 class TestVersionUpdates(unittest.TestCase):
 
@@ -106,6 +128,27 @@ class TestVersionUpdates(unittest.TestCase):
             ["androidx.bar:bar", "androidx.qux:qux"]))
         self.assertFalse(should_update_artifact(
             "androidx.foo", "foo", [], ["foo"]))
+
+    def test_update_version_maps_should_update(self):
+        artifact_ver_map = {
+            "androidx.bar:bar": "1.1.0",
+        }
+        final_artifact_ver_map={
+            "androidx.bar:bar": "1.2.0-alpha01"
+        }
+        update_version_maps(artifact_ver_map, "androidx.bar", "bar", "1.2.0-alpha01", "androidx.bar", "androidx.bar:bar", 123456)
+        self.assertEquals(artifact_ver_map, final_artifact_ver_map)
+
+    def test_update_version_maps_should_not_update(self):
+        artifact_ver_map = {
+            "androidx.bar:bar": "1.2.0-alpha01",
+        }
+        final_artifact_ver_map={
+            "androidx.bar:bar": "1.2.0-alpha01"
+        }
+
+        update_version_maps(artifact_ver_map, "androidx.bar", "bar", "1.1.0", "androidx.bar", "androidx.bar:bar", 123456)
+        self.assertEquals(artifact_ver_map, final_artifact_ver_map)
 
     def test_update_docs_public_build_gradle(self):
         # Get the current state of the build.gradle file.
@@ -139,6 +182,230 @@ class TestVersionUpdates(unittest.TestCase):
         ]
         self.assertEqual(new_lines, correct_outline_lines)
 
+
+class TestLongFormSyntax(unittest.TestCase):
+
+    def test_correct_syntax_is_parsed(self):
+        long_form_test_str = "1111/androidx.foo"
+        source_to_artifact = defaultdict(lambda: defaultdict(list))
+        parse_long_form(long_form_test_str, source_to_artifact)
+        self.assertTrue(source_to_artifact.get("1111"))
+        self.assertTrue(source_to_artifact["1111"].get("groups"))
+        self.assertFalse(source_to_artifact["1111"].get("artifacts"))
+        self.assertEqual(source_to_artifact["1111"]["groups"],
+                         ["androidx.foo"])
+
+        long_form_test_str = "1111/androidx.foo:foo-bar"
+        source_to_artifact = defaultdict(lambda: defaultdict(list))
+        parse_long_form(long_form_test_str, source_to_artifact)
+        self.assertTrue(source_to_artifact.get("1111"))
+        self.assertFalse(source_to_artifact["1111"].get("groups"))
+        self.assertTrue(source_to_artifact["1111"].get("artifacts"))
+        self.assertEqual(source_to_artifact["1111"]["artifacts"],
+                         ["androidx.foo:foo-bar"])
+
+        long_form_test_str = "1111/androidx.foo,2222/androidx.foo:foo-bar"
+        source_to_artifact = defaultdict(lambda: defaultdict(list))
+        parse_long_form(long_form_test_str, source_to_artifact)
+        self.assertTrue(source_to_artifact.get("1111"))
+        self.assertTrue(source_to_artifact["1111"].get("groups"))
+        self.assertFalse(source_to_artifact["1111"].get("artifacts"))
+        self.assertEqual(source_to_artifact["1111"]["groups"],
+                         ["androidx.foo"])
+        self.assertTrue(source_to_artifact.get("2222"))
+        self.assertFalse(source_to_artifact["2222"].get("groups"))
+        self.assertTrue(source_to_artifact["2222"].get("artifacts"))
+        self.assertEqual(source_to_artifact["2222"]["artifacts"],
+                         ["androidx.foo:foo-bar"])
+
+        long_form_test_str = ("1111/androidx.foo,1111/androidx.bar:bar,"
+                              "2222/androidx.foo,3333/androidx.bar:bar,"
+                              "3333/androidx.qux,4444/androidx.qux:qux,"
+                              "4444/androidx.qux:qux-ktx")
+        source_to_artifact = defaultdict(lambda: defaultdict(list))
+        parse_long_form(long_form_test_str, source_to_artifact)
+        self.assertTrue(source_to_artifact.get("1111"))
+        self.assertTrue(source_to_artifact["1111"].get("groups"))
+        self.assertTrue(source_to_artifact["1111"].get("artifacts"))
+        self.assertEqual(source_to_artifact["1111"]["groups"],
+                         ["androidx.foo"])
+        self.assertEqual(source_to_artifact["1111"]["artifacts"],
+                         ["androidx.bar:bar"])
+        self.assertTrue(source_to_artifact.get("2222"))
+        self.assertTrue(source_to_artifact["2222"].get("groups"))
+        self.assertFalse(source_to_artifact["2222"].get("artifacts"))
+        self.assertEqual(source_to_artifact["2222"]["groups"],
+                         ["androidx.foo"])
+        self.assertTrue(source_to_artifact.get("3333"))
+        self.assertTrue(source_to_artifact["3333"].get("groups"))
+        self.assertTrue(source_to_artifact["3333"].get("artifacts"))
+        self.assertEqual(source_to_artifact["3333"]["groups"],
+                         ["androidx.qux"])
+        self.assertEqual(source_to_artifact["3333"]["artifacts"],
+                         ["androidx.bar:bar"])
+        self.assertTrue(source_to_artifact.get("4444"))
+        self.assertFalse(source_to_artifact["4444"].get("groups"))
+        self.assertTrue(source_to_artifact["4444"].get("artifacts"))
+        self.assertEqual(source_to_artifact["4444"]["artifacts"],
+                         ["androidx.qux:qux", "androidx.qux:qux-ktx"])
+
+    def test_incorrect_syntax_throws_error(self):
+        long_form_test_str = "1111androidx.foo"
+        source_to_artifact = defaultdict(lambda: defaultdict(list))
+        result = parse_long_form(long_form_test_str, source_to_artifact)
+        self.assertFalse(result)
+
+        long_form_test_str = "1111/foo"
+        source_to_artifact = defaultdict(lambda: defaultdict(list))
+        result = parse_long_form(long_form_test_str, source_to_artifact)
+        self.assertFalse(result)
+
+        long_form_test_str = "1111/androidx-foo"
+        source_to_artifact = defaultdict(lambda: defaultdict(list))
+        result = parse_long_form(long_form_test_str, source_to_artifact)
+        self.assertFalse(result)
+
+        long_form_test_str = "1111/androidx.foo,2222/androidx.foo/foo-bar"
+        source_to_artifact = defaultdict(lambda: defaultdict(list))
+        result = parse_long_form(long_form_test_str, source_to_artifact)
+        self.assertFalse(result)
+
+        long_form_test_str = ("1111/androidx.foo,1111/androidx.bar:bar,"
+                              "2222/androidx.foo,/androidx.bar:bar,"
+                              "3333/androidx.qux,4444/androidx.qux:qux,"
+                              "4444/androidx.qux:qux-ktx")
+        result = parse_long_form(long_form_test_str, source_to_artifact)
+        self.assertFalse(result)
+
+class TestDocsUpdate(unittest.TestCase):
+
+    def test_should_update_docs_returns_false(self):
+        self.assertFalse(should_update_docs(
+            "androidx.appsearch:appsearch-compiler"))
+        self.assertFalse(should_update_docs(
+            "androidx.appsearch:appsearch-debug-view"))
+        self.assertFalse(should_update_docs(
+            "androidx.benchmark:benchmark-gradle-plugin"))
+        self.assertFalse(should_update_docs(
+            "androidx.compose:compiler:compiler"))
+        self.assertFalse(should_update_docs(
+            "androidx.compose:compiler:compiler-hosted"))
+        self.assertFalse(should_update_docs(
+            "androidx.compose:material:material-icons-extended"))
+        self.assertFalse(should_update_docs(
+            "androidx.compose:ui:ui-android-stubs"))
+        self.assertFalse(should_update_docs(
+            "androidx.compose:ui:ui-test-manifest"))
+        self.assertFalse(should_update_docs(
+            "androidx.hilt:hilt-compiler"))
+        self.assertFalse(should_update_docs(
+            "androidx.inspection:inspection-gradle-plugin"))
+        self.assertFalse(should_update_docs(
+            "androidx.jetifier:jetifier-processor"))
+        self.assertFalse(should_update_docs(
+            "androidx.lifecycle:lifecycle-compiler"))
+        self.assertFalse(should_update_docs(
+            "androidx.media2:media2-exoplayer"))
+        self.assertFalse(should_update_docs(
+            "androidx.navigation:navigation-safe-args-generator"))
+        self.assertFalse(should_update_docs(
+            "androidx.navigation:navigation-safe-args-gradle-plugin"))
+        self.assertFalse(should_update_docs(
+            "androidx.remotecallback:remotecallback-processor"))
+        self.assertFalse(should_update_docs(
+            "androidx.resourceinspection:resourceinspection-processor"))
+        self.assertFalse(should_update_docs(
+            "androidx.room:room-compiler"))
+        self.assertFalse(should_update_docs(
+            "androidx.room:room-compiler-processing"))
+        self.assertFalse(should_update_docs(
+            "androidx.room:room-compiler-processing-testing"))
+        self.assertFalse(should_update_docs(
+            "androidx.versionedparcelable:versionedparcelable-compiler"))
+        self.assertFalse(should_update_docs(
+            "androidx.compose.animation:animation-tooling-internal"))
+        self.assertFalse(should_update_docs(
+            "androidx.collection:collection-jvm"))
+        self.assertFalse(should_update_docs(
+            "androidx.datastore:datastore-jvm"))
+        self.assertFalse(should_update_docs(
+            "androidx.camera:camera-camera2-pipe"))
+        self.assertFalse(should_update_docs(
+            "androidx.camera:camera-camera2-pipe-integration"))
+        self.assertFalse(should_update_docs(
+            "androidx.camera:camera-camera2-pipe-testing"))
+        self.assertFalse(should_update_docs(
+            "androidx.tracing:tracing-perfetto-binary"))
+        self.assertFalse(should_update_docs(
+            "androidx.datastore:datastore-android"))
+        self.assertFalse(should_update_docs(
+            "androidx.safeparcel:safeparcel-processor"))
+        self.assertFalse(should_update_docs(
+            "androidx.privacysandbox.tools:tools-apicompiler"))
+        self.assertFalse(should_update_docs(
+            "androidx.privacysandbox.tools:tools-apigenerator"))
+        self.assertFalse(should_update_docs(
+            "androidx.privacysandbox.tools:tools-apipackager"))
+        self.assertFalse(should_update_docs(
+            "androidx.privacysandbox.tools:tools-core"))
+        self.assertFalse(should_update_docs(
+            "androidx.resourceinspection:resourceinspection-processor"))
+        self.assertFalse(should_update_docs(
+            "androidx.glance:glance-appwidget-proto"))
+        self.assertFalse(should_update_docs(
+            "androidx.wear.tiles:tiles-proto"))
+        self.assertFalse(should_update_docs(
+            "androidx.privacysandbox.plugins:plugins-privacysandbox-library"))
+
+    def test_should_update_docs_returns_true(self):
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.foo:foo-bar"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.camera:camera-video"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.collection:collection"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.datstore:datstore"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.compose:material:material:material-samples"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.compose:ui:ui-graphics"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.dynamicanimation:dynamicanimation-ktx"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.emoji2:emoji2-views-helper"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.glance:glance-appwidget"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.lifecycle:lifecycle-common-java8"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.media2:media2-session"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.paging:paging-samples"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.remotecallback:remotecallback"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.camera:camera-camera2"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.camera:camera-view"))
+        with unittest.mock.patch('builtins.input', return_value="yes"):
+            self.assertTrue(should_update_docs(
+                "androidx.wear.protolayout:protolayout"))
 
 if __name__ == '__main__':
     unittest.main()
