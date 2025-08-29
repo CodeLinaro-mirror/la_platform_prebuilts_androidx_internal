@@ -1,0 +1,1402 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.paging",
+    "module": "paging-compose",
+    "version": "3.4.0-alpha03",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.0.0",
+      "buildId:": "13972835"
+    }
+  },
+  "variants": [
+    {
+      "name": "metadataApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.compose.runtime",
+          "module": "runtime",
+          "version": {
+            "requires": "1.9.0"
+          }
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-common",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.paging",
+          "module": "paging-common",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-common-ktx",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-guava",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-runtime",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-runtime-ktx",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-rxjava2",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-rxjava2-ktx",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-rxjava3",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-testing",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        }
+      ],
+      "files": [
+        {
+          "name": "paging-compose-metadata-3.4.0-alpha03.jar",
+          "url": "paging-compose-3.4.0-alpha03.jar",
+          "size": 10477,
+          "sha512": "945234f2bc10bf560eda50ab29dd39d22a8a0e725c54d5af828f3c8ba3d0b8fb41d1dad10a52ed444dfecd3c3ad4255ed6aee2a1d7833ee4eb4a53c9c68faeee",
+          "sha256": "6a45d21ec54a5b97813ff991a55d521387c61ebc4c57b125640b5f71283466b0",
+          "sha1": "1aba2700d2741ebdab625894d371925aade77250",
+          "md5": "3e323d5944b45ea39006e0c146a470f5"
+        }
+      ]
+    },
+    {
+      "name": "metadataSourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.paging",
+          "module": "paging-common",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-common-ktx",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-guava",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-runtime",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-runtime-ktx",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-rxjava2",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-rxjava2-ktx",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-rxjava3",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-testing",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        }
+      ],
+      "files": [
+        {
+          "name": "paging-compose-kotlin-3.4.0-alpha03-sources.jar",
+          "url": "paging-compose-3.4.0-alpha03-sources.jar",
+          "size": 12291,
+          "sha512": "1a3150cc7c642119bfa31c44e1f8b9b44fc8792a0efb249e67c24e985672688f5b8c91ef24b9bbc28c23c89df4fff3b431aeada3b497822be0aaf2f0befa9c8d",
+          "sha256": "3aa247c7c1c1f646b01b4652f88cd2610d6a1f967a586d30024b025e6ddf5ee7",
+          "sha1": "81a0fdae577837c5a8bea0da1b01c6a1e7a58184",
+          "md5": "7ede7dbbb6a087b96c632223ab755e67"
+        }
+      ]
+    },
+    {
+      "name": "androidxSourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "androidx-multiplatform-docs"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.paging",
+          "module": "paging-common",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-common-ktx",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-guava",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-runtime",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-runtime-ktx",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-rxjava2",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-rxjava2-ktx",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-rxjava3",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-testing",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        }
+      ],
+      "files": [
+        {
+          "name": "paging-compose-3.4.0-alpha03-multiplatform-sources.jar",
+          "url": "paging-compose-3.4.0-alpha03-multiplatform-sources.jar",
+          "size": 14821,
+          "sha512": "c3686978a9af1a1fe68b85aab0032cd343553e4df790eb95b48d77776b424c09ea936fde0c5c357b84dffd210ead22b44ec16de227e3e298ac5ec8270ad34e78",
+          "sha256": "0b04b64061a1a5ae5f72a7d9ac8694eacf4495480e9aaf40fb981db3c43e296d",
+          "sha1": "f2e68c0ba99e7149dd0292d726bf9ff4da62eb3d",
+          "md5": "e6f3c5e43e1508dd85fc7188ed1434ca"
+        },
+        {
+          "name": "paging-compose-3.4.0-alpha03-samples-sources.jar",
+          "url": "paging-compose-3.4.0-alpha03-samples-sources.jar",
+          "size": 10343,
+          "sha512": "799d05e945f4a99440b41c20bc3e8a0fd5496e81945dea3e3c8aba2ee3055604a5272e5f0159ec5bc36b91615ecca44d91cde83298fd5d249c0816b5cba8c5aa",
+          "sha256": "04dae2fcceeb32a48d41d9db3c7895ddd0497b25e55d23cce4c215a2cfe68a83",
+          "sha1": "9f605971897e5a35501e60536a3f483611b1b7fa",
+          "md5": "d752e0088ff6688804d7a77f45d305aa"
+        }
+      ]
+    },
+    {
+      "name": "libraryVersionMetadata",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.usage": "library-version-metadata"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.paging",
+          "module": "paging-common",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-common-ktx",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-guava",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-runtime",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-runtime-ktx",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-rxjava2",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-rxjava2-ktx",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-rxjava3",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        },
+        {
+          "group": "androidx.paging",
+          "module": "paging-testing",
+          "version": {
+            "requires": "3.4.0-alpha03"
+          },
+          "reason": "paging-compose is in atomic group androidx.paging"
+        }
+      ],
+      "files": [
+        {
+          "name": "apiLevels.json",
+          "url": "paging-compose-3.4.0-alpha03-versionMetadata.json",
+          "size": 1214,
+          "sha512": "9abee337d2e9386109ebde9dcb7154d436be4f19e682aeccca882599a07a811ab51ef28fdc8d21e4ac9d7f3e258143cb80922520fa9d327b0cc8163c6e39c6fd",
+          "sha256": "ee19a4ab4bf091c95ca2952cc736de230533a5bce359c616376f2a1cc12d1ef5",
+          "sha1": "74053fa51c8e192f38349b110ae3a9c88bb39a17",
+          "md5": "860cdd356e72ba99b7b6e29e3dbb544c"
+        }
+      ]
+    },
+    {
+      "name": "androidApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../paging-compose-android/3.4.0-alpha03/paging-compose-android-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-android",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "androidRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../paging-compose-android/3.4.0-alpha03/paging-compose-android-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-android",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "androidSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../paging-compose-android/3.4.0-alpha03/paging-compose-android-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-android",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "desktopApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../paging-compose-desktop/3.4.0-alpha03/paging-compose-desktop-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-desktop",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "desktopRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../paging-compose-desktop/3.4.0-alpha03/paging-compose-desktop-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-desktop",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "desktopSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../paging-compose-desktop/3.4.0-alpha03/paging-compose-desktop-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-desktop",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "iosArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "ios_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-iosarm64/3.4.0-alpha03/paging-compose-iosarm64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-iosarm64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "iosArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "ios_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-iosarm64/3.4.0-alpha03/paging-compose-iosarm64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-iosarm64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "iosArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "ios_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-iosarm64/3.4.0-alpha03/paging-compose-iosarm64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-iosarm64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "iosSimulatorArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "ios_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-iossimulatorarm64/3.4.0-alpha03/paging-compose-iossimulatorarm64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-iossimulatorarm64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "iosSimulatorArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "ios_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-iossimulatorarm64/3.4.0-alpha03/paging-compose-iossimulatorarm64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-iossimulatorarm64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "iosSimulatorArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "ios_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-iossimulatorarm64/3.4.0-alpha03/paging-compose-iossimulatorarm64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-iossimulatorarm64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "iosX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "ios_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-iosx64/3.4.0-alpha03/paging-compose-iosx64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-iosx64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "iosX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "ios_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-iosx64/3.4.0-alpha03/paging-compose-iosx64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-iosx64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "iosX64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "ios_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-iosx64/3.4.0-alpha03/paging-compose-iosx64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-iosx64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "jsApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.js.compiler": "ir",
+        "org.jetbrains.kotlin.platform.type": "js"
+      },
+      "available-at": {
+        "url": "../../paging-compose-js/3.4.0-alpha03/paging-compose-js-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-js",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "jsRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.js.compiler": "ir",
+        "org.jetbrains.kotlin.platform.type": "js"
+      },
+      "available-at": {
+        "url": "../../paging-compose-js/3.4.0-alpha03/paging-compose-js-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-js",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "jsSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.js.compiler": "ir",
+        "org.jetbrains.kotlin.platform.type": "js"
+      },
+      "available-at": {
+        "url": "../../paging-compose-js/3.4.0-alpha03/paging-compose-js-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-js",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "linuxArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "linux_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-linuxarm64/3.4.0-alpha03/paging-compose-linuxarm64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-linuxarm64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "linuxArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "linux_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-linuxarm64/3.4.0-alpha03/paging-compose-linuxarm64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-linuxarm64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "linuxX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "linux_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-linuxx64/3.4.0-alpha03/paging-compose-linuxx64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-linuxx64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "linuxX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "linux_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-linuxx64/3.4.0-alpha03/paging-compose-linuxx64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-linuxx64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "macosArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "macos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-macosarm64/3.4.0-alpha03/paging-compose-macosarm64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-macosarm64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "macosArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "macos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-macosarm64/3.4.0-alpha03/paging-compose-macosarm64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-macosarm64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "macosArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "macos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-macosarm64/3.4.0-alpha03/paging-compose-macosarm64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-macosarm64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "macosX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "macos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-macosx64/3.4.0-alpha03/paging-compose-macosx64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-macosx64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "macosX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "macos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-macosx64/3.4.0-alpha03/paging-compose-macosx64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-macosx64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "macosX64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "macos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-macosx64/3.4.0-alpha03/paging-compose-macosx64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-macosx64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "mingwX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "mingw_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-mingwx64/3.4.0-alpha03/paging-compose-mingwx64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-mingwx64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "mingwX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "mingw_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-mingwx64/3.4.0-alpha03/paging-compose-mingwx64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-mingwx64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "tvosArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "tvos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-tvosarm64/3.4.0-alpha03/paging-compose-tvosarm64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-tvosarm64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "tvosArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "tvos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-tvosarm64/3.4.0-alpha03/paging-compose-tvosarm64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-tvosarm64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "tvosArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "tvos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-tvosarm64/3.4.0-alpha03/paging-compose-tvosarm64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-tvosarm64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "tvosSimulatorArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "tvos_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-tvossimulatorarm64/3.4.0-alpha03/paging-compose-tvossimulatorarm64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-tvossimulatorarm64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "tvosSimulatorArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "tvos_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-tvossimulatorarm64/3.4.0-alpha03/paging-compose-tvossimulatorarm64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-tvossimulatorarm64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "tvosSimulatorArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "tvos_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-tvossimulatorarm64/3.4.0-alpha03/paging-compose-tvossimulatorarm64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-tvossimulatorarm64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "tvosX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "tvos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-tvosx64/3.4.0-alpha03/paging-compose-tvosx64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-tvosx64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "tvosX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "tvos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-tvosx64/3.4.0-alpha03/paging-compose-tvosx64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-tvosx64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "tvosX64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "tvos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-tvosx64/3.4.0-alpha03/paging-compose-tvosx64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-tvosx64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "wasmJsApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.platform.type": "wasm",
+        "org.jetbrains.kotlin.wasm.target": "js"
+      },
+      "available-at": {
+        "url": "../../paging-compose-wasm-js/3.4.0-alpha03/paging-compose-wasm-js-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-wasm-js",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "wasmJsRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.platform.type": "wasm",
+        "org.jetbrains.kotlin.wasm.target": "js"
+      },
+      "available-at": {
+        "url": "../../paging-compose-wasm-js/3.4.0-alpha03/paging-compose-wasm-js-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-wasm-js",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "wasmJsSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.platform.type": "wasm",
+        "org.jetbrains.kotlin.wasm.target": "js"
+      },
+      "available-at": {
+        "url": "../../paging-compose-wasm-js/3.4.0-alpha03/paging-compose-wasm-js-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-wasm-js",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "watchosArm32ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "watchos_arm32",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-watchosarm32/3.4.0-alpha03/paging-compose-watchosarm32-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-watchosarm32",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "watchosArm32SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "watchos_arm32",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-watchosarm32/3.4.0-alpha03/paging-compose-watchosarm32-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-watchosarm32",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "watchosArm32MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "watchos_arm32",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-watchosarm32/3.4.0-alpha03/paging-compose-watchosarm32-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-watchosarm32",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "watchosArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "watchos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-watchosarm64/3.4.0-alpha03/paging-compose-watchosarm64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-watchosarm64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "watchosArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "watchos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-watchosarm64/3.4.0-alpha03/paging-compose-watchosarm64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-watchosarm64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "watchosArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "watchos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-watchosarm64/3.4.0-alpha03/paging-compose-watchosarm64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-watchosarm64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "watchosDeviceArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "watchos_device_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-watchosdevicearm64/3.4.0-alpha03/paging-compose-watchosdevicearm64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-watchosdevicearm64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "watchosDeviceArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "watchos_device_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-watchosdevicearm64/3.4.0-alpha03/paging-compose-watchosdevicearm64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-watchosdevicearm64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "watchosDeviceArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "watchos_device_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-watchosdevicearm64/3.4.0-alpha03/paging-compose-watchosdevicearm64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-watchosdevicearm64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "watchosSimulatorArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "watchos_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-watchossimulatorarm64/3.4.0-alpha03/paging-compose-watchossimulatorarm64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-watchossimulatorarm64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "watchosSimulatorArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "watchos_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-watchossimulatorarm64/3.4.0-alpha03/paging-compose-watchossimulatorarm64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-watchossimulatorarm64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "watchosSimulatorArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "watchos_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-watchossimulatorarm64/3.4.0-alpha03/paging-compose-watchossimulatorarm64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-watchossimulatorarm64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "watchosX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "watchos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-watchosx64/3.4.0-alpha03/paging-compose-watchosx64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-watchosx64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "watchosX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "watchos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-watchosx64/3.4.0-alpha03/paging-compose-watchosx64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-watchosx64",
+        "version": "3.4.0-alpha03"
+      }
+    },
+    {
+      "name": "watchosX64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "watchos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../paging-compose-watchosx64/3.4.0-alpha03/paging-compose-watchosx64-3.4.0-alpha03.module",
+        "group": "androidx.paging",
+        "module": "paging-compose-watchosx64",
+        "version": "3.4.0-alpha03"
+      }
+    }
+  ]
+}
