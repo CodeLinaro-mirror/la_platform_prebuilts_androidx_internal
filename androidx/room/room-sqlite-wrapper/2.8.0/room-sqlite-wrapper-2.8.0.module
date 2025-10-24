@@ -1,0 +1,718 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.room",
+    "module": "room-sqlite-wrapper",
+    "version": "2.8.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.0.0",
+      "buildId:": "14041852"
+    }
+  },
+  "variants": [
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing-testing",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-external-antlr",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-guava",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-gradle-plugin",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-ktx",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-migration",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-guava",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava2",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava3",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava2",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava3",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-testing",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        }
+      ],
+      "files": [
+        {
+          "name": "room-sqlite-wrapper-2.8.0-sources.jar",
+          "url": "room-sqlite-wrapper-2.8.0-sources.jar",
+          "size": 14649,
+          "sha512": "38fad6ab4dae7d72a681602ac55ca38c80db699f392b9b8952306d86096d319219da210cf4ed5b1a69680d083e0e8860c7f4e349e59718dcdd8285c391ea27fc",
+          "sha256": "2db760717844a4bad6c08707a5b67fb7ff303ef7c766916b2c38f05c90e1288c",
+          "sha1": "77e2c605b8c2d7c226f3422bfc1a1d85fec23ea1",
+          "md5": "66ae0f35a8599f5128ef166bcdd29966"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.8.0"
+          }
+        },
+        {
+          "group": "androidx.sqlite",
+          "module": "sqlite",
+          "version": {
+            "requires": "2.6.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib"
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing-testing",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-external-antlr",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-guava",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-gradle-plugin",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-ktx",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-migration",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-guava",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava2",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava3",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava2",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava3",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-testing",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.1.20"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "room-sqlite-wrapper-2.8.0.aar",
+          "url": "room-sqlite-wrapper-2.8.0.aar",
+          "size": 87822,
+          "sha512": "5d363884a0c1304fd55ac99e96693afdab8fe76d56afab688dd3127efc628c60926c1d17421f07c27924a08d81177a362141c2e60aec8d129e4c6e38151526ba",
+          "sha256": "94079051696c19dedb41c12ea77ff1ba4b2e616aa2e23f603392d70626347c41",
+          "sha1": "b656205f281ee22e4971bba3286e955c28b7887c",
+          "md5": "3ee88d478a67931e0b249411737662b9"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.concurrent",
+          "module": "concurrent-futures",
+          "version": {
+            "requires": "1.2.0"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.8.0"
+          }
+        },
+        {
+          "group": "androidx.sqlite",
+          "module": "sqlite",
+          "version": {
+            "requires": "2.6.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib"
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-android",
+          "version": {
+            "requires": "1.8.1"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing-testing",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-external-antlr",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-guava",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-gradle-plugin",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-ktx",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-migration",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-guava",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava2",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava3",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava2",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava3",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-testing",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.1.20"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "room-sqlite-wrapper-2.8.0.aar",
+          "url": "room-sqlite-wrapper-2.8.0.aar",
+          "size": 87822,
+          "sha512": "5d363884a0c1304fd55ac99e96693afdab8fe76d56afab688dd3127efc628c60926c1d17421f07c27924a08d81177a362141c2e60aec8d129e4c6e38151526ba",
+          "sha256": "94079051696c19dedb41c12ea77ff1ba4b2e616aa2e23f603392d70626347c41",
+          "sha1": "b656205f281ee22e4971bba3286e955c28b7887c",
+          "md5": "3ee88d478a67931e0b249411737662b9"
+        }
+      ]
+    },
+    {
+      "name": "libraryVersionMetadata",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.usage": "library-version-metadata"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.room",
+          "module": "room-common",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing-testing",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-external-antlr",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-guava",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-gradle-plugin",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-ktx",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-migration",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-guava",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava2",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava3",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava2",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava3",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-testing",
+          "version": {
+            "requires": "2.8.0"
+          },
+          "reason": "room-sqlite-wrapper is in atomic group androidx.room"
+        }
+      ],
+      "files": [
+        {
+          "name": "room-sqlite-wrapper-2.8.0-versionMetadata.json",
+          "url": "room-sqlite-wrapper-2.8.0-versionMetadata.json",
+          "size": 172,
+          "sha512": "70fd88e152dcfb8be6f16738bf986de9cf6173dfb84eb4724a37881c398f07fba02bb36df7b97f27d70b1dba761074ef4bb4df17594d9cf33d06639b78aa0187",
+          "sha256": "ae92609d747f38bbe14218966195ce55174bf6b168ea915eb4b6e4a3ac93ccf2",
+          "sha1": "ee6a7be9ad3a14707b1aab7aaf2c2dd255dcf2c5",
+          "md5": "006a89995c14450879051d0087f33538"
+        }
+      ]
+    }
+  ]
+}
