@@ -515,7 +515,7 @@ def update_androidx(target, build_id, local_file, groups, artifacts, skip_public
 	repo_dir = None
 	try:
 		if build_id:
-			artifact_zip_file = '^top-of-tree-m2repository-all(-[^-]*)?.zip'
+			artifact_zip_file = 'top-of-tree-m2repository-all(-[^-]*)?.zip'
 			if not kmp_docs:
 				repo_dir = fetch_and_extract("androidx", build_id, artifact_zip_file, None)
 			else:
