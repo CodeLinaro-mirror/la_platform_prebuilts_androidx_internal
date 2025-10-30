@@ -33,19 +33,41 @@
     <connection>scm:git:https://android.googlesource.com/platform/frameworks/support</connection>
     <url>https://cs.android.com/androidx/platform/frameworks/support</url>
   </scm>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <artifactId>kotlin-stdlib</artifactId>
+        <version>2.0.21</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <dependencies>
     <dependency>
-      <groupId>androidx.annotation</groupId>
-      <artifactId>annotation</artifactId>
-      <version>1.2.0</version>
+      <groupId>androidx.datastore</groupId>
+      <artifactId>datastore-preferences</artifactId>
+      <version>1.0.0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>androidx.annotation</groupId>
-      <artifactId>annotation-experimental</artifactId>
-      <version>1.4.0</version>
+      <groupId>androidx.work</groupId>
+      <artifactId>work-runtime</artifactId>
+      <version>2.7.1</version>
       <scope>runtime</scope>
       <type>aar</type>
+    </dependency>
+    <dependency>
+      <groupId>androidx.glance</groupId>
+      <artifactId>glance</artifactId>
+      <version>[1.2.0-alpha01]</version>
+      <scope>compile</scope>
+      <type>aar</type>
+    </dependency>
+    <dependency>
+      <groupId>androidx.annotation</groupId>
+      <artifactId>annotation</artifactId>
+      <version>1.8.1</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>androidx.compose.runtime</groupId>
@@ -67,42 +89,15 @@
     </dependency>
     <dependency>
       <groupId>androidx.datastore</groupId>
-      <artifactId>datastore-core</artifactId>
-      <version>1.0.0</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>androidx.datastore</groupId>
-      <artifactId>datastore-preferences</artifactId>
-      <version>1.0.0</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>androidx.datastore</groupId>
       <artifactId>datastore-preferences-core</artifactId>
       <version>1.0.0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>androidx.glance</groupId>
-      <artifactId>glance</artifactId>
-      <version>[1.1.1]</version>
+      <groupId>androidx.datastore</groupId>
+      <artifactId>datastore-core</artifactId>
+      <version>1.0.0</version>
       <scope>compile</scope>
-      <type>aar</type>
-    </dependency>
-    <dependency>
-      <groupId>androidx.glance</groupId>
-      <artifactId>glance-appwidget</artifactId>
-      <version>[1.1.1]</version>
-      <scope>compile</scope>
-      <type>aar</type>
-    </dependency>
-    <dependency>
-      <groupId>androidx.work</groupId>
-      <artifactId>work-runtime</artifactId>
-      <version>2.7.1</version>
-      <scope>runtime</scope>
-      <type>aar</type>
     </dependency>
     <dependency>
       <groupId>androidx.work</groupId>
@@ -114,8 +109,21 @@
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
       <artifactId>kotlin-stdlib</artifactId>
-      <version>1.8.22</version>
       <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>androidx.annotation</groupId>
+      <artifactId>annotation-experimental</artifactId>
+      <version>1.4.1</version>
+      <scope>runtime</scope>
+      <type>aar</type>
+    </dependency>
+    <dependency>
+      <groupId>androidx.glance</groupId>
+      <artifactId>glance-appwidget</artifactId>
+      <version>[1.2.0-alpha01]</version>
+      <scope>compile</scope>
+      <type>aar</type>
     </dependency>
   </dependencies>
 </project>
