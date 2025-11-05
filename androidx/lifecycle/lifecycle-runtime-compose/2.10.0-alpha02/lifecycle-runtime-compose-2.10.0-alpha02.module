@@ -1,0 +1,1761 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.lifecycle",
+    "module": "lifecycle-runtime-compose",
+    "version": "2.10.0-alpha02",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.0.0",
+      "buildId:": "13895212"
+    }
+  },
+  "variants": [
+    {
+      "name": "metadataApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.9.1"
+          }
+        },
+        {
+          "group": "androidx.compose.runtime",
+          "module": "runtime",
+          "version": {
+            "requires": "1.9.0-beta03"
+          }
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-runtime",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-common",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-common-java8",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-compiler",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-livedata",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-livedata-core",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-livedata-core-ktx",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-livedata-ktx",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-process",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-reactivestreams",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-reactivestreams-ktx",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-runtime",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-runtime-ktx",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-runtime-testing",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-service",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel-compose",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel-ktx",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel-savedstate",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel-testing",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel-navigation3",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        }
+      ],
+      "files": [
+        {
+          "name": "lifecycle-runtime-compose-metadata-2.10.0-alpha02.jar",
+          "url": "lifecycle-runtime-compose-2.10.0-alpha02.jar",
+          "size": 11648,
+          "sha512": "abd422d5b38b8bd8567cdee6330ba5d9a07c2dca93bfff93abfe89379da545eb1d427fbe36f5c38502df089e1751a9f4f39a4e1481e072ff9ad5853b59e53867",
+          "sha256": "d9b5ebd1a52b878bcaadca0d7342cb84dcf11113c7c9bd2a27c6ed3a2919b4a7",
+          "sha1": "5a9c9c60416deef84550b8422aaaf6d8099c2ae0",
+          "md5": "bde56e21c6cfc8dcdd1fcbc0602d73dd"
+        }
+      ]
+    },
+    {
+      "name": "metadataSourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-common",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-common-java8",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-compiler",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-livedata",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-livedata-core",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-livedata-core-ktx",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-livedata-ktx",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-process",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-reactivestreams",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-reactivestreams-ktx",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-runtime",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-runtime-ktx",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-runtime-testing",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-service",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel-compose",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel-ktx",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel-savedstate",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel-testing",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel-navigation3",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        }
+      ],
+      "files": [
+        {
+          "name": "lifecycle-runtime-compose-kotlin-2.10.0-alpha02-sources.jar",
+          "url": "lifecycle-runtime-compose-2.10.0-alpha02-sources.jar",
+          "size": 16634,
+          "sha512": "24c639e003fd9b456feb2be0fb48c9cfd0a171bfadbbe7d62e9a80b54074f76f7109320cfb765ed2c69be6428c9bc7150af7f3618fe3a08b10e53c7b4b1d1ea7",
+          "sha256": "9b607dbc0135608fb41dec64cf88ea4d475159dc4cbb48f1a1b5d551ee0f6e7a",
+          "sha1": "fa576b7800feef166d553af4ab9534508d34f9b7",
+          "md5": "86f14e5fa1fd90b3a71d2e37c83261f5"
+        }
+      ]
+    },
+    {
+      "name": "androidxSourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "androidx-multiplatform-docs"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-common",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-common-java8",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-compiler",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-livedata",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-livedata-core",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-livedata-core-ktx",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-livedata-ktx",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-process",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-reactivestreams",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-reactivestreams-ktx",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-runtime",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-runtime-ktx",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-runtime-testing",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-service",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel-compose",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel-ktx",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel-savedstate",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel-testing",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel-navigation3",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        }
+      ],
+      "files": [
+        {
+          "name": "lifecycle-runtime-compose-2.10.0-alpha02-multiplatform-sources.jar",
+          "url": "lifecycle-runtime-compose-2.10.0-alpha02-multiplatform-sources.jar",
+          "size": 19132,
+          "sha512": "b2bfdd336c1d56eabfbf4366031b15b0678feeccac9f3c3e6e8c22bb9c3155541b0c360ba16bbfcb41a0c3c18e9acb22d00b7b9ae9e5feb1a6cc3b33c55f179d",
+          "sha256": "cea328852309f93932539b064b195c5fb7763b234398b144a44efbe43d3e6275",
+          "sha1": "5f58cc345597909d0612cf5e33c5259eaed3a9db",
+          "md5": "f5227b0e2176070b7996a65cb31cfc0f"
+        },
+        {
+          "name": "lifecycle-runtime-compose-2.10.0-alpha02-samples-sources.jar",
+          "url": "lifecycle-runtime-compose-2.10.0-alpha02-samples-sources.jar",
+          "size": 7033,
+          "sha512": "926351b8c52243fea998fd808aa55a5e34a500a94354a45d46bf1e334f158fc647d80645ed1a5f64d1cbd55d5f64e7d1ccef4c63fb5069fc3a30c4b07f2c027e",
+          "sha256": "124a358ff3c60b156b419a18f5775f2711b63b7a6cb55d6c9ab6b1405af0de53",
+          "sha1": "f07f21edb543cb27cc34a1eb687a0987ed213386",
+          "md5": "9827cbd06788991dc7af6b1fa01fc597"
+        }
+      ]
+    },
+    {
+      "name": "libraryVersionMetadata",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.usage": "library-version-metadata"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-common",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-common-java8",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-compiler",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-livedata",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-livedata-core",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-livedata-core-ktx",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-livedata-ktx",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-process",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-reactivestreams",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-reactivestreams-ktx",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-runtime",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-runtime-ktx",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-runtime-testing",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-service",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel-compose",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel-ktx",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel-savedstate",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel-testing",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel-navigation3",
+          "version": {
+            "requires": "2.10.0-alpha02"
+          },
+          "reason": "lifecycle-runtime-compose is in atomic group androidx.lifecycle"
+        }
+      ],
+      "files": [
+        {
+          "name": "apiLevels.json",
+          "url": "lifecycle-runtime-compose-2.10.0-alpha02-versionMetadata.json",
+          "size": 11575,
+          "sha512": "23109e790d7dc2e71ac8cd811c960f7cd0adb4fcf7f59ff68e0621d66402690e3eabb6e2faac04d9dbb235f95c6b3c410d568b6dbc966743c3b87383184d8fe4",
+          "sha256": "fac6df3adbfefc2ab213772f56746acc6bbdb0c346d0f822a59ffc9eccfc15ad",
+          "sha1": "476b40163d2f8a65893d8b7e0497b0848f2ef914",
+          "md5": "527550c2584e4da2ea05c7323c205e47"
+        }
+      ]
+    },
+    {
+      "name": "androidApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-android/2.10.0-alpha02/lifecycle-runtime-compose-android-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-android",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "androidRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-android/2.10.0-alpha02/lifecycle-runtime-compose-android-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-android",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "androidSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-android/2.10.0-alpha02/lifecycle-runtime-compose-android-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-android",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "desktopApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-desktop/2.10.0-alpha02/lifecycle-runtime-compose-desktop-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-desktop",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "desktopRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-desktop/2.10.0-alpha02/lifecycle-runtime-compose-desktop-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-desktop",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "desktopSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-desktop/2.10.0-alpha02/lifecycle-runtime-compose-desktop-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-desktop",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "iosArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "ios_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-iosarm64/2.10.0-alpha02/lifecycle-runtime-compose-iosarm64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-iosarm64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "iosArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "ios_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-iosarm64/2.10.0-alpha02/lifecycle-runtime-compose-iosarm64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-iosarm64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "iosArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "ios_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-iosarm64/2.10.0-alpha02/lifecycle-runtime-compose-iosarm64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-iosarm64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "iosSimulatorArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "ios_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-iossimulatorarm64/2.10.0-alpha02/lifecycle-runtime-compose-iossimulatorarm64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-iossimulatorarm64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "iosSimulatorArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "ios_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-iossimulatorarm64/2.10.0-alpha02/lifecycle-runtime-compose-iossimulatorarm64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-iossimulatorarm64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "iosSimulatorArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "ios_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-iossimulatorarm64/2.10.0-alpha02/lifecycle-runtime-compose-iossimulatorarm64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-iossimulatorarm64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "iosX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "ios_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-iosx64/2.10.0-alpha02/lifecycle-runtime-compose-iosx64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-iosx64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "iosX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "ios_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-iosx64/2.10.0-alpha02/lifecycle-runtime-compose-iosx64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-iosx64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "iosX64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "ios_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-iosx64/2.10.0-alpha02/lifecycle-runtime-compose-iosx64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-iosx64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "jsApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.js.compiler": "ir",
+        "org.jetbrains.kotlin.platform.type": "js"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-js/2.10.0-alpha02/lifecycle-runtime-compose-js-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-js",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "jsRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.js.compiler": "ir",
+        "org.jetbrains.kotlin.platform.type": "js"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-js/2.10.0-alpha02/lifecycle-runtime-compose-js-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-js",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "jsSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.js.compiler": "ir",
+        "org.jetbrains.kotlin.platform.type": "js"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-js/2.10.0-alpha02/lifecycle-runtime-compose-js-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-js",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "linuxArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "linux_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-linuxarm64/2.10.0-alpha02/lifecycle-runtime-compose-linuxarm64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-linuxarm64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "linuxArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "linux_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-linuxarm64/2.10.0-alpha02/lifecycle-runtime-compose-linuxarm64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-linuxarm64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "linuxX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "linux_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-linuxx64/2.10.0-alpha02/lifecycle-runtime-compose-linuxx64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-linuxx64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "linuxX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "linux_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-linuxx64/2.10.0-alpha02/lifecycle-runtime-compose-linuxx64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-linuxx64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "macosArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "macos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-macosarm64/2.10.0-alpha02/lifecycle-runtime-compose-macosarm64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-macosarm64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "macosArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "macos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-macosarm64/2.10.0-alpha02/lifecycle-runtime-compose-macosarm64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-macosarm64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "macosArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "macos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-macosarm64/2.10.0-alpha02/lifecycle-runtime-compose-macosarm64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-macosarm64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "macosX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "macos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-macosx64/2.10.0-alpha02/lifecycle-runtime-compose-macosx64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-macosx64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "macosX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "macos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-macosx64/2.10.0-alpha02/lifecycle-runtime-compose-macosx64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-macosx64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "macosX64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "macos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-macosx64/2.10.0-alpha02/lifecycle-runtime-compose-macosx64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-macosx64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "mingwX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "mingw_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-mingwx64/2.10.0-alpha02/lifecycle-runtime-compose-mingwx64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-mingwx64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "mingwX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "mingw_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-mingwx64/2.10.0-alpha02/lifecycle-runtime-compose-mingwx64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-mingwx64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "tvosArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "tvos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-tvosarm64/2.10.0-alpha02/lifecycle-runtime-compose-tvosarm64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-tvosarm64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "tvosArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "tvos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-tvosarm64/2.10.0-alpha02/lifecycle-runtime-compose-tvosarm64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-tvosarm64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "tvosArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "tvos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-tvosarm64/2.10.0-alpha02/lifecycle-runtime-compose-tvosarm64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-tvosarm64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "tvosSimulatorArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "tvos_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-tvossimulatorarm64/2.10.0-alpha02/lifecycle-runtime-compose-tvossimulatorarm64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-tvossimulatorarm64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "tvosSimulatorArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "tvos_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-tvossimulatorarm64/2.10.0-alpha02/lifecycle-runtime-compose-tvossimulatorarm64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-tvossimulatorarm64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "tvosSimulatorArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "tvos_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-tvossimulatorarm64/2.10.0-alpha02/lifecycle-runtime-compose-tvossimulatorarm64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-tvossimulatorarm64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "tvosX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "tvos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-tvosx64/2.10.0-alpha02/lifecycle-runtime-compose-tvosx64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-tvosx64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "tvosX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "tvos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-tvosx64/2.10.0-alpha02/lifecycle-runtime-compose-tvosx64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-tvosx64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "tvosX64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "tvos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-tvosx64/2.10.0-alpha02/lifecycle-runtime-compose-tvosx64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-tvosx64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "wasmJsApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.platform.type": "wasm",
+        "org.jetbrains.kotlin.wasm.target": "js"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-wasm-js/2.10.0-alpha02/lifecycle-runtime-compose-wasm-js-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-wasm-js",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "wasmJsRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.platform.type": "wasm",
+        "org.jetbrains.kotlin.wasm.target": "js"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-wasm-js/2.10.0-alpha02/lifecycle-runtime-compose-wasm-js-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-wasm-js",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "wasmJsSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.platform.type": "wasm",
+        "org.jetbrains.kotlin.wasm.target": "js"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-wasm-js/2.10.0-alpha02/lifecycle-runtime-compose-wasm-js-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-wasm-js",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "watchosArm32ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "watchos_arm32",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-watchosarm32/2.10.0-alpha02/lifecycle-runtime-compose-watchosarm32-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-watchosarm32",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "watchosArm32SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "watchos_arm32",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-watchosarm32/2.10.0-alpha02/lifecycle-runtime-compose-watchosarm32-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-watchosarm32",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "watchosArm32MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "watchos_arm32",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-watchosarm32/2.10.0-alpha02/lifecycle-runtime-compose-watchosarm32-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-watchosarm32",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "watchosArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "watchos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-watchosarm64/2.10.0-alpha02/lifecycle-runtime-compose-watchosarm64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-watchosarm64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "watchosArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "watchos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-watchosarm64/2.10.0-alpha02/lifecycle-runtime-compose-watchosarm64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-watchosarm64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "watchosArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "watchos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-watchosarm64/2.10.0-alpha02/lifecycle-runtime-compose-watchosarm64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-watchosarm64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "watchosDeviceArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "watchos_device_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-watchosdevicearm64/2.10.0-alpha02/lifecycle-runtime-compose-watchosdevicearm64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-watchosdevicearm64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "watchosDeviceArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "watchos_device_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-watchosdevicearm64/2.10.0-alpha02/lifecycle-runtime-compose-watchosdevicearm64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-watchosdevicearm64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "watchosDeviceArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "watchos_device_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-watchosdevicearm64/2.10.0-alpha02/lifecycle-runtime-compose-watchosdevicearm64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-watchosdevicearm64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "watchosSimulatorArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "watchos_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-watchossimulatorarm64/2.10.0-alpha02/lifecycle-runtime-compose-watchossimulatorarm64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-watchossimulatorarm64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "watchosSimulatorArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "watchos_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-watchossimulatorarm64/2.10.0-alpha02/lifecycle-runtime-compose-watchossimulatorarm64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-watchossimulatorarm64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "watchosSimulatorArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "watchos_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-watchossimulatorarm64/2.10.0-alpha02/lifecycle-runtime-compose-watchossimulatorarm64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-watchossimulatorarm64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "watchosX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "watchos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-watchosx64/2.10.0-alpha02/lifecycle-runtime-compose-watchosx64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-watchosx64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "watchosX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "watchos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-watchosx64/2.10.0-alpha02/lifecycle-runtime-compose-watchosx64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-watchosx64",
+        "version": "2.10.0-alpha02"
+      }
+    },
+    {
+      "name": "watchosX64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "watchos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../lifecycle-runtime-compose-watchosx64/2.10.0-alpha02/lifecycle-runtime-compose-watchosx64-2.10.0-alpha02.module",
+        "group": "androidx.lifecycle",
+        "module": "lifecycle-runtime-compose-watchosx64",
+        "version": "2.10.0-alpha02"
+      }
+    }
+  ]
+}
