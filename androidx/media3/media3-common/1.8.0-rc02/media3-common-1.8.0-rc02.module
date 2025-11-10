@@ -1,0 +1,371 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.media3",
+    "module": "media3-common",
+    "version": "1.8.0-rc02",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.10.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "com.google.guava",
+          "module": "guava",
+          "version": {
+            "requires": "33.3.1-android"
+          },
+          "excludes": [
+            {
+              "group": "com.google.j2objc",
+              "module": "j2objc-annotations"
+            },
+            {
+              "group": "org.checkerframework",
+              "module": "checker-compat-qual"
+            },
+            {
+              "group": "com.google.code.findbugs",
+              "module": "jsr305"
+            },
+            {
+              "group": "org.codehaus.mojo",
+              "module": "animal-sniffer-annotations"
+            },
+            {
+              "group": "org.checkerframework",
+              "module": "checker-qual"
+            },
+            {
+              "group": "com.google.errorprone",
+              "module": "error_prone_annotations"
+            }
+          ]
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation-experimental",
+          "version": {
+            "requires": "1.3.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "media3-common-1.8.0-rc02.aar",
+          "url": "media3-common-1.8.0-rc02.aar",
+          "size": 537544,
+          "sha512": "9d740b6bef80e077bc6562ecd6a6a4b538fa39fd1afa06503705f4efd6fd8e9809e4fe265798aeff4b5d2ee5e67f447f2a86d1b5d2cb75a914e2ae22f870dbd0",
+          "sha256": "c6193b8e0ffe22f6ff9564d2b973f99e009bae33e83847fec00097608102ce42",
+          "sha1": "614473890f37745e80a162c68269858b10901e51",
+          "md5": "aaabc3650a0eb9e46041f54a57f75f94"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.6.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-bom",
+          "version": {
+            "requires": "1.8.0"
+          },
+          "attributes": {
+            "org.gradle.category": "platform"
+          },
+          "endorseStrictVersions": true
+        },
+        {
+          "group": "com.google.guava",
+          "module": "guava",
+          "version": {
+            "requires": "33.3.1-android"
+          },
+          "excludes": [
+            {
+              "group": "com.google.j2objc",
+              "module": "j2objc-annotations"
+            },
+            {
+              "group": "org.checkerframework",
+              "module": "checker-compat-qual"
+            },
+            {
+              "group": "com.google.code.findbugs",
+              "module": "jsr305"
+            },
+            {
+              "group": "org.codehaus.mojo",
+              "module": "animal-sniffer-annotations"
+            },
+            {
+              "group": "org.checkerframework",
+              "module": "checker-qual"
+            },
+            {
+              "group": "com.google.errorprone",
+              "module": "error_prone_annotations"
+            }
+          ]
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation-experimental",
+          "version": {
+            "requires": "1.3.1"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.media3",
+          "module": "media3-cast",
+          "version": {
+            "requires": "1.8.0-rc02"
+          }
+        },
+        {
+          "group": "androidx.media3",
+          "module": "media3-common-ktx",
+          "version": {
+            "requires": "1.8.0-rc02"
+          }
+        },
+        {
+          "group": "androidx.media3",
+          "module": "media3-container",
+          "version": {
+            "requires": "1.8.0-rc02"
+          }
+        },
+        {
+          "group": "androidx.media3",
+          "module": "media3-database",
+          "version": {
+            "requires": "1.8.0-rc02"
+          }
+        },
+        {
+          "group": "androidx.media3",
+          "module": "media3-datasource",
+          "version": {
+            "requires": "1.8.0-rc02"
+          }
+        },
+        {
+          "group": "androidx.media3",
+          "module": "media3-datasource-cronet",
+          "version": {
+            "requires": "1.8.0-rc02"
+          }
+        },
+        {
+          "group": "androidx.media3",
+          "module": "media3-datasource-okhttp",
+          "version": {
+            "requires": "1.8.0-rc02"
+          }
+        },
+        {
+          "group": "androidx.media3",
+          "module": "media3-datasource-rtmp",
+          "version": {
+            "requires": "1.8.0-rc02"
+          }
+        },
+        {
+          "group": "androidx.media3",
+          "module": "media3-decoder",
+          "version": {
+            "requires": "1.8.0-rc02"
+          }
+        },
+        {
+          "group": "androidx.media3",
+          "module": "media3-exoplayer-midi",
+          "version": {
+            "requires": "1.8.0-rc02"
+          }
+        },
+        {
+          "group": "androidx.media3",
+          "module": "media3-effect",
+          "version": {
+            "requires": "1.8.0-rc02"
+          }
+        },
+        {
+          "group": "androidx.media3",
+          "module": "media3-exoplayer",
+          "version": {
+            "requires": "1.8.0-rc02"
+          }
+        },
+        {
+          "group": "androidx.media3",
+          "module": "media3-exoplayer-dash",
+          "version": {
+            "requires": "1.8.0-rc02"
+          }
+        },
+        {
+          "group": "androidx.media3",
+          "module": "media3-exoplayer-hls",
+          "version": {
+            "requires": "1.8.0-rc02"
+          }
+        },
+        {
+          "group": "androidx.media3",
+          "module": "media3-exoplayer-ima",
+          "version": {
+            "requires": "1.8.0-rc02"
+          }
+        },
+        {
+          "group": "androidx.media3",
+          "module": "media3-exoplayer-rtsp",
+          "version": {
+            "requires": "1.8.0-rc02"
+          }
+        },
+        {
+          "group": "androidx.media3",
+          "module": "media3-exoplayer-smoothstreaming",
+          "version": {
+            "requires": "1.8.0-rc02"
+          }
+        },
+        {
+          "group": "androidx.media3",
+          "module": "media3-exoplayer-workmanager",
+          "version": {
+            "requires": "1.8.0-rc02"
+          }
+        },
+        {
+          "group": "androidx.media3",
+          "module": "media3-extractor",
+          "version": {
+            "requires": "1.8.0-rc02"
+          }
+        },
+        {
+          "group": "androidx.media3",
+          "module": "media3-muxer",
+          "version": {
+            "requires": "1.8.0-rc02"
+          }
+        },
+        {
+          "group": "androidx.media3",
+          "module": "media3-session",
+          "version": {
+            "requires": "1.8.0-rc02"
+          }
+        },
+        {
+          "group": "androidx.media3",
+          "module": "media3-transformer",
+          "version": {
+            "requires": "1.8.0-rc02"
+          }
+        },
+        {
+          "group": "androidx.media3",
+          "module": "media3-ui",
+          "version": {
+            "requires": "1.8.0-rc02"
+          }
+        },
+        {
+          "group": "androidx.media3",
+          "module": "media3-ui-compose",
+          "version": {
+            "requires": "1.8.0-rc02"
+          }
+        },
+        {
+          "group": "androidx.media3",
+          "module": "media3-ui-leanback",
+          "version": {
+            "requires": "1.8.0-rc02"
+          }
+        },
+        {
+          "group": "androidx.media3",
+          "module": "media3-test-utils",
+          "version": {
+            "requires": "1.8.0-rc02"
+          }
+        },
+        {
+          "group": "androidx.media3",
+          "module": "media3-test-utils-robolectric",
+          "version": {
+            "requires": "1.8.0-rc02"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "media3-common-1.8.0-rc02.aar",
+          "url": "media3-common-1.8.0-rc02.aar",
+          "size": 537544,
+          "sha512": "9d740b6bef80e077bc6562ecd6a6a4b538fa39fd1afa06503705f4efd6fd8e9809e4fe265798aeff4b5d2ee5e67f447f2a86d1b5d2cb75a914e2ae22f870dbd0",
+          "sha256": "c6193b8e0ffe22f6ff9564d2b973f99e009bae33e83847fec00097608102ce42",
+          "sha1": "614473890f37745e80a162c68269858b10901e51",
+          "md5": "aaabc3650a0eb9e46041f54a57f75f94"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseSourcePublication",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "media3-common-1.8.0-rc02-sources.jar",
+          "url": "media3-common-1.8.0-rc02-sources.jar",
+          "size": 449088,
+          "sha512": "50005955ad08201c9ac854b6470f48e1f8bd838ed24a2dd3d161f4d3a619ace92fd8087b7af9d6724bf44d3f9ae11a66d6118478649884b0b036e7f94001968c",
+          "sha256": "3b71607d5f56c5adc87542194f7543f3c0ccfa728cb72328daefdc89fac24200",
+          "sha1": "0698a9d3a7ccec6f5f081262040e151eca67ff2a",
+          "md5": "4f3fb7317040568a44e5c53950903e70"
+        }
+      ]
+    }
+  ]
+}

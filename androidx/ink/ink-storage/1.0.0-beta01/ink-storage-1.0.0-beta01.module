@@ -1,0 +1,505 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.ink",
+    "module": "ink-storage",
+    "version": "1.0.0-beta01",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.1.0",
+      "buildId:": "14278171"
+    }
+  },
+  "variants": [
+    {
+      "name": "metadataApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.0.21"
+          }
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.ink",
+          "module": "ink-authoring",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-authoring-compose",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-brush",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-brush-compose",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-geometry",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-geometry-compose",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-nativeloader",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-strokes",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-rendering",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        }
+      ],
+      "files": [
+        {
+          "name": "ink-storage-metadata-1.0.0-beta01.jar",
+          "url": "ink-storage-1.0.0-beta01.jar",
+          "size": 4769,
+          "sha512": "c387f683879800bdabbc4528a6c6014e08ddf8f7aaef61fd80da803c653380741c16f19482432c26fd67d2ccdd0e6cf52ece3ba94f9ebb36d005a3fd70b22e8d",
+          "sha256": "ecafa747bc78f59ea492b137fabb54be9f6cc3d5b658d8c37f02db523b5dee2f",
+          "sha1": "e08b170fbaa8f73d8b6f5068f1188d5988b08e75",
+          "md5": "dd53e673742f168f7453dabbceec761b"
+        }
+      ]
+    },
+    {
+      "name": "metadataSourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.ink",
+          "module": "ink-authoring",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-authoring-compose",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-brush",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-brush-compose",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-geometry",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-geometry-compose",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-nativeloader",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-strokes",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-rendering",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        }
+      ],
+      "files": [
+        {
+          "name": "ink-storage-kotlin-1.0.0-beta01-sources.jar",
+          "url": "ink-storage-1.0.0-beta01-sources.jar",
+          "size": 4372,
+          "sha512": "5952d417d8b62b92ba55ca193d9e7f0defc36d6568ecf12ce2a01ed8428e108f47eb18ae9a4ea7d9cf78b26a89879441cf6be6fd1caead3d45932814f4b730be",
+          "sha256": "4d8b08688c64a6cb760307aec889fffc38d19f1b987f87a72480c78ded8d6b79",
+          "sha1": "512bcb7cf74ac9278b2f0b363f838e74a9e1e861",
+          "md5": "0627d514c6be39d1f3f0de6a2f6c4a6c"
+        }
+      ]
+    },
+    {
+      "name": "androidxSourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "androidx-multiplatform-docs"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.ink",
+          "module": "ink-authoring",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-authoring-compose",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-brush",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-brush-compose",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-geometry",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-geometry-compose",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-nativeloader",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-strokes",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-rendering",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        }
+      ],
+      "files": [
+        {
+          "name": "ink-storage-1.0.0-beta01-multiplatform-sources.jar",
+          "url": "ink-storage-1.0.0-beta01-multiplatform-sources.jar",
+          "size": 15846,
+          "sha512": "042dab46d5480dfcdab24f3f83685e13726d9f8d7d54de9e95c5bb03ac1386fb5324993086c6a6cc1c992f0864003b1d9a91a08f3aee94f089d9802e80d46162",
+          "sha256": "c0e01b17c1c5470d772e66c5b284bed62e34f62d027a742806b7a4bfa5744f66",
+          "sha1": "237bd500fd955b78d06a5461600c1eafcb719f55",
+          "md5": "65561298563c7ccdbe2e8f0f8d9ec742"
+        }
+      ]
+    },
+    {
+      "name": "libraryVersionMetadata",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.usage": "library-version-metadata"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.ink",
+          "module": "ink-authoring",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-authoring-compose",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-brush",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-brush-compose",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-geometry",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-geometry-compose",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-nativeloader",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-strokes",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        },
+        {
+          "group": "androidx.ink",
+          "module": "ink-rendering",
+          "version": {
+            "requires": "1.0.0-beta01"
+          },
+          "reason": "ink-storage is in atomic group androidx.ink"
+        }
+      ],
+      "files": [
+        {
+          "name": "apiLevels.json",
+          "url": "ink-storage-1.0.0-beta01-versionMetadata.json",
+          "size": 2295,
+          "sha512": "b0e5899d1c72e0e87ae5efd9ec15a885cb822806091a9158c2212a2106c1158c05b10d4a7b6adb6ad53a902a919f301f9fcc405910f7b7d978d624c64cc7260e",
+          "sha256": "cf302e27442509073e4e5aeaad254c674a94611ad1a8d47ad97e057a57d78f14",
+          "sha1": "da01392b1e5b9e04467c04e86a0e2d1bc218f981",
+          "md5": "d228a5001dc09686e4192707327837b1"
+        }
+      ]
+    },
+    {
+      "name": "androidApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../ink-storage-android/1.0.0-beta01/ink-storage-android-1.0.0-beta01.module",
+        "group": "androidx.ink",
+        "module": "ink-storage-android",
+        "version": "1.0.0-beta01"
+      }
+    },
+    {
+      "name": "androidRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../ink-storage-android/1.0.0-beta01/ink-storage-android-1.0.0-beta01.module",
+        "group": "androidx.ink",
+        "module": "ink-storage-android",
+        "version": "1.0.0-beta01"
+      }
+    },
+    {
+      "name": "androidSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../ink-storage-android/1.0.0-beta01/ink-storage-android-1.0.0-beta01.module",
+        "group": "androidx.ink",
+        "module": "ink-storage-android",
+        "version": "1.0.0-beta01"
+      }
+    },
+    {
+      "name": "jvmApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../ink-storage-jvm/1.0.0-beta01/ink-storage-jvm-1.0.0-beta01.module",
+        "group": "androidx.ink",
+        "module": "ink-storage-jvm",
+        "version": "1.0.0-beta01"
+      }
+    },
+    {
+      "name": "jvmRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../ink-storage-jvm/1.0.0-beta01/ink-storage-jvm-1.0.0-beta01.module",
+        "group": "androidx.ink",
+        "module": "ink-storage-jvm",
+        "version": "1.0.0-beta01"
+      }
+    },
+    {
+      "name": "jvmSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../ink-storage-jvm/1.0.0-beta01/ink-storage-jvm-1.0.0-beta01.module",
+        "group": "androidx.ink",
+        "module": "ink-storage-jvm",
+        "version": "1.0.0-beta01"
+      }
+    }
+  ]
+}

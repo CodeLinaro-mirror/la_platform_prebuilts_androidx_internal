@@ -1,0 +1,1568 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.room",
+    "module": "room-common",
+    "version": "2.8.0-alpha01",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14",
+      "buildId:": "13759744"
+    }
+  },
+  "variants": [
+    {
+      "name": "metadataApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.9.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib"
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.1.20"
+          }
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing-testing",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-external-antlr",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-guava",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-gradle-plugin",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-ktx",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-migration",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-guava",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava2",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava3",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava2",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava3",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-sqlite-wrapper",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-testing",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        }
+      ],
+      "files": [
+        {
+          "name": "room-common-metadata-2.8.0-alpha01.jar",
+          "url": "room-common-2.8.0-alpha01.jar",
+          "size": 31622,
+          "sha512": "090a946ec4fc890b35ea467f2154244791084220d4c95573e748e16ddfe067483176272575dd94ae75af5776df3fab384770e909f576a395f10c2165cb95cce2",
+          "sha256": "c31519bf10a0c0c81fd8dba1164a0504d744d14db1ab33147a86d814faf1aaa3",
+          "sha1": "0136a6d45f5106f792973db46493e708824256e2",
+          "md5": "0af8886f6b80ac5392c4de7174f82649"
+        }
+      ]
+    },
+    {
+      "name": "metadataSourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.room",
+          "module": "room-compiler",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing-testing",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-external-antlr",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-guava",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-gradle-plugin",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-ktx",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-migration",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-guava",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava2",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava3",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava2",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava3",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-sqlite-wrapper",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-testing",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        }
+      ],
+      "files": [
+        {
+          "name": "room-common-kotlin-2.8.0-alpha01-sources.jar",
+          "url": "room-common-2.8.0-alpha01-sources.jar",
+          "size": 68873,
+          "sha512": "fbda4e68d5c978ad403f42c241b15f449e193b071785ff97b6556da75b57b63f332af693b1e2c7309aeb8dbc633a2143a6b6b5b9d8137a22d8015d098f41df54",
+          "sha256": "abfd43f2631f3d6abd9f64882605c6e2e8f54a36912cd4336ba8d89d579ff2d9",
+          "sha1": "f6825ab80ac27f4c219c994b5de32e135f443d4b",
+          "md5": "92642ccd7e259435114c6f550f1b14e4"
+        }
+      ]
+    },
+    {
+      "name": "androidxSourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "androidx-multiplatform-docs"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.room",
+          "module": "room-compiler",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing-testing",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-external-antlr",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-guava",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-gradle-plugin",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-ktx",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-migration",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-guava",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava2",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava3",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava2",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava3",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-sqlite-wrapper",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-testing",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        }
+      ],
+      "files": [
+        {
+          "name": "room-common-2.8.0-alpha01-multiplatform-sources.jar",
+          "url": "room-common-2.8.0-alpha01-multiplatform-sources.jar",
+          "size": 77085,
+          "sha512": "db0cc8dca95edbda8df04c8da8e6362552d4c6adff81d729058ee1492c6f93fef4aa0d784dce7ae064ab9ca165828ad86c34e871467c052515f3995dce3e1c49",
+          "sha256": "b63d5162ff2714d055fb1226094e2aebc089a54196fb781ce5146b53bcff5000",
+          "sha1": "e84894a975f4dae36958a04108d0f5afc80f5256",
+          "md5": "45aca0ea596e614e9931e00d24e2edc5"
+        }
+      ]
+    },
+    {
+      "name": "libraryVersionMetadata",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.usage": "library-version-metadata"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.room",
+          "module": "room-compiler",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-compiler-processing-testing",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-external-antlr",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-guava",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-gradle-plugin",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-ktx",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-migration",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-guava",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava2",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-paging-rxjava3",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-runtime",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava2",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-rxjava3",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-sqlite-wrapper",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        },
+        {
+          "group": "androidx.room",
+          "module": "room-testing",
+          "version": {
+            "requires": "2.8.0-alpha01"
+          },
+          "reason": "room-common is in atomic group androidx.room"
+        }
+      ],
+      "files": [
+        {
+          "name": "apiLevels.json",
+          "url": "room-common-2.8.0-alpha01-versionMetadata.json",
+          "size": 15858,
+          "sha512": "e8bf91d09bee4794c9283f61713f85db5faf89e8a3a9162553d20dd12cc0c49cf3e5329aa9ecc1bd5f6e70df3f42d341c9e6d7fc2f64faca9b9eae6523517c3a",
+          "sha256": "014e985fe63a905f15492d8a20706a01f8c271e58698d3771f8529a140110540",
+          "sha1": "3adef7b4e5be860887ae4abbbcd59681f314374d",
+          "md5": "8882d7a116b1800b8a767105c1392f39"
+        }
+      ]
+    },
+    {
+      "name": "iosArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "ios_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-iosarm64/2.8.0-alpha01/room-common-iosarm64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-iosarm64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "iosArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "ios_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-iosarm64/2.8.0-alpha01/room-common-iosarm64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-iosarm64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "iosArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "ios_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-iosarm64/2.8.0-alpha01/room-common-iosarm64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-iosarm64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "iosSimulatorArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "ios_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-iossimulatorarm64/2.8.0-alpha01/room-common-iossimulatorarm64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-iossimulatorarm64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "iosSimulatorArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "ios_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-iossimulatorarm64/2.8.0-alpha01/room-common-iossimulatorarm64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-iossimulatorarm64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "iosSimulatorArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "ios_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-iossimulatorarm64/2.8.0-alpha01/room-common-iossimulatorarm64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-iossimulatorarm64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "iosX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "ios_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-iosx64/2.8.0-alpha01/room-common-iosx64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-iosx64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "iosX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "ios_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-iosx64/2.8.0-alpha01/room-common-iosx64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-iosx64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "iosX64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "ios_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-iosx64/2.8.0-alpha01/room-common-iosx64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-iosx64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "jsApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.js.compiler": "ir",
+        "org.jetbrains.kotlin.platform.type": "js"
+      },
+      "available-at": {
+        "url": "../../room-common-js/2.8.0-alpha01/room-common-js-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-js",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "jsRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.js.compiler": "ir",
+        "org.jetbrains.kotlin.platform.type": "js"
+      },
+      "available-at": {
+        "url": "../../room-common-js/2.8.0-alpha01/room-common-js-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-js",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "jsSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.js.compiler": "ir",
+        "org.jetbrains.kotlin.platform.type": "js"
+      },
+      "available-at": {
+        "url": "../../room-common-js/2.8.0-alpha01/room-common-js-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-js",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "jvmApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../room-common-jvm/2.8.0-alpha01/room-common-jvm-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-jvm",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "jvmRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../room-common-jvm/2.8.0-alpha01/room-common-jvm-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-jvm",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "jvmSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../room-common-jvm/2.8.0-alpha01/room-common-jvm-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-jvm",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "linuxArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "linux_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-linuxarm64/2.8.0-alpha01/room-common-linuxarm64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-linuxarm64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "linuxArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "linux_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-linuxarm64/2.8.0-alpha01/room-common-linuxarm64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-linuxarm64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "linuxX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "linux_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-linuxx64/2.8.0-alpha01/room-common-linuxx64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-linuxx64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "linuxX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "linux_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-linuxx64/2.8.0-alpha01/room-common-linuxx64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-linuxx64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "macosArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "macos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-macosarm64/2.8.0-alpha01/room-common-macosarm64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-macosarm64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "macosArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "macos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-macosarm64/2.8.0-alpha01/room-common-macosarm64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-macosarm64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "macosArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "macos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-macosarm64/2.8.0-alpha01/room-common-macosarm64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-macosarm64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "macosX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "macos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-macosx64/2.8.0-alpha01/room-common-macosx64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-macosx64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "macosX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "macos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-macosx64/2.8.0-alpha01/room-common-macosx64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-macosx64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "macosX64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "macos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-macosx64/2.8.0-alpha01/room-common-macosx64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-macosx64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "tvosArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "tvos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-tvosarm64/2.8.0-alpha01/room-common-tvosarm64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-tvosarm64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "tvosArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "tvos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-tvosarm64/2.8.0-alpha01/room-common-tvosarm64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-tvosarm64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "tvosArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "tvos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-tvosarm64/2.8.0-alpha01/room-common-tvosarm64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-tvosarm64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "tvosSimulatorArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "tvos_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-tvossimulatorarm64/2.8.0-alpha01/room-common-tvossimulatorarm64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-tvossimulatorarm64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "tvosSimulatorArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "tvos_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-tvossimulatorarm64/2.8.0-alpha01/room-common-tvossimulatorarm64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-tvossimulatorarm64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "tvosSimulatorArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "tvos_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-tvossimulatorarm64/2.8.0-alpha01/room-common-tvossimulatorarm64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-tvossimulatorarm64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "tvosX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "tvos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-tvosx64/2.8.0-alpha01/room-common-tvosx64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-tvosx64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "tvosX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "tvos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-tvosx64/2.8.0-alpha01/room-common-tvosx64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-tvosx64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "tvosX64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "tvos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-tvosx64/2.8.0-alpha01/room-common-tvosx64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-tvosx64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "wasmJsApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.platform.type": "wasm",
+        "org.jetbrains.kotlin.wasm.target": "js"
+      },
+      "available-at": {
+        "url": "../../room-common-wasm-js/2.8.0-alpha01/room-common-wasm-js-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-wasm-js",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "wasmJsRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.platform.type": "wasm",
+        "org.jetbrains.kotlin.wasm.target": "js"
+      },
+      "available-at": {
+        "url": "../../room-common-wasm-js/2.8.0-alpha01/room-common-wasm-js-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-wasm-js",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "wasmJsSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.platform.type": "wasm",
+        "org.jetbrains.kotlin.wasm.target": "js"
+      },
+      "available-at": {
+        "url": "../../room-common-wasm-js/2.8.0-alpha01/room-common-wasm-js-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-wasm-js",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosArm32ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "watchos_arm32",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-watchosarm32/2.8.0-alpha01/room-common-watchosarm32-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-watchosarm32",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosArm32SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "watchos_arm32",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-watchosarm32/2.8.0-alpha01/room-common-watchosarm32-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-watchosarm32",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosArm32MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "watchos_arm32",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-watchosarm32/2.8.0-alpha01/room-common-watchosarm32-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-watchosarm32",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "watchos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-watchosarm64/2.8.0-alpha01/room-common-watchosarm64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-watchosarm64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "watchos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-watchosarm64/2.8.0-alpha01/room-common-watchosarm64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-watchosarm64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "watchos_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-watchosarm64/2.8.0-alpha01/room-common-watchosarm64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-watchosarm64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosDeviceArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "watchos_device_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-watchosdevicearm64/2.8.0-alpha01/room-common-watchosdevicearm64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-watchosdevicearm64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosDeviceArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "watchos_device_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-watchosdevicearm64/2.8.0-alpha01/room-common-watchosdevicearm64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-watchosdevicearm64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosDeviceArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "watchos_device_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-watchosdevicearm64/2.8.0-alpha01/room-common-watchosdevicearm64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-watchosdevicearm64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosSimulatorArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "watchos_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-watchossimulatorarm64/2.8.0-alpha01/room-common-watchossimulatorarm64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-watchossimulatorarm64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosSimulatorArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "watchos_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-watchossimulatorarm64/2.8.0-alpha01/room-common-watchossimulatorarm64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-watchossimulatorarm64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosSimulatorArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "watchos_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-watchossimulatorarm64/2.8.0-alpha01/room-common-watchossimulatorarm64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-watchossimulatorarm64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "watchos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-watchosx64/2.8.0-alpha01/room-common-watchosx64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-watchosx64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "watchos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-watchosx64/2.8.0-alpha01/room-common-watchosx64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-watchosx64",
+        "version": "2.8.0-alpha01"
+      }
+    },
+    {
+      "name": "watchosX64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "watchos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../room-common-watchosx64/2.8.0-alpha01/room-common-watchosx64-2.8.0-alpha01.module",
+        "group": "androidx.room",
+        "module": "room-common-watchosx64",
+        "version": "2.8.0-alpha01"
+      }
+    }
+  ]
+}
