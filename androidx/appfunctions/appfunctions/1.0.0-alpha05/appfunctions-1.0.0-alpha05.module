@@ -1,0 +1,276 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "androidx.appfunctions",
+    "module": "appfunctions",
+    "version": "1.0.0-alpha05",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.1.0",
+      "buildId:": "14159612"
+    }
+  },
+  "variants": [
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.appfunctions",
+          "module": "appfunctions-compiler",
+          "version": {
+            "requires": "1.0.0-alpha05"
+          },
+          "reason": "appfunctions is in atomic group androidx.appfunctions"
+        },
+        {
+          "group": "androidx.appfunctions",
+          "module": "appfunctions-service",
+          "version": {
+            "requires": "1.0.0-alpha05"
+          },
+          "reason": "appfunctions is in atomic group androidx.appfunctions"
+        },
+        {
+          "group": "androidx.appfunctions",
+          "module": "appfunctions-testing",
+          "version": {
+            "requires": "1.0.0-alpha05"
+          },
+          "reason": "appfunctions is in atomic group androidx.appfunctions"
+        }
+      ],
+      "files": [
+        {
+          "name": "appfunctions-1.0.0-alpha05-sources.jar",
+          "url": "appfunctions-1.0.0-alpha05-sources.jar",
+          "size": 104039,
+          "sha512": "e64153d080ce73de51abac704eb2cf386cda4f9e67d5281375111537a796f8e5e147c777240edd6068b6d15ff3dc4a1dcca717a46367f583b0af2ec9a1d664a1",
+          "sha256": "832745817317f372599bd0d0a30208dc61b1bdef50f3d361bcc2167a5a1dea88",
+          "sha1": "4c3679f2b49ad83679f929dfb49ab04e459b9c85",
+          "md5": "933719016c4ebf62f98ac0ab9f164134"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.8.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib"
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.appfunctions",
+          "module": "appfunctions-compiler",
+          "version": {
+            "requires": "1.0.0-alpha05"
+          },
+          "reason": "appfunctions is in atomic group androidx.appfunctions"
+        },
+        {
+          "group": "androidx.appfunctions",
+          "module": "appfunctions-service",
+          "version": {
+            "requires": "1.0.0-alpha05"
+          },
+          "reason": "appfunctions is in atomic group androidx.appfunctions"
+        },
+        {
+          "group": "androidx.appfunctions",
+          "module": "appfunctions-testing",
+          "version": {
+            "requires": "1.0.0-alpha05"
+          },
+          "reason": "appfunctions is in atomic group androidx.appfunctions"
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.0.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "appfunctions-1.0.0-alpha05.aar",
+          "url": "appfunctions-1.0.0-alpha05.aar",
+          "size": 311751,
+          "sha512": "9c390bd5b3d4672a13fc4be84cbd50e07e923ca2f1f08c2dab83a5d6a468d701f6a0ffae6133c09205213925f4a5b32160c682b17df738b06706b66272061e32",
+          "sha256": "758b10b5ae450522504ea195e7d2856f44726b9862a9c6e520e5386801495073",
+          "sha1": "be7a4f26ba6220f016a708259529a9af386f90a5",
+          "md5": "dd86f1bb1f9975c3fe7e5cd7479c9496"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.annotation",
+          "module": "annotation",
+          "version": {
+            "requires": "1.8.1"
+          }
+        },
+        {
+          "group": "androidx.appsearch",
+          "module": "appsearch",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "androidx.appsearch",
+          "module": "appsearch-platform-storage",
+          "version": {
+            "requires": "1.1.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib"
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-android",
+          "version": {
+            "requires": "1.9.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-guava",
+          "version": {
+            "requires": "1.9.0"
+          },
+          "excludes": [
+            {
+              "group": "com.google.guava",
+              "module": "guava"
+            }
+          ]
+        }
+      ],
+      "dependencyConstraints": [
+        {
+          "group": "androidx.appfunctions",
+          "module": "appfunctions-compiler",
+          "version": {
+            "requires": "1.0.0-alpha05"
+          },
+          "reason": "appfunctions is in atomic group androidx.appfunctions"
+        },
+        {
+          "group": "androidx.appfunctions",
+          "module": "appfunctions-service",
+          "version": {
+            "requires": "1.0.0-alpha05"
+          },
+          "reason": "appfunctions is in atomic group androidx.appfunctions"
+        },
+        {
+          "group": "androidx.appfunctions",
+          "module": "appfunctions-testing",
+          "version": {
+            "requires": "1.0.0-alpha05"
+          },
+          "reason": "appfunctions is in atomic group androidx.appfunctions"
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.0.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "appfunctions-1.0.0-alpha05.aar",
+          "url": "appfunctions-1.0.0-alpha05.aar",
+          "size": 311751,
+          "sha512": "9c390bd5b3d4672a13fc4be84cbd50e07e923ca2f1f08c2dab83a5d6a468d701f6a0ffae6133c09205213925f4a5b32160c682b17df738b06706b66272061e32",
+          "sha256": "758b10b5ae450522504ea195e7d2856f44726b9862a9c6e520e5386801495073",
+          "sha1": "be7a4f26ba6220f016a708259529a9af386f90a5",
+          "md5": "dd86f1bb1f9975c3fe7e5cd7479c9496"
+        }
+      ]
+    },
+    {
+      "name": "libraryVersionMetadata",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.usage": "library-version-metadata"
+      },
+      "dependencyConstraints": [
+        {
+          "group": "androidx.appfunctions",
+          "module": "appfunctions-compiler",
+          "version": {
+            "requires": "1.0.0-alpha05"
+          },
+          "reason": "appfunctions is in atomic group androidx.appfunctions"
+        },
+        {
+          "group": "androidx.appfunctions",
+          "module": "appfunctions-service",
+          "version": {
+            "requires": "1.0.0-alpha05"
+          },
+          "reason": "appfunctions is in atomic group androidx.appfunctions"
+        },
+        {
+          "group": "androidx.appfunctions",
+          "module": "appfunctions-testing",
+          "version": {
+            "requires": "1.0.0-alpha05"
+          },
+          "reason": "appfunctions is in atomic group androidx.appfunctions"
+        }
+      ],
+      "files": [
+        {
+          "name": "appfunctions-1.0.0-alpha05-versionMetadata.json",
+          "url": "appfunctions-1.0.0-alpha05-versionMetadata.json",
+          "size": 25448,
+          "sha512": "5c4c7e6dc7075490c0b73a9a449ba81466b8f7c3f8414a54d06bff3ca8e2af6fcf43fe2a278330fbbb43a9598f210e26286837d3853e556e76bf0b72bb401666",
+          "sha256": "aa2a50f4bfaf81197d08ebf4d11a0ad48a0d86e8b82243e5b39351cddbab1c8b",
+          "sha1": "944cdab2f7613339f32ed934ba3c2652e98ae8b6",
+          "md5": "5db6699c37ffbab06d45834b0ea96ffe"
+        }
+      ]
+    }
+  ]
+}
