@@ -73,8 +73,7 @@ def fetch_artifact(target, build_id, artifact_path):
 def extract_artifact(artifact_path):
 	# Unzip the repo archive into a separate directory.
 	repo_dir = os.path.basename(artifact_path)[:-4]
-	actual_artifact_path = glob.glob(artifact_path)[0]
-	with zipfile.ZipFile(actual_artifact_path) as zipFile:
+	with zipfile.ZipFile(artifact_path) as zipFile:
 		zipFile.extractall(repo_dir)
 	return repo_dir
 
